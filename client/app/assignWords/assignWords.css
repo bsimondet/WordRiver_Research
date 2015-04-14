@@ -13,6 +13,12 @@
   letter-spacing: -1px;
 }
 
+#banner h2 {
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
 .hero-unit {
   position: relative;
   padding: 30px 15px;

@@ -245,10 +245,10 @@ exports.deleteTile = function(req, res, next) {
       console.log(word == user.tileBucket[i].wordName);
       if(word == user.tileBucket[i].wordName){
         console.log(word);
-        for(var j = 0; j < user.tileBucket[i].tileTags.length; j++){
-          if(user.tileBucket[i].tileTags[j] == packId){
+        for(var j = 0; j < user.tileBucket[i].contextTags.length; j++){
+          if(user.tileBucket[i].contextTags[j] == packId){
             console.log(j);
-            user.tileBucket[i].tileTags.splice(j, 1);
+            user.tileBucket[i].contextTags.splice(j, 1);
           }
         }
       }

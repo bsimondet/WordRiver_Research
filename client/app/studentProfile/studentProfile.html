@@ -2,8 +2,7 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>Word River</h1>
-    <p class="lead">Assisting in students in creative learning.</p>
+    <h1>Student Profile</h1>
   </div>
 </header>
 <div class="col-xs-2" style="margin-left:175px">
@@ -15,10 +14,8 @@
       <form ng-submit="addTag()">
       </form>
     </li>
-    <!--TODO Attach to database to display all the words-->
-    <li class="list-group-item" type="checkbox" ng-repeat="student in students"><label><input type="checkbox" id="myCheck" value="value" ng-click="allCheckedStudents(student._id)">{{student.lastName}}, {{student.firstName}}</label><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="removeData($index)"></span></li>
+    <li class="list-group-item" type="checkbox" ng-repeat="student in students">{{student.lastName}}, {{student.firstName}}</li>
   </ul>
-  <input type="submit" value="Add Selected Students to Selected Groups" class="btn btn-primary" ng-click="addStudentsToGroups()">
 </div>
 <div class="container">
 

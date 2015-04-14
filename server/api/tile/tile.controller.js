@@ -65,6 +65,30 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.updateTile = function(req, res, next) {
+  //var userId = req.user._id;
+
+  var word = req.body.word;
+  var packId = req.body.packId;
+
+  User.findById(userId, function (err, user) {
+    var found = false;
+    for(var i = 0; i < user.tileBucket.length; i++){
+      if(user.tileBucket[i].wordName == word){
+        found = true;
+        user.tileBucket[i].tileTags.push(packId);
+      }
+    }
+    if(!found){
+      user.tileBucket.push({wordName: word, tileTags: [packId]});
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

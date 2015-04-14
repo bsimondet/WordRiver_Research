@@ -2,11 +2,11 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>Word Manager!</h1>
+    <h1>Word Manager</h1>
   </div>
 </header>
 <div class="container-fluid">
-        <div class="col-xs-4" style="margin-left:180px" id="categories">
+        <div class="col-xs-2" style="margin-left:180px" id="categories">
             <h1 class="page-header">Categories:</h1>
             <ul class="list-group">
                 <li class="list-group-item">
@@ -19,7 +19,26 @@
                   <a href="" ng-click="displayCatInfo(category)">{{category}}</a></label><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="confirmDelete($index)"></span></li>
             </ul>
         </div>
+
       <div class="col-xs-4">
+        <h1 class="page-header">Middle Column:</h1>
+        <div class="col-xs-5">
+          <h2 class="page-header">Words in Category:</h2>
+          <ul class="list-group">
+            <li class="list-group-item">
+            </li>
+            <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy: toSort:order">{{tile.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red" ng-click="removeFromCategory($index)"></span></li>
+            <p id="displayContextWords">
+          </ul>
+        </div>
+
+        <div class="col-xs-5">
+          <h2 class="page-header">Categories in Word:</h2>
+        </div>
+
+      </div>
+
+      <div class="col-xs-2">
         <h1 class="page-header">Existing words:</h1>
         <div class="container">
           <form ng-submit="addWord()">
@@ -37,6 +56,7 @@
             </form>
           </li>
           <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
+            <!--<li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-click="checkCheckbox(category)">-->
             <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="removeWord($index)"></span></li>
         </ul>
       </div>
