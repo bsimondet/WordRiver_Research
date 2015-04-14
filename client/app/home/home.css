@@ -1,7 +1,9 @@
 .thing-form {
   margin: 20px 0;
 }
-
+body, html{
+  height: 100%;
+}
 
 #banner {
   border-bottom: none;
@@ -54,8 +56,21 @@ h2 {
   float: left;
 }
 
-
+.navbar{
+  position:fixed;
+  top: 0px;
+  width: 100%;
+  hight: 60px;
+}
 .background {
   background-repeat: no-repeat;
   padding:35px;
+  position: fixed !important;
+  top:60px;
+  width: 100%;
+}
+.test{
+  margin-top: 385px;
+  overflow: auto;
+  height: 100%;
 }

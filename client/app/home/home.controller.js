@@ -6,8 +6,8 @@ angular.module('WordRiverApp')
     $scope.errors = {};
 
     $scope.backgroundImage = {
-      background: "url(assets/images/river.jpg) no-repeat bottom center",
-      "background-attachment": "fixed"
+      background: "url(assets/images/river.jpg) no-repeat bottom",
+      "background-attachment": "scroll"
     };
 
     $scope.login = function(form) {
