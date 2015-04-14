@@ -30,11 +30,26 @@
 }
 
 img.resize{
-  width: 190px;
-  height: 180px;
+  width: 270px;
+  height: 260px;
+  float: left;
+  margin-left: 12%;
 }
 
 img.resizeNav{
   width: 70px;
   height: 70px;
+}
+
+h2 {
+  float: left;
+}
+
+.loginBox {
+  width: 510px;
+  height: 160px;
+  border-radius: 25px;
+  opacity: 0.4;
+  background: #000000;
+  float: left;
 }

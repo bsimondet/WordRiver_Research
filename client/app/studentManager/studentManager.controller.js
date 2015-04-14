@@ -182,7 +182,7 @@ angular.module('WordRiverApp')
 
 
     $scope.displayGroupInfo = function(group){
-      $scope.selectedGroupName = group.groupName;
+      $scope.selectedGroupName = "Students in "+group.groupName+":";
       $scope.studentsInGroup = [];
       for(var i = 0; i < $scope.studentList.length; i++){
         if($scope.studentList[i].groupList.indexOf(group.groupName) != -1){
@@ -190,7 +190,13 @@ angular.module('WordRiverApp')
         }
       }
 
-    }
+    };
+
+    $scope.getStudentGroups = function(student){
+      $scope.selectedGroupName = "Groups for "+student.firstName+" "+student.lastName+":";
+      $scope.studentsInGroup = student.allGroupsIn;
+
+    };
 
     $scope.orderBy = function (property) {
       var sortOrder = 1;
