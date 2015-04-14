@@ -6,31 +6,47 @@
     <p class="lead">Assisting in students in creative learning.</p>
   </div>
 </header>
+<div class="col-xs-2" style="margin-left:175px">
+
+  <h1 class="page-header">All Students:</h1>
+  <button class="btn btn-primary" title="Sort A-Z" ng-click="students.sort(orderBy('lastName'))">A-Z</button>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <form ng-submit="addTag()">
+      </form>
+    </li>
+    <!--TODO Attach to database to display all the words-->
+    <li class="list-group-item" type="checkbox" ng-repeat="student in students"><label><input type="checkbox" id="myCheck" value="value" ng-click="allCheckedStudents(student._id)">{{student.lastName}}, {{student.firstName}}</label><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="removeData($index)"></span></li>
+  </ul>
+  <input type="submit" value="Add Selected Students to Selected Groups" class="btn btn-primary" ng-click="addStudentsToGroups()">
+</div>
 <div class="container">
-  <a class="btn btn-default" href="/main"> Back to Home</a>
-  <h1 class="page-header">Student Name: {{currentStudent.student}}</h1>
 
-  <h1 class="page-header">Context Packs:</h1>
-  <table style="width:100%">
-    <tr>
-      to add
-    </tr>
-  </table>
+  <div class="col-xs-5" style="margin-left:175px">
+    <a class="btn btn-default" href="/main"> Back to Home</a>
+    <h1 class="page-header">Student Name: {{currentStudent.student}}</h1>
 
-  <h1 class="page-header">Words:</h1>
-  <table style="width:100%">
-    <tr>
-      to add
-    </tr>
-  </table>
+    <h1 class="page-header">Context Packs:</h1>
+    <table style="width:100%">
+      <tr>
+        to add
+      </tr>
+    </table>
 
-  <h1 class="page-header">Artifacts:</h1>
-  <table style="width:100%">
-    <tr>
-      to add
-    </tr>
-  </table>
+    <h1 class="page-header">Words:</h1>
+    <table style="width:100%">
+      <tr>
+        to add
+      </tr>
+    </table>
 
+    <h1 class="page-header">Artifacts:</h1>
+    <table style="width:100%">
+      <tr>
+        to add
+      </tr>
+    </table>
+  </div>
 </div>
 
 
