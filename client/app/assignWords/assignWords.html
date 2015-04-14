@@ -12,7 +12,7 @@
     <div class="col-xs-4" ng-show="groupView">
       <button class="btn btn-primary" title="Show Students" ng-click="showGroupView(false)">Show Students</button>
       <h1 class="page-header">Groups:</h1>
-      <ul class="list-group">
+      <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="group in groupArray">
           <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group.groupName)">{{group.groupName}}</a>
       </ul>
@@ -20,19 +20,26 @@
     <div class="col-xs-4" ng-hide="groupView">
       <button class="btn btn-primary" title="Show Groups" ng-click="showGroupView(true)">Show Groups</button>
       <h1 class="page-header">Students:</h1>
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="student in selectedStudents">
+      <ul class="list-group scroll">
+        <li class="list-group-item " ng-repeat="student in selectedStudents">
           <input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a>
       </ul>
     </div>
     <div class="col-xs-4">
       <h1>Middle Column</h1>
     </div>
-    <div class="col-xs-3" >
-      <input type="button" value="Show Categories" class="btn btn-primary">
-      <input type="button" value="Show words" class="btn btn-primary">
+    <div class="col-xs-4" ng-show="categoryView">
+      <button class="btn btn-primary" title="Show Words" ng-click="showCategoryView(false)">Show Words</button>
       <h1 class="page-header">Categories:</h1>
-      <ul class="list-group">
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="category in categoryArray">
+          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a>
+      </ul>
+    </div>
+    <div class="col-xs-4" ng-hide="categoryView">
+      <button class="btn btn-primary" title="Show Categories" ng-click="showCategoryView(true)">Show Categories</button>
+      <h1 class="page-header">Words:</h1>
+      <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="category in categoryArray">
           <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a>
       </ul>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wordRiverAppApp')
+angular.module('WordRiverApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('studentProfile', {

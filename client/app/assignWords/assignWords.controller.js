@@ -15,9 +15,14 @@ angular.module('WordRiverApp')
     $scope.userTiles = [];
     $scope.studentCategories = [];
     $scope.groupView = true;
+    $scope.categoryView = true;
 
     $scope.showGroupView = function(bool){
       $scope.groupView = bool;
+    };
+
+    $scope.showCategoryView = function(bool){
+      $scope.categoryView = bool;
     };
 
     $scope.getAll = function () {
@@ -38,6 +43,9 @@ angular.module('WordRiverApp')
           }
         }
       });
+      for(var i = 0; i < 30; i++){
+        $scope.categoryArray.push(i)
+      }
     };
     $scope.getAll();
 
