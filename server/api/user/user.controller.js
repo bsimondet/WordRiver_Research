@@ -21,6 +21,14 @@ exports.index = function(req, res) {
   });
 };
 
+exports.getUserTiles = function(req, res) {
+  return res.status(208);
+  //User.find({}, '-salt -hashedPassword', function (err, users) {
+  //  if(err) return res.send(500, err);
+  //  res.json(200, users);
+  //});
+};
+
 /**
  * Creates a new user
  */

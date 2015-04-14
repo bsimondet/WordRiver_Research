@@ -13,10 +13,9 @@ describe('Controller: StudentManagerCtrl', function () {
     StudentManagerCtrl = $controller('StudentManagerCtrl', {
       $scope: scope
     });
-    scope.getStudentList();
-    scope.getGroups();
-    scope.getStudents();
   }));
+
+
 
   //it('should test findStudentInList', function () {
   //  for(var i = 0; i < scope.studentList.length; i++){
@@ -25,6 +24,7 @@ describe('Controller: StudentManagerCtrl', function () {
   //});
 
   it('should test findStudentAccount', function () {
+
     expect(1).toEqual(1);
   });
 
@@ -58,6 +58,10 @@ describe('Controller: StudentManagerCtrl', function () {
 
   it('should test displayGroupInfo', function () {
     expect(1).toEqual(1);
+  });
+
+  it('should be true', function() {
+    expect(true).toBe(true);
   });
 
 });

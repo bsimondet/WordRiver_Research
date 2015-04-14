@@ -37,3 +37,11 @@
     color: #000;
     padding: 0.2em 0;
 }
+
+.unassignIconColor {
+  opacity: .5;
+}
+
+.unassignIconColor:hover {
+  opacity: 1.0;
+}

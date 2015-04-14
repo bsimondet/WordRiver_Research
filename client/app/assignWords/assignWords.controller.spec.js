@@ -7,7 +7,7 @@ describe('Controller: AssignWordsCtrl', function () {
   beforeEach(module('socketMock'));
 
 
-  var SendWordsCtrl, scope;
+  var AssignWordsCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
