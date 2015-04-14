@@ -5,6 +5,11 @@ angular.module('WordRiverApp')
     $scope.user = {email: "rosemariemaxwell@plexia.com", password: "culpa"};
     $scope.errors = {};
 
+    $scope.backgroundImage = {
+      background: "url(assets/images/river.jpg) no-repeat bottom center",
+      "background-attachment": "fixed"
+    };
+
     $scope.login = function(form) {
       $scope.submitted = true;
 

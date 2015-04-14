@@ -2,6 +2,7 @@
   margin: 20px 0;
 }
 
+
 #banner {
   border-bottom: none;
   margin-top: -20px;
@@ -19,7 +20,6 @@
   color: #F5F5F5;
   text-align: right;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  background: #1475b2;
 }
 
 .footer {
@@ -49,7 +49,13 @@ h2 {
   width: 510px;
   height: 160px;
   border-radius: 25px;
-  opacity: 0.4;
+  opacity: 0.7;
   background: #000000;
   float: left;
+}
+
+
+.background {
+  background-repeat: no-repeat;
+  padding:35px;
 }
