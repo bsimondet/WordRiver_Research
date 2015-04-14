@@ -9,20 +9,27 @@
 <div class="container">
   <br/>
   <form ng-submit="assignWords()">
-    <div class="col-xs-4" ng-show="groupView">
+    <div class="col-xs-4 accordion-toggle" ng-show="groupView">
       <button class="btn btn-primary" title="Show Students" ng-click="showGroupView(false)">Show Students</button>
       <h1 class="page-header">Groups:</h1>
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="group in groupArray">
-          <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group.groupName)">{{group.groupName}}</a>
+          <label><input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="">{{group.groupName}}</a> <span class="glyphicon glyphicon-chevron-right floatRight close"></span></label>
+        </li>
       </ul>
+      <div id="groupCollapse" class = "panel-collapse collapse in">
+        <div class="panel-body" ng-controller="StudentManagerCtrl" ng-click="displayGroupInfo(group)">
+          <li class="list-group-item" ng-repeat="student in studentsInGroup"><label>{{student.lastName}}, {{student.firstName}}</label></li>
+        </div>
+      </div>
     </div>
     <div class="col-xs-4" ng-hide="groupView">
       <button class="btn btn-primary" title="Show Groups" ng-click="showGroupView(true)">Show Groups</button>
       <h1 class="page-header">Students:</h1>
       <ul class="list-group scroll">
         <li class="list-group-item " ng-repeat="student in selectedStudents">
-          <input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a>
+          <label><input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a></label>
+        </li>
       </ul>
     </div>
     <div class="col-xs-4">
@@ -33,7 +40,8 @@
       <h1 class="page-header">Categories:</h1>
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="category in categoryArray">
-          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a>
+          <label><input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a></label>
+        </li>
       </ul>
     </div>
     <div class="col-xs-4" ng-hide="categoryView">
@@ -41,7 +49,8 @@
       <h1 class="page-header">Words:</h1>
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="category in categoryArray">
-          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a>
+          <label><input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a></label>
+        </li>
       </ul>
     </div>
     <input type="submit" value="Assign Words" class="btn btn-primary">
