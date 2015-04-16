@@ -32,8 +32,9 @@ body, html{
 }
 
 img.resize{
-  width: 270px;
-  height: 260px;
+  margin-top: 1%;
+  width: 310px;
+  height: 295px;
   float: left;
   margin-left: 12%;
 }
@@ -43,9 +44,13 @@ img.resizeNav{
   height: 70px;
 }
 
-h2 {
+.h2 {
   float: left;
-  margin-left: 2%
+  margin-left: 0.1%;
+  font-size: 160% !important;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 0.5px #000000;
 }
 
 .loginBox {
@@ -55,6 +60,8 @@ h2 {
   opacity: 0.75;
   background: #000000;
   float: left;
+  margin-left: -33%;
+  margin-top: 5%;
 }
 
 .navbar {
@@ -69,7 +76,7 @@ h2 {
   position: fixed !important;
   top: 60px;
   width: 100%;
-  height: 400px;
+  height: 425px;
 }
 .test{
   margin-top: 385px;
@@ -122,4 +129,11 @@ label {
 
 .container {
   height: 100%;
+}
+
+.help-block{
+  float: left;
+  color: #ff0000 !important;
+  margin-bottom: -2%;
+  margin-left: 10px;
 }

@@ -25,6 +25,7 @@ angular.module('WordRiverApp')
           })
           .catch( function(err) {
             $scope.errors.other = err.message;
+            $location.path('/');
           });
       }
     };
