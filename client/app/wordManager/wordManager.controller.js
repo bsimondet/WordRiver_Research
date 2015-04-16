@@ -14,6 +14,9 @@ angular.module('WordRiverApp')
     $scope.matchTiles = [];
     $scope.toSort = "tile";
     $scope.order = true;
+    $scope.currentCategory = null;
+    $scope.currentTile = null;
+    //$scope.selectedCategories = [];
 
     $scope.confirmDelete = function(index) {
       this.index = index;
@@ -99,6 +102,7 @@ angular.module('WordRiverApp')
     $scope.displayCatInfo = function (category) {
       $scope.userTiles = [];
       $scope.matchTiles = [];
+      $scope.currentCategory = category;
       $http.get('/api/tile').success(function (allTiles) {
         $scope.allCatTiles = allTiles;
         for (var i = 0; i < $scope.allCatTiles.length; i++) {
@@ -109,30 +113,48 @@ angular.module('WordRiverApp')
         for (var j = 0; j < $scope.userTiles.length; j++) {
           for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
             if ($scope.userTiles[j].contextTags[z].tagName == category) {
-              $scope.matchTiles.push($scope.userTiles[j].name);
+              $scope.matchTiles.push($scope.userTiles[j]);
+              //console.log($scope.userTiles[j].name);
             }
           }
         }
         if ($scope.matchTiles.length > 0) {
-          alert("The tiles in the category " + category + " are:\n" + $scope.matchTiles.join('\n'));
+
         } else {
           alert("There are no tiles in this category");
         }
       });
     };
 
+
+    //THIS IS THE FUNCTION WE ARE WORKING ON - 4/14/15
+    $scope.removeFromCategory = function (tile) {
+      console.log('1 of 3');
+      for(var i = 0; i < $scope.matchTiles.length; i++){
+        console.log('2 of 3');
+        //console.log($scope.matchTiles.length);
+        if(tile._id == $scope.matchTiles[i]._id){
+          console.log('3 of 3');
+          $scope.matchTiles.splice(i, 1);
+        }
+      }
+    };
+
+
+
       $scope.displayWordInfo = function (word) {
         $scope.contextTagsTemp = [];
+        $scope.currentTile = word;
         for(var i =0; i<$scope.allTiles.length; i++){
           if($scope.allTiles[i].name == word.name){
             if($scope.allTiles[i].contextTags.length > 0) {
               for (var j = 0; j < $scope.allTiles[i].contextTags.length; j++){
                 $scope.contextTagsTemp.push($scope.allTiles[i].contextTags[j].tagName);
               }
-              alert("This tile has the categories:\n" + $scope.contextTagsTemp.join('\n'));
+              //alert("This tile has the categories:\n" + $scope.contextTagsTemp.join('\n'));
             }
             else{
-              alert("This tile has no categories.");
+              //alert("This tile has no categories.");
             }
           }
         }

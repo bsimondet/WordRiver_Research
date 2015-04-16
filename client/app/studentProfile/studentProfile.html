@@ -2,35 +2,43 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>Word River</h1>
-    <p class="lead">Assisting in students in creative learning.</p>
+    <h1>Student Profile</h1>
   </div>
 </header>
+<div class="col-xs-2" style="margin-left:175px">
+
+  <h1 class="page-header">All Students:</h1>
+  <button class="btn btn-primary" ng-click="toSort = 'lastName'; order = !order">Sort by last name</button>
+  <ul class="list-group">
+    <li class="list-group-item" type="checkbox" ng-repeat="student in students | orderBy: toSort:order"><a href="" ng-click="displayStudentProfile(student)">{{student.lastName}}, {{student.firstName}}</a></li>
+  </ul>
+</div>
 <div class="container">
-  <a class="btn btn-default" href="/main"> Back to Home</a>
-  <h1 class="page-header">Student Name: {{currentStudent.student}}</h1>
 
-  <h1 class="page-header">Context Packs:</h1>
-  <table style="width:100%">
-    <tr>
-      to add
-    </tr>
-  </table>
+  <div class="col-xs-8" style="margin-left:175px">
+    <a class="btn btn-default" href="/main"> Back to Home</a>
+    <h1 class="page-header">Student Name: {{selectedStudent.firstName}} {{selectedStudent.lastName}}</h1>
 
-  <h1 class="page-header">Words:</h1>
-  <table style="width:100%">
-    <tr>
-      to add
-    </tr>
-  </table>
+    <h1 class="page-header">Context Packs:</h1>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="contextTag in selectedStudent.contextTags"><label>{{contextTag.tagName}}</label>
+        </li>
+    </ul>
 
-  <h1 class="page-header">Artifacts:</h1>
-  <table style="width:100%">
-    <tr>
-      to add
-    </tr>
-  </table>
+    <h1 class="page-header">Words:</h1>
+    <table style="width:100%">
+      <tr>
+        to add
+      </tr>
+    </table>
 
+    <h1 class="page-header">Artifacts:</h1>
+    <table style="width:100%">
+      <tr>
+        to add
+      </tr>
+    </table>
+  </div>
 </div>
 
 

@@ -13,7 +13,6 @@ angular.module('WordRiverApp')
     $scope.selectedStudents = [];
     $scope.studentsInGroup = []; //Student references
     $scope.selectedGroupName = "";
-    $scope.newArray = [];
 
 ///////////////////////////////////
     $scope.getStudentList = function(){
@@ -43,7 +42,7 @@ angular.module('WordRiverApp')
 
     $scope.addGroup = function () {
       if ($scope.groupField.length >= 1) {
-        var newGroup = {groupName: $scope.groupField, contextPacks: []}
+        var newGroup = {groupName: $scope.groupField, contextPacks: []};
         $scope.localGroupArray.push(newGroup);
         $http.patch('/api/users/' + $scope.currentUser._id + '/group',
           {groupList: $scope.localGroupArray}
@@ -85,7 +84,7 @@ angular.module('WordRiverApp')
         }
       }
       return index;
-    }
+    };
 
     $scope.findGroupInList = function(groupName){
       var index = -1;
@@ -115,7 +114,7 @@ angular.module('WordRiverApp')
         var groupIndex = $scope.findGroupInList($scope.selectedGroups[i]);
         $scope.addContextPacksToStudent($scope.localGroupArray[groupIndex].contextPacks, fullStudent)
       }
-    }
+    };
 
     $scope.addContextPacksToStudent = function(contextArray, student){
       for(var i = 0; i < contextArray.length; i++){
@@ -138,7 +137,7 @@ angular.module('WordRiverApp')
           //$scope.addTilesToStudent($scope.students[studentIndex], contextArray[i]);
         }
       }
-    }
+    };
 
 
 
@@ -150,8 +149,7 @@ angular.module('WordRiverApp')
             $scope.assignStudentToGroup($scope.selectedStudents[i], $scope.selectedGroups[j]);
         }
       }
-
-    }
+    };
 
     //Takes in a group name
     $scope.allCheckedGroups = function(category){
@@ -190,7 +188,6 @@ angular.module('WordRiverApp')
           $scope.studentsInGroup.push($scope.studentList[i]);
         }
       }
-
     };
 
     $scope.orderBy = function (property) {
@@ -213,22 +210,31 @@ angular.module('WordRiverApp')
         return result * sortOrder;
       }
     };
-    //////////////////////////////////////////////////////////
-    //Trying to write and edit group name function. Having troubles with changing just the name.
-    $scope.editName = function (index) {
-      console.log($scope.studentsInGroup[0]);
-      var text = prompt("Provide a new name for " + $scope.localGroupArray[index].groupName + ".", "");
-      if (text != null) {
-        var choice = confirm("Are you sure you want to change the name of " + $scope.localGroupArray[index].groupName + " to " + text + "?");
-        if (choice == true) {
+    //////////////////////////////////////////////////////////////////////////
 
-          $http.patch('/api/users/' + $scope.currentUser._id + '/group',
-            {"groupName": text}
-          ).success(function(){
-            });
-
+    //making remove for students from groups.
+    $scope.removeStudentFromGroup = function (student) {
+      console.log("started");
+      for (var i = 0; i < $scope.studentList.length; i++){
+        if (student == $scope.studentList[i]){
+          console.log("found the student");
+          for (var j = 0; j < $scope.studentList[i].groupList.length; j++){
+            if ($scope.selectedGroupName == $scope.studentList[i].groupList[j]){
+              console.log("about to splice");
+              $scope.studentList[i].groupList.splice(j, 1);
+              console.log("did it");
+              break;
+            }
+          }
+          break;
         }
       }
+      for (var h = 0; h < $scope.studentsInGroup.length; h++){
+        if (student = $scope.studentsInGroup[h]){
+          $scope.studentsInGroup.splice(h, 1);
+        }
+      }
+      $scope.displayGroupInfo($scope.selectedGroupName);
     };
 
   });

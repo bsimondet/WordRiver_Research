@@ -15,8 +15,7 @@ var StudentSchema = new Schema({
   contextTags: [{ //Array of JSON objects, where each object is a context tag grouping containing the tag used and the id of the user that created the context pack
     tagName: String,
     creatorID: String
-  }],
-  allGroupsIn:[] //array of group names the student is in
+  }]
 });
 
 module.exports = mongoose.model('Student', StudentSchema);

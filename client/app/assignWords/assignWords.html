@@ -9,49 +9,115 @@
 <div class="container">
   <br/>
   <form ng-submit="assignWords()">
+    <input type="submit" value="Assign Words" class="btn btn-primary" style="margin-left:40%; margin-right:60%">
+    <!--This section is for the left column-->
     <div class="col-xs-4" ng-show="groupView">
       <button class="btn btn-primary" title="Show Students" ng-click="showGroupView(false)">Show Students</button>
       <h1 class="page-header">Groups:</h1>
+      <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
+      <button class="btn btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="group in groupArray">
-          <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group.groupName)">{{group.groupName}}</a>
+        <li class="list-group-item" ng-repeat="group in groupArray | orderBy:'groupName':order1"><label>
+          <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group.groupName)">{{group.groupName}}</a></label>
       </ul>
     </div>
     <div class="col-xs-4" ng-hide="groupView">
       <button class="btn btn-primary" title="Show Groups" ng-click="showGroupView(true)">Show Groups</button>
       <h1 class="page-header">Students:</h1>
+      <button class="btn btn-primary" ng-show="!AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0; AZ0=!AZ0">Z-A</button>
+      <button class="btn btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
       <ul class="list-group scroll">
-        <li class="list-group-item " ng-repeat="student in selectedStudents">
-          <input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a>
+        <li class="list-group-item " ng-repeat="student in selectedStudents | orderBy:'lastName':order0">
+          <label><input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a></label>
       </ul>
     </div>
-    <div class="col-xs-4">
-      <h1>Middle Column</h1>
+    <!--This section is for the middle column-->
+    <div class="col-xs-4" ng-hide="showMiddle">
+      <h3>Click on anything to begin.</h3>
     </div>
+    <div class="col-xs-4" ng-show="showCategory">
+      <br/>
+      <br/>
+      <div class="scroll">
+        <h4>The tiles in the category {{categorySelected}} are:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="word in matchTiles"><label>
+          </label>{{word}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+        <h4>The groups that have this category are:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="group in matchGroup"><label>
+          </label>{{group}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+        <h4>The students that have this category are:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="student in matchStudent"><label>
+          </label>{{student.firstName}} {{student.lastName}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xs-4" ng-show="wordView">
+      <br/>
+      <br/>
+      <div class="scroll">
+        <h4>The tile {{tileSelected.name}} is in the categories:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="word in matchTiles"><label>
+          </label>{{word}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+        <h4>The groups that have this tile are:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="group in matchGroup"><label>
+          </label>{{group}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+        <h4>The students that have this tile are:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="student in matchStudent"><label>
+          </label>{{student.firstName}} {{student.lastName}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xs-4" ng-show="showGroup">
+      <br/>
+      <br/>
+      <div class="scroll">
+        <h4>The tile {{tileSelected.name}} is in the categories:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="word in matchTiles"><label>
+          </label>{{word}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+        <h4>The groups that have this tile are:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="group in matchGroup"><label>
+          </label>{{group}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+        <h4>The students that have this tile are:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="student in matchStudent"><label>
+          </label>{{student.firstName}} {{student.lastName}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+        </ul>
+      </div>
+    </div>
+    <!--This section is for the right column-->
     <div class="col-xs-4" ng-show="categoryView">
       <button class="btn btn-primary" title="Show Words" ng-click="showCategoryView(false)">Show Words</button>
       <h1 class="page-header">Categories:</h1>
+      <button class="btn btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
+      <button class="btn btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="category in categoryArray">
-          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a>
+        <li class="list-group-item" ng-repeat="category in categoryArray | orderBy:'toString()':order2"><label>
+          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a></label>
       </ul>
     </div>
     <div class="col-xs-4" ng-hide="categoryView">
       <button class="btn btn-primary" title="Show Categories" ng-click="showCategoryView(true)">Show Categories</button>
       <h1 class="page-header">Words:</h1>
+      <button class="btn btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
+      <button class="btn btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="category in categoryArray">
-          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a>
+        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3"><label>
+          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a></label>
       </ul>
     </div>
-    <input type="submit" value="Assign Words" class="btn btn-primary">
   </form>
-  <!--<td> <div class="col-lg-12" ng-repeat="class in classList"><label><input type="checkbox" name="checkbox" value="value"></label> <li class="btn btn-default" ng-click="changeFilter(class)">{{class}}</li></div></td>
-          <td> <div class="col-lg-12" ng-repeat="class in classList | filter: filterText" ng-show="true"><div class="col-lg-12" ng-repeat="person in studentList | filter: class |orderBy: 'student'" ng-show="true"><label><input type="checkbox" value="studentChecked"  ng-click="allCheckedStudents(person)"><a class="btn btn-default" ng-click="makeCurrentStudent(person)" href="/profile"> {{person.student}}</a></label></div></div>
-          </td>
-       -->
 </div>
-
-
-
-
