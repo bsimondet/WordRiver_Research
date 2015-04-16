@@ -15,6 +15,7 @@ angular.module('WordRiverApp')
     $scope.toSort = "tile";
     $scope.order = true;
     $scope.currentCategory = null;
+    $scope.currentTile = null;
     //$scope.selectedCategories = [];
 
     $scope.confirmDelete = function(index) {
@@ -118,15 +119,12 @@ angular.module('WordRiverApp')
           }
         }
         if ($scope.matchTiles.length > 0) {
-          //alert("The tiles in the category " + category + " are:\n" + $scope.matchTiles.join('\n'));
-          //document.getElementById("displayContextWords").innerHTML = "<li class=\"list-group-item\" ng-repeat=\"word in matchTiles\"> <label> {{word}}</label> </li>" ;
-          <!--<input type=\"checkbox\" value=\"value\" ng-click=\"\"-->
+
         } else {
           alert("There are no tiles in this category");
         }
       });
     };
-
 
 
     //THIS IS THE FUNCTION WE ARE WORKING ON - 4/14/15
@@ -146,16 +144,17 @@ angular.module('WordRiverApp')
 
       $scope.displayWordInfo = function (word) {
         $scope.contextTagsTemp = [];
+        $scope.currentTile = word;
         for(var i =0; i<$scope.allTiles.length; i++){
           if($scope.allTiles[i].name == word.name){
             if($scope.allTiles[i].contextTags.length > 0) {
               for (var j = 0; j < $scope.allTiles[i].contextTags.length; j++){
                 $scope.contextTagsTemp.push($scope.allTiles[i].contextTags[j].tagName);
               }
-              alert("This tile has the categories:\n" + $scope.contextTagsTemp.join('\n'));
+              //alert("This tile has the categories:\n" + $scope.contextTagsTemp.join('\n'));
             }
             else{
-              alert("This tile has no categories.");
+              //alert("This tile has no categories.");
             }
           }
         }
