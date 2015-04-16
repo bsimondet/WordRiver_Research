@@ -4,7 +4,8 @@ angular.module('WordRiverApp')
   .controller('HomeCtrl', function ($scope, Auth, $location) {
     $scope.user = {email: "rosemariemaxwell@plexia.com", password: "culpa"};
     $scope.errors = {};
-
+    $scope.logInShow = true;
+    $scope.signUpShow = false;
     $scope.backgroundImage = {
       background: "url(assets/images/river.jpg) no-repeat center",
       "background-attachment": "scroll"
