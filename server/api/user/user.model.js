@@ -26,6 +26,7 @@ var UserSchema = new Schema({
     studentID: String, //Students ID
     groupList: [], //Groups that a student is in, represented by an array of Strings
     contextTags: [] //Array of tags that a student has access to
+    // {type: Schema.Types.ObjectId, ref: 'Student'}
   }]
 });
 
