@@ -175,6 +175,7 @@ angular.module('WordRiverApp')
       $scope.groupSelected = group;
       $scope.matchCategories = [];
       $scope.matchStudents = [];
+      $scope.matchTiles = [];
       for(var i = 0; i<$scope.groupArray.length; i++){
         if ($scope.groupArray[i].groupName == $scope.groupSelected){
           for(var j=0; j<$scope.groupArray[i].contextPacks.length; j++){
@@ -193,6 +194,7 @@ angular.module('WordRiverApp')
         for (var n = 0; n<$scope.userTiles.length; n++){
           for (var o = 0; o<$scope.userTiles[n].contextTags.length; o++){
             if ($scope.matchCategories[m] == $scope.userTiles[n].contextTags[o].tagName){
+              $scope.matchTiles.push($scope.userTiles[n]);
             }
           }
         }

@@ -93,8 +93,8 @@
         </ul>
         <h4>The words that this group has are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="student in matchStudent"><label>
-          </label>{{student.firstName}} {{student.lastName}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+          <li class="list-group-item" ng-repeat="tile in matchTiles"><label>
+          </label>{{tile.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
         </ul>
       </div>
     </div>
