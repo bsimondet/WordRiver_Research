@@ -17,6 +17,9 @@ angular.module('WordRiverApp')
       $scope.categoryArray = $scope.currentUser.contextPacks;
       $scope.groupArray = $scope.currentUser.groupList;
       $scope.studentArray = $scope.currentUser.studentList;
+      $scope.isCollapsed = false;
+      $scope.groupedStudents = [];
+
       $http.get('/api/students').success(function (allStudents) {
         $scope.allStudents = allStudents;
         for (var i = 0; i < $scope.allStudents.length; i++) {
@@ -249,6 +252,19 @@ angular.module('WordRiverApp')
             studentCategoryArray.splice(i, 1);
           }
         }
+      }
+    };
+
+    $scope.studentsInGroupAssignment = function(group) {
+      for(var i = 0; i < $scope.studentArray.length; i++){
+        var studentsInThisGroup = [];
+        console.log("this is the student group list " + $scope.studentArray[i].groupList.indexOf("Group E"));
+        if ($scope.studentArray[i].groupList.indexOf(group) > -1) {
+          console.log("we are in the if statement");
+          studentsInThisGroup.push($scope.studentArray[i]);
+        }
+        $scope.groupedStudents = studentsInThisGroup;
+        console.log($scope.groupedStudents);
       }
     };
   });

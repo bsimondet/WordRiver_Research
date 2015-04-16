@@ -16,14 +16,18 @@
       <h1 class="page-header">Groups:</h1>
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="group in groupArray">
-          <label><input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="">{{group.groupName}}</a> <span class="glyphicon glyphicon-chevron-right floatRight close"></span></label>
+          <label><input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="">{{group.groupName}}</a></label> <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group)"></span>
+          <div collapse="!isCollapsed">
+            dfgi
+            <p><li class="list-group-item" ng-repeat="student in groupedStudents"><label>{{student.lastName}}, {{student.firstName}}</label></p>
+          </div>
         </li>
       </ul>
-      <div id="groupCollapse" class = "panel-collapse collapse in">
-        <div class="panel-body" ng-controller="StudentManagerCtrl" ng-click="displayGroupInfo(group)">
-          <li class="list-group-item" ng-repeat="student in studentsInGroup"><label>{{student.lastName}}, {{student.firstName}}</label></li>
-        </div>
-      </div>
+      <!--<div id="groupCollapse" class = "panel-collapse collapse in">-->
+        <!--<div class="panel-body" ng-controller="StudentManagerCtrl" ng-click="displayGroupInfo(group)">-->
+          <!--<li class="list-group-item" ng-repeat="student in studentsInGroup"><label>{{student.lastName}}, {{student.firstName}}</label></li>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
     <div class="col-xs-4" ng-hide="groupView">
       <button class="btn btn-primary" title="Show Groups" ng-click="showGroupView(true)">Show Groups</button>
