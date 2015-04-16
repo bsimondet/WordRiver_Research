@@ -17,6 +17,9 @@ angular.module('WordRiverApp')
       $scope.categoryArray = $scope.currentUser.contextPacks;
       $scope.groupArray = $scope.currentUser.groupList;
       $scope.studentArray = $scope.currentUser.studentList;
+      $scope.isCollapsed = false;
+      $scope.groupedStudents = [];
+
       $http.get('/api/students').success(function (allStudents) {
         $scope.allStudents = allStudents;
         for (var i = 0; i < $scope.allStudents.length; i++) {
@@ -171,8 +174,32 @@ angular.module('WordRiverApp')
     };
 
     $scope.displayGroupInfo = function (group){
-      for(var i =0; i<$scope.groupArray.length; i++){
-        if($scope.groupArray[i].groupName == group){
+      $scope.switchMiddle("group");
+      $scope.groupSelected = group;
+      $scope.matchCategories = [];
+      $scope.matchStudents = [];
+      $scope.matchTiles = [];
+      for(var i = 0; i<$scope.groupArray.length; i++){
+        if ($scope.groupArray[i].groupName == $scope.groupSelected){
+          for(var j=0; j<$scope.groupArray[i].contextPacks.length; j++){
+            $scope.matchCategories.push($scope.groupArray[i].contextPacks[j]);
+          }
+        }
+      }
+      for (var k = 0; k<$scope.studentArray.length; k++){
+        for (var l = 0; l<$scope.studentArray[k].groupList.length; l++){
+          if ($scope.studentArray[k].groupList[l] === group){
+            $scope.matchStudents.push($scope.studentArray[k]);
+          }
+        }
+      }
+      for (var m = 0; m<$scope.matchCategories.length; m++){
+        for (var n = 0; n<$scope.userTiles.length; n++){
+          for (var o = 0; o<$scope.userTiles[n].contextTags.length; o++){
+            if ($scope.matchCategories[m] == $scope.userTiles[n].contextTags[o].tagName){
+              $scope.matchTiles.push($scope.userTiles[n]);
+            }
+          }
         }
       }
     };
@@ -249,6 +276,19 @@ angular.module('WordRiverApp')
             studentCategoryArray.splice(i, 1);
           }
         }
+      }
+    };
+
+    $scope.studentsInGroupAssignment = function(group) {
+      for(var i = 0; i < $scope.studentArray.length; i++){
+        var studentsInThisGroup = [];
+        console.log("this is the student group list " + $scope.studentArray[i].groupList.indexOf("Group E"));
+        if ($scope.studentArray[i].groupList.indexOf(group) > -1) {
+          console.log("we are in the if statement");
+          studentsInThisGroup.push($scope.studentArray[i]);
+        }
+        $scope.groupedStudents = studentsInThisGroup;
+        console.log($scope.groupedStudents);
       }
     };
   });

@@ -102,7 +102,7 @@ angular.module('WordRiverApp')
     if($scope.studentList[studentIndex].groupList.indexOf(group) == -1){
       $scope.studentList[studentIndex].groupList.push(group);
       if(group == $scope.selectedGroupName){
-        $scope.studentsInGroup.push($scope.studentList[studentIndex]);
+        $scope.studentsInGroup.push($scope.studentList[stdfgudentIndex]);
       }
       $scope.addGroupsContextPacksToStudent(student);
     }
