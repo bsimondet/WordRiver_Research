@@ -95,3 +95,7 @@ label {
 .clear {
   clear: both;
 }
+
+.buttonSize {
+  float: left;
+}
