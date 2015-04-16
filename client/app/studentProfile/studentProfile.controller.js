@@ -7,7 +7,7 @@ angular.module('WordRiverApp')
     $scope.studentList = []; //List of user references to students
     $scope.students = []; //List of actual student objects
     $scope.currentUser = Auth.getCurrentUser();
-    $scope.selectedStudents = [];
+    $scope.selectedStudent = "";
 
     //$http.get('/api/things').success(function (awesomeThings) {
     //  $scope.students = awesomeThings;
@@ -28,6 +28,17 @@ angular.module('WordRiverApp')
       }
     };
     $scope.getStudents();
+
+    $scope.displayStudentProfile = function(student){
+      $scope.selectedStudent = student;
+      //for(var i = 0; i < $scope.studentList.length; i++){
+      //  if($scope.studentList[i].groupList.indexOf(group.groupName) != -1){
+      //    $scope.studentsInGroup.push($scope.studentList[i]);
+      //  }
+      //}
+    };
+
+
     //$scope.addThing = function () {
     //  if ($scope.newThing === '') {
     //    return;
