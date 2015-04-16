@@ -49,10 +49,10 @@ h2 {
 }
 
 .loginBox {
-  width: 510px;
-  height: 400px;
+  width: 40%;
+  height: auto;
   border-radius: 25px;
-  opacity: 0.7;
+  opacity: 0.75;
   background: #000000;
   float: left;
 }
@@ -69,7 +69,7 @@ h2 {
   position: fixed !important;
   top: 60px;
   width: 100%;
-  height: 500px;
+  height: 400px;
 }
 .test{
   margin-top: 385px;
@@ -83,12 +83,13 @@ h2 {
   color: black;
   width: 250px;
   margin-left: 10px;
+  margin-top: 15px;
 }
 
 label {
   float: left;
   margin-left: 10px;
-  margin-top: 2px;
+  margin-top: 17px;
   font-size: 120%;
 }
 
@@ -96,6 +97,29 @@ label {
   clear: both;
 }
 
-.buttonSize {
+.buttonSizeUpper {
+  margin-left: 10px;
+  margin-top: 17px;
   float: left;
+  width: 16%;
+  height: 15%;
+  font-size: 100%;
+  padding: 6px;
+  color: #000000;
+}
+
+.buttonSizeLower {
+  margin-left: 10px;
+  margin-top: 15px;
+  margin-bottom: 17px;
+  float: left;
+  width: 16%;
+  height: 15%;
+  font-size: 100%;
+  padding: 6px;
+  color: #000000;
+}
+
+.container {
+  height: 100%;
 }
