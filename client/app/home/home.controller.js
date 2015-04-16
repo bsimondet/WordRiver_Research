@@ -6,7 +6,7 @@ angular.module('WordRiverApp')
     $scope.errors = {};
 
     $scope.backgroundImage = {
-      background: "url(assets/images/river.jpg) no-repeat bottom",
+      background: "url(assets/images/river.jpg) no-repeat center",
       "background-attachment": "scroll"
     };
 
@@ -27,5 +27,29 @@ angular.module('WordRiverApp')
           });
       }
     };
+    $scope.register = function(form) {
+      $scope.submitted = true;
 
+      if(form.$valid) {
+        Auth.createUser({
+          name: $scope.user.name,
+          email: $scope.user.email,
+          password: $scope.user.password
+        })
+          .then( function() {
+            // Account created, redirect to home
+            $location.path('/');
+          })
+          .catch( function(err) {
+            err = err.data;
+            $scope.errors = {};
+
+            // Update validity of form fields that match the mongoose errors
+            angular.forEach(err.errors, function(error, field) {
+              form[field].$setValidity('mongoose', false);
+              $scope.errors[field] = error.message;
+            });
+          });
+      }
+    };
   });
