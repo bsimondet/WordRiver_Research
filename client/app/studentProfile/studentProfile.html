@@ -20,11 +20,10 @@
     <h1 class="page-header">Student Name: {{selectedStudent.firstName}} {{selectedStudent.lastName}}</h1>
 
     <h1 class="page-header">Context Packs:</h1>
-    <table style="width:100%">
-      <tr>
-        to add
-      </tr>
-    </table>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="contextTag in selectedStudent.contextTags"><label>{{contextTag.tagName}}</label>
+        </li>
+    </ul>
 
     <h1 class="page-header">Words:</h1>
     <table style="width:100%">
