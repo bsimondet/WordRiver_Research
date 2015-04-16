@@ -171,8 +171,30 @@ angular.module('WordRiverApp')
     };
 
     $scope.displayGroupInfo = function (group){
-      for(var i =0; i<$scope.groupArray.length; i++){
-        if($scope.groupArray[i].groupName == group){
+      $scope.switchMiddle("group");
+      $scope.groupSelected = group;
+      $scope.matchCategories = [];
+      $scope.matchStudents = [];
+      for(var i = 0; i<$scope.groupArray.length; i++){
+        if ($scope.groupArray[i].groupName == $scope.groupSelected){
+          for(var j=0; j<$scope.groupArray[i].contextPacks.length; j++){
+            $scope.matchCategories.push($scope.groupArray[i].contextPacks[j]);
+          }
+        }
+      }
+      for (var k = 0; k<$scope.studentArray.length; k++){
+        for (var l = 0; l<$scope.studentArray[k].groupList.length; l++){
+          if ($scope.studentArray[k].groupList[l] === group){
+            $scope.matchStudents.push($scope.studentArray[k]);
+          }
+        }
+      }
+      for (var m = 0; m<$scope.matchCategories.length; m++){
+        for (var n = 0; n<$scope.userTiles.length; n++){
+          for (var o = 0; o<$scope.userTiles[n].contextTags.length; o++){
+            if ($scope.matchCategories[m] == $scope.userTiles[n].contextTags[o].tagName){
+            }
+          }
         }
       }
     };
