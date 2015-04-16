@@ -2,7 +2,7 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>Student Manager!</h1>
+    <h1>Student Manager</h1>
   </div>
 </header>
 
@@ -19,6 +19,7 @@
     <li class="list-group-item" type="checkbox" ng-repeat="group in localGroupArray"><label>
         <input type="checkbox" id="myCheck" value="value" ng-click="allCheckedGroups(group.groupName)"><a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a></label>
           <span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="removeData($index)"></span>
+          <span class="glyphicon glyphicon-pencil floatLeft close" style="color: #000000" ng-click=""></span>
     </li>
     <!--adapt for groups-->
 
@@ -33,7 +34,9 @@
   <div>
     <!--adapt for students-->
     <h1 class="page-header">Students in {{selectedGroupName}}:</h1>
-      <li class="list-group-item" ng-repeat="student in studentsInGroup"><label>{{student.lastName}}, {{student.firstName}}</label></li>
+      <li class="list-group-item" ng-repeat="student in studentsInGroup"><label>{{student.lastName}}, {{student.firstName}}</label>
+        <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red" ng-click="removeStudentFromGroup(student)"></span>
+      </li>
     </ul>
     <div>
     </div>
@@ -49,7 +52,7 @@
       </form>
     </li>
     <!--TODO Attach to database to display all the words-->
-    <li class="list-group-item" type="checkbox" ng-repeat="student in students"><label><input type="checkbox" id="myCheck" value="value" ng-click="allCheckedStudents(student._id)">{{student.lastName}}, {{student.firstName}}</label><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="removeData($index)"></span></li>
+    <li class="list-group-item" type="checkbox" ng-repeat="student in students"><label><input type="checkbox" id="myCheck" value="value" ng-click="allCheckedStudents(student._id)">{{student.lastName}}, {{student.firstName}}</label></li>
   </ul>
   <input type="submit" value="Add Selected Students to Selected Groups" class="btn btn-primary" ng-click="addStudentsToGroups()">
 </div>

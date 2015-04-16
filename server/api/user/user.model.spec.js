@@ -3,8 +3,10 @@
 var should = require('should');
 var app = require('../../app');
 var User = require('./user.model');
+var request = require('supertest');
 
 var user = new User({
+  _id: '1234',
   provider: 'local',
   name: 'Fake User',
   email: 'test@test.com',
@@ -57,4 +59,15 @@ describe('User Model', function() {
   it("should not authenticate user if password is invalid", function() {
     return user.authenticate('blah').should.not.be.true;
   });
+
+  //it("Testing getting all user's tiles", function(done){
+  //  user.save(function() {
+  //    request(app)
+  //      .get('/user/1234/tile')
+  //      .expect(200)
+  //      .end(function(err, response) {
+  //        done();
+  //      });
+  //  });
+  //});
 });
