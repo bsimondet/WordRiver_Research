@@ -65,6 +65,37 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.removeFromCategory = function(req, res, next) {
+  //var userId = req.user._id;
+
+  var category = req.body.category;
+  var tileId = req.tile._id;
+  User.findById(tileId, function (err, tile) {
+    //for(var i = 0; i < user.tileBucket.length; i++){
+    //  console.log(word == user.tileBucket[i].wordName);
+    //  if(word == user.tileBucket[i].wordName){
+    //    console.log(word);
+    //    for(var j = 0; j < user.tileBucket[i].contextTags.length; j++){
+    //      if(user.tileBucket[i].contextTags[j] == packId){
+    //        console.log(j);
+    //        user.tileBucket[i].contextTags.splice(j, 1);
+    //      }
+    //    }
+    //  }
+    //}
+    for(var i = 0; i < tile.tagName.length; i++){
+      if(tile.tagName[i] == category){
+        tile.tagName
+      }
+    }
+
+    tile.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.updateTile = function(req, res, next) {
   //var userId = req.user._id;
 
