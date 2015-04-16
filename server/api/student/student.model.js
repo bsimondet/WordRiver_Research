@@ -4,8 +4,8 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var StudentSchema = new Schema({
-  "firstName": String,
-  "lastName": String,
+  firstName: String,
+  lastName: String,
 //  artifacts: [[{ //Array of arrays containing JSON objects, with each inner array representing an artifact, and each JSON object representing a tile
 //    tileID: String, //Tile ID
 //    contextPack: String //Context pack tag associated with the tile used in the JSON object

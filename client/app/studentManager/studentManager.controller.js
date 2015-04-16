@@ -13,6 +13,7 @@ angular.module('WordRiverApp')
     $scope.selectedStudents = [];
     $scope.studentsInGroup = []; //Student references
     $scope.selectedGroupName = "";
+    $scope.newArray = [];
 
 ///////////////////////////////////
     $scope.getStudentList = function(){
@@ -190,7 +191,7 @@ angular.module('WordRiverApp')
         }
       }
 
-    }
+    };
 
     $scope.orderBy = function (property) {
       var sortOrder = 1;
@@ -212,4 +213,22 @@ angular.module('WordRiverApp')
         return result * sortOrder;
       }
     };
+    //////////////////////////////////////////////////////////
+    //Trying to write and edit group name function. Having troubles with changing just the name.
+    $scope.editName = function (index) {
+      console.log($scope.studentsInGroup[0]);
+      var text = prompt("Provide a new name for " + $scope.localGroupArray[index].groupName + ".", "");
+      if (text != null) {
+        var choice = confirm("Are you sure you want to change the name of " + $scope.localGroupArray[index].groupName + " to " + text + "?");
+        if (choice == true) {
+
+          $http.patch('/api/users/' + $scope.currentUser._id + '/group',
+            {"groupName": text}
+          ).success(function(){
+            });
+
+        }
+      }
+    };
+
   });
