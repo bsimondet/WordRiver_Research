@@ -215,11 +215,11 @@ angular.module('WordRiverApp')
     //making remove for students from groups.
     $scope.removeStudentFromGroup = function (student) {
       console.log("started");
-      for(var i = 0; i < $scope.studentList.length; i++){
+      for (var i = 0; i < $scope.studentList.length; i++){
         if (student == $scope.studentList[i]){
           console.log("found the student");
-          for(var j = 0; j < $scope.studentList[i].groupList.length; j++){
-            if($scope.selectedGroupName == $scope.studentList[i].groupList[j]){
+          for (var j = 0; j < $scope.studentList[i].groupList.length; j++){
+            if ($scope.selectedGroupName == $scope.studentList[i].groupList[j]){
               console.log("about to splice");
               $scope.studentList[i].groupList.splice(j, 1);
               console.log("did it");
@@ -229,6 +229,12 @@ angular.module('WordRiverApp')
           break;
         }
       }
+      for (var h = 0; h < $scope.studentsInGroup.length; h++){
+        if (student = $scope.studentsInGroup[h]){
+          $scope.studentsInGroup.splice(h, 1);
+        }
+      }
+      $scope.displayGroupInfo($scope.selectedGroupName);
     };
 
   });
