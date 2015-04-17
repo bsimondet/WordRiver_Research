@@ -224,7 +224,7 @@ angular.module('WordRiverApp')
               $scope.studentList[i].groupList.splice(j, 1);
               console.log("did it");
               break;
-            }
+            }console.log($scope.displayGroupInfo(group.groupName));
           }
           break;
         }
@@ -246,14 +246,12 @@ angular.module('WordRiverApp')
         var choice = confirm("Are you sure you want to change the name of " + $scope.localGroupArray[index].groupName + " to " + text + "?");
         if (choice == true) {
 
-
           $scope.localGroupArray[index].groupName = text;
-          console.log($scope.displayGroupInfo(group.groupName));
 
-          $http.patch('/api/users/' + $scope.currentUser._id + '/group',
-            {groupList: $scope.localGroupArray}
+          $http.put('/api/users/' + $scope.currentUser._id + '/group',
+            {index: index, groupName: text}
           ).success(function(){
-            });
+          });
 
         }
       }
