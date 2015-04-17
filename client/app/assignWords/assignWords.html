@@ -17,12 +17,12 @@
       <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="group in groupArray  | orderBy:'groupName':order1">
+        <li class="list-group-item" ng-repeat="group in groupArray | orderBy:'groupName':order1">
           <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group.groupName)">{{group.groupName}}</a>
-          <span class="glyphicon glyphicon-chevron-right floatRight close" ng-model="collapsed" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group)"></span>
+          <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group)"></span>
           <ul collapse="!isCollapsed">
             dfg
-            <li ng-show="collapsed" class="list-group-item" ng-repeat="student in groupedStudents"><label>{{student.lastName}}, {{student.firstName}}</label>
+            <li class="list-group-item" ng-repeat="student in groupedStudents"><label>{{student.lastName}}, {{student.firstName}}</label></li>
           </ul>
         </li>
       </ul>
