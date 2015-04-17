@@ -6,6 +6,8 @@ angular.module('WordRiverApp')
     $scope.errors = {};
     $scope.logInShow = true;
     $scope.signUpShow = false;
+    $scope.signedInShow = false;
+    $scope.buttonsShow = false;
     $scope.backgroundImage = {
       background: "url(assets/images/river.jpg) no-repeat center",
       "background-attachment": "scroll"

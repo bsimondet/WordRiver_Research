@@ -79,9 +79,11 @@ img.resizeNav{
   height: 425px;
 }
 .test{
-  margin-top: 385px;
+  margin-top: 485px;
   overflow: auto;
   height: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .input {
@@ -104,7 +106,18 @@ label {
   clear: both;
 }
 
-.buttonSizeUpper {
+.buttonSizeUpperLogIn {
+  margin-left: 10px;
+  margin-top: 2px;
+  float: left;
+  width: 16%;
+  height: 15%;
+  font-size: 100%;
+  padding: 6px;
+  color: #000000;
+}
+
+.buttonSizeUpperSignUp {
   margin-left: 10px;
   margin-top: 17px;
   float: left;

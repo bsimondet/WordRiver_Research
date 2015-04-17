@@ -5,17 +5,16 @@
     <img class="resize" src="assets/images/WordRiverLogo.png" alt="we have a logo!"><br>
     <h2 class = "h2">Assisting students in creative learning.</h2>
     <div class="loginBox">
-      <a class="btn btn-default btn-lg btn-register buttonSizeUpper" ng-click="logInShow = true; signUpShow = false;">
-        Login
-      </a>
-      <a class="btn btn-default btn-lg btn-register buttonSizeUpper" ng-click="logInShow = false; signUpShow = true;">
-        Sign Up
-      </a>
 
       <!--Login screen-->
-
       <div ng-show = "logInShow">
         <form class="form" name="logIn" ng-submit="login(logIn)" novalidate>
+          <a class="btn btn-default btn-lg btn-register buttonSizeUpperLogIn" ng-click="logInShow = true; signUpShow = false;">
+            Login
+          </a>
+          <a class="btn btn-default btn-lg btn-register buttonSizeUpperLogIn" ng-click="logInShow = false; signUpShow = true;">
+            Sign Up
+          </a>
 
           <div class="form-group has-error">
             <span class="clear help-block" ng-show="logIn.email.$error.required && logIn.password.$error.required && submitted">
@@ -39,7 +38,7 @@
             <label>: Password</label>
           </div>
           <div class="clear">
-            <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
+            <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" ng-click="logInShow = true; signUpShow = false;" type="submit">
               Login
             </button>
           </div>
@@ -50,6 +49,13 @@
 
       <div ng-show="signUpShow">
         <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
+
+          <a class="btn btn-default btn-lg btn-register buttonSizeUpperSignUp" ng-click="logInShow = true; signUpShow = false;">
+            Login
+          </a>
+          <a class="btn btn-default btn-lg btn-register buttonSizeUpperSignUp" ng-click="logInShow = false; signUpShow = true;">
+            Sign Up
+          </a>
 
           <div class="clear" ng-class="{ 'has-success': signUp.name.$valid && submitted,
                                             'has-error': signUp.name.$invalid && submitted }">
@@ -103,6 +109,16 @@
 
         </form>
       </div>
+
+
+      <div ng-show = "signedInShow">
+        <form class = "">
+          <span>
+            Hello There
+          </span>
+        </form>
+      </div>
+
 
     </div>
   </div>
