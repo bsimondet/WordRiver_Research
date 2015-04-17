@@ -30,12 +30,12 @@
 
           <div class="clear">
             <input type="email" name="email" class="input" ng-model="user.email" id="loginEmail" required>
-            <label for="loginEmail" >: Email</label>
+            <label class="label" for="loginEmail" >: Email</label>
           </div>
 
           <div class="clear">
             <input type="password" name="password" class="input" ng-model="user.password" required>
-            <label>: Password</label>
+            <label class="label">: Password</label>
           </div>
           <div class="clear">
             <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
@@ -64,7 +64,7 @@
             </span>
             <input type="text" name="name" class="clear input" ng-model="user.name"
                    required/>
-            <label>: Name</label>
+            <label class="label">: Name</label>
 
           </div>
 
@@ -82,7 +82,7 @@
             <input type="email" name="email" class="clear input" ng-model="user.email"
                    required
                    mongoose-error/>
-            <label>: Email</label>
+            <label class="label">: Email</label>
           </div>
 
           <div class="clear" ng-class="{ 'has-success': signUp.password.$valid && submitted,
@@ -98,7 +98,7 @@
                    ng-minlength="3"
                    required
                    mongoose-error/>
-            <label>: Password</label>
+            <label class="label">: Password</label>
           </div>
 
           <div class="clear">
@@ -136,5 +136,6 @@
 <footer class="footer">
   <div class="container">
     <p>Iteration 2 Merge </p>
+  </div>
   </div>
 </footer>
