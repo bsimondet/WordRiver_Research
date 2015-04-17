@@ -39,7 +39,7 @@
           </div>
           <div class="clear">
             <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
-              Login
+              Submit
             </button>
           </div>
         </form>
@@ -103,7 +103,7 @@
 
           <div class="clear">
             <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
-              Sign up
+              Submit
             </button>
           </div>
 
@@ -112,11 +112,11 @@
 
 
       <div ng-show = "signedInShow">
-        <form class = "">
+        <div class = "welcomeText">
           <span>
-            Hello There
+            Hello {{ getCurrentUser().name }} !
           </span>
-        </form>
+        </div>
       </div>
 
 

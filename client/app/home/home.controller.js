@@ -8,6 +8,7 @@ angular.module('WordRiverApp')
     $scope.signUpShow = false;
     $scope.signedInShow = false;
     $scope.buttonsShow = true;
+    $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.backgroundImage = {
       background: "url(assets/images/river.jpg) no-repeat center",
       "background-attachment": "scroll"
@@ -71,6 +72,11 @@ angular.module('WordRiverApp')
         $scope.buttonsShow = false;
         $scope.logInShow = false;
         $scope.signUpShow = false;
+      }else{
+        $scope.logInShow = true;
+        $scope.signUpShow = false;
+        $scope.signedInShow = false;
+        $scope.buttonsShow = true;
       }
     }
 

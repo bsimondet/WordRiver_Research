@@ -14,7 +14,8 @@ angular.module('WordRiverApp')
 
     $scope.logout = function() {
       Auth.logout();
-      $location.path('/login');
+      window.location = "/";
+
     };
 
     $scope.isActive = function(route) {
