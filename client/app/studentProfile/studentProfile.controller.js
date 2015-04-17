@@ -29,14 +29,35 @@ angular.module('WordRiverApp')
     };
     $scope.getStudents();
 
+  $scope.AllTiles = [];
+    $scope.getTiles = function(){
+        $http.get("/api/tiles/" ).success(function(tile) {
+          $scope.AllTiles.push(tile);
+        })
+    };
+    $scope.getTiles();
+
+
+    $scope.tiles = [];
     $scope.displayStudentProfile = function(student){
+      $scope.tilesID = [];
       $scope.selectedStudent = student;
+      $scope.tilesID = $scope.selectedStudent.tileBucket;
+      //for (var i=0; $scope.tilesID.length; i++) {
+      //  $scope.tilename = document.getElementById("tilesID[i]");
+      //  $scope.tiles.push($scope.tilename);
+      //  for (var j = 0; j < $scope.AllTiles.length; j++) {
+      //    if ($scope.tilesID[i] == $scope.AllTiles[j]._id){
+      //      $scope.tiles.push($scope.AllTiles[j].name);
+      //    }
+      //  }
+      //  }
+      };
       //for(var i = 0; i < $scope.studentList.length; i++){
       //  if($scope.studentList[i].groupList.indexOf(group.groupName) != -1){
       //    $scope.studentsInGroup.push($scope.studentList[i]);
       //  }
       //}
-    };
 
 
     //$scope.addThing = function () {

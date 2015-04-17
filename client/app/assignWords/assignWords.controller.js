@@ -216,11 +216,28 @@ angular.module('WordRiverApp')
     };
 
     $scope.displayStudentInfo = function (student){
+      $scope.studentSelected = student;
+      $scope.switchMiddle("student");
+      $scope.matchGroup = [];
       $scope.studentCategories = [];
-      for(var i =0; i<$scope.selectedStudents.length; i++){
-        if($scope.selectedStudents[i].firstName == student.firstName && $scope.studentArray[i].lastName == student.lastName){
-          for(var j=0; j<$scope.selectedStudents[i].contextTags.length; j++){
-            $scope.studentCategories.push($scope.selectedStudents[i].contextTags[j].tagName);
+      $scope.matchTiles = [];
+      $scope.matchTileIds = [];
+      for (var j = 0; j < $scope.currentUser.studentList.length; j++){
+        if ($scope.currentUser.studentList[j].studentID == student._id){
+          $scope.matchGroup = $scope.currentUser.studentList[j].groupList;
+          $scope.studentCategories = $scope.currentUser.studentList[j].contextTags;
+          console.log("got here");
+        }
+      }
+      for (var i = 0; i < $scope.selectedStudents.length; i++){
+        if ($scope.selectedStudents[i]._id == student._id){
+          $scope.matchTileIds = $scope.selectedStudents[i].tileBucket;
+        }
+      }
+      for (var k = 0; k < $scope.matchTileIds.length; k++){
+        for (var l = 0; l < $scope.allTiles.length; l++){
+          if ($scope.allTiles[l]._id == $scope.matchTileIds[k]){
+            $scope.matchTiles.push($scope.allTiles[l]);
           }
         }
       }
@@ -261,49 +278,61 @@ angular.module('WordRiverApp')
     //This is the section for the assign function and its helpers
 
     $scope.assignWords = function () {
-      $scope.individualStudentCategories = [];
-      $scope.userSideStudentCategories = [];
-      //Checks to make sure there are selected categories
-      if ($scope.selectedCategories.length > 0) {
-        //For each of the checked students, push their packs onto an array
-        for (var i = 0; i < $scope.checkedStudents.length; i++) {
-          $scope.studentCategoryArray = [];
-          for (var a = 0; a < $scope.checkedStudents[i].contextTags.length; a++){
-            $scope.studentCategoryArray.push({
-              tagName:$scope.checkedStudents[i].contextTags[a].tagName,
-              creatorID:$scope.checkedStudents[i].contextTags[a].creatorID
-            })
-          }
-          $scope.checkCategoryDups($scope.studentCategoryArray, $scope.selectedCategories);
-          //Push the selected categories onto the array locally
-          for (var j = 0; j < $scope.selectedCategories.length; j++) {
-            $scope.studentCategoryArray.push({
-              tagName:$scope.selectedCategories[j],
-              creatorID:$scope.currentUser._id
-            });
-          }
-          $http.patch('/api/students/' + $scope.checkedStudents[i]._id,
-            {contextTags: $scope.studentCategoryArray});
-        }
-        //Go through each selected group
-        console.log($scope.selectedGroups.length);
-        for (var k=0; k <$scope.selectedGroups.length; k++){
-          //Check for duplicate categories to the ones we want to push
-          for (var l = 0; l<$scope.groupArray.length; l++){
-            $scope.checkCategoryDups($scope.groupArray[l].contextPacks,$scope.selectedCategories);
-            if($scope.selectedGroups[k].groupName == $scope.groupArray[l].groupName){
-              for(var m=0; m<$scope.selectedCategories.length; m++){
-                $scope.groupArray[l].contextPacks.push($scope.selectedCategories[m]);
-              }
-            }
-          }
-          //Update the group's categories
-          $http.patch('/api/users/'+$scope.currentUser._id+'/group',{
-            groupList:$scope.groupArray
-          });
-        }
+      if($scope.groupView && $scope.categoryView){
+        //Function to add selected categories to selected groups.
+      } else if ($scope.groupView && !$scope.categoryView){
+        //Function to add selected words to selected groups.
+      } else if (!$scope.groupView && $scope.categoryView){
+        //Function to add selected categories to selected students.
+      } else if (!$scope.groupView && !$scope.categoryView){
+        //Function to add selected words to selected students.
       }
-      $scope.getAll();
+      
+      //Old code from last time this function worked
+
+      //$scope.individualStudentCategories = [];
+      //$scope.userSideStudentCategories = [];
+      ////Checks to make sure there are selected categories
+      //if ($scope.selectedCategories.length > 0) {
+      //  //For each of the checked students, push their packs onto an array
+      //  for (var i = 0; i < $scope.checkedStudents.length; i++) {
+      //    $scope.studentCategoryArray = [];
+      //    for (var a = 0; a < $scope.checkedStudents[i].contextTags.length; a++){
+      //      $scope.studentCategoryArray.push({
+      //        tagName:$scope.checkedStudents[i].contextTags[a].tagName,
+      //        creatorID:$scope.checkedStudents[i].contextTags[a].creatorID
+      //      })
+      //    }
+      //    $scope.checkCategoryDups($scope.studentCategoryArray, $scope.selectedCategories);
+      //    //Push the selected categories onto the array locally
+      //    for (var j = 0; j < $scope.selectedCategories.length; j++) {
+      //      $scope.studentCategoryArray.push({
+      //        tagName:$scope.selectedCategories[j],
+      //        creatorID:$scope.currentUser._id
+      //      });
+      //    }
+      //    $http.patch('/api/students/' + $scope.checkedStudents[i]._id,
+      //      {contextTags: $scope.studentCategoryArray});
+      //  }
+      //  //Go through each selected group
+      //  console.log($scope.selectedGroups.length);
+      //  for (var k=0; k <$scope.selectedGroups.length; k++){
+      //    //Check for duplicate categories to the ones we want to push
+      //    for (var l = 0; l<$scope.groupArray.length; l++){
+      //      $scope.checkCategoryDups($scope.groupArray[l].contextPacks,$scope.selectedCategories);
+      //      if($scope.selectedGroups[k].groupName == $scope.groupArray[l].groupName){
+      //        for(var m=0; m<$scope.selectedCategories.length; m++){
+      //          $scope.groupArray[l].contextPacks.push($scope.selectedCategories[m]);
+      //        }
+      //      }
+      //    }
+      //    //Update the group's categories
+      //    $http.patch('/api/users/'+$scope.currentUser._id+'/group',{
+      //      groupList:$scope.groupArray
+      //    });
+      //  }
+      //}
+      //$scope.getAll();
     };
 
     $scope.checkCategoryDups = function (studentCategoryArray, checkedCategoryArray, checkedElement) {

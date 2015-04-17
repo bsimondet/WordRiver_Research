@@ -67,10 +67,10 @@ exports.destroy = function(req, res) {
 
 exports.removeFromCategory = function(req, res, next) {
   //var userId = req.user._id;
-
+  console.log("function called");
   var category = req.body.category;
-  var tileId = req.tile._id;
-  User.findById(tileId, function (err, tile) {
+  var tileId = req.body.tileId;
+  tile.findById(tileId, function (err, tile) {
     //for(var i = 0; i < user.tileBucket.length; i++){
     //  console.log(word == user.tileBucket[i].wordName);
     //  if(word == user.tileBucket[i].wordName){
@@ -83,9 +83,12 @@ exports.removeFromCategory = function(req, res, next) {
     //    }
     //  }
     //}
-    for(var i = 0; i < tile.tagName.length; i++){
-      if(tile.tagName[i] == category){
-        tile.tagName
+    console.log(tile);
+    for(var i = 0; i < tile.contextTags.length; i++){
+      console.log("for loop");
+      if(tile.contextTags[i].tagName == category){
+        console.log("splice me");
+        tile.contextTags.splice(i,1);
       }
     }
 
@@ -96,29 +99,29 @@ exports.removeFromCategory = function(req, res, next) {
   });
 };
 
-exports.updateTile = function(req, res, next) {
-  //var userId = req.user._id;
-
-  var word = req.body.word;
-  var packId = req.body.packId;
-
-  User.findById(userId, function (err, user) {
-    var found = false;
-    for(var i = 0; i < user.tileBucket.length; i++){
-      if(user.tileBucket[i].wordName == word){
-        found = true;
-        user.tileBucket[i].tileTags.push(packId);
-      }
-    }
-    if(!found){
-      user.tileBucket.push({wordName: word, tileTags: [packId]});
-    }
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      res.send(200);
-    });
-  });
-};
+//exports.updateTile = function(req, res, next) {
+//  //var userId = req.user._id;
+//
+//  var word = req.body.word;
+//  var packId = req.body.packId;
+//
+//  User.findById(userId, function (err, user) {
+//    var found = false;
+//    for(var i = 0; i < user.tileBucket.length; i++){
+//      if(user.tileBucket[i].wordName == word){
+//        found = true;
+//        user.tileBucket[i].tileTags.push(packId);
+//      }
+//    }
+//    if(!found){
+//      user.tileBucket.push({wordName: word, tileTags: [packId]});
+//    }
+//    user.save(function(err) {
+//      if (err) return validationError(res, err);
+//      res.send(200);
+//    });
+//  });
+//};
 
 function handleError(res, err) {
   return res.send(500, err);

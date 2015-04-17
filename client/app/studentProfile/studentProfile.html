@@ -5,7 +5,7 @@
     <h1>Student Profile</h1>
   </div>
 </header>
-<div class="col-xs-2" style="margin-left:175px">
+<div class="col-xs-2" style="margin-left:auto display:block">
 
   <h1 class="page-header">All Students:</h1>
   <button class="btn btn-primary" ng-click="toSort = 'lastName'; order = !order">Sort by last name</button>
@@ -15,9 +15,17 @@
 </div>
 <div class="container">
 
-  <div class="col-xs-8" style="margin-left:175px">
+  <div class="col-xs-8" style="margin-right:auto   display:block">
     <a class="btn btn-default" href="/main"> Back to Home</a>
     <h1 class="page-header">Student Name: {{selectedStudent.firstName}} {{selectedStudent.lastName}}</h1>
+
+
+    <h1 class="page-header">Groups:</h1>
+    <table style="width:100%">
+      <tr>
+        to add
+      </tr>
+    </table>
 
     <h1 class="page-header">Context Packs:</h1>
     <ul class="list-group">
@@ -26,11 +34,10 @@
     </ul>
 
     <h1 class="page-header">Words:</h1>
-    <table style="width:100%">
-      <tr>
-        to add
-      </tr>
-    </table>
+    <!--<ul class="list-group">-->
+      <!--<li class="list-group-item" ng-repeat="tile in tiles"><label>{{tile}}</label>-->
+      <!--</li>-->
+    <!--</ul>-->
 
     <h1 class="page-header">Artifacts:</h1>
     <table style="width:100%">
