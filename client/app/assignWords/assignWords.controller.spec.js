@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 describe('Controller: AssignWordsCtrl', function () {
 
@@ -20,4 +20,5 @@ describe('Controller: AssignWordsCtrl', function () {
   it('should ...', function () {
     expect(1).toEqual(1);
   });
+
 });

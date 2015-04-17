@@ -4,6 +4,7 @@ describe('Controller: StudentManagerCtrl', function () {
 
   // load the controller's module
   beforeEach(module('WordRiverApp'));
+  beforeEach(module('socketMock'));
 
   var StudentManagerCtrl, scope;
 
@@ -23,45 +24,45 @@ describe('Controller: StudentManagerCtrl', function () {
   //  }
   //});
 
-  it('should test findStudentAccount', function () {
-
-    expect(1).toEqual(1);
-  });
-
-  it('should test findGroupInList', function () {
-    expect(1).toEqual(1);
-  });
-
-  it('should test assignStudentToGroup', function () {
-    expect(1).toEqual(1);
-  });
-
-  it('should test addGroupsContextPacksToStudent', function () {
-    expect(1).toEqual(1);
-  });
-
-  it('should test addContextPacksToStudent', function () {
-    expect(1).toEqual(1);
-  });
-
-  it('should test addStudentsToGroups', function () {
-    expect(1).toEqual(1);
-  });
-
-  it('should test allCheckedGroups', function () {
-    expect(1).toEqual(1);
-  });
-
-  it('should test allCheckedStudents', function () {
-    expect(1).toEqual(1);
-  });
-
-  it('should test displayGroupInfo', function () {
-    expect(1).toEqual(1);
-  });
-
-  it('should be true', function() {
-    expect(true).toBe(true);
-  });
+  //it('should test findStudentAccount', function () {
+  //
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should test findGroupInList', function () {
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should test assignStudentToGroup', function () {
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should test addGroupsContextPacksToStudent', function () {
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should test addContextPacksToStudent', function () {
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should test addStudentsToGroups', function () {
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should test allCheckedGroups', function () {
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should test allCheckedStudents', function () {
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should test displayGroupInfo', function () {
+  //  expect(1).toEqual(1);
+  //});
+  //
+  //it('should be true', function() {
+  //  expect(true).toBe(true);
+  //});
 
 });
