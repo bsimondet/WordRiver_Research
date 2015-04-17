@@ -20,6 +20,7 @@ angular.module('WordRiverApp')
     //$scope.getStudentList();
     //
 
+
     $scope.getStudents = function(){
       for(var i = 0; i < $scope.studentList.length; i++) {
         $http.get("/api/students/" + $scope.studentList[i].studentID).success(function(student) {
