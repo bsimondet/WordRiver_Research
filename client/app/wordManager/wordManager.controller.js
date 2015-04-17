@@ -16,6 +16,7 @@ angular.module('WordRiverApp')
     $scope.order = true;
     $scope.currentCategory = null;
     $scope.currentTile = null;
+    $scope.tileId = "";
     //$scope.selectedCategories = [];
 
     $scope.confirmDelete = function(index) {
@@ -25,13 +26,13 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.disassociateTile = function(pack, index) {
-      console.log(pack);
-      $http.put('/api/users/' + $scope.userId + "/deleteTile", {word: pack.tiles[index].wordName, packId: pack._id});
-      pack.tiles.splice(index, 1);
-      //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
-      //$http.delete('/api/packs/' + pack._id);
-    };
+    //$scope.disassociateTile = function(pack, index) {
+    //  console.log(pack);
+    //  $http.put('/api/users/' + $scope.userId + "/deleteTile", {word: pack.tiles[index].wordName, packId: pack._id});
+    //  pack.tiles.splice(index, 1);
+    //  //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
+    //  //$http.delete('/api/packs/' + pack._id);
+    //};
 
     $scope.getCategories = function() {
         $scope.categoryArray = $scope.currentUser.contextPacks;
@@ -156,17 +157,17 @@ angular.module('WordRiverApp')
     //  }
     //};
 
-    $scope.removeFromCategory = function (tile) {
-      console.log('1 of 3');
-      for(var i = 0; i < $scope.matchTiles.length; i++){
-        console.log('2 of 3');
-        //console.log($scope.matchTiles.length);
-        if(tile._id == $scope.matchTiles[i]._id){
-          console.log('3 of 3');
-          $scope.matchTiles.splice(i, 1);
-        }
-      }
-    };
+    //$scope.removeFromCategory = function (tile) {
+    //  console.log('1 of 3');
+    //  for(var i = 0; i < $scope.matchTiles.length; i++){
+    //    console.log('2 of 3');
+    //    //console.log($scope.matchTiles.length);
+    //    if(tile._id == $scope.matchTiles[i]._id){
+    //      console.log('3 of 3');
+    //      $scope.matchTiles.splice(i, 1);
+    //    }
+    //  }
+    //};
 
 
       $scope.displayWordInfo = function (word) {
@@ -195,10 +196,12 @@ angular.module('WordRiverApp')
     //};
 
     $scope.removeFromCategory = function(tile, index) {
-      //console.log(pack);
-      $scope.categoryArray.splice(index, 1);
-      $http.put('/api/tiles/' + "/removeFromCategory", {category: $scope.currentCategory, tileId: tile._id});
-      tile.tagName(index, 1);
+      //console.log("test");
+      $scope.tileId = tile._id;
+      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.currentCategory, tileId: tile._id});
+      //console.log("test");
+      console.log(tile._id);
+      $scope.matchTiles.splice(index, 1);
       //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
       //$http.delete('/api/packs/' + pack._id);
     };
