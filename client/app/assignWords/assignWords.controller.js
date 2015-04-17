@@ -2,11 +2,22 @@
 
 angular.module('WordRiverApp')
   .controller('AssignWordsCtrl', function ($rootScope, $scope, $http, socket, Auth) {
+    $scope.currentUser = Auth.getCurrentUser();
+    $scope.categoryArray = [];
+    $scope.groupArray = [];
+    $scope.selectedCategories = [];
+    $scope.selectedGroups = [];
+    $scope.selectedStudents = [];
+    $scope.studentArray = [];
+    $scope.allStudents = [];
+    $scope.checkedStudents = [];
+    $scope.matchTiles = [];
+    $scope.userTiles = [];
+    $scope.studentCategories = [];
+    $scope.groupView = true;
 
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for getting all the things
-
-    $scope.currentUser = Auth.getCurrentUser();
 
     $scope.getAll = function () {
       $scope.userTiles = [];
@@ -281,14 +292,16 @@ angular.module('WordRiverApp')
 
     $scope.studentsInGroupAssignment = function(group) {
       for(var i = 0; i < $scope.studentArray.length; i++){
-        var studentsInThisGroup = [];
         console.log("this is the student group list " + $scope.studentArray[i].groupList.indexOf("Group E"));
-        if ($scope.studentArray[i].groupList.indexOf(group) > -1) {
+        console.log($scope.studentArray[i].groupList.indexOf(group));
+        console.log(group.groupName);
+        if ($scope.studentArray[i].groupList.indexOf(group.groupName) > -1) {
           console.log("we are in the if statement");
-          studentsInThisGroup.push($scope.studentArray[i]);
+          $scope.groupedStudents.push($scope.studentArray[i]);
         }
-        $scope.groupedStudents = studentsInThisGroup;
-        console.log($scope.groupedStudents);
       }
+      console.log($scope.groupedStudents);
+      $scope.groupedStudents = [];
+
     };
   });
