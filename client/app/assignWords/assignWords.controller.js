@@ -2,11 +2,22 @@
 
 angular.module('WordRiverApp')
   .controller('AssignWordsCtrl', function ($rootScope, $scope, $http, socket, Auth) {
+    $scope.currentUser = Auth.getCurrentUser();
+    $scope.categoryArray = [];
+    $scope.groupArray = [];
+    $scope.selectedCategories = [];
+    $scope.selectedGroups = [];
+    $scope.selectedStudents = [];
+    $scope.studentArray = [];
+    $scope.allStudents = [];
+    $scope.checkedStudents = [];
+    $scope.matchTiles = [];
+    $scope.userTiles = [];
+    $scope.studentCategories = [];
+    $scope.groupView = true;
 
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for getting all the things
-
-    $scope.currentUser = Auth.getCurrentUser();
 
     $scope.getAll = function () {
       $scope.userTiles = [];
@@ -205,11 +216,28 @@ angular.module('WordRiverApp')
     };
 
     $scope.displayStudentInfo = function (student){
+      $scope.studentSelected = student;
+      $scope.switchMiddle("student");
+      $scope.matchGroup = [];
       $scope.studentCategories = [];
-      for(var i =0; i<$scope.selectedStudents.length; i++){
-        if($scope.selectedStudents[i].firstName == student.firstName && $scope.studentArray[i].lastName == student.lastName){
-          for(var j=0; j<$scope.selectedStudents[i].contextTags.length; j++){
-            $scope.studentCategories.push($scope.selectedStudents[i].contextTags[j].tagName);
+      $scope.matchTiles = [];
+      $scope.matchTileIds = [];
+      for (var j = 0; j < $scope.currentUser.studentList.length; j++){
+        if ($scope.currentUser.studentList[j].studentID == student._id){
+          $scope.matchGroup = $scope.currentUser.studentList[j].groupList;
+          $scope.studentCategories = $scope.currentUser.studentList[j].contextTags;
+          console.log("got here");
+        }
+      }
+      for (var i = 0; i < $scope.selectedStudents.length; i++){
+        if ($scope.selectedStudents[i]._id == student._id){
+          $scope.matchTileIds = $scope.selectedStudents[i].tileBucket;
+        }
+      }
+      for (var k = 0; k < $scope.matchTileIds.length; k++){
+        for (var l = 0; l < $scope.allTiles.length; l++){
+          if ($scope.allTiles[l]._id == $scope.matchTileIds[k]){
+            $scope.matchTiles.push($scope.allTiles[l]);
           }
         }
       }
@@ -319,14 +347,16 @@ angular.module('WordRiverApp')
 
     $scope.studentsInGroupAssignment = function(group) {
       for(var i = 0; i < $scope.studentArray.length; i++){
-        var studentsInThisGroup = [];
         console.log("this is the student group list " + $scope.studentArray[i].groupList.indexOf("Group E"));
-        if ($scope.studentArray[i].groupList.indexOf(group) > -1) {
+        console.log($scope.studentArray[i].groupList.indexOf(group));
+        console.log(group.groupName);
+        if ($scope.studentArray[i].groupList.indexOf(group.groupName) > -1) {
           console.log("we are in the if statement");
-          studentsInThisGroup.push($scope.studentArray[i]);
+          $scope.groupedStudents.push($scope.studentArray[i]);
         }
-        $scope.groupedStudents = studentsInThisGroup;
-        console.log($scope.groupedStudents);
       }
+      console.log($scope.groupedStudents);
+      $scope.groupedStudents = [];
+
     };
   });
