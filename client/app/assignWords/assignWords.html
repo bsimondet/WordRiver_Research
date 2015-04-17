@@ -31,7 +31,7 @@
       <h1 class="page-header">Students:</h1>
       <button class="btn btn-primary" ng-show="!AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0; AZ0=!AZ0">Z-A</button>
       <button class="btn btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
-      <input type="text" ng-Model="searchText0">
+      <input type="text" ng-Model="searchText0" placeholder="Search">
       <ul class="list-group scroll">
         <li class="list-group-item " ng-repeat="student in selectedStudents | orderBy:'lastName':order0 |filter:searchText0">
           <input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}} </a>
@@ -110,7 +110,7 @@
       <h1 class="page-header">Categories:</h1>
       <button class="btn btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
       <button class="btn btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
-      <input type="text" ng-Model="searchText1">
+      <input type="text" ng-Model="searchText1" placeholder="Search">
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="category in categoryArray | orderBy:'toString()':order2 | filter:searchText1">
           <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a>
@@ -121,7 +121,7 @@
       <h1 class="page-header">Words:</h1>
       <button class="btn btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
-      <input type="text" ng-Model="searchText2">
+      <input type="text" ng-Model="searchText2" placeholder="Search">
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:searchText2">
           <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
