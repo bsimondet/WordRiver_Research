@@ -17,12 +17,12 @@
       <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="group in groupArray  | orderBy:'groupName':order1"">
-          <label><input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="">{{group.groupName}}</a></label> <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group)"></span>
-          <div collapse="!isCollapsed">
-            dfgi
-            <p><li class="list-group-item" ng-repeat="student in groupedStudents"><label>{{student.lastName}}, {{student.firstName}}</label></p>
-          </div>
+        <li class="list-group-item" ng-repeat="group in groupArray  | orderBy:'groupName':order1">
+          <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group.groupName)">{{group.groupName}}</a>
+          <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group)"></span>
+          <ul collapse="!isCollapsed">
+            <li class="list-group-item" ng-repeat="student in groupedStudents"><label>{{student.lastName}}, {{student.firstName}}</label>
+          </ul>
         </li>
       </ul>
     </div>
@@ -33,7 +33,7 @@
       <button class="btn btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
       <ul class="list-group scroll">
         <li class="list-group-item " ng-repeat="student in selectedStudents | orderBy:'lastName':order0">
-          <label><input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a></label>
+          <input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}} </a>
       </ul>
     </div>
     <!--This section is for the middle column-->
@@ -43,7 +43,7 @@
     <div class="col-xs-4" ng-show="showCategory">
       <br/>
       <br/>
-      <div class="scroll">
+      <div class="middleScroll">
         <h4>The tiles in the category {{categorySelected}} are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="word in matchTiles"><label>
@@ -64,7 +64,7 @@
     <div class="col-xs-4" ng-show="wordView">
       <br/>
       <br/>
-      <div class="scroll">
+      <div class="middleScroll">
         <h4>The tile {{tileSelected.name}} is in the categories:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="word in matchTiles"><label>
@@ -85,7 +85,7 @@
     <div class="col-xs-4" ng-show="showGroup">
       <br/>
       <br/>
-      <div class="scroll">
+      <div class="middleScroll">
         <h4>The group {{groupSelected}} has the students:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="student in matchStudents"><label>
@@ -110,8 +110,8 @@
       <button class="btn btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
       <button class="btn btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="category in categoryArray | orderBy:'toString()':order2"><label>
-          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a></label>
+        <li class="list-group-item" ng-repeat="category in categoryArray | orderBy:'toString()':order2">
+          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category}}</a>
       </ul>
     </div>
     <div class="col-xs-4" ng-hide="categoryView">
@@ -120,8 +120,8 @@
       <button class="btn btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3"><label>
-          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a></label>
+        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3">
+          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
       </ul>
     </div>
   </form>
