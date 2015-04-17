@@ -13,7 +13,8 @@ var StudentSchema = new Schema({
   teachers: [], //Array of user account IDs associated with this student
   tileBucket: [], //List of tile IDs the student has access to
   contextTags: [{ //Array of JSON objects, where each object is a context tag grouping containing the tag used and the id of the user that created the context pack
-    tagName: String,
+    name: String,
+    isWordType: Boolean,
     creatorID: String
   }]
 });
