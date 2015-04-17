@@ -7,7 +7,7 @@ angular.module('WordRiverApp')
     $scope.logInShow = true;
     $scope.signUpShow = false;
     $scope.signedInShow = false;
-    $scope.buttonsShow = false;
+    $scope.buttonsShow = true;
     $scope.backgroundImage = {
       background: "url(assets/images/river.jpg) no-repeat center",
       "background-attachment": "scroll"
@@ -22,6 +22,10 @@ angular.module('WordRiverApp')
           password: $scope.user.password
         })
           .then( function() {
+            $scope.signedInShow = true;
+            $scope.buttonsShow = false;
+            $scope.logInShow = false;
+            $scope.signUpShow = false;
             // Logged in, redirect to home
             $location.path('/');
           })
@@ -41,6 +45,10 @@ angular.module('WordRiverApp')
           password: $scope.user.password
         })
           .then( function() {
+            $scope.signedInShow = true;
+            $scope.buttonsShow = false;
+            $scope.logInShow = false;
+            $scope.signUpShow = false;
             // Account created, redirect to home
             $location.path('/');
           })
@@ -56,4 +64,16 @@ angular.module('WordRiverApp')
           });
       }
     };
+
+    $scope.checkedLoggedIn = function() {
+      if(Auth.isLoggedIn()){
+        $scope.signedInShow = true;
+        $scope.buttonsShow = false;
+        $scope.logInShow = false;
+        $scope.signUpShow = false;
+      }
+    }
+
+    $scope.checkedLoggedIn();
+
   });
