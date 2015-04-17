@@ -102,7 +102,7 @@ angular.module('WordRiverApp')
     if($scope.studentList[studentIndex].groupList.indexOf(group) == -1){
       $scope.studentList[studentIndex].groupList.push(group);
       if(group == $scope.selectedGroupName){
-        $scope.studentsInGroup.push($scope.studentList[studentIndex]);
+        $scope.studentsInGroup.push($scope.studentList[stdfgudentIndex]);
       }
       $scope.addGroupsContextPacksToStudent(student);
     }
@@ -190,6 +190,13 @@ angular.module('WordRiverApp')
       }
     };
 
+
+    $scope.getStudentGroups = function(student){
+      $scope.selectedGroupName = "Groups for "+student.firstName+" "+student.lastName+":";
+      $scope.studentsInGroup = student.allGroupsIn;
+
+    };
+
     $scope.orderBy = function (property) {
       var sortOrder = 1;
       if(property[0] === "-") {
@@ -215,26 +222,28 @@ angular.module('WordRiverApp')
     //making remove for students from groups.
     $scope.removeStudentFromGroup = function (student) {
       console.log("started");
-      for (var i = 0; i < $scope.studentList.length; i++){
-        if (student == $scope.studentList[i]){
+      for (var i = 0; i < $scope.studentList.length; i++) {
+        if (student == $scope.studentList[i]) {
           console.log("found the student");
-          for (var j = 0; j < $scope.studentList[i].groupList.length; j++){
-            if ($scope.selectedGroupName == $scope.studentList[i].groupList[j]){
+          for (var j = 0; j < $scope.studentList[i].groupList.length; j++) {
+            if ($scope.selectedGroupName == $scope.studentList[i].groupList[j]) {
               console.log("about to splice");
               $scope.studentList[i].groupList.splice(j, 1);
               console.log("did it");
               break;
-            }console.log($scope.displayGroupInfo(group.groupName));
+            }
           }
           break;
         }
       }
-      for (var h = 0; h < $scope.studentsInGroup.length; h++){
-        if (student = $scope.studentsInGroup[h]){
+      for (var h = 0; h < $scope.studentsInGroup.length; h++) {
+        if (student = $scope.studentsInGroup[h]) {
           $scope.studentsInGroup.splice(h, 1);
         }
       }
       $scope.displayGroupInfo($scope.selectedGroupName);
+    };
+
     };
 
     //////////////////////////////////////////////////////////
@@ -255,6 +264,6 @@ angular.module('WordRiverApp')
 
         }
       }
-    };
+
 
   });
