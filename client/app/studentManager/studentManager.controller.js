@@ -190,6 +190,14 @@ angular.module('WordRiverApp')
       }
     };
 
+    };
+
+    $scope.getStudentGroups = function(student){
+      $scope.selectedGroupName = "Groups for "+student.firstName+" "+student.lastName+":";
+      $scope.studentsInGroup = student.allGroupsIn;
+
+    };
+
     $scope.orderBy = function (property) {
       var sortOrder = 1;
       if(property[0] === "-") {
