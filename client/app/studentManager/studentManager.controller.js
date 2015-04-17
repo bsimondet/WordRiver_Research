@@ -102,7 +102,7 @@ angular.module('WordRiverApp')
     if($scope.studentList[studentIndex].groupList.indexOf(group) == -1){
       $scope.studentList[studentIndex].groupList.push(group);
       if(group == $scope.selectedGroupName){
-        $scope.studentsInGroup.push($scope.studentList[stdfgudentIndex]);
+        $scope.studentsInGroup.push($scope.studentList[studentIndex]);
       }
       $scope.addGroupsContextPacksToStudent(student);
     }
@@ -190,14 +190,6 @@ angular.module('WordRiverApp')
       }
     };
 
-    };
-
-    $scope.getStudentGroups = function(student){
-      $scope.selectedGroupName = "Groups for "+student.firstName+" "+student.lastName+":";
-      $scope.studentsInGroup = student.allGroupsIn;
-
-    };
-
     $scope.orderBy = function (property) {
       var sortOrder = 1;
       if(property[0] === "-") {
@@ -247,18 +239,18 @@ angular.module('WordRiverApp')
 
     //////////////////////////////////////////////////////////
     //Trying to write and edit group name function. Having troubles with changing just the name.
-    $scope.editName = function (index) {
+    $scope.editName = function (index, group) {
 
       var text = prompt("Provide a new name for " + $scope.localGroupArray[index].groupName + ".", "");
       if (text != null) {
         var choice = confirm("Are you sure you want to change the name of " + $scope.localGroupArray[index].groupName + " to " + text + "?");
         if (choice == true) {
 
-          console.log($scope.displayGroupInfo($scope.localGroupArray[index].groupName));
+
           $scope.localGroupArray[index].groupName = text;
+          console.log($scope.displayGroupInfo(group.groupName));
 
-
-          $http.get('/api/users/' + $scope.currentUser._id + '/group',
+          $http.patch('/api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.localGroupArray}
           ).success(function(){
             });
