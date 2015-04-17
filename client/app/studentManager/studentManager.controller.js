@@ -239,7 +239,7 @@ angular.module('WordRiverApp')
 
     //////////////////////////////////////////////////////////
     //Trying to write and edit group name function. Having troubles with changing just the name.
-    $scope.editName = function (index, group) {
+    $scope.editName = function (index, group) { // This is a good function
 
       var text = prompt("Provide a new name for " + $scope.localGroupArray[index].groupName + ".", "");
       if (text != null) {
