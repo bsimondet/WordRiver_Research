@@ -189,8 +189,7 @@ angular.module('WordRiverApp')
         }
       }
     };
-
-
+    
 
     $scope.getStudentGroups = function(student){
       $scope.selectedGroupName = "Groups for "+student.firstName+" "+student.lastName+":";
