@@ -67,13 +67,13 @@
       <div class="middleScroll">
         <h4>The tile {{tileSelected.name}} is in the categories:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="word in matchTiles"><label>
-          </label>{{word}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+          <li class="list-group-item" ng-repeat="category in matchCategories"><label>
+          </label>{{category}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
         </ul>
         <h4>The groups that have this tile are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="group in matchGroup"><label>
-          </label>{{group}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
+          <li class="list-group-item" ng-repeat="group in matchGroup">
+          {{group}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="confirmDelete($index)"></span></li>
         </ul>
         <h4>The students that have this tile are:</h4>
         <ul class="list-group">
