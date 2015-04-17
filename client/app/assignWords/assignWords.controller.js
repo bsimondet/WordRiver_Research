@@ -229,6 +229,32 @@ angular.module('WordRiverApp')
     $scope.displayTileInfo = function (word){
       $scope.tileSelected = word;
       $scope.switchMiddle("word");
+      $scope.matchCategories = [];
+      $scope.matchGroup = [];
+      $scope.matchStudent = [];
+      for (var i = 0; i < $scope.userTiles.length; i++){
+        if ($scope.userTiles[i].name == word.name){
+          for(var j = 0; j < $scope.userTiles[i].contextTags.length; j++){
+            $scope.matchCategories.push($scope.userTiles[i].contextTags[j].tagName);
+          }
+        }
+      }
+      for (var l = 0; l < $scope.groupArray.length; l++){
+        for (var m = 0; m < $scope.groupArray[l].contextPacks.length; m++){
+          for (var n = 0; n < $scope.matchCategories.length; n++){
+            if($scope.groupArray[l].contextPacks[m] == $scope.matchCategories[n]){
+              $scope.matchGroup.push($scope.groupArray[l].groupName);
+            }
+          }
+        }
+      }
+      for (var o = 0; o < $scope.selectedStudents.length; o++){
+        for (var p = 0; p < $scope.selectedStudents[o].tileBucket.length; p++){
+          if(word._id == $scope.selectedStudents[o].tileBucket[p]){
+            $scope.matchStudent.push($scope.selectedStudents[o]);
+          }
+        }
+      }
     };
 
     ////////////////////////////////////////////////////////////////////////////
