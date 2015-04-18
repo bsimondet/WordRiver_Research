@@ -226,7 +226,6 @@ angular.module('WordRiverApp')
         if ($scope.currentUser.studentList[j].studentID == student._id){
           $scope.matchGroup = $scope.currentUser.studentList[j].groupList;
           $scope.studentCategories = $scope.currentUser.studentList[j].contextTags;
-          console.log("got here");
         }
       }
       for (var i = 0; i < $scope.selectedStudents.length; i++){
@@ -273,6 +272,24 @@ angular.module('WordRiverApp')
         }
       }
     };
+
+    $scope.displayStudentHelper = function(student){
+      for(var i = 0; i < $scope.selectedStudents.length; i++){
+        if(student.studentID == $scope.selectedStudents[i]._id){
+          $scope.displayStudentInfo($scope.selectedStudents[i]);
+        }
+      }
+    };
+
+    $scope.displayTileHelper = function(tile){
+      for (var i = 0; i < $scope.allTiles.length; i++){
+        if ($scope.allTiles[i].name == tile){
+          $scope.displayTileInfo($scope.allTiles[i]);
+          return;
+        }
+      }
+    };
+
 
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for the assign function and its helpers
