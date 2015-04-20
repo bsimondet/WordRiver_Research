@@ -22,7 +22,7 @@
           <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group)"></span>
           <ul collapse="!isCollapsed">
             <li class="list-group-item" ng-repeat="students in groupedStudents">
-              <a href ="">{{students.lastName}}, {{students.firstName}}</a></li>
+              <a href ="" ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a></li>
           </ul>
         </li>
       </ul>
