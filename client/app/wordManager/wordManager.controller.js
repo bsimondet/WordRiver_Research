@@ -2,6 +2,7 @@
 
 angular.module('WordRiverApp')
   .controller('WordManagerCtrl', function ($scope, $http, socket, Auth) {
+    $scope.currentUser = Auth.getCurrentUser();
     $scope.categoryField = "";
     $scope.addField = "";
     $scope.addType = "";
@@ -19,6 +20,8 @@ angular.module('WordRiverApp')
     $scope.currentTile = null;
     $scope.tileId = "";
     $scope.contextTagsTemp = [];
+    $scope.showValue = true;
+    $scope.wordToEdit = null;
    // $scope.wordToRemove = null;
     //$scope.selectedCategories = [];
 
@@ -190,7 +193,33 @@ angular.module('WordRiverApp')
       }
     };
 
+    $scope.editWord = function(index){
+        $scope.editWordIndex = index;
+        $scope.showValue = false;
+        $scope.wordToEdit = $scope.userTiles[index];
+    };
+
+    $scope.updateTile = function() {
+
+        $scope.showValue = true;
+    }
+
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Usefull database functions from previous iteration
 
