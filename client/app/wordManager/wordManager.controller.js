@@ -168,11 +168,11 @@ angular.module('WordRiverApp')
     };
 
     //Removes a category from a word, on the server side this does the same thing as removeFromCategory
-    $scope.removeCategoryFromWord = function(tile, index) {
-      $scope.tileId = tile._id;
-      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.contextTagsTemp[index], tileId: tile._id});
+    $scope.removeCategoryFromWord = function(index) {
+      $scope.tileId = $scope.currentTile._id;
+      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.contextTagsTemp[index], tileId: $scope.currentTile._id});
       //console.log("test");
-      console.log(tile._id);
+      //console.log(tile._id);
       $scope.contextTagsTemp.splice(index, 1);
     };
 
