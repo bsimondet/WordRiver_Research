@@ -181,7 +181,13 @@ angular.module('WordRiverApp')
       $scope.wordToRemove = $scope.userTiles[index];
       $http.delete('/api/tile/'+ $scope.wordToRemove._id);
       $scope.getWords();
+      var wordToRemove = $scope.userTiles(index);
       $scope.userTiles.splice(index,1);
+      for(var i = 0; i < $scope.allTiles.length; i++){
+        if(wordToRemove.id == $scope.allTiles[i].id) {
+            $scope.allTiles.splice(i,1);
+          }
+      }
     };
 
   });
