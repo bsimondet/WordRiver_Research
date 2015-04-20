@@ -33,18 +33,23 @@ User.find({}).remove(function() {
       ],
       "groupList": [
         {"groupName": "Group A",
+          "_id": "5535520d4e9e3d82b7283ca2",
         "contextPacks": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"]
         },
         {"groupName": "Group B",
+          "_id": "5535520db654746a2361ffb6",
           "contextPacks": ["553167d1c67764f3773612dc"]
         },
         {"groupName": "Group C",
+          "_id": "5535520dd7b5c70193c4993c",
           "contextPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86"]
         },
         {"groupName": "Group D",
+          "_id": "5535520dff3a52f2757e5944",
           "contextPacks": ["553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"]
         },
         {"groupName": "Group E",
+          "_id": "5535520d147a722a4e7233a3",
           "contextPacks": ["553167d1c296f9753ce8447f"]
         }],
 
@@ -58,85 +63,85 @@ User.find({}).remove(function() {
           "firstName": "Cardenas",
           "lastName": "Coffey",
           "studentID": "5511ab56117e23f0412fd08f",
-          "groupList": ["Group A", "Group B"],
+          "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
           "contextTags": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80"]
         }, {
           "firstName": "Aisha",
           "lastName": "Wheeler",
           "studentID": "5511ab564ac02dbaf337270d",
-          "groupList": ["Group A"],
+          "groupList": ["5535520d4e9e3d82b7283ca2"],
           "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"]
         }, {
           "firstName": "Weiss",
           "lastName": "Tanner",
           "studentID": "5511ab5617fda1233df3f6dd",
-          "groupList": ["Group A", "Group B", "Group E"],
+          "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6", "5535520d147a722a4e7233a3"],
           "contextTags": ["553167d13562bc39e23e4d3b", "553167d183c193d16d03ce80", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d1c296f9753ce8447f"]
         },{
           "firstName": "Burke",
           "lastName": "Mayer",
           "studentID": "552c20f8be17b267b77b5a19",
-          "groupList": ["Group C", "Group D", "Group E"],
+          "groupList": ["5535520dd7b5c70193c4993c", "5535520dff3a52f2757e5944", "5535520d147a722a4e7233a3"],
           "contextTags": ["553167d14651465f11201014", "553167d123b90c175f9b3a86", "553167d1d969a916cab51920", "553167d1c296f9753ce8447f", "553167d1afa1bda9bc0d055a"]
         },{
           "firstName": "Mueller",
           "lastName": "David",
           "studentID": "552c20f8d1172952c6f268fe",
-          "groupList": ["Group C", "Group B", "Group E"],
+          "groupList": ["5535520dd7b5c70193c4993c", "5535520db654746a2361ffb6", "5535520d147a722a4e7233a3"],
           "contextTags": ["553167d14651465f11201014", "553167d123b90c175f9b3a86", "553167d1c67764f3773612dc", "553167d1c296f9753ce8447f"]
         },{
           "firstName": "Kimberley",
           "lastName": "Lloyd",
           "studentID": "552c20f878838eab8bf3f0b1",
-          "groupList": ["Group D"],
+          "groupList": ["5535520dff3a52f2757e5944"],
           "contextTags": ["553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"]
         },{
           "firstName": "Rodriguez",
           "lastName": "Madden",
           "studentID": "552c20f8b21be14535092a6a",
-          "groupList": ["Group B", "Group C"],
+          "groupList": ["5535520db654746a2361ffb6", "5535520dd7b5c70193c4993c"],
           "contextTags": ["553167d1c67764f3773612dc", "553167d14651465f11201014", "553167d123b90c175f9b3a86"]
         },{
           "firstName": "Garza",
           "lastName": "Massey",
           "studentID": "552c20f8c91389f9a90eea7e",
-          "groupList": ["Group A"],
+          "groupList": ["5535520d4e9e3d82b7283ca2"],
           "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"]
         },{
           "firstName": "Deloris",
           "lastName": "Alvarado",
           "studentID": "552c20f8842d066cb9945d93",
-          "groupList": ["Group D", "Group A"],
+          "groupList": ["5535520dff3a52f2757e5944", "5535520d4e9e3d82b7283ca2"],
           "contextTags": ["553167d1d969a916cab51920", "553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1afa1bda9bc0d055a"]
         },{
           "firstName": "Hahn",
           "lastName": "Melendez",
           "studentID": "552c20f835f5e056a3e3c932",
-          "groupList": ["Group A", "Group B", "Group E"],
+          "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6", "5535520d147a722a4e7233a3"],
           "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc", "553167d1c296f9753ce8447f"]
         },{
           "firstName": "Lucinda",
           "lastName": "Bass",
           "studentID": "552c20f8f403787cef74f326",
-          "groupList": ["Group A", "Group C", "Group E"],
+          "groupList": ["5535520d4e9e3d82b7283ca2", "5535520dd7b5c70193c4993c", "5535520d147a722a4e7233a3"],
           "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d14651465f11201014", "553167d123b90c175f9b3a86", "553167d1c296f9753ce8447f"]
         },{
           "firstName": "James",
           "lastName": "Lester",
           "studentID": "552c20f81e2f0b90bb8b354a",
-          "groupList": ["Group A", "Group B"],
+          "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
           "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc"]
         },{
           "firstName": "Marva",
           "lastName": "Mcgowan",
           "studentID": "552c20f8236b5a09d40cfaf0",
-          "groupList": ["Group D", "Group C", "Group E"],
+          "groupList": ["5535520dff3a52f2757e5944", "5535520dd7b5c70193c4993c", "5535520d147a722a4e7233a3"],
           "contextTags": ["553167d14651465f11201014", "553167d123b90c175f9b3a86", "553167d1d969a916cab51920", "553167d1c296f9753ce8447f", "553167d1afa1bda9bc0d055a"]
         },{
           "firstName": "Jefferson",
           "lastName": "Bean",
           "studentID": "552c20f80645c32973a23dfc",
-          "groupList": ["Group A", "Group D"],
+          "groupList": ["5535520d4e9e3d82b7283ca2", "5535520dff3a52f2757e5944"],
           "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1d969a916cab51920"]
         },{
           "firstName": "Claire",
@@ -146,43 +151,6 @@ User.find({}).remove(function() {
           "contextTags": []
         }
       ]
-    },
-    /////////////////////////////////////
-    {
-      "_id": "5511a83d70df99c5fdfa434f",
-      "name": "Le Marshall",
-      "email": "lemarshall@plexia.com",
-      "role": {
-        "type": "user"
-      },
-      "password": "commodo",
-      "contextPacks": [
-        "Malawi",
-        "Norway",
-        "Sao Tome and Principe",
-        "Benin",
-        "Antigua and Barbuda",
-        "Seychelles",
-        "Dominican Republic"
-      ],
-      "groupList": [
-        {"groupName": "Pennsylvania",
-          "contextPacks": []
-        },
-        {"groupName": "Louisiana",
-          "contextPacks": []
-        },
-        {"groupName": "West Virginia",
-          "contextPacks": []
-        },
-        {"groupName": "Minnesota",
-          "contextPacks": []
-        },
-        {"groupName": "Delaware",
-          "contextPacks": []
-        }],
-      "tileBucket": [],
-      "studentList": []
     }
   );
 });
@@ -900,8 +868,6 @@ Tile.find({}).remove(function() {
       "active": false,
       "wordType": "Adjective"
     },
-
-
     {
     "_id": "552d5c8011d58a4ad979d9b0",
       "name": "Conductor",
