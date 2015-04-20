@@ -162,7 +162,7 @@ angular.module('WordRiverApp')
       $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.currentCategory, tileId: tile._id});
       //console.log("test");
       console.log(tile._id);
-      $scope.categoryArray.splice(index, 1);
+      $scope.matchTiles.splice(index, 1);
       //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
       //$http.delete('/api/packs/' + pack._id);
     };
@@ -187,6 +187,8 @@ angular.module('WordRiverApp')
   });
 
 //Usefull database functions from previous iteration
+
+
 //exports.removeTileFromCategory = function(req, res, next) {
 //  var userId = req.user._id;
 //
@@ -211,7 +213,6 @@ angular.module('WordRiverApp')
 //    });
 //  });
 //};
-
 
 
 //exports.updatePack = function(req, res, next) {
