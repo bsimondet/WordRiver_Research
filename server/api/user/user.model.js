@@ -18,7 +18,8 @@ var UserSchema = new Schema({
   groupList: [{
     groupName: String,
     _id: String,
-    contextPacks: []
+    contextPacks: [],
+    freeTiles: []
   }], //JSON object containing the groupname and an array of associated context pack names.
   tileBucket: [], //List of tile IDs the user has access to
   studentList: [{  //Student JSON
