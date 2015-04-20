@@ -140,8 +140,6 @@ angular.module('WordRiverApp')
       }
     };
 
-
-
     $scope.addStudentsToGroups = function(){
         //iterate over all of the students and all of the groups
       //call assignStudentToGroup on each pair
@@ -241,6 +239,14 @@ angular.module('WordRiverApp')
             if ($scope.studentList[i].groupList[j] == $scope.selectedGroup._id) {
               console.log("about to splice");
               $scope.studentList[i].groupList.splice(j, 1);
+
+              ////Start here once the seed is changed
+              //$http.deleteFromGroup('api/students/' + $scope.currentUser._id + '/student',
+              //  //Insert code to update the database
+              //).success(function () {
+              //    //Insert
+              //  });
+
               console.log("did it");
               break;
             }
@@ -253,10 +259,8 @@ angular.module('WordRiverApp')
           $scope.studentsInGroup.splice(h, 1);
         }
       }
-      //$scope.displayGroupInfo($scope.selectedGroupName);
+      $scope.displayGroupInfo($scope.selectedGroup);
     };
-
-
 
     //////////////////////////////////////////////////////////
     //Trying to write and edit group name function. Having troubles with changing just the name.
