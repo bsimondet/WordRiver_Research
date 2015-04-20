@@ -13,6 +13,7 @@ angular.module('WordRiverApp')
     $scope.selectedStudents = [];
     $scope.studentsInGroup = []; //Student references
     $scope.selectedGroupName = "";
+    $scope.selectedGroup = {};
 
 ///////////////////////////////////
     $scope.getStudentList = function(){
@@ -183,6 +184,7 @@ angular.module('WordRiverApp')
     $scope.displayGroupInfo = function(group){
       $scope.selectedGroupName = group.groupName;
       $scope.studentsInGroup = [];
+      $scope.selectedGroup = group;
       for(var i = 0; i < $scope.studentList.length; i++){
         if($scope.inArray($scope.studentList[i].groupList, group._id)){
           $scope.studentsInGroup.push($scope.studentList[i]);
@@ -192,7 +194,7 @@ angular.module('WordRiverApp')
 
     $scope.inArray= function(array, item){
       for(var i = 0; i < array.length; i++){
-        if(array[i]._id == item){
+        if(array[i] == item){
           return true;
         }
       }
@@ -235,7 +237,8 @@ angular.module('WordRiverApp')
         if (student == $scope.studentList[i]) {
           console.log("found the student");
           for (var j = 0; j < $scope.studentList[i].groupList.length; j++) {
-            if ($scope.selectedGroupName == $scope.studentList[i].groupList[j]) {
+            console.log($scope.selectedGroupName + " "+ $scope.studentList[i].groupList[j] )
+            if ($scope.studentList[i].groupList[j] == $scope.selectedGroup._id) {
               console.log("about to splice");
               $scope.studentList[i].groupList.splice(j, 1);
               console.log("did it");
@@ -250,7 +253,7 @@ angular.module('WordRiverApp')
           $scope.studentsInGroup.splice(h, 1);
         }
       }
-      $scope.displayGroupInfo($scope.selectedGroupName);
+      //$scope.displayGroupInfo($scope.selectedGroupName);
     };
 
 
