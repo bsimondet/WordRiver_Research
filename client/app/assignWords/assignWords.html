@@ -21,8 +21,8 @@
           <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group.groupName)">{{group.groupName}}</a>
           <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group)"></span>
           <ul collapse="!isCollapsed">
-            dfg
-            <li class="list-group-item" ng-repeat="student in groupedStudents"><label>{{student.lastName}}, {{student.firstName}}</label></li>
+            <li class="list-group-item" ng-repeat="students in groupedStudents">
+              <a href ="">{{students.lastName}}, {{students.firstName}}</a></li>
           </ul>
         </li>
       </ul>

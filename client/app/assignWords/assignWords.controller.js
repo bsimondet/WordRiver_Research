@@ -15,6 +15,8 @@ angular.module('WordRiverApp')
       $scope.userTiles = [];
       $scope.studentCategories = [];
       $scope.groupView = true;
+      $scope.groupedStudents = [];
+
 
       ////////////////////////////////////////////////////////////////////////////
       //This is the section for getting all the things
@@ -440,17 +442,17 @@ angular.module('WordRiverApp')
       };
 
       $scope.studentsInGroupAssignment = function(group) {
+        $scope.groupedStudents=[];
         for(var i = 0; i < $scope.studentArray.length; i++){
-          console.log("this is the student group list " + $scope.studentArray[i].groupList.indexOf("Group E"));
           console.log($scope.studentArray[i].groupList.indexOf(group));
           console.log(group.groupName);
           if ($scope.studentArray[i].groupList.indexOf(group.groupName) > -1) {
             console.log("we are in the if statement");
             $scope.groupedStudents.push($scope.studentArray[i]);
+
           }
         }
         console.log($scope.groupedStudents);
-        $scope.groupedStudents = [];
-
-      };
-    });
+    };
+    $scope.groupedStudents = [];
+  });
