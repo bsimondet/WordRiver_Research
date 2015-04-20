@@ -3,11 +3,13 @@
  * to disable, edit config/environment/index.js, and set `seedDB: false`
  */
 
+
 'use strict';
 
 var User = require('../api/user/user.model');
 var Student = require('../api/student/student.model');
 var Tile = require('../api/tile/tile.model');
+var Category = require('../api/category/category.model')
 
 User.find({}).remove(function() {
   User.create({
@@ -577,7 +579,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
   },
   {
     "_id": "5511ae8cec56277a4af216a5",
@@ -589,7 +591,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "5511ae8c1fb25384d865e514",
@@ -601,7 +603,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "5511ae8cf6f121e4c3108cd6",
@@ -613,7 +615,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "5511ae8cb5ac0ff225f5fde2",
@@ -625,7 +627,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "5511ae8c72c6bb3a7f9cd910",
@@ -661,7 +663,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "5511ae8c127053ad5bf17926",
@@ -673,7 +675,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "5511ae8ce28633ca8ad95f7f",
@@ -685,7 +687,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "5511ae8c8b6533965921e512",
@@ -697,7 +699,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
 
   },
     {
@@ -722,7 +724,7 @@ Tile.find({}).remove(function() {
         }
       ],
       "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
     },
     {
       "_id": "552c2418684d651eee7cea6e",
@@ -734,7 +736,7 @@ Tile.find({}).remove(function() {
         }
       ],
       "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
     },
     {
       "_id": "552c2418f3a3808dd9765a0f",
@@ -758,7 +760,7 @@ Tile.find({}).remove(function() {
         }
       ],
       "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
     },
     {
       "_id": "552c2418e365512da04e88c6",
@@ -770,7 +772,7 @@ Tile.find({}).remove(function() {
         }
       ],
       "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
     },
     {
       "_id": "552c24181e58616ee17366ad",
@@ -830,7 +832,7 @@ Tile.find({}).remove(function() {
         }
       ],
       "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
     },
     {
       "_id": "552c241885a79608d3f3ead5",
@@ -842,7 +844,7 @@ Tile.find({}).remove(function() {
         }
       ],
       "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
     },
     {
       "_id": "552c241822d53b21154c0cc0",
@@ -854,7 +856,7 @@ Tile.find({}).remove(function() {
         }
       ],
       "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
     },
     {
       "_id": "552c2418c036ef35fe0bac32",
@@ -878,7 +880,7 @@ Tile.find({}).remove(function() {
       }
     ],
       "active": false,
-      "wordType": "553167d171ef5955ded609ef"
+      "wordType": "Noun"
   },
   {
     "_id": "552d5c80d6a8d78c5541b508",
@@ -890,7 +892,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "552d5c80c0b37217fd3eded3",
@@ -902,7 +904,7 @@ Tile.find({}).remove(function() {
     }
   ],
     "active": false,
-    "wordType": "553167d171ef5955ded609ef"
+    "wordType": "Noun"
   },
   {
     "_id": "552d5c80af62cb1c0a09f7bf",
@@ -2019,17 +2021,11 @@ Tile.find({}).remove(function() {
       ],
       "active": false,
       "wordType": "Adverb"
-    }
-
-
-
-
-
-  )
+    })
 });
 
-Tile.find({}).remove(function() {
-  Tile.create(
+Category.find({}).remove(function() {
+  Category.create(
     {
       "_id": "553167d183c193d16d03ce80",
       "name": "Dolch 1",
