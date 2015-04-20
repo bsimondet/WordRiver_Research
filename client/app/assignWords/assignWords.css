@@ -5,12 +5,14 @@
 #banner {
   border-bottom: none;
   margin-top: -20px;
+  top: 60px;
 }
 
 #banner h1 {
-  font-size: 60px;
+  font-size: 55px !important;
   line-height: 1;
   letter-spacing: -1px;
+  padding-top: -5px !important;
 }
 
 #banner h2 {
@@ -21,11 +23,16 @@
 
 .hero-unit {
   position: relative;
-  padding: 30px 15px;
+  padding: 15px 15px !important;
   color: #F5F5F5;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.24);
   background: #4393B9;
+  height: 110px !important;
+  width: 80% !important;
+  margin: 0 auto !important;
+  margin-bottom: 70px !important;
+
 }
 
 table, th, td {
