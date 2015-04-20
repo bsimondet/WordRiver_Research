@@ -36,7 +36,7 @@
           <ul class="list-group">
             <li class="list-group-item">
             </li>
-            <li class="list-group-item" ng-repeat="category in contextTagsTemp | orderBy: toSort:order">{{category}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red" ng-click="removeFromCategory($index)"></span></li>
+            <li class="list-group-item" ng-repeat="category in contextTagsTemp | orderBy: toSort:order">{{category}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red" ng-click="removeCategoryFromWord($index)"></span></li>
           </ul>
         </div>
 
