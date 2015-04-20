@@ -14,10 +14,18 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  contextPacks: [], //List of tags that can be applied to tiles
+  contextPacks: [
+    {
+      name: String,
+      isWordType: Boolean
+    }
+  ], //List of tags that can be applied to tiles
   groupList: [{
     groupName: String,
-    contextPacks: []
+    contextPacks: [{
+      name: String,
+      isWordType: Boolean
+    }]
   }], //JSON object containing the groupname and an array of associated context pack names.
   tileBucket: [], //List of tile IDs the user has access to
   studentList: [{  //Student JSON
@@ -25,7 +33,11 @@ var UserSchema = new Schema({
     lastName: String,
     studentID: String, //Students ID
     groupList: [], //Groups that a student is in, represented by an array of Strings
-    contextTags: [] //Array of tags that a student has access to
+    contextTags: [{
+      name: String,
+      isWordType: Boolean
+    }] //Array of tags that a student has access to
+    // {type: Schema.Types.ObjectId, ref: 'Student'}
   }]
 });
 
