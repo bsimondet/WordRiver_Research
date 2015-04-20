@@ -21,16 +21,19 @@ angular.module('WordRiverApp')
 
       $scope.getAll = function () {
         $scope.userTiles = [];
-        $scope.categoryArray = [];
+        $scope.userCategories = [];
+        $scope.userCategoryIdArray = [];
         $scope.groupArray = [];
         $scope.selectedStudents = [];
         $scope.studentArray = [];
-        $scope.categoryArray = $scope.currentUser.contextPacks;
+        $scope.userCategoryIdArray = $scope.currentUser.contextPacks;
         $scope.groupArray = $scope.currentUser.groupList;
         $scope.studentArray = $scope.currentUser.studentList;
         $scope.isCollapsed = false;
         $scope.groupedStudents = [];
-
+        $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
+         $scope.userCategories = userCategories;
+        });
         $http.get('/api/students').success(function (allStudents) {
           $scope.allStudents = allStudents;
           for (var i = 0; i < $scope.allStudents.length; i++) {
@@ -187,14 +190,19 @@ angular.module('WordRiverApp')
       $scope.displayGroupInfo = function (group){
         $scope.switchMiddle("group");
         $scope.groupSelected = group;
-        $scope.matchCategories = [];
+        $scope.matchCategoryIds = [];
         $scope.matchStudents = [];
         $scope.matchTiles = [];
         for(var i = 0; i<$scope.groupArray.length; i++){
           if ($scope.groupArray[i].groupName == $scope.groupSelected){
             for(var j=0; j<$scope.groupArray[i].contextPacks.length; j++){
-              $scope.matchCategories.push($scope.groupArray[i].contextPacks[j]);
+              $scope.matchCategoryIds.push($scope.groupArray[i].contextPacks[j]);
             }
+          }
+        }
+        for(var z = 0; z < $scope.matchCategoryIds.length; z++){
+          for(var v = 0; v < $scope.currentUser.groupList.length; v++){
+            //check here for matching categories for the ids we got
           }
         }
         for (var k = 0; k<$scope.studentArray.length; k++){
@@ -304,21 +312,25 @@ angular.module('WordRiverApp')
 
       $scope.unassignTileFromCategory = function (word, category){
         $scope.confirmUnassign(word, category);
+        //Tile API remove from context tags [{tagName:id}]
+
+
       };
 
       $scope.unassignGroupFromCategory = function (group, category){
         $scope.confirmUnassign(group, category);
+        //User API remove from group in groupList [{contextPacks:[category ids]}]
       };
 
       $scope.unassignStudentFromCategory = function (student, category){
         $scope.confirmUnassign(student.firstName, category);
+        //User API remove from studentList [{studentID: id, contextTags:[category ids]}]
+        //Student API remove from contextTags:[{tagName:id, creatorId:id}]
       };
 
       //Tile view unassign functions
 
-      $scope.unassignWordFromCategory = function (category, word){
-        $scope.confirmUnassign(category, word);
-      };
+      //unassigning word from category can be done with $scope.unassignTileFromCategory
 
       $scope.unassignWordFromGroup = function (group, word){
         $scope.confirmUnassign(group, word);
@@ -330,7 +342,7 @@ angular.module('WordRiverApp')
 
       //Group view unassign functions
       $scope.unassignStudentFromGroup = function (student, group){
-        $scope.confirmUnassign(student, group);
+        $scope.confirmUnassign(student.firstName, group);
       };
 
       $scope.unassignCategoryFromGroup = function (category, group){
@@ -338,7 +350,7 @@ angular.module('WordRiverApp')
       };
 
       $scope.unassignTileFromGroup = function (tile, group){
-        $scope.confirmUnassign(tile, group);
+        $scope.confirmUnassign(tile.name, group);
       };
 
       //Student view unassign function

@@ -8,6 +8,9 @@ angular.module('WordRiverApp')
     $scope.studentList = $scope.currentUser.studentList; //List of user references to students
     $scope.students = []; //List of actual student objects
     $scope.selectedStudents = [];
+    $scope.currentCategory = null;
+    $scope.categoryArray = [];
+
 
     //$http.get('/api/things').success(function (awesomeThings) {
     //  $scope.students = awesomeThings;
@@ -20,6 +23,20 @@ angular.module('WordRiverApp')
     //$scope.getStudentList();
     //
 
+    $scope.getCategories = function() {
+      $scope.categoryArray = $scope.currentUser.contextPacks;
+    };
+
+    $scope.getCategories();
+
+    //$scope.searchCategories = function() {
+    //  for (var i = 0; i < $scope.selectedStudent.contextTags.length; i++){
+    //    for (var j = 0; j < categoryArray.length; j++){
+    //      if ($scope.selectedStudent.contextTags[i] == $scope.categoryArray[j].name){
+    //      }
+    //    }
+    //  }
+    //};
 
     $scope.getStudents = function(){
       for(var i = 0; i < $scope.studentList.length; i++) {
@@ -28,6 +45,7 @@ angular.module('WordRiverApp')
         })
       }
     };
+
     $scope.getStudents();
 
   $scope.AllTiles = [];
