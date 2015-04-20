@@ -184,10 +184,19 @@ angular.module('WordRiverApp')
       $scope.selectedGroupName = group.groupName;
       $scope.studentsInGroup = [];
       for(var i = 0; i < $scope.studentList.length; i++){
-        if($scope.studentList[i].groupList.indexOf(group.groupName) != -1){
+        if($scope.inArray($scope.studentList[i].groupList, group._id)){
           $scope.studentsInGroup.push($scope.studentList[i]);
         }
       }
+    };
+
+    $scope.inArray= function(array, item){
+      for(var i = 0; i < array.length; i++){
+        if(array[i]._id == item){
+          return true;
+        }
+      }
+      return false;
     };
 
 
@@ -244,26 +253,29 @@ angular.module('WordRiverApp')
       $scope.displayGroupInfo($scope.selectedGroupName);
     };
 
-    };
+
 
     //////////////////////////////////////////////////////////
     //Trying to write and edit group name function. Having troubles with changing just the name.
-    $scope.editName = function (index, group) { // This is a good function
+    $scope.editGroupName = function (index) { // This is a good function
 
       var text = prompt("Provide a new name for " + $scope.localGroupArray[index].groupName + ".", "");
       if (text != null) {
         var choice = confirm("Are you sure you want to change the name of " + $scope.localGroupArray[index].groupName + " to " + text + "?");
         if (choice == true) {
 
+          //$scope.studentList[index].groupList.groupName = text;
           $scope.localGroupArray[index].groupName = text;
 
           $http.put('/api/users/' + $scope.currentUser._id + '/group',
             {index: index, groupName: text}
-          ).success(function(){
+          ).success(function () {
+            $scope.getStudents();
           });
 
         }
       }
+    };
 
+});
 
-  });
