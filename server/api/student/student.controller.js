@@ -20,6 +20,12 @@ exports.index = function(req, res) {
   });
 };
 
+exports.getUserStudents = function(req,res) {
+  Student.find({teachers: req.params.creatorID}, function(err, students) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, students);
+  });
+};
 
 // Get a single student
 exports.show = function(req, res) {

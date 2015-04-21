@@ -9,7 +9,7 @@
 var User = require('../api/user/user.model');
 var Student = require('../api/student/student.model');
 var Tile = require('../api/tile/tile.model');
-var Category = require('../api/category/category.model')
+var Category = require('../api/category/category.model');
 
 User.find({}).remove(function() {
   User.create({
@@ -36,7 +36,7 @@ User.find({}).remove(function() {
       "groupList": [
         {"groupName": "Group A",
           "_id": "5535520d4e9e3d82b7283ca2",
-        "contextPacks": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"]
+          "contextPacks": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"]
         },
         {"groupName": "Group B",
           "_id": "5535520db654746a2361ffb6",
@@ -165,29 +165,29 @@ Student.find({}).remove(function() {
       "lastName": "Coffey",
       "artifacts": [],
       "teachers": [
-      "5511a83da168f8b5f3144f02"
-    ],
+        "5511a83da168f8b5f3144f02"
+      ],
       "tileBucket": ["5511ae8cec56277a4af216a5", "5511ae8cec56277a4af216a5", "5511ae8c1fb25384d865e514", "5511ae8c72c6bb3a7f9cd910", "5511ae8c081ccbd0d072d7b4", "5511ae8c127053ad5bf17926", "5511ae8ce28633ca8ad95f7f", "5511ae8c8b6533965921e512", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61",
         "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b0880b6c91fd8b9cbdb", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b0847299c2a7c0811ae", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b",
         "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "contextTags": [
-      {
-        "tagName": "553167d13562bc39e23e4d3b",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
-      {
-        "tagName": "553167d1c67764f3773612dc",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
-      {
-        "tagName": "553167d1cd3291e1352efe94",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
-      {
-        "tagName": "553167d183c193d16d03ce80",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      }
-    ]
+        {
+          "tagName": "553167d13562bc39e23e4d3b",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
+        {
+          "tagName": "553167d1c67764f3773612dc",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
+        {
+          "tagName": "553167d1cd3291e1352efe94",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
+        {
+          "tagName": "553167d183c193d16d03ce80",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        }
+      ]
     },
     {
       "_id": "5511ab564ac02dbaf337270d",
@@ -195,23 +195,23 @@ Student.find({}).remove(function() {
       "lastName": "Wheeler",
       "artifacts": [],
       "teachers": [
-      "5511a83da168f8b5f3144f02"
-    ],
+        "5511a83da168f8b5f3144f02"
+      ],
       "tileBucket": ["5511ae8c1fb25384d865e514", "5511ae8c72c6bb3a7f9cd910", "5511ae8c081ccbd0d072d7b4", "5511ae8c127053ad5bf17926", "5511ae8ce28633ca8ad95f7f", "5511ae8c8b6533965921e512", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b0880b6c91fd8b9cbdb", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b0847299c2a7c0811ae", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "contextTags": [
-      {
-        "tagName": "553167d183c193d16d03ce80",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
-      {
-        "tagName": "553167d1cd3291e1352efe94",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
-      {
-        "tagName": "553167d13562bc39e23e4d3b",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      }
-    ]
+        {
+          "tagName": "553167d183c193d16d03ce80",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
+        {
+          "tagName": "553167d1cd3291e1352efe94",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
+        {
+          "tagName": "553167d13562bc39e23e4d3b",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        }
+      ]
     },
     {
       "_id": "5511ab5617fda1233df3f6dd",
@@ -219,30 +219,30 @@ Student.find({}).remove(function() {
       "lastName": "Tanner",
       "artifacts": [],
       "teachers": [
-      "5511a83da168f8b5f3144f02"
-    ],
+        "5511a83da168f8b5f3144f02"
+      ],
       "tileBucket": ["5511ae8cec56277a4af216a5", "5511ae8c1fb25384d865e514", "5511ae8c72c6bb3a7f9cd910", "5511ae8c081ccbd0d072d7b4", "5511ae8c127053ad5bf17926", "5511ae8ce28633ca8ad95f7f", "5511ae8c8b6533965921e512", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b0880b6c91fd8b9cbdb", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b0847299c2a7c0811ae", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "contextTags": [
-      {
-        "tagName": "553167d183c193d16d03ce80",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
-      {
-        "tagName": "553167d1c67764f3773612dc",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
-      {
-        "tagName": "553167d1cd3291e1352efe94",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
-      {
-        "tagName": "553167d1c296f9753ce8447f",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      },
+        {
+          "tagName": "553167d183c193d16d03ce80",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
+        {
+          "tagName": "553167d1c67764f3773612dc",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
+        {
+          "tagName": "553167d1cd3291e1352efe94",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
+        {
+          "tagName": "553167d1c296f9753ce8447f",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        },
         {"tagName": "553167d13562bc39e23e4d3b",
           "creatorID": "5511a83da168f8b5f3144f02"
         }
-    ]
+      ]
     },
     {
       "_id": "552c20f8be17b267b77b5a19",
@@ -570,138 +570,138 @@ Student.find({}).remove(function() {
 Tile.find({}).remove(function() {
   Tile.create({
 
-    "_id": "5511ae8c805b0d983f66e2cd",
-    "name": "Mail",
+      "_id": "5511ae8c805b0d983f66e2cd",
+      "name": "Mail",
       "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
-    {
-      "tagName": "553167d1d26d6cb60967d8a5"
-    }
-  ],
-    "active": false,
+      "contextTags": [
+        {
+          "tagName": "553167d1d26d6cb60967d8a5"
+        }
+      ],
+      "active": false,
       "wordType": "Noun"
-  },
-  {
-    "_id": "5511ae8cec56277a4af216a5",
-    "name": "Batman",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
-      {
-      "tagName": "553167d1c67764f3773612dc"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "5511ae8c1fb25384d865e514",
-    "name": "Dog",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+    },
     {
-      "tagName": "553167d1cd3291e1352efe94"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "5511ae8cf6f121e4c3108cd6",
-    "name": "Book",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+      "_id": "5511ae8cec56277a4af216a5",
+      "name": "Batman",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d1c67764f3773612dc"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
     {
-      "tagName": "553167d1d969a916cab51920"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "5511ae8cb5ac0ff225f5fde2",
-    "name": "Pencil",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+      "_id": "5511ae8c1fb25384d865e514",
+      "name": "Dog",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d1cd3291e1352efe94"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
     {
-      "tagName": "553167d1d969a916cab51920"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "5511ae8c72c6bb3a7f9cd910",
-    "name": "Jump",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+      "_id": "5511ae8cf6f121e4c3108cd6",
+      "name": "Book",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d1d969a916cab51920"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
     {
-      "tagName": "553167d183c193d16d03ce80"
-    }
-  ],
-    "active": false,
-    "wordType": "Verb"
-  },
-  {
-    "_id": "5511ae8c081ccbd0d072d7b4",
-    "name": "Run",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+      "_id": "5511ae8cb5ac0ff225f5fde2",
+      "name": "Pencil",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d1d969a916cab51920"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
     {
-      "tagName": "553167d183c193d16d03ce80"
-    }
-  ],
-    "active": false,
-    "wordType": "Verb"
-  },
-  {
-    "_id": "5511ae8cfb1b2d41b9f92888",
-    "name": "Desk",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+      "_id": "5511ae8c72c6bb3a7f9cd910",
+      "name": "Jump",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d183c193d16d03ce80"
+        }
+      ],
+      "active": false,
+      "wordType": "Verb"
+    },
     {
-      "tagName": "553167d1d969a916cab51920"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "5511ae8c127053ad5bf17926",
-    "name": "Cat",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+      "_id": "5511ae8c081ccbd0d072d7b4",
+      "name": "Run",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d183c193d16d03ce80"
+        }
+      ],
+      "active": false,
+      "wordType": "Verb"
+    },
     {
-      "tagName": "553167d1cd3291e1352efe94"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "5511ae8ce28633ca8ad95f7f",
-    "name": "House",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+      "_id": "5511ae8cfb1b2d41b9f92888",
+      "name": "Desk",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d1d969a916cab51920"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
     {
-      "tagName": "553167d183c193d16d03ce80"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "5511ae8c8b6533965921e512",
-    "name": "Ball",
-    "creatorID": "5511a83da168f8b5f3144f02",
-    "contextTags": [
+      "_id": "5511ae8c127053ad5bf17926",
+      "name": "Cat",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d1cd3291e1352efe94"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
     {
-      "tagName": "553167d13562bc39e23e4d3b"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
+      "_id": "5511ae8ce28633ca8ad95f7f",
+      "name": "House",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d183c193d16d03ce80"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
+    {
+      "_id": "5511ae8c8b6533965921e512",
+      "name": "Ball",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "contextTags": [
+        {
+          "tagName": "553167d13562bc39e23e4d3b"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
 
-  },
+    },
     {
       "_id": "552c2418c7134c9a280c8048",
       "name": "a",
@@ -871,53 +871,53 @@ Tile.find({}).remove(function() {
       "wordType": "Adjective"
     },
     {
-    "_id": "552d5c8011d58a4ad979d9b0",
+      "_id": "552d5c8011d58a4ad979d9b0",
       "name": "Conductor",
       "contextTags": [
-      {
-        "tagName": "553167d14651465f11201014",
-        "creatorID": "5511a83da168f8b5f3144f02"
-      }
-    ],
+        {
+          "tagName": "553167d14651465f11201014",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        }
+      ],
       "active": false,
       "wordType": "Noun"
-  },
-  {
-    "_id": "552d5c80d6a8d78c5541b508",
-    "name": "Steam",
-    "contextTags": [
+    },
     {
-      "tagName": "553167d14651465f11201014",
-      "creatorID": "5511a83da168f8b5f3144f02"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "552d5c80c0b37217fd3eded3",
-    "name": "Pilot",
-    "contextTags": [
+      "_id": "552d5c80d6a8d78c5541b508",
+      "name": "Steam",
+      "contextTags": [
+        {
+          "tagName": "553167d14651465f11201014",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
     {
-      "tagName": "553167d123b90c175f9b3a86",
-      "creatorID": "5511a83da168f8b5f3144f02"
-    }
-  ],
-    "active": false,
-    "wordType": "Noun"
-  },
-  {
-    "_id": "552d5c80af62cb1c0a09f7bf",
-    "name": "Fly",
-    "contextTags": [
+      "_id": "552d5c80c0b37217fd3eded3",
+      "name": "Pilot",
+      "contextTags": [
+        {
+          "tagName": "553167d123b90c175f9b3a86",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        }
+      ],
+      "active": false,
+      "wordType": "Noun"
+    },
     {
-      "tagName": "553167d123b90c175f9b3a86",
-      "creatorID": "5511a83da168f8b5f3144f02"
-    }
-  ],
-    "active": false,
-    "wordType": "Verb"
-  },
+      "_id": "552d5c80af62cb1c0a09f7bf",
+      "name": "Fly",
+      "contextTags": [
+        {
+          "tagName": "553167d123b90c175f9b3a86",
+          "creatorID": "5511a83da168f8b5f3144f02"
+        }
+      ],
+      "active": false,
+      "wordType": "Verb"
+    },
     {
       "_id": "552d5b08e1a3de8740774fad",
       "name": "away",
@@ -2094,9 +2094,3 @@ Category.find({}).remove(function() {
     }
   )
 });
-
-
-
-
-
-

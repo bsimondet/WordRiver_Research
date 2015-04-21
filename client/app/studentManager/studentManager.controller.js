@@ -14,7 +14,6 @@ angular.module('WordRiverApp')
     $scope.studentsInGroup = []; //Student references
     $scope.selectedGroupName = "";
     $scope.selectedGroup = {};
-
 ///////////////////////////////////
     $scope.getStudentList = function(){
       $scope.studentList = $scope.currentUser.studentList;
@@ -103,7 +102,7 @@ angular.module('WordRiverApp')
     if($scope.studentList[studentIndex].groupList.indexOf(group) == -1){
       $scope.studentList[studentIndex].groupList.push(group);
       if(group == $scope.selectedGroupName){
-        $scope.studentsInGroup.push($scope.studentList[stdfgudentIndex]);
+        $scope.studentsInGroup.push($scope.studentList[studentIndex]);
       }
       $scope.addGroupsContextPacksToStudent(student);
     }
@@ -134,7 +133,7 @@ angular.module('WordRiverApp')
           }
         }
         if(notAdded){
-          $scope.students[studentIndex].contextTags.push({tagName: contextArray[i], creatorID: scope.currentUser._id});
+          $scope.students[studentIndex].contextTags.push({tagName: contextArray[i], creatorID: $scope.currentUser._id});
           //$scope.addTilesToStudent($scope.students[studentIndex], contextArray[i]);
         }
       }
@@ -189,6 +188,7 @@ angular.module('WordRiverApp')
         }
       }
     };
+
 
     $scope.inArray= function(array, item){
       for(var i = 0; i < array.length; i++){
