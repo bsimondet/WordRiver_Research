@@ -95,7 +95,6 @@ angular.module('WordRiverApp')
 
     $scope.addWord = function() {
       if ($scope.addField.length >= 1 && $scope.addType.length >= 1) {
-        console.log($scope.selectedCategories.length);
         $http.post('/api/tile', {
           name: $scope.addField,
           contextTags: $scope.selectedCategories,
@@ -149,22 +148,41 @@ angular.module('WordRiverApp')
     };
 
 
+    $scope.getCategoryFromTagName = function(tile, index) {
+      for(var i = 0; i < $scope.categoryArray.length; i++){
+        //console.log(tile.contextTags[index]);
+        if(tile.contextTags[index].tagName == $scope.categoryArray[i]._id){
+          $scope.contextTagsTemp.push($scope.categoryArray[i]);
+          console.log($scope.categoryArray[i]);
+        }
+      }
+    };
+
       $scope.displayWordInfo = function (word) {
         $scope.contextTagsTemp = [];
         $scope.currentTile = word;
-        for(var i =0; i<$scope.allTiles.length; i++){
-          if($scope.allTiles[i].name == word.name){
-            if($scope.allTiles[i].contextTags.length > 0) {
-              for (var j = 0; j < $scope.allTiles[i].contextTags.length; j++){
-                $scope.contextTagsTemp.push($scope.allTiles[i].contextTags[j].tagName);
-              }
-              //alert("This tile has the categories:\n" + $scope.contextTagsTemp.join('\n'));
-            }
-            else{
-              //alert("This tile has no categories.");
-            }
-          }
+        //for(var i =0; i < $scope.allTiles.length; i++){
+        // //console.log(word.name)
+        //  if($scope.allTiles[i]._id == word._id){
+        //    if($scope.allTiles[i].contextTags.length > 0) {
+        //      for (var j = 0; j < $scope.allTiles[i].contextTags.length; j++){
+        //       $scope.getCategoryFromTagName($scope.allTiles[i]);
+        //      }
+        //      //alert("This tile has the categories:\n" + $scope.contextTagsTemp.join('\n'));
+        //    }
+        //    else{
+        //      //alert("This tile has no categories.");
+        //    }
+        //  }
+        //}
+
+
+        for (var j = 0; j < word.contextTags.length; j++) {
+          console.log(word.contextTags.length);
+          $scope.getCategoryFromTagName(word, j);
         }
+
+
       };
 
     //Deletes a category
