@@ -15,6 +15,9 @@ angular.module('WordRiverApp')
     $scope.selectedGroupName = "";
     $scope.selectedGroup = {};
 ///////////////////////////////////
+
+    //Be sure we change the getStudents and getGroups. The Schema was changed and now we need to go from the new models rather than through user.
+
     $scope.getStudentList = function(){
       $scope.studentList = $scope.currentUser.studentList;
     };
