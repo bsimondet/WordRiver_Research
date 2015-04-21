@@ -245,13 +245,13 @@ angular.module('WordRiverApp')
         //Only editing the word text
         $scope.tileId = tile._id;
 
-        $http.put('/api/tile/' + $scope.tileId + "/update", {category: $scope.currentCategory, tileId: tile._id});
+        //$http.put('/api/tile/' + $scope.tileId + "/update", {category: $scope.currentCategory, tileId: tile._id});
 
         $scope.editField = "";
       }
       else if($scope.editField.length == 0 && $scope.editType.length >= 1){
         //Only editing the word type
-       ;
+
         $scope.editType = "";
       }
       else if($scope.editField.length >= 1 && $scope.editType.length >= 1){
