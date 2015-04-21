@@ -162,7 +162,32 @@ exports.updateCategories = function(req, res) {
   });
 };
 
+exports.updateGroupsName = function(req, res) {
+  var id = req.params.id;
+  var groupName = req.body.groupName;
+  var index = req.body.index;
 
+  User.findById(req.params.id, function (err, users) {
+    // Handle Errors
+    if (err) {
+      return handleError(res, err)
+    }
+    if (!users) {
+      return res.send(404)
+    }
+    console.log(users.groupList[index]);
+    // Merging request body and pack from DB. Special callback for arrays!
+    users.groupList[index].groupName = groupName;
+    console.log(users.groupList[index]);
+    // Saves to database
+    users.save(function (err) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(200, users);
+    });
+  });
+};
 
 exports.updateGroups = function(req, res) {
   // deletes _id in req body to not screw things up...
