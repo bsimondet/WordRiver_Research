@@ -10,7 +10,7 @@ angular.module('WordRiverApp')
     $scope.selectedStudents = [];
     $scope.studentArray = [];
     $scope.allStudents = [];
-    $scope.checkedStudents = [];
+    $scope.selectedWords = [];
     $scope.matchTiles = [];
     $scope.userTiles = [];
     $scope.studentCategories = [];
@@ -119,16 +119,23 @@ angular.module('WordRiverApp')
 
     $scope.checkStudents = function (student) {
       var counter;
-      for (var i = 0; i < $scope.checkedStudents.length; i++) {
-        if ($scope.checkedStudents[i] == student) {
-          $scope.checkedStudents.splice(i, 1);
+      for (var i = 0; i < $scope.selectedStudents.length; i++) {
+        if ($scope.selectedStudents[i] == student) {
+          $scope.selectedStudents.splice(i, 1);
           counter = 1;
         }
       }
       if (counter != 1) {
-        $scope.checkedStudents.push(student);
+        $scope.selectedStudents.push(student);
       }
     };
+
+    $scope.checkWords = function (word) {
+      var counter;
+      for(var i = 0; i < $scope.selectedWords; i++){
+
+      }
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for switching information in the middle
@@ -278,7 +285,7 @@ angular.module('WordRiverApp')
           for (var n = 0; n < $scope.matchCategories.length; n++){
             if($scope.userGroups[l].contextPacks[m] == $scope.matchCategories[n]._id){
               $scope.matchGroup.push($scope.userGroups[l]);
-            }
+             dfg}
           }
         }
       }
