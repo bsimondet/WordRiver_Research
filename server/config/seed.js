@@ -36,7 +36,8 @@ User.find({}).remove(function() {
       "groupList": [
         {"groupName": "Group A",
           "_id": "5535520d4e9e3d82b7283ca2",
-          "contextPacks": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"]
+          "contextPacks": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"],
+          "freeTiles": []
         },
         {"groupName": "Group B",
           "_id": "5535520db654746a2361ffb6",
@@ -45,15 +46,18 @@ User.find({}).remove(function() {
         },
         {"groupName": "Group C",
           "_id": "5535520dd7b5c70193c4993c",
-          "contextPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86"]
+          "contextPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86"],
+          "freeTiles": []
         },
         {"groupName": "Group D",
           "_id": "5535520dff3a52f2757e5944",
-          "contextPacks": ["553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"]
+          "contextPacks": ["553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"],
+          "freeTiles": []
         },
         {"groupName": "Group E",
           "_id": "5535520d147a722a4e7233a3",
-          "contextPacks": ["553167d1c296f9753ce8447f"]
+          "contextPacks": ["553167d1c296f9753ce8447f"],
+          "freeTiles": []
         }],
 
       "tileBucket": ["5511ae8c72c6bb3a7f9cd910", "5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" , "552c24185768cb166a497fdb", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c805b0d983f66e2cd", "552c2418684d651eee7cea6e", "552c24183b10b8ec888e042b", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "552c241885a79608d3f3ead5", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
