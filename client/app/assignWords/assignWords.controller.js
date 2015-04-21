@@ -14,7 +14,6 @@ angular.module('WordRiverApp')
     $scope.matchTiles = [];
     $scope.userTiles = [];
     $scope.studentCategories = [];
-    $scope.groupView = true;
     $scope.groupedStudents = [];
 
 
@@ -47,12 +46,6 @@ angular.module('WordRiverApp')
     $scope.groupView = true;
     $scope.categoryView = true;
 
-    $scope.showGroupView = function(bool){
-      $scope.groupView = bool;
-    };
-    $scope.showCategoryView = function(bool){
-      $scope.categoryView = bool;
-    };
 
     $scope.showMiddle = false;
     $scope.wordView = false;
@@ -398,13 +391,49 @@ angular.module('WordRiverApp')
     $scope.assignWords = function () {
       if($scope.groupView && $scope.categoryView){
         //Function to add selected categories to selected groups.
+        if($scope.selectedGroups.length = 0){
+          alert("You must select at least 1 group.")
+          return;
+        }
+        if($scope.selectedCategories.length = 0){
+          alert("You must select at least 1 category.")
+          return;
+        }
+
       } else if ($scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected groups.
+        if($scope.selectedGroups.length == 0){
+          alert("You must select at least 1 group.")
+          return;
+        }
+        if($scope.selectedWords.length == 0){
+          alert("You must select at least 1 word.")
+          return;
+        }
+
         console.log($scope.selectedWords[0])
       } else if (!$scope.groupView && $scope.categoryView){
         //Function to add selected categories to selected students.
+        if($scope.selectedStudents.length == 0){
+          alert("You must select at least 1 student.")
+          return;
+        }
+        if($scope.selectedCategories.length == 0){
+          alert("You must select at least 1 category.")
+          return;
+        }
+
       } else if (!$scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected students.
+        if($scope.selectedStudents.length == 0){
+          alert("You must select at least 1 student.")
+          return;
+        }
+        if($scope.selectedWords.length == 0){
+          alert("You must select at least 1 word.")
+          return;
+        }
+
       }
     };
 
