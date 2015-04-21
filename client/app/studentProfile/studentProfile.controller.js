@@ -15,11 +15,7 @@ angular.module('WordRiverApp')
     $scope.currentCategory = null;
     $scope.categoryArray = [];
 
-
-    //$http.get('/api/things').success(function (awesomeThings) {
-    //  $scope.students = awesomeThings;
-    //  socket.syncUpdates('thing', $scope.students);
-    //});
+    $scope.hide = true;
 
     //$scope.getStudentList = function(){
     //  $scope.studentList = $scope.currentUser.studentList;
@@ -27,9 +23,7 @@ angular.module('WordRiverApp')
     //$scope.getStudentList();
     //
 
-    //$scope.getCategories = function() {
-    //  $scope.categoryArray = $scope.currentUser.contextPacks;
-    //};
+
 
     $scope.getCategories = function(student) {
       $scope.categoryArray = [];
@@ -46,13 +40,6 @@ angular.module('WordRiverApp')
       });
     };
 
-    //$scope.getCategories = function(){
-    //  for(var i = 0; i < $scope.studentList.length; i++) {
-    //    $http.get("/api/categories/" + $scope.Category[i]._id).success(function(category) {
-    //      $scope.categoryArray.push(category);
-    //    })
-    //  }
-    //};
 
 
     //$scope.searchCategories = function() {
@@ -89,6 +76,7 @@ angular.module('WordRiverApp')
       $scope.selectedStudent = student;
       $scope.tilesID = $scope.selectedStudent.tileBucket;
       $scope.getCategories(student);
+      $scope.hide = false;
       //for (var i=0; $scope.tilesID.length; i++) {
       //  $scope.tilename = document.getElementById("tilesID[i]");
       //  $scope.tiles.push($scope.tilename);
