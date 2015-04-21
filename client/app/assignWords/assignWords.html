@@ -96,7 +96,7 @@
         <h4>The group "{{groupSelected}}" has the students:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="student in matchStudents | orderBy:'firstName'">
-          <a href="" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignStudentFromGroup(student, groupSelected)"></span></li>
+          <a href="" ng-click="displayStudentHelper(student)">{{student.firstName}} {{student.lastName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignStudentFromGroup(student, groupSelected)"></span></li>
         </ul>
         <h4>The categories that this group has are:</h4>
         <ul class="list-group">
@@ -151,7 +151,7 @@
       <input type="text" ng-Model="searchText2" placeholder="Search">
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:searchText2">
-          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
+          <input type="checkbox" value="value" ng-click="checkWords(tile)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
       </ul>
     </div>
   </form>

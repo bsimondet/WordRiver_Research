@@ -88,6 +88,31 @@ exports.updateTags = function(req, res) {
   });
 };
 
+exports.deleteFromGroup = function(req, res) {
+  var userId = req.user._id;
+  var group = req.groupList._id;
+  var studentArray = req.studentGoingAway;
+  var packId = req.body.packId;
+  Student.findById(userId, function (err, user) {
+    for(var i = 0; i < user.tileBucket.length; i++){
+      console.log(word == user.tileBucket[i].wordName);
+      if(word == user.tileBucket[i].wordName){
+        console.log(word);
+        for(var j = 0; j < user.tileBucket[i].contextTags.length; j++){
+          if(user.tileBucket[i].contextTags[j] == packId){
+            console.log(j);
+            user.tileBucket[i].contextTags.splice(j, 1);
+          }
+        }
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 // Deletes a thing from the DB.
 exports.destroy = function(req, res) {
   Student.findById(req.params.id, function (err, student) {
