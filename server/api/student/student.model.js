@@ -12,10 +12,10 @@ var StudentSchema = new Schema({
 //}]],
   teachers: [], //Array of user account IDs associated with this student
   tileBucket: [], //List of tile IDs the student has access to
-  contextTags: [{ //Array of JSON objects, where each object is a context tag grouping containing the tag used and the id of the user that created the context pack
-    tagName: String,
-    creatorID: String
-  }]
+  groupList: [], //Groups that a student is in, represented by an array of group ids
+  contextTags: [] //Array of category ids, where each object is a context tag grouping containing the tag used and the id of the user that created the context pack
+
 });
 
 module.exports = mongoose.model('Student', StudentSchema);
+
