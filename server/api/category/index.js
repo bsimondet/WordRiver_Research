@@ -1,16 +1,16 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./student.controller');
+var controller = require('./category.controller');
 
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/:creatorID/categories', controller.getUserCategories);
 router.get('/:id', controller.show);
-router.get('/:creatorID/students', controller.getUserStudents);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
-router.patch('/:id', controller.updateTags);
+router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
 module.exports = router;

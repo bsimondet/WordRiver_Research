@@ -102,7 +102,7 @@ angular.module('WordRiverApp')
     if($scope.studentList[studentIndex].groupList.indexOf(group) == -1){
       $scope.studentList[studentIndex].groupList.push(group);
       if(group == $scope.selectedGroupName){
-        $scope.studentsInGroup.push($scope.studentList[stdfgudentIndex]);
+        $scope.studentsInGroup.push($scope.studentList[studentIndex]);
       }
       $scope.addGroupsContextPacksToStudent(student);
     }
@@ -133,7 +133,7 @@ angular.module('WordRiverApp')
           }
         }
         if(notAdded){
-          $scope.students[studentIndex].contextTags.push({tagName: contextArray[i], creatorID: scope.currentUser._id});
+          $scope.students[studentIndex].contextTags.push({tagName: contextArray[i], creatorID: $scope.currentUser._id});
           //$scope.addTilesToStudent($scope.students[studentIndex], contextArray[i]);
         }
       }
