@@ -16,7 +16,7 @@
                     </form>
                 </li>
                 <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-click="checkCheckbox(category)">
-                  <a href="" ng-click="displayCatInfo(category)">{{category}}</a></label><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="confirmDelete($index)"></span></li>
+                  <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="confirmDelete($index)"></span></li>
             </ul>
         </div>
 
