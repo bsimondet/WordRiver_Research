@@ -4,18 +4,18 @@ angular.module('WordRiverApp')
   .controller('StudentProfileCtrl', function ($rootScope, $scope, $http, socket, Auth) {
     $scope.currentUser = Auth.getCurrentUser();
     $scope.currentStudent = $rootScope.currentStudent;
+
     console.log($scope.currentStudent);
+
     $scope.studentList = $scope.currentUser.studentList; //List of user references to students
     $scope.students = []; //List of actual student objects
+
     $scope.selectedStudents = [];
+
     $scope.currentCategory = null;
     $scope.categoryArray = [];
 
-
-    //$http.get('/api/things').success(function (awesomeThings) {
-    //  $scope.students = awesomeThings;
-    //  socket.syncUpdates('thing', $scope.students);
-    //});
+    $scope.hide = true;
 
     //$scope.getStudentList = function(){
     //  $scope.studentList = $scope.currentUser.studentList;
@@ -23,11 +23,24 @@ angular.module('WordRiverApp')
     //$scope.getStudentList();
     //
 
-    $scope.getCategories = function() {
-      $scope.categoryArray = $scope.currentUser.contextPacks;
+
+
+    $scope.getCategories = function(student) {
+      $scope.categoryArray = [];
+      $scope.selectedStudent = student;
+      $http.get('/api/categories').success(function (allCategories) {
+        console.log(allCategories);
+        for (var i = 0; i < $scope.selectedStudent.contextTags.length; i++) {
+          for(var j = 0; j < allCategories.length; j++){
+            if(allCategories[j]._id == $scope.selectedStudent.contextTags[i].tagName){
+              $scope.categoryArray.push(allCategories[i].name);
+            }
+          }
+        }
+      });
     };
 
-    $scope.getCategories();
+
 
     //$scope.searchCategories = function() {
     //  for (var i = 0; i < $scope.selectedStudent.contextTags.length; i++){
@@ -62,6 +75,8 @@ angular.module('WordRiverApp')
       $scope.tilesID = [];
       $scope.selectedStudent = student;
       $scope.tilesID = $scope.selectedStudent.tileBucket;
+      $scope.getCategories(student);
+      $scope.hide = false;
       //for (var i=0; $scope.tilesID.length; i++) {
       //  $scope.tilename = document.getElementById("tilesID[i]");
       //  $scope.tiles.push($scope.tilename);
@@ -82,10 +97,10 @@ angular.module('WordRiverApp')
     //$scope.addThing = function () {
     //  if ($scope.newThing === '') {
     //    return;
-    //  }
+    //  }Student
     //  $http.post('/api/things', {name: $scope.newThing});
     //  $scope.newThing = '';
-    //};
+    //};Student
     //
     //$scope.deleteThing = function (thing) {
     //  $http.delete('/api/things/' + thing._id);

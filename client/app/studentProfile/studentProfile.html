@@ -7,7 +7,7 @@
 </header>
 <div class="col-xs-2" style="margin-left:auto display:block">
 
-  <h1 class="page-header">All Students:</h1>
+  <h3 class="page-header">All Students:</h3>
   <button class="btn btn-primary" ng-click="toSort = 'lastName'; order = !order">Sort by last name</button>
   <ul class="list-group">
     <li class="list-group-item" type="checkbox" ng-repeat="student in students | orderBy: toSort:order"><a href="" ng-click="displayStudentProfile(student)">{{student.lastName}}, {{student.firstName}}</a></li>
@@ -15,31 +15,31 @@
 </div>
 <div class="container">
 
-  <div class="col-xs-8" style="margin-right:auto   display:block">
+  <div class="col-xs-8" style="margin-right:auto   display:block" ng-hide="hide">
     <a class="btn btn-default" href="/main"> Back to Home</a>
-    <h1 class="page-header">Student Name: {{selectedStudent.firstName}} {{selectedStudent.lastName}}</h1>
+    <h1 class="page-header">{{selectedStudent.firstName}} {{selectedStudent.lastName}}</h1>
 
 
-    <h1 class="page-header">Groups:</h1>
+    <h3 class="page-header">Groups:</h3>
     <table style="width:100%">
       <tr>
         to add
       </tr>
     </table>
 
-    <h1 class="page-header">Context Packs:</h1>
+    <h3 class="page-header">Context Packs:</h3>
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="contextTag in selectedStudent.contextTags"><label>{{contextTag.tagName}}</label>
+        <li class="list-group-item" ng-repeat="contextPack in categoryArray"><label>{{contextPack}}</label>
         </li>
     </ul>
 
-    <h1 class="page-header">Words:</h1>
+    <h3 class="page-header">Words:</h3>
     <!--<ul class="list-group">-->
       <!--<li class="list-group-item" ng-repeat="tile in tiles"><label>{{tile}}</label>-->
       <!--</li>-->
     <!--</ul>-->
 
-    <h1 class="page-header">Artifacts:</h1>
+    <h3 class="page-header">Artifacts:</h3>
     <table style="width:100%">
       <tr>
         to add

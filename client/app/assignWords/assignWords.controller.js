@@ -10,7 +10,7 @@ angular.module('WordRiverApp')
     $scope.selectedStudents = [];
     $scope.studentArray = [];
     $scope.allStudents = [];
-    $scope.checkedStudents = [];
+    $scope.selectedWords = [];
     $scope.matchTiles = [];
     $scope.userTiles = [];
     $scope.studentCategories = [];
@@ -28,7 +28,6 @@ angular.module('WordRiverApp')
       $scope.userGroups = [];
       $scope.isCollapsed = false;
       $scope.userGroups = $scope.currentUser.groupList;
-      $scope.userSideStudents = $scope.currentUser.studentList;
       $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
         $scope.userCategories = userCategories;
       });
@@ -119,16 +118,29 @@ angular.module('WordRiverApp')
 
     $scope.checkStudents = function (student) {
       var counter;
-      for (var i = 0; i < $scope.checkedStudents.length; i++) {
-        if ($scope.checkedStudents[i] == student) {
-          $scope.checkedStudents.splice(i, 1);
+      for (var i = 0; i < $scope.selectedStudents.length; i++) {
+        if ($scope.selectedStudents[i] == student) {
+          $scope.selectedStudents.splice(i, 1);
           counter = 1;
         }
       }
       if (counter != 1) {
-        $scope.checkedStudents.push(student);
+        $scope.selectedStudents.push(student);
       }
     };
+
+    $scope.checkWords = function (word) {
+      var counter = 0;
+      for(var i = 0; i < $scope.selectedWords.length; i++){
+        if($scope.selectedWords[i] == word) {
+          $scope.selectedWords.splice(i,1);
+          counter = 1;
+        }
+      }
+      if(counter != 1){
+        $scope.selectedWords.push(word);
+      }
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for switching information in the middle
@@ -278,7 +290,7 @@ angular.module('WordRiverApp')
           for (var n = 0; n < $scope.matchCategories.length; n++){
             if($scope.userGroups[l].contextPacks[m] == $scope.matchCategories[n]._id){
               $scope.matchGroup.push($scope.userGroups[l]);
-            }
+             dfg}
           }
         }
       }
@@ -304,14 +316,10 @@ angular.module('WordRiverApp')
     $scope.unassignTileFromCategory = function (word, category){
       $scope.confirmUnassign(word, category);
       //Tile API remove from context tags [{tagName:id}]
-
-
     };
 
     $scope.unassignGroupFromCategory = function (group, category){
       $scope.confirmUnassign(group.groupName, category);
-      //User API remove from group in groupList [{contextPacks:[category ids]}]
-      $scope.useCategory;
       for(var z = 0; z < $scope.userCategories.length; z ++){
         if ($scope.userCategories[z].name == category){
           $scope.useCategory = $scope.userCategories[z];
@@ -330,13 +338,31 @@ angular.module('WordRiverApp')
         {groupList: $scope.userGroups}).success(function(){
           $scope.getAll();
         });
-      $scope.displayCatInfo($scope.useCategory).delay(30000);
+      $scope.displayCatInfo($scope.useCategory);
     };
 
     $scope.unassignStudentFromCategory = function (student, category){
       $scope.confirmUnassign(student.firstName, category);
-      //User API remove from studentList [{studentID: id, contextTags:[category ids]}]
-      //Student API remove from contextTags:[{tagName:id, creatorId:id}]
+      for(var z = 0; z < $scope.userCategories.length; z ++){
+        if ($scope.userCategories[z].name == category){
+          $scope.useCategory = $scope.userCategories[z];
+        }
+      }
+      for (var i = 0; i < $scope.userStudents.length; i++){
+        if($scope.userStudents[i]._id == student._id){
+          for (var j = 0; j < $scope.userStudents[i].contextTags.length; j++){
+            if($scope.userStudents[i].contextTags[j].tagName == $scope.useCategory._id){
+              console.log("got here");
+              $scope.userStudents[i].contextTags.splice(j,1);
+              $http.patch('/api/students/'+student._id,
+                {contextTags: $scope.userStudents[i].contextTags}).success(function(){
+                  $scope.getAll();
+                });
+              $scope.displayCatInfo($scope.useCategory);
+            }
+          }
+        }
+      }
     };
 
 //Tile view unassign functions
@@ -387,6 +413,7 @@ angular.module('WordRiverApp')
         //Function to add selected categories to selected groups.
       } else if ($scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected groups.
+        console.log($scope.selectedWords[0])
       } else if (!$scope.groupView && $scope.categoryView){
         //Function to add selected categories to selected students.
       } else if (!$scope.groupView && !$scope.categoryView){
