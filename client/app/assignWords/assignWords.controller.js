@@ -28,7 +28,6 @@ angular.module('WordRiverApp')
       $scope.userGroups = [];
       $scope.isCollapsed = false;
       $scope.userGroups = $scope.currentUser.groupList;
-      $scope.userSideStudents = $scope.currentUser.studentList;
       $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
         $scope.userCategories = userCategories;
       });
@@ -317,14 +316,10 @@ angular.module('WordRiverApp')
     $scope.unassignTileFromCategory = function (word, category){
       $scope.confirmUnassign(word, category);
       //Tile API remove from context tags [{tagName:id}]
-
-
     };
 
     $scope.unassignGroupFromCategory = function (group, category){
       $scope.confirmUnassign(group.groupName, category);
-      //User API remove from group in groupList [{contextPacks:[category ids]}]
-      $scope.useCategory;
       for(var z = 0; z < $scope.userCategories.length; z ++){
         if ($scope.userCategories[z].name == category){
           $scope.useCategory = $scope.userCategories[z];
@@ -343,13 +338,31 @@ angular.module('WordRiverApp')
         {groupList: $scope.userGroups}).success(function(){
           $scope.getAll();
         });
-      $scope.displayCatInfo($scope.useCategory).delay(30000);
+      $scope.displayCatInfo($scope.useCategory);
     };
 
     $scope.unassignStudentFromCategory = function (student, category){
       $scope.confirmUnassign(student.firstName, category);
-      //User API remove from studentList [{studentID: id, contextTags:[category ids]}]
-      //Student API remove from contextTags:[{tagName:id, creatorId:id}]
+      for(var z = 0; z < $scope.userCategories.length; z ++){
+        if ($scope.userCategories[z].name == category){
+          $scope.useCategory = $scope.userCategories[z];
+        }
+      }
+      for (var i = 0; i < $scope.userStudents.length; i++){
+        if($scope.userStudents[i]._id == student._id){
+          for (var j = 0; j < $scope.userStudents[i].contextTags.length; j++){
+            if($scope.userStudents[i].contextTags[j].tagName == $scope.useCategory._id){
+              console.log("got here");
+              $scope.userStudents[i].contextTags.splice(j,1);
+              $http.patch('/api/students/'+student._id,
+                {contextTags: $scope.userStudents[i].contextTags}).success(function(){
+                  $scope.getAll();
+                });
+              $scope.displayCatInfo($scope.useCategory);
+            }
+          }
+        }
+      }
     };
 
 //Tile view unassign functions
