@@ -8,11 +8,10 @@
 
 <div class="container">
   <br/>
-  <form ng-submit="assignWords()">
-    <input type="submit" value="Assign Words" class="btn btn-primary assignButton" style="margin-left:44%; margin-right:60%">
+  <button  class="btn btn-primary center-block" title="Assign Words" ng-click="assignWords()">Assign Words</button>
     <!--This section is for the left column-->
     <div class="col-xs-3 accordion-toggle" ng-show="groupView">
-      <button class="btn btn-primary" title="Show Students" ng-click="showGroupView(false)">Show Students</button>
+      <button class="btn btn-primary" title="Show Students" ng-click="groupView=!groupView">Show Students</button>
       <h1 class="page-header">Groups:</h1>
       <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
@@ -33,7 +32,7 @@
       <!--</div>-->
     </div>
     <div class="col-xs-3" ng-hide="groupView">
-      <button class="btn btn-primary" title="Show Groups" ng-click="showGroupView(true)">Show Groups</button>
+      <button class="btn btn-primary" title="Show Groups" ng-click="groupView=!groupView">Show Groups</button>
       <h1 class="page-header">Students:</h1>
       <button class="btn btn-primary" ng-show="!AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0; AZ0=!AZ0">Z-A</button>
       <button class="btn btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
@@ -54,17 +53,17 @@
         <h4>The tiles in the category "{{categorySelected}}" are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="word in matchTiles | orderBy:'name'">
-          <a href="" ng-click="displayTileInfo(word)">{{word.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromCategory(word, categorySelected)"></span></li>
+          <a href="" ng-click="displayTileInfo(word)">{{word.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromCategory(word, categorySelected, 'category')"></span></li>
         </ul>
         <h4>The groups that have this category are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="group in matchGroup | orderBy:'groupName'">
-          <a href = "" ng-click = "displayGroupInfo(group)">{{group.groupName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignGroupFromCategory(group, categorySelected)"></span></li>
+          <a href = "" ng-click = "displayGroupInfo(group)">{{group.groupName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignGroupFromCategory(group, categorySelected, 'category')"></span></li>
         </ul>
         <h4>The students that have this category are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="student in matchStudent | orderBy:'firstName'">
-          <a href = "" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a><span class="glyphicon glyphicon-minus-sign close unassignIconColor" style="color: red; " ng-click="unassignStudentFromCategory(student, categorySelected)"></span></li>
+          <a href = "" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a><span class="glyphicon glyphicon-minus-sign close unassignIconColor" style="color: red; " ng-click="unassignStudentFromCategory(student, categorySelected, 'category')"></span></li>
         </ul>
       </div>
     </div>
@@ -75,17 +74,17 @@
         <h4>The tile "{{tileSelected.name}}" is in the categories:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="category in matchCategories | orderBy:'name'">
-          <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromCategory(category, tileSelected)"></span></li>
+          <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromCategory(category, tileSelected, 'tile')"></span></li>
         </ul>
         <h4>The groups that have this tile are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="group in matchGroup | orderBy:'groupName'">
-          <a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromGroup(group, tileSelected)"></span></li>
+          <a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromGroup(group, tileSelected, 'tile')"></span></li>
         </ul>
         <h4>The students that have this tile are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="student in matchStudent | orderBy:'firstName'">
-          <a href = "" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromStudent(student, tileSelected)"></span></li>
+          <a href = "" ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromStudent(student, tileSelected, 'tile')"></span></li>
         </ul>
       </div>
     </div>
@@ -96,17 +95,17 @@
         <h4>The group "{{groupSelected}}" has the students:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="student in matchStudents | orderBy:'firstName'">
-          <a href="" ng-click="displayStudentHelper(student)">{{student.firstName}} {{student.lastName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignStudentFromGroup(student, groupSelected)"></span></li>
+          <a href="" ng-click="displayStudentHelper(student)">{{student.firstName}} {{student.lastName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignStudentFromGroup(student, groupSelected, 'group')"></span></li>
         </ul>
         <h4>The categories that this group has are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="pack in matchCategories | orderBy:'name'">
-          <a href="" ng-click="displayCatInfo(pack)">{{pack.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignCategoryFromGroup(pack, groupSelected)"></span></li>
+          <a href="" ng-click="displayCatInfo(pack)">{{pack.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignCategoryFromGroup(pack, groupSelected, 'group')"></span></li>
         </ul>
         <h4>The words that this group has are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy:'name'">
-          <a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromGroup(tile, groupSelected)"></span></li>
+          <a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromGroup(tile, groupSelected, 'group')"></span></li>
         </ul>
       </div>
     </div>
@@ -117,23 +116,23 @@
         <h4>The groups {{studentSelected.firstName}} {{studentSelected.lastName}} is in are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="group in matchGroups | orderBy:'groupName'">
-          <a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignGroupFromStudent(group, studentSelected)"></span></li>
+          <a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignGroupFromStudent(group, studentSelected, 'student')"></span></li>
         </ul>
         <h4>The categories that this student has are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="pack in matchCategories | orderBy:'name'">
-          <a href="" ng-click="displayCatInfo(pack)">{{pack.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignCategoryFromStudent(pack, studentSelected)"></span></li>
+          <a href="" ng-click="displayCatInfo(pack)">{{pack.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignCategoryFromStudent(pack, studentSelected, 'student')"></span></li>
         </ul>
         <h4>The words that this student has are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy:'name'">
-          <a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromStudent(tile, studentSelected)"></span></li>
+          <a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromStudent(tile, studentSelected, 'student')"></span></li>
         </ul>
       </div>
     </div>
     <!--This section is for the right column-->
     <div class="col-xs-3" ng-show="categoryView">
-      <button class="btn btn-primary" title="Show Words" ng-click="showCategoryView(false)">Show Words</button>
+      <button class="btn btn-primary" title="Show Words" ng-click="categoryView=!categoryView">Show Words</button>
       <h1 class="page-header">Categories:</h1>
       <button class="btn btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
       <button class="btn btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
@@ -144,7 +143,7 @@
       </ul>
     </div>
     <div class="col-xs-3" ng-hide="categoryView">
-      <button class="btn btn-primary" title="Show Categories" ng-click="showCategoryView(true)">Show Categories</button>
+      <button class="btn btn-primary" title="Show Categories" ng-click="categoryView=!categoryView">Show Categories</button>
       <h1 class="page-header">Words:</h1>
       <button class="btn btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
@@ -154,5 +153,4 @@
           <input type="checkbox" value="value" ng-click="checkWords(tile)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
       </ul>
     </div>
-  </form>
 </div>
