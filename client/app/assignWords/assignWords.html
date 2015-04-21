@@ -7,12 +7,11 @@
 </header>
 
 <div class="container">
-  <br/>
-  <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
     <!--This section is for the left column-->
     <div class="col-xs-3 accordion-toggle" ng-show="groupView">
       <button class="btn btn-primary" title="Show Students" ng-click="groupView=!groupView">Show Students</button>
-      <h1 class="page-header">Groups:</h1>
+      <h1 class="">Groups:</h1>
+      <hr>
       <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
       <ul class="list-group scroll">
@@ -33,7 +32,8 @@
     </div>
     <div class="col-xs-3" ng-hide="groupView">
       <button class="btn btn-primary" title="Show Groups" ng-click="groupView=!groupView">Show Groups</button>
-      <h1 class="page-header">Students:</h1>
+      <h1 class="">Students:</h1>
+      <hr>
       <button class="btn btn-primary" ng-show="!AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0; AZ0=!AZ0">Z-A</button>
       <button class="btn btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
       <input type="text" ng-Model="searchText0" placeholder="Search">
@@ -44,9 +44,11 @@
     </div>
     <!--This section is for the middle column-->
     <div class="col-xs-6 center" ng-hide="showMiddle">
+      <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <h3>Click on anything to begin.</h3>
     </div>
     <div class="col-xs-6" ng-show="showCategory">
+      <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br/>
       <br/>
       <div class="middleScroll">
@@ -68,6 +70,7 @@
       </div>
     </div>
     <div class="col-xs-6" ng-show="wordView">
+      <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br/>
       <br/>
       <div class="middleScroll">
@@ -89,6 +92,7 @@
       </div>
     </div>
     <div class="col-xs-6" ng-show="showGroup">
+      <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br/>
       <br/>
       <div class="middleScroll">
@@ -110,6 +114,7 @@
       </div>
     </div>
     <div class="col-xs-6" ng-show="studentView">
+      <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br/>
       <br/>
       <div class="middleScroll">
@@ -133,7 +138,8 @@
     <!--This section is for the right column-->
     <div class="col-xs-3" ng-show="categoryView">
       <button class="btn btn-primary" title="Show Words" ng-click="categoryView=!categoryView">Show Words</button>
-      <h1 class="page-header">Categories:</h1>
+      <h1 class="">Categories:</h1>
+      <hr>
       <button class="btn btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
       <button class="btn btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
       <input type="text" ng-Model="searchText1" placeholder="Search">
@@ -144,7 +150,8 @@
     </div>
     <div class="col-xs-3" ng-hide="categoryView">
       <button class="btn btn-primary" title="Show Categories" ng-click="categoryView=!categoryView">Show Categories</button>
-      <h1 class="page-header">Words:</h1>
+      <h1 class="">Words:</h1>
+      <hr>
       <button class="btn btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
       <input type="text" ng-Model="searchText2" placeholder="Search">
