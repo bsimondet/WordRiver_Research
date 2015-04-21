@@ -93,7 +93,7 @@ exports.removeFromCategory = function(req, res, next) {
     console.log(tile);
     for(var i = 0; i < tile.contextTags.length; i++){
       console.log("for loop");
-      if(tile.contextTags[i].tagName == category){
+      if(tile.contextTags[i].tagName == category._id){
         console.log("splice me");
         tile.contextTags.splice(i,1);
       }
