@@ -151,7 +151,7 @@
       <input type="text" ng-Model="searchText2" placeholder="Search">
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:searchText2">
-          <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
+          <input type="checkbox" value="value" ng-click="checkWords(tile)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
       </ul>
     </div>
   </form>

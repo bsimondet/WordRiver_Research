@@ -131,9 +131,15 @@ angular.module('WordRiverApp')
     };
 
     $scope.checkWords = function (word) {
-      var counter;
-      for(var i = 0; i < $scope.selectedWords; i++){
-
+      var counter = 0;
+      for(var i = 0; i < $scope.selectedWords.length; i++){
+        if($scope.selectedWords[i] == word) {
+          $scope.selectedWords.splice(i,1);
+          counter = 1;
+        }
+      }
+      if(counter != 1){
+        $scope.selectedWords.push(word);
       }
     }
 
@@ -394,6 +400,7 @@ angular.module('WordRiverApp')
         //Function to add selected categories to selected groups.
       } else if ($scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected groups.
+        console.log($scope.selectedWords[0])
       } else if (!$scope.groupView && $scope.categoryView){
         //Function to add selected categories to selected students.
       } else if (!$scope.groupView && !$scope.categoryView){
