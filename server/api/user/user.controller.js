@@ -218,7 +218,24 @@ exports.updateGroups = function(req, res) {
   });
 };
 
+exports.deleteGroup = function(req, res) {
+  var userId = req.params.id;
+  var group = req.body.group;
 
+  User.findById(userId, function (err, user) {
+    for(var i = 0 ; i < user.groupList.length; i++){
+      console.log(user.groupList[i]._id + " " + group);
+      if(user.groupList[i]._id == group){
+        user.groupList.splice(i, 1);
+
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
 
 exports.updateBucket = function(req, res, next) {
   var userId = req.user._id;
