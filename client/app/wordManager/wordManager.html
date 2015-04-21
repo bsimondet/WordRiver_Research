@@ -15,8 +15,10 @@
                         <input type="submit" value="Submit" class="btn btn-primary">
                     </form>
                 </li>
+              <div style="width:275px; height:500px; overflow: scroll;">
                 <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-click="checkCheckbox(category)">
                   <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="confirmDelete($index)"></span></li>
+                </div>
             </ul>
         </div>
 
@@ -27,7 +29,9 @@
           <ul class="list-group">
             <li class="list-group-item">
             </li>
+            <div style="width:225px; height:500px; overflow: scroll;">
             <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy: toSort:order">{{tile.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red" ng-click="removeFromCategory(tile, $index)"></span></li>
+              </div>
           </ul>
         </div>
 
@@ -36,7 +40,9 @@
           <ul class="list-group">
             <li class="list-group-item">
             </li>
+            <div style="width:225px; height:500px; overflow: scroll;">
             <li class="list-group-item" ng-repeat="category in contextTagsTemp | orderBy: toSort:order">{{category.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red" ng-click="removeCategoryFromWord($index)"></span></li>
+              </div>
           </ul>
         </div>
 
