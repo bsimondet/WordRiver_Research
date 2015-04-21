@@ -379,24 +379,19 @@ angular.module('WordRiverApp')
 
 //Tile view unassign functions
 
-    $scope.unassignWordFromCategory = function (word, category){
-      $scope.confirmUnassign(word.name, category);
+    $scope.unassignWordFromCategory = function (category, word){
+      $scope.confirmUnassign(word.name, category.name);
       //Tile API remove from context tags [{tagName:id}]
-      for(var z = 0; z < $scope.userCategories.length; z ++){
-        if ($scope.userCategories[z].name == category){
-          $scope.useCategory = $scope.userCategories[z];
-        }
-      }
       for(var i = 0; i < $scope.userTiles.length; i++){
         if($scope.userTiles[i]._id == word._id){
           for (var j = 0; j < $scope.userTiles[i].contextTags.length; j++){
-            if($scope.useCategory._id == $scope.userTiles[i].contextTags[j].tagName){
+            if(category._id == $scope.userTiles[i].contextTags[j].tagName){
               $scope.userTiles[i].contextTags.splice(j,1);
               $http.patch('/api/tile/'+word._id,
                 {contextTags: $scope.userTiles[i].contextTags}).success(function(){
                   $scope.getAll();
                 });
-              $scope.displayCatInfo($scope.useCategory);
+              $scope.displayTileInfo(word);
             }
           }
         }
@@ -404,7 +399,21 @@ angular.module('WordRiverApp')
     };
 
     $scope.unassignWordFromGroup = function (group, word){
-      $scope.confirmUnassign(group, word);
+      $scope.confirmUnassign(group.groupName, word.name);
+      for(var i = 0; i < $scope.userGroups.length; i++){
+        if($scope.userGroups[i] == group){
+          for(var j = 0; j < $scope.userGroups[i].freeTiles[j].length; j++){
+            if($scope.userGroups[i].freeTiles[j] == word._id){
+              $scope.userGroups[i].freeTiles.splice(j,1);
+              $http.patch('/api/user/'+$scope.currentUser._id+'/group',
+              {groupList:$scope.userGroups}).success(function(){
+                $scope.getAll();
+              })
+              $scope.displayTileInfo(word);
+            }
+          }
+        }
+      }
     };
 
     $scope.unassignWordFromStudent = function (student, word){
@@ -464,7 +473,7 @@ angular.module('WordRiverApp')
           alert("You must select at least 1 word.");
           return;
         }
-        
+
       } else if (!$scope.groupView && $scope.categoryView){
         //Function to add selected categories to selected students.
         if($scope.selectedStudents.length == 0){
