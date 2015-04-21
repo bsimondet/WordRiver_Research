@@ -3,18 +3,17 @@
 angular.module('WordRiverApp')
   .controller('StudentProfileCtrl', function ($rootScope, $scope, $http, socket, Auth) {
     $scope.currentUser = Auth.getCurrentUser();
-    $scope.currentStudent = $rootScope.currentStudent;
+    //$scope.currentStudent = $rootScope.currentStudent;
 
-    console.log($scope.currentStudent);
+    //console.log($scope.currentStudent);
 
-    $scope.studentList = $scope.currentUser.studentList; //List of user references to students
     $scope.students = []; //List of actual student objects
 
     $scope.selectedStudents = [];
 
     $scope.currentCategory = null;
     $scope.categoryArray = [];
-
+    $scope.wordArray = [];
     $scope.hide = true;
 
     //$scope.getStudentList = function(){
@@ -32,7 +31,7 @@ angular.module('WordRiverApp')
         console.log(allCategories);
         for (var i = 0; i < $scope.selectedStudent.contextTags.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
-            if(allCategories[j]._id == $scope.selectedStudent.contextTags[i].tagName){
+            if(allCategories[j]._id == $scope.selectedStudent.contextTags[i]){
               $scope.categoryArray.push(allCategories[i].name);
             }
           }
@@ -40,6 +39,21 @@ angular.module('WordRiverApp')
       });
     };
 
+
+    $scope.getWords = function(student) {
+      $scope.wordArray = [];
+      $scope.selectedStudent = student;
+      $http.get('/api/tile').success(function (allWords) {
+        console.log(allWords);
+        for (var i = 0; i < $scope.selectedStudent.tileBucket.length; i++) {
+          for(var j = 0; j < allWords.length; j++){
+            if(allWords[j]._id == $scope.selectedStudent.tileBucket[i]){
+              $scope.wordArray.push(allWords[i].name);
+            }
+          }
+        }
+      });
+    };
 
 
     //$scope.searchCategories = function() {
@@ -49,49 +63,35 @@ angular.module('WordRiverApp')
     //      }
     //    }
     //  }
-    //};
+    //};.studentID
 
     $scope.getStudents = function(){
-      for(var i = 0; i < $scope.studentList.length; i++) {
-        $http.get("/api/students/" + $scope.studentList[i].studentID).success(function(student) {
-          $scope.students.push(student);
+      for(var i = 0; i < $scope.currentUser.studentList.length; i++) {
+        $http.get("/api/students/").success(function(student) {
+          for (var i = 0; i < $scope.currentUser.studentList.length; i++) {
+            for (var j = 0; j < student.length; j++) {
+              if (student[j]._id == $scope.currentUser.studentList[i]) {
+                $scope.students.push(student[i]);
+              }
+            }
+          }
         })
       }
     };
 
     $scope.getStudents();
 
-  $scope.AllTiles = [];
-    $scope.getTiles = function(){
-        $http.get("/api/tiles/" ).success(function(tile) {
-          $scope.AllTiles.push(tile);
-        })
-    };
-    $scope.getTiles();
-
-
-    $scope.tiles = [];
     $scope.displayStudentProfile = function(student){
+
       $scope.tilesID = [];
       $scope.selectedStudent = student;
       $scope.tilesID = $scope.selectedStudent.tileBucket;
       $scope.getCategories(student);
+      $scope.getWords(student);
       $scope.hide = false;
-      //for (var i=0; $scope.tilesID.length; i++) {
-      //  $scope.tilename = document.getElementById("tilesID[i]");
-      //  $scope.tiles.push($scope.tilename);
-      //  for (var j = 0; j < $scope.AllTiles.length; j++) {
-      //    if ($scope.tilesID[i] == $scope.AllTiles[j]._id){
-      //      $scope.tiles.push($scope.AllTiles[j].name);
-      //    }
-      //  }
-      //  }
+
       };
-      //for(var i = 0; i < $scope.studentList.length; i++){
-      //  if($scope.studentList[i].groupList.indexOf(group.groupName) != -1){
-      //    $scope.studentsInGroup.push($scope.studentList[i]);
-      //  }
-      //}
+
 
 
     //$scope.addThing = function () {

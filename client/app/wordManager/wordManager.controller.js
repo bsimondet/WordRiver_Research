@@ -155,7 +155,7 @@ angular.module('WordRiverApp')
         //console.log(tile.contextTags[index]);
         if(tile.contextTags[index].tagName == $scope.categoryArray[i]._id){
           $scope.contextTagsTemp.push($scope.categoryArray[i]);
-          console.log($scope.categoryArray[i]);
+          //console.log($scope.categoryArray[i]);
         }
       }
     };
@@ -194,7 +194,7 @@ angular.module('WordRiverApp')
       for(var i = 0; i < $scope.categoryArray.length; i ++){
         categoryArrayIDS.push($scope.categoryArray[i]._id);
       }
-      $http.patch('/api/users/' + $scope.currentUser._id, "/category",{
+      $http.patch('/api/users/' + $scope.currentUser._id, {
         contextPacks : categoryArrayIDS
       });
     };
@@ -205,7 +205,7 @@ angular.module('WordRiverApp')
       $scope.tileId = tile._id;
       $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.currentCategory, tileId: tile._id});
       //console.log("test");
-      console.log(tile._id);
+      //console.log(tile._id);
       $scope.matchTiles.splice(index, 1);
       //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
       //$http.delete('/api/packs/' + pack._id);
@@ -225,10 +225,10 @@ angular.module('WordRiverApp')
       $scope.wordToRemove = $scope.userTiles[index];
       $http.delete('/api/tile/'+ $scope.wordToRemove._id);
       $scope.getWords();
-      var wordToRemove = $scope.userTiles(index);
+      //var wordToRemove = $scope.userTiles[index];
       $scope.userTiles.splice(index,1);
       for(var i = 0; i < $scope.allTiles.length; i++){
-        if(wordToRemove.id == $scope.allTiles[i].id) {
+        if($scope.wordToRemove.id == $scope.allTiles[i].id) {
             $scope.allTiles.splice(i,1);
           }
       }
@@ -245,13 +245,13 @@ angular.module('WordRiverApp')
         //Only editing the word text
         $scope.tileId = tile._id;
 
-        $http.put('/api/tile/' + $scope.tileId + "/update", {category: $scope.currentCategory, tileId: tile._id});
+        //$http.put('/api/tile/' + $scope.tileId + "/update", {category: $scope.currentCategory, tileId: tile._id});
 
         $scope.editField = "";
       }
       else if($scope.editField.length == 0 && $scope.editType.length >= 1){
         //Only editing the word type
-       ;
+
         $scope.editType = "";
       }
       else if($scope.editField.length >= 1 && $scope.editType.length >= 1){
