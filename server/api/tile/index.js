@@ -11,6 +11,7 @@ router.get('/:creatorID/tiles', controller.getUserTiles);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
+router.patch('/', controller.update);
 router.delete('/:id', controller.destroy);
 router.put('/:id/removeFromCategory', controller.removeFromCategory);
 

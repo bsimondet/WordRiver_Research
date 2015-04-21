@@ -6,6 +6,8 @@ angular.module('WordRiverApp')
     $scope.categoryField = "";
     $scope.addField = "";
     $scope.addType = "";
+    $scope.editField = "";
+    $scope.editType = "";
     $scope.searchField = "";
     $scope.categoryArray = [];
     $scope.currentUser = Auth.getCurrentUser();
@@ -216,7 +218,26 @@ angular.module('WordRiverApp')
         $scope.wordToEdit = $scope.userTiles[index];
     };
 
-    $scope.updateTile = function() {
+    $scope.updateTile = function(tile) {
+      if($scope.editField.length >= 1 && $scope.editType.length < 1){
+        //Only editing the word text
+        //$http.patch('/api/tiles/',
+        //  {contextPacks: $scope.categoryArray}
+        //).success(function(){
+        //  });
+        $scope.editField = "";
+      }
+      else if($scope.editField.length == 0 && $scope.editType.length >= 1){
+        //Only editing the word type
+       ;
+        $scope.editType = "";
+      }
+      else if($scope.editField.length >= 1 && $scope.editType.length >= 1){
+        //Editing both the word type and the word text
+
+        $scope.editField = "";
+        $scope.editType = "";
+      }
 
         $scope.showValue = true;
     }
