@@ -1,4 +1,7 @@
 'use strict';
+//alphabetize middle
+//fix category alphabetize
+//wider middle
 
 angular.module('WordRiverApp')
     .controller('AssignWordsCtrl', function ($rootScope, $scope, $http, socket, Auth) {

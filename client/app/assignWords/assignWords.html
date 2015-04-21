@@ -9,9 +9,9 @@
 <div class="container">
   <br/>
   <form ng-submit="assignWords()">
-    <input type="submit" value="Assign Words" class="btn btn-primary" style="margin-left:40%; margin-right:60%">
+    <input type="submit" value="Assign Words" class="btn btn-primary assignButton" style="margin-left:44%; margin-right:60%">
     <!--This section is for the left column-->
-    <div class="col-xs-4 accordion-toggle" ng-show="groupView">
+    <div class="col-xs-3 accordion-toggle" ng-show="groupView">
       <button class="btn btn-primary" title="Show Students" ng-click="showGroupView(false)">Show Students</button>
       <h1 class="page-header">Groups:</h1>
       <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
@@ -32,7 +32,7 @@
         <!--</div>-->
       <!--</div>-->
     </div>
-    <div class="col-xs-4" ng-hide="groupView">
+    <div class="col-xs-3" ng-hide="groupView">
       <button class="btn btn-primary" title="Show Groups" ng-click="showGroupView(true)">Show Groups</button>
       <h1 class="page-header">Students:</h1>
       <button class="btn btn-primary" ng-show="!AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0; AZ0=!AZ0">Z-A</button>
@@ -44,10 +44,10 @@
       </ul>
     </div>
     <!--This section is for the middle column-->
-    <div class="col-xs-4" ng-hide="showMiddle">
+    <div class="col-xs-6 center" ng-hide="showMiddle">
       <h3>Click on anything to begin.</h3>
     </div>
-    <div class="col-xs-4" ng-show="showCategory">
+    <div class="col-xs-6" ng-show="showCategory">
       <br/>
       <br/>
       <div class="middleScroll">
@@ -68,7 +68,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-xs-4" ng-show="wordView">
+    <div class="col-xs-6" ng-show="wordView">
       <br/>
       <br/>
       <div class="middleScroll">
@@ -89,7 +89,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-xs-4" ng-show="showGroup">
+    <div class="col-xs-6" ng-show="showGroup">
       <br/>
       <br/>
       <div class="middleScroll">
@@ -110,7 +110,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-xs-4" ng-show="studentView">
+    <div class="col-xs-6" ng-show="studentView">
       <br/>
       <br/>
       <div class="middleScroll">
@@ -132,7 +132,7 @@
       </div>
     </div>
     <!--This section is for the right column-->
-    <div class="col-xs-4" ng-show="categoryView">
+    <div class="col-xs-3" ng-show="categoryView">
       <button class="btn btn-primary" title="Show Words" ng-click="showCategoryView(false)">Show Words</button>
       <h1 class="page-header">Categories:</h1>
       <button class="btn btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
@@ -143,7 +143,7 @@
           <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category.name}}</a>
       </ul>
     </div>
-    <div class="col-xs-4" ng-hide="categoryView">
+    <div class="col-xs-3" ng-hide="categoryView">
       <button class="btn btn-primary" title="Show Categories" ng-click="showCategoryView(true)">Show Categories</button>
       <h1 class="page-header">Words:</h1>
       <button class="btn btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
