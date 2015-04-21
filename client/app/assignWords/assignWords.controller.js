@@ -404,11 +404,11 @@ angular.module('WordRiverApp')
     $scope.assignWords = function () {
       if($scope.groupView && $scope.categoryView){
         //Function to add selected categories to selected groups.
-        if($scope.selectedGroups.length = 0){
+        if($scope.selectedGroups.length == 0){
           alert("You must select at least 1 group.")
           return;
         }
-        if($scope.selectedCategories.length = 0){
+        if($scope.selectedCategories.length == 0){
           alert("You must select at least 1 category.")
           return;
         }
