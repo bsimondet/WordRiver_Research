@@ -32,6 +32,7 @@ angular.module('WordRiverApp')
     //};
 
     $scope.getCategories = function(student) {
+      $scope.categoryArray = [];
       $scope.selectedStudent = student;
       $http.get('/api/categories').success(function (allCategories) {
         console.log(allCategories);
