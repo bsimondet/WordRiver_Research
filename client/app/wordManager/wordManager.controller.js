@@ -34,7 +34,7 @@ angular.module('WordRiverApp')
 
 
     $scope.getCategories = function() {
-      $http.get('/api/Categorys').success(function (allCategories) {
+      $http.get('/api/categories').success(function (allCategories) {
         console.log(allCategories);
         for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
@@ -45,6 +45,7 @@ angular.module('WordRiverApp')
         }
       });
     }
+
 
     $scope.checkCheckbox = function(category){
       var counter;
