@@ -32,9 +32,20 @@ angular.module('WordRiverApp')
       }
     };
 
+
     $scope.getCategories = function() {
-        $scope.categoryArray = $scope.currentUser.contextPacks;
-      };
+      $http.get('/api/categories').success(function (allCategories) {
+        console.log(allCategories);
+        for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
+          for(var j = 0; j < allCategories.length; j++){
+            if(allCategories[j]._id == $scope.currentUser.contextPacks[i]){
+              $scope.categoryArray.push(allCategories[i]);
+            }
+          }
+        }
+      });
+    }
+
 
     $scope.checkCheckbox = function(category){
       var counter;
