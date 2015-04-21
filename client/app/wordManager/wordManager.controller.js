@@ -6,6 +6,8 @@ angular.module('WordRiverApp')
     $scope.categoryField = "";
     $scope.addField = "";
     $scope.addType = "";
+    $scope.editField = "";
+    $scope.editType = "";
     $scope.searchField = "";
     $scope.categoryArray = [];
     $scope.currentUser = Auth.getCurrentUser();
@@ -188,8 +190,12 @@ angular.module('WordRiverApp')
     //Deletes a category
     $scope.removeCategory = function(index) {
       $scope.categoryArray.splice(index, 1);
-      $http.patch('/api/users/'+$scope.currentUser._id+'/category',{
-        contextPacks : $scope.categoryArray
+      var categoryArrayIDS = [];
+      for(var i = 0; i < $scope.categoryArray.length; i ++){
+        categoryArrayIDS.push($scope.categoryArray[i]._id);
+      }
+      $http.patch('/api/users/' + $scope.currentUser._id, "/category",{
+        contextPacks : categoryArrayIDS
       });
     };
 
@@ -234,7 +240,26 @@ angular.module('WordRiverApp')
         $scope.wordToEdit = $scope.userTiles[index];
     };
 
-    $scope.updateTile = function() {
+    $scope.updateTile = function(tile) {
+      if($scope.editField.length >= 1 && $scope.editType.length < 1){
+        //Only editing the word text
+        $scope.tileId = tile._id;
+
+        $http.put('/api/tile/' + $scope.tileId + "/update", {category: $scope.currentCategory, tileId: tile._id});
+
+        $scope.editField = "";
+      }
+      else if($scope.editField.length == 0 && $scope.editType.length >= 1){
+        //Only editing the word type
+       ;
+        $scope.editType = "";
+      }
+      else if($scope.editField.length >= 1 && $scope.editType.length >= 1){
+        //Editing both the word type and the word text
+
+        $scope.editField = "";
+        $scope.editType = "";
+      }
 
         $scope.showValue = true;
     }
