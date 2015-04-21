@@ -305,8 +305,28 @@ angular.module('WordRiverApp')
       };
 
       $scope.unassignGroupFromCategory = function (group, category){
-        $scope.confirmUnassign(group, category);
+        $scope.confirmUnassign(group.groupName, category);
         //User API remove from group in groupList [{contextPacks:[category ids]}]
+        $scope.useCategory;
+        for(var z = 0; z < $scope.userCategories.length; z ++){
+          if ($scope.userCategories[z].name == category){
+            $scope.useCategory = $scope.userCategories[z];
+          }
+        }
+        for (var i = 0; i < $scope.userGroups.length; i++){
+          if($scope.userGroups[i]._id == group._id){
+            for (var j = 0; j < $scope.userGroups[i].contextPacks.length; j++){
+              if ($scope.userGroups[i].contextPacks[j] == $scope.useCategory._id){
+                $scope.userGroups[i].contextPacks.splice(j, 1);
+              }
+            }
+          }
+        }
+        $http.patch('/api/users/'+$scope.currentUser._id+'/group',
+            {groupList: $scope.userGroups}).success(function(){
+              $scope.getAll();
+            });
+        $scope.displayCatInfo($scope.useCategory).delay(30000);
       };
 
       $scope.unassignStudentFromCategory = function (student, category){
@@ -324,7 +344,7 @@ angular.module('WordRiverApp')
       };
 
       $scope.unassignWordFromStudent = function (student, word){
-        $scope.confirmUnassign(student, word);
+        $scope.confirmUnassign(student.firstName, word);
       };
 
 //Group view unassign functions
@@ -332,8 +352,8 @@ angular.module('WordRiverApp')
         $scope.confirmUnassign(student.firstName, group);
       };
 
-      $scope.unassignCategoryFromGroup = function (category, group){
-        $scope.confirmUnassign(category, group);
+      $scope.unassignCategoryFromGroup = function(category, group){
+
       };
 
       $scope.unassignTileFromGroup = function (tile, group){
