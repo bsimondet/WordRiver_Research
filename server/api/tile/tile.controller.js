@@ -20,6 +20,13 @@ exports.index = function(req, res) {
   });
 };
 
+exports.getUserTiles = function(req,res) {
+  tile.find({creatorID: req.params.creatorID}, function(err, tiles) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, tiles);
+  });
+};
+
 
 // Get a single student
 exports.show = function(req, res) {

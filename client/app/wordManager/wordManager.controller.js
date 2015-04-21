@@ -32,9 +32,20 @@ angular.module('WordRiverApp')
       }
     };
 
+
     $scope.getCategories = function() {
-        $scope.categoryArray = $scope.currentUser.contextPacks;
-      };
+      $http.get('/api/categories').success(function (allCategories) {
+        console.log(allCategories);
+        for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
+          for(var j = 0; j < allCategories.length; j++){
+            if(allCategories[j]._id == $scope.currentUser.contextPacks[i]){
+              $scope.categoryArray.push(allCategories[i]);
+            }
+          }
+        }
+      });
+    }
+
 
     $scope.checkCheckbox = function(category){
       var counter;
@@ -99,25 +110,31 @@ angular.module('WordRiverApp')
     $scope.getAllTiles = function(){
       $http.get('/api/tile').success(function (allTiles) {
         $scope.allCatTiles = allTiles;
+        for (var i = 0; i < $scope.allCatTiles.length; i++) {
+          if ($scope.currentUser._id == $scope.allCatTiles[i].creatorID) {
+            $scope.userTiles.push($scope.allCatTiles[i]);
+          }
+        }
       });
     };
 
     $scope.getAllTiles();
     //cat is short for category
     $scope.displayCatInfo = function (category) {
-      $scope.userTiles = [];
+      //$scope.userTiles = [];
       $scope.matchTiles = [];
       $scope.currentCategory = category;
       //$http.get('/api/tile').success(function (allTiles) {
-      //  $scope.allCatTiles = allTiles;
-        for (var i = 0; i < $scope.allCatTiles.length; i++) {
-          if ($scope.currentUser._id == $scope.allCatTiles[i].creatorID) {
-            $scope.userTiles.push($scope.allCatTiles[i]);
-          }
-        }
+        //  $scope.allCatTiles = allTiles;
+        //  for (var i = 0; i < $scope.allCatTiles.length; i++) {
+        //    if ($scope.currentUser._id == $scope.allCatTiles[i].creatorID) {
+        //      $scope.userTiles.push($scope.allCatTiles[i]);
+        //    }
+        //  }
         for (var j = 0; j < $scope.userTiles.length; j++) {
           for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
-            if ($scope.userTiles[j].contextTags[z].tagName == category) {
+            console.log($scope.userTiles[j].contextTags[z].tagName)
+            if ($scope.userTiles[j].contextTags[z].tagName == category._id) {
               $scope.matchTiles.push($scope.userTiles[j]);
               //console.log($scope.userTiles[j].name);
             }
