@@ -33,7 +33,7 @@ body, html{
 
 img.resize{
   position: relative;
-  margin-top: 1%;
+  margin-top: -1%;
   width: 310px;
   height: 295px;
   float: left;
@@ -43,6 +43,7 @@ img.resize{
 
 
 .h2 {
+  margin-top: -2%;
   float: left;
   margin-left: 0.1%;
   font-size: 170% !important;
@@ -52,15 +53,13 @@ img.resize{
 }
 
 .loginBox {
-  width: 35%;
-  width: 35%;
+  position: relative;
+  width: 400px;
   height: auto;
   border-radius: 25px;
   opacity: 0.75;
   background: #000000;
   float: left;
-  margin-left: -35%;
-  margin-top: 5%;
 }
 
 .navbar {
