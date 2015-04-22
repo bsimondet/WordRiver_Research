@@ -12,6 +12,7 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.patch('/', controller.update);
+//router.patch('/:id/unassign', controller.updateTile);
 router.delete('/:id', controller.destroy);
 router.put('/:id/removeFromCategory', controller.removeFromCategory);
 
