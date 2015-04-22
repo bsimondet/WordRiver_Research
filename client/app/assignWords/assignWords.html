@@ -17,9 +17,12 @@
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="group in userGroups | orderBy:'groupName':order1">
           <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
-          <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group)"></span>
-          <ul collapse="!isCollapsed">
-            <li class="list-group-item" ng-repeat="students in groupedStudents">
+          <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="studentsInGroupAssignment(group); status.open=!status.open; status.isFirstDisabled = !isFirstDisabled"></span>
+          <!--isCollapsed = !isCollapsed;-->
+          <!--<ul collapse="!isCollapsed">-->
+          
+        <ul collapse = "!status.open" ng-model="oneAtATime">
+            <li class="list-group-item" ng-repeat="students in groupedStudents" close-others="oneAtATime" is-open=status.isFirstOpen" is-disabled="status.isFirstDisabled">
               <a href ="" ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a></li>
           </ul>
         </li>

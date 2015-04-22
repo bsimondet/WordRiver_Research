@@ -194,7 +194,7 @@ angular.module('WordRiverApp')
         for (var l = 0; l<$scope.userStudents[k].groupList.length; l++){
           if ($scope.userStudents[k].groupList[l] === group._id){
             $scope.matchStudents.push($scope.userStudents[k]);
-          }
+          }Group
         }
       }
       for (var m = 0; m<$scope.userGroups.length; m++){
@@ -370,6 +370,12 @@ angular.module('WordRiverApp')
       }
     };
 
+      $scope.unassignStudentFromCategory = function (student, category){
+        $scope.confirmUnassign(student.firstName, category);
+        //User API remove from studentList [{studentID: id, contextTags:[category ids]}]
+        //Student API remove from contextTags:[{tagName:id, creatorId:id}]
+      };
+
 //Tile view unassign functions
 
     $scope.unassignWordFromCategory = function (category, word){
@@ -506,18 +512,24 @@ angular.module('WordRiverApp')
 
     $scope.studentsInGroupAssignment = function(group) {
       $scope.groupedStudents=[];
-      for(var i = 0; i < $scope.studentArray.length; i++){
-        console.log($scope.studentArray[i].groupList.indexOf(group));
-        console.log(group.groupName);
-        if ($scope.studentArray[i].groupList.indexOf(group.groupName) > -1) {
+      for(var i = 0; i < $scope.userStudents.length; i++){
+        //console.log($scope.userStudents[i].groupList.length);
+        console.log($scope.userStudents[i].groupList.indexOf(group.groupName));
+        console.log($scope.userStudents[i].groupList);
+        console.log(group._id);
+        if ($scope.userStudents[i].groupList.indexOf(group._id) > -1) {
           console.log("we are in the if statement");
-          $scope.groupedStudents.push($scope.studentArray[i]);
-
+          $scope.groupedStudents.push($scope.userStudents[i]);
         }
       }
       console.log($scope.groupedStudents);
     };
 
-//$scope.groupedStudents = [];
+    $scope.oneAtATime = true;
+
+    $scope.status = {
+      isFirstOpen: true,
+      isFirstDisabled: false
+    };
 
   });
