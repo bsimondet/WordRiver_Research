@@ -12,20 +12,21 @@
 
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+        <li class="font-size" ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-left">
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/wordManager')}"><a href="/wordManager">Word Manager</a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/assignWords')}"><a href="/assignWords">Assign Content to People</a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/studentManager')}"><a href="/studentManager">Student Manager</a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/studentProfile')}"><a href="/studentProfile">Student Profile</a></li>
+        <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/wordManager')}"><a href="/wordManager">Word Manager</a></li>
+        <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/assignWords')}"><a href="/assignWords">Assign Content to People</a></li>
+        <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/studentManager')}"><a href="/studentManager">Student Manager</a></li>
+        <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/studentProfile')}"><a href="/studentProfile">Student Profile</a></li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+
+      <ul class="nav navbar-nav navbar-right font-size">
         <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>

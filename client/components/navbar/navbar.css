@@ -1,9 +1,68 @@
 #a {
   display: block;
-  height: 50px;
+  height: 38px;
+  border-color: white;
 }
 
 img.resizeNav {
-  width: 68px;
-  height: 60px;
+  width: 45px;
+  height: 38px;
 }
+
+.font-size {
+  font-size: 11px;
+  display: inline-block;
+  font-weight: bold;
+  padding-top: 6px;
+}
+
+.navbar-default .navbar-nav >
+.active > a, .navbar-default
+.navbar-nav > .active > a:hover, .navbar-default
+.navbar-nav > .active > a:focus {
+  height: 28px;
+  border-radius: 5px;
+  color: #000000;
+}
+
+/*.settings {*/
+  /*float: left;*/
+  /*margin-left: 50%;*/
+  /*margin-top: 3px;*/
+/*}*/
+
+/*.logout {*/
+  /*float: right;*/
+  /*margin-top: 3px;*/
+/*}*/
+
+/*.welcomeUser {*/
+  /*float: right;*/
+  /*margin-top: 2px;*/
+/*}*/
+
+/*.textHeight {*/
+  /*margin-bottom: 20px;*/
+/*}*/
+
+.navbar-nav {
+  height: 38px;
+  color: #343434;
+  background-color: white;
+}
+
+.navbar-default {
+  height: 38px;
+  border-bottom-color: white;
+}
+
+
+.collapse {
+  border-bottom-color: white;
+}
+
+.navbar-text {
+  margin-top: 18px;
+  margin-bottom: 15px;
+}
+
