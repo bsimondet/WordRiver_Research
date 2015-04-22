@@ -1,12 +1,13 @@
 #a {
   display: block;
   height: 38px;
-  border-color: white;
+  border-color: #F8F8F8;
 }
 
 img.resizeNav {
   width: 45px;
   height: 38px;
+  margin-right: 10%;
 }
 
 .font-size {
@@ -25,44 +26,25 @@ img.resizeNav {
   color: #000000;
 }
 
-/*.settings {*/
-  /*float: left;*/
-  /*margin-left: 50%;*/
-  /*margin-top: 3px;*/
-/*}*/
-
-/*.logout {*/
-  /*float: right;*/
-  /*margin-top: 3px;*/
-/*}*/
-
-/*.welcomeUser {*/
-  /*float: right;*/
-  /*margin-top: 2px;*/
-/*}*/
-
-/*.textHeight {*/
-  /*margin-bottom: 20px;*/
-/*}*/
-
 .navbar-nav {
   height: 38px;
-  color: #343434;
-  background-color: white;
+  color: #F8F8F8;
+  background-color: #F8F8F8;
 }
 
 .navbar-default {
   height: 38px;
-  border-bottom-color: white;
-}
-
-
-.collapse {
-  border-bottom-color: white;
+  border-bottom-color: #F8F8F8;
 }
 
 .navbar-text {
-  margin-top: 18px;
+  margin-top: 9px;
   margin-bottom: 15px;
 }
 
+.navbar-nav > li > a {
+  line-height: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  outline: none;
+}
