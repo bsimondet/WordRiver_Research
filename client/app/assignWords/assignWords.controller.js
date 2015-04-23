@@ -147,7 +147,7 @@ angular.module('WordRiverApp')
       $scope.matchTiles = [];
       for (var j = 0; j < $scope.userTiles.length; j++) {
         for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
-          if ($scope.userTiles[j].contextTags[z].tagName == category._id) {
+          if ($scope.userTiles[j].contextTags[z] == category._id) {
             $scope.matchTiles.push($scope.userTiles[j]);
           }
         }
@@ -272,7 +272,7 @@ angular.module('WordRiverApp')
       $scope.matchGroup = [];
       $scope.matchStudent = [];
       for (var i = 0; i < $scope.userTiles.length; i++) {
-        if ($scope.userTiles[i].name == word.name) {
+        if ($scope.userTiles[i]._id == word._id) {
           for (var j = 0; j < $scope.userTiles[i].contextTags.length; j++) {
             $scope.matchCategoryIds.push($scope.userTiles[i].contextTags[j]);
           }
@@ -280,7 +280,7 @@ angular.module('WordRiverApp')
       }
       for (var q = 0; q < $scope.matchCategoryIds.length; q++) {
         for (var r = 0; r < $scope.userCategories.length; r++) {
-          if ($scope.userCategories[r]._id == $scope.matchCategoryIds[q].tagName) {
+          if ($scope.userCategories[r]._id == $scope.matchCategoryIds[q]) {
             $scope.matchCategories.push($scope.userCategories[r]);
           }
         }
@@ -315,7 +315,7 @@ angular.module('WordRiverApp')
       for(var i = 0; i < $scope.userTiles.length; i++){
         if($scope.userTiles[i]._id == word._id){
           for (var j = 0; j < $scope.userTiles[i].contextTags.length; j++){
-            if(category._id == $scope.userTiles[i].contextTags[j].tagName){
+            if(category._id == $scope.userTiles[i].contextTags[j]){
               $scope.userTiles[i].contextTags.splice(j,1);
               $scope.i = i;
               $http.patch('/api/tile/'+word._id,
@@ -377,14 +377,7 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.unassignStudentFromCategory = function (student, category){
-      $scope.confirmUnassign(student.firstName, category);
-      //User API remove from studentList [{studentID: id, contextTags:[category ids]}]
-      //Student API remove from contextTags:[{tagName:id, creatorId:id}]
-
-    };
-
-    $scope.unassignWordFromGroup = function (group, word){
+    $scope.unassignWordFromGroup = function (group, word, type){
       $scope.confirmUnassign(group.groupName, word.name);
       for(var i = 0; i < $scope.userGroups.length; i++){
         if($scope.userGroups[i] == group){
@@ -392,11 +385,15 @@ angular.module('WordRiverApp')
           for(var j = 0; j < $scope.userGroups[i].freeTiles[j].length; j++){
             if($scope.userGroups[i].freeTiles[j] == word._id){
               $scope.userGroups[i].freeTiles.splice(j,1);
-              $http.patch('/api/user/'+$scope.currentUser._id+'/group',
+              $http.patch('/api/users/'+$scope.currentUser._id+'/group',
                 {groupList:$scope.userGroups}).success(function(){
                   $scope.getAll();
                 });
-              $scope.displayTileInfo(word);
+              if (type == 'group'){
+                $scope.displayGroupInfo(group);
+              } else {
+                $scope.displayTileInfo(word);
+              }
             }
           }
         }
@@ -427,9 +424,32 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.unassignStudentFromGroup = function (student, group){
-      $scope.confirmUnassign(student.firstName, group);
+    $scope.unassignStudentFromGroup = function (student, group, type){
+      $scope.confirmUnassign(student.firstName, group.groupName);
+      for (var i = 0; i < $scope.userStudents.length; i++){
+        console.log($scope.userStudents[i]._id);
+        if($scope.userStudents[i]._id == student._id){
+          console.log("step 1");
+          for(var j = 0; j < $scope.userStudents[i].groupList.length; j++){
+            if ($scope.userStudents[i].groupList[j]==group._id){
+              console.log("step B");
+              $scope.userStudents[i].groupList.splice(j,1);
+              $http.patch('api/students/'+student._id,
+                {groupList: $scope.userStudents[i].groupList}).success(function(){
+                  $scope.getAll();
+                });
+              if(type == 'student'){
+                $scope.displayStudentInfo(student);
+              } else {
+                console.log("step Last");
+                $scope.displayGroupInfo(group);
+              }
+            }
+          }
+        }
+      }
     };
+
 
     $scope.confirmUnassign = function (thing, place){
       confirm("Are you sure that you would like to unassign " + thing + " from "+ place + "?")

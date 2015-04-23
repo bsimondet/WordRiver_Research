@@ -436,7 +436,7 @@ Tile.find({}).remove(function() {
       "_id": "552c2418291728ecd1d4667d",
       "name": "apple",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d1c296f9753ce8447f"],
+      "contextTags": ["553167d1c296f9753ce8447f", "553167d1d969a916cab51920"],
       "active": false,
       "wordType": "Noun"
     },
@@ -460,7 +460,7 @@ Tile.find({}).remove(function() {
       "_id": "552c2418c036ef35fe0bac32",
       "name": "fast",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d13562bc39e23e4d3b"],
+      "contextTags": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc"],
       "active": false,
       "wordType": "Adjective"
     },
@@ -492,7 +492,7 @@ Tile.find({}).remove(function() {
       "_id": "552d5c80af62cb1c0a09f7bf",
       "name": "fly",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d123b90c175f9b3a86"],
+      "contextTags": ["553167d123b90c175f9b3a86", "553167d1c67764f3773612dc"],
       "active": false,
       "wordType": "Verb"
     },
@@ -1028,7 +1028,7 @@ Tile.find({}).remove(function() {
       "_id": "552d5b0861219d0e0572b532",
       "name": "ride",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d1afa1bda9bc0d055a"],
+      "contextTags": ["553167d1afa1bda9bc0d055a", "553167d14651465f11201014"],
       "active": false,
       "wordType": "Verb"
     },
