@@ -13,5 +13,6 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.updateTags);
 router.delete('/:id', controller.destroy);
 router.put('/:id/deleteFromGroup', controller.deleteFromGroup);
+router.put('/:id/assignToGroup', controller.assignToGroup);
 
 module.exports = router;
