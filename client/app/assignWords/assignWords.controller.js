@@ -511,7 +511,6 @@ angular.module('WordRiverApp')
           return;
         }
         for(var i = 0; i < $scope.selectedStudents.length; i++){
-          var unmatchedWords = [];
           for(var j = 0; j <$scope.selectedWords.length; j++){
             var match = false;
             for(var h = 0; h < $scope.selectedStudents[i].tileBucket.length; h++){
@@ -520,14 +519,21 @@ angular.module('WordRiverApp')
               }
             }
             if(match == false){
-              unmatchedWords.push($scope.selectedWords[j]._id)
+              $scope.selectedStudents[i].tileBucket.push($scope.selectedWords[j]._id)
             }
           }
-          console.log($scope.selectedStudents[i].tileBucket);
           //patch request
           $http.patch('/api/students/' + $scope.selectedStudents[i]._id,
-            {tileBucket:unmatchedWords}
-          ).success(function(){});
+            {tileBucket:$scope.selectedStudents[i].tileBucket}
+          ).success(function(){
+              $scope.getAll();
+            });
+          if(type == 'tile'){
+            console.log("final step");
+            $scope.displayTileInfo(word);
+          } else {
+            $scope.displayStudentInfo(student);
+          }
         }
 
       }
