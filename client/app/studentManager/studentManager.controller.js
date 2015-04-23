@@ -45,6 +45,7 @@ angular.module('WordRiverApp')
       $scope.studentList = [];
       for(var i = 0; i < students.length; i++){
         if($scope.inArray($scope.currentUser.studentList, students[i]._id)){
+          console.log(students[i]);
           $scope.students.push(students[i]);
           $scope.studentList.push(students[i]);
         }
@@ -84,7 +85,7 @@ angular.module('WordRiverApp')
     $scope.findStudentInList = function(student){
       var index = -1;
       for(var i = 0; i < $scope.studentList.length; i++){
-        if($scope.studentList[i].studentID == student){
+        if($scope.studentList[i]._id == student){
           index = i;
         }
       }
@@ -116,6 +117,8 @@ angular.module('WordRiverApp')
     $scope.assignStudentToGroup = function(student, group){
       console.log(student + " "+ group);
     var studentIndex = $scope.findStudentInList(student);
+      console.log(studentIndex);
+
     if($scope.studentList[studentIndex].groupList.indexOf(group) == -1){
       $scope.studentList[studentIndex].groupList.push(group);
       if(group._id == $scope.selectedGroup._id){
@@ -123,6 +126,12 @@ angular.module('WordRiverApp')
       }
       $scope.addGroupsContextPacksToStudent(student);
     }
+      //Not sure what to do here...
+      $http.put("/api/students/" + student + "/assignToGroup",
+        {groupID: group._id}
+      ).success(function () {
+          $scope.getStudents();
+        });
   };
 
     $scope.addGroupsContextPacksToStudent = function(student){
@@ -142,7 +151,8 @@ angular.module('WordRiverApp')
         }
 
         //student side
-        var studentIndex = $scope.findStudentAccount(student.studentID);
+        console.log(student);
+        var studentIndex = $scope.findStudentAccount(student._id);
         var notAdded = true;
         for(var j = 0; j < $scope.students[studentIndex].contextTags.length; j++){
           if(($scope.students[studentIndex].contextTags[j].creatorID == $scope.currentUser._id) && ($scope.students[studentIndex].contextTags[j].tagName == contextArray[i])){
