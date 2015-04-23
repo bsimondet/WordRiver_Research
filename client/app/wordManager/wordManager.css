@@ -22,34 +22,58 @@
   background: #4393B9;
 }
 
-/*changes the background color to yellow when a student is selected*/
-a.ng-scopeng-binding:visited{
-  background-color: #ffff00;
+table, th, td {
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-collapse: collapse;
+  width: 50%;
+  height: 30px;
+  align: right;
+  border-radius: 25px;
 }
 
-.footer {
+form{
+  align: left;
+}
+
+.wordfooter {
   text-align: center;
-  padding: 30px 0;
-  margin-top: 70px;
-  border-top: 1px solid #E5E5E5;
+  padding: 0px 0;
 }
 
-.space {
-  text-align: center;
-  padding: 50px 0;
+.scroll {
+  width: 100%;
+  height: 400px;
+  overflow: auto;
 }
 
-/*.selected {*/
-  /*background-color: green !important;*/
-/*}*/
+.middleScroll {
+  width: 100%;
+  height: 540px;
+  overflow: auto;
+}
 
-/*.selecting {*/
-  /*background-color: yellow !important;*/
-/*}*/
+.assignButton {
+  background-color: #008000;
 
-/*.select-helper {*/
-  /*position: absolute;*/
-  /*border: 1px dashed red;*/
-  /*background: red;*/
-  /*opacity: 0.2;*/
-/*}*/
+}
+.assignButton:hover {
+  background-color:red;
+}
+
+.center {
+  text-align:center;
+}
+
+.wordsIn {
+  margin-left: 10%;
+  float: left;
+  width: 30%;
+}
+
+.categoriesIn {
+  margin-right: 10%;
+  float: right;
+  width: 30%;
+}
+
+
