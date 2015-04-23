@@ -12,6 +12,7 @@ angular.module('WordRiverApp')
     $scope.categoryArray = [];
     $scope.currentUser = Auth.getCurrentUser();
     $scope.selectedCategories = [];
+    $scope.selectedTiles = [];
     $scope.allTiles = [];
     $scope.allCatTiles = [];
     $scope.userTiles = [];
@@ -46,7 +47,7 @@ angular.module('WordRiverApp')
           }
         }
       });
-    }
+    };
 
 
     $scope.checkCheckbox = function(category){
@@ -93,6 +94,7 @@ angular.module('WordRiverApp')
         }
       });
     };
+
     $scope.getWords();
 
     $scope.addWord = function() {
@@ -108,18 +110,18 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.getAllTiles = function(){
-      $http.get('/api/tile').success(function (allTiles) {
-        $scope.allCatTiles = allTiles;
-        for (var i = 0; i < $scope.allCatTiles.length; i++) {
-          if ($scope.currentUser._id == $scope.allCatTiles[i].creatorID) {
-            $scope.userTiles.push($scope.allCatTiles[i]);
-          }
-        }
-      });
-    };
-
-    $scope.getAllTiles();
+    //$scope.getAllTiles = function(){
+    //  $http.get('/api/tile').success(function (allTiles) {
+    //    $scope.allCatTiles = allTiles;
+    //    for (var i = 0; i < $scope.allCatTiles.length; i++) {
+    //      if ($scope.currentUser._id == $scope.allCatTiles[i].creatorID) {
+    //        $scope.userTiles.push($scope.allCatTiles[i]);
+    //      }
+    //    }
+    //  });
+    //};
+    //
+    //$scope.getAllTiles();
     //cat is short for category
     $scope.displayCatInfo = function (category) {
       //$scope.userTiles = [];
@@ -187,6 +189,14 @@ angular.module('WordRiverApp')
 
       };
 
+    $scope.addWordToCatoegry = function() {
+
+    };
+
+    //$scope.updateTileV2 = function(tile) {
+    //
+    //  $http.put('/api/tile' + $scope.tileId + "/updateTile", {})
+    //}
     //Deletes a category
     $scope.removeCategory = function(index) {
       $scope.categoryArray.splice(index, 1);
@@ -245,13 +255,13 @@ angular.module('WordRiverApp')
         //Only editing the word text
         $scope.tileId = tile._id;
 
-        $http.put('/api/tile/' + $scope.tileId + "/update", {category: $scope.currentCategory, tileId: tile._id});
+        //$http.put('/api/tile/' + $scope.tileId + "/update", {category: $scope.currentCategory, tileId: tile._id});
 
         $scope.editField = "";
       }
       else if($scope.editField.length == 0 && $scope.editType.length >= 1){
         //Only editing the word type
-       ;
+
         $scope.editType = "";
       }
       else if($scope.editField.length >= 1 && $scope.editType.length >= 1){

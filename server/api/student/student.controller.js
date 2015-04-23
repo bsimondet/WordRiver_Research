@@ -89,21 +89,13 @@ exports.updateTags = function(req, res) {
 };
 
 exports.deleteFromGroup = function(req, res) {
-  var userId = req.user._id;
-  var group = req.groupList._id;
-  var studentArray = req.studentGoingAway;
-  var packId = req.body.packId;
+  var userId = req.params.id;
+  var group = req.body.groupID;
   Student.findById(userId, function (err, user) {
-    for(var i = 0; i < user.tileBucket.length; i++){
-      console.log(word == user.tileBucket[i].wordName);
-      if(word == user.tileBucket[i].wordName){
-        console.log(word);
-        for(var j = 0; j < user.tileBucket[i].contextTags.length; j++){
-          if(user.tileBucket[i].contextTags[j] == packId){
-            console.log(j);
-            user.tileBucket[i].contextTags.splice(j, 1);
-          }
-        }
+    for(var i = 0 ; i < user.groupList.length; i++){
+      console.log(user.groupList[i] +" "+ group);
+      if(user.groupList[i] == group){
+        user.groupList.splice(i, 1);
       }
     }
     user.save(function(err) {

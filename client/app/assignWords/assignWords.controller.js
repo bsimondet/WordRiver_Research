@@ -141,7 +141,7 @@ angular.module('WordRiverApp')
     //cat is short for category
     $scope.displayCatInfo = function (category) {
       $scope.switchMiddle("category");
-      $scope.categorySelected = category.name;
+      $scope.categorySelected = category;
       $scope.matchStudent = [];
       $scope.matchGroup = [];
       $scope.matchTiles = [];
@@ -170,11 +170,12 @@ angular.module('WordRiverApp')
 
     $scope.displayGroupInfo = function (group){
       $scope.switchMiddle("group");
-      $scope.groupSelected = group.groupName;
+      $scope.groupSelected = group;
       $scope.matchCategoryIds = [];
       $scope.matchCategories = [];
       $scope.matchStudents = [];
       $scope.matchTiles = [];
+      $scope.matchTileIds = [];
       for(var i = 0; i<$scope.userGroups.length; i++){
         if ($scope.userGroups[i]._id == group._id){
           for(var j=0; j<$scope.userGroups[i].contextPacks.length; j++){
@@ -193,15 +194,20 @@ angular.module('WordRiverApp')
         for (var l = 0; l<$scope.userStudents[k].groupList.length; l++){
           if ($scope.userStudents[k].groupList[l] === group._id){
             $scope.matchStudents.push($scope.userStudents[k]);
-          }
+          }Group
         }
       }
       for (var m = 0; m<$scope.userGroups.length; m++){
-        for (var n = 0; n<$scope.userTiles.length; n++){
-          if ($scope.userGroups[m]._id == group._id){
-            for(var p = 0; p < $scope.userGroups[m].freeTiles.length; m++)
-              $scope.matchTiles.push($scope.userGroups[m].freeTiles[p]);
-              console.log($scope.userGroups[m].freeTiles[p]);
+        if ($scope.userGroups[m]._id == group._id){
+          for(var p = 0; p < $scope.userGroups[m].freeTiles.length; p++) {
+            $scope.matchTileIds.push($scope.userGroups[m].freeTiles[p]);
+          }
+        }
+      }
+      for (var h = 0; h < $scope.matchTileIds.length; h++){
+        for (var o = 0; o < $scope.userTiles.length; o++){
+          if ($scope.matchTileIds[h] == $scope.userTiles[o]._id){
+            $scope.matchTiles.push($scope.userTiles[o]);
           }
         }
       }
@@ -258,45 +264,43 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.displayTileInfo = function (word){
+    $scope.displayTileInfo = function (word) {
       $scope.tileSelected = word;
       $scope.switchMiddle("word");
       $scope.matchCategoryIds = [];
       $scope.matchCategories = [];
       $scope.matchGroup = [];
       $scope.matchStudent = [];
-      for (var i = 0; i < $scope.userTiles.length; i++){
-        if ($scope.userTiles[i].name == word.name){
-          for(var j = 0; j < $scope.userTiles[i].contextTags.length; j++){
+      for (var i = 0; i < $scope.userTiles.length; i++) {
+        if ($scope.userTiles[i].name == word.name) {
+          for (var j = 0; j < $scope.userTiles[i].contextTags.length; j++) {
             $scope.matchCategoryIds.push($scope.userTiles[i].contextTags[j]);
           }
         }
       }
-      for (var q = 0; q < $scope.matchCategoryIds.length; q++){
-        for (var r = 0; r < $scope.userCategories.length; r++){
-          if ($scope.userCategories[r]._id == $scope.matchCategoryIds[q].tagName){
+      for (var q = 0; q < $scope.matchCategoryIds.length; q++) {
+        for (var r = 0; r < $scope.userCategories.length; r++) {
+          if ($scope.userCategories[r]._id == $scope.matchCategoryIds[q].tagName) {
             $scope.matchCategories.push($scope.userCategories[r]);
           }
         }
       }
-      for (var l = 0; l < $scope.userGroups.length; l++){
-        for (var m = 0; m < $scope.userGroups[l].contextPacks.length; m++){
-          for (var n = 0; n < $scope.matchCategories.length; n++){
-            if($scope.userGroups[l].contextPacks[m] == $scope.matchCategories[n]._id){
-              $scope.matchGroup.push($scope.userGroups[l]);
-            }
+      for (var l = 0; l < $scope.userGroups.length; l++) {
+        for (var m = 0; m < $scope.userGroups[l].freeTiles.length; m++) {
+          if ($scope.userGroups[l].freeTiles[m] == word._id) {
+            $scope.matchGroup.push($scope.userGroups[l]);
           }
         }
       }
-      for (var o = 0; o < $scope.userStudents.length; o++){
-        for (var p = 0; p < $scope.userStudents[o].tileBucket.length; p++){
-          if(word._id == $scope.userStudents[o].tileBucket[p]){
+
+      for (var o = 0; o < $scope.userStudents.length; o++) {
+        for (var p = 0; p < $scope.userStudents[o].tileBucket.length; p++) {
+          if (word._id == $scope.userStudents[o].tileBucket[p]) {
             $scope.matchStudent.push($scope.userStudents[o]);
           }
         }
       }
     };
-
     $scope.displayStudentHelper = function(student){
       student._id = student.studentID;
       $scope.displayStudentInfo(student);
@@ -306,28 +310,20 @@ angular.module('WordRiverApp')
 //This is the section for the unassign functions
 
 //Category view unassign functions
-    $scope.getRealCategory = function(category){
-      for(var z = 0; z < $scope.userCategories.length; z ++){
-        if ($scope.userCategories[z].name == category){
-          $scope.useCategory = $scope.userCategories[z];
-        }
-      }
-    };
 
     $scope.unassignTileFromCategory = function (word, category, view){
-      $scope.confirmUnassign(word.name, category);
+      $scope.confirmUnassign(word.name, category.name);
       //Tile API remove from context tags [{tagName:id}]
-      $scope.getRealCategory(category);
       for(var i = 0; i < $scope.userTiles.length; i++){
         if($scope.userTiles[i]._id == word._id){
           for (var j = 0; j < $scope.userTiles[i].contextTags.length; j++){
-            if($scope.useCategory._id == $scope.userTiles[i].contextTags[j].tagName){
+            if(category._id == $scope.userTiles[i].contextTags[j].tagName){
               $scope.userTiles[i].contextTags.splice(j,1);
-              $http.patch('/api/tile/'+word._id,
+              $http.patch('/api/tile/'+word._id+'/unassign',
                 {contextTags: $scope.userTiles[i].contextTags}).success(function(){
                   $scope.getAll();
                 });
-              $scope.displayCatInfo($scope.useCategory);
+              $scope.displayCatInfo(category);
             }
           }
         }
@@ -335,12 +331,11 @@ angular.module('WordRiverApp')
     };
 
     $scope.unassignGroupFromCategory = function (group, category, view){
-      $scope.confirmUnassign(group.groupName, category);
-      $scope.getRealCategory(category);
+      $scope.confirmUnassign(group.groupName, category.name);
       for (var i = 0; i < $scope.userGroups.length; i++){
         if($scope.userGroups[i]._id == group._id){
           for (var j = 0; j < $scope.userGroups[i].contextPacks.length; j++){
-            if ($scope.userGroups[i].contextPacks[j] == $scope.useCategory._id){
+            if ($scope.userGroups[i].contextPacks[j] == category._id){
               $scope.userGroups[i].contextPacks.splice(j, 1);
             }
           }
@@ -350,24 +345,22 @@ angular.module('WordRiverApp')
         {groupList: $scope.userGroups}).success(function(){
           $scope.getAll();
         });
-      $scope.displayCatInfo($scope.useCategory);
+      $scope.displayCatInfo(category);
     };
 
     $scope.unassignStudentFromCategory = function (student, category, view){
-      $scope.confirmUnassign(student.firstName, category);
-      $scope.getRealCategory(category);
+      $scope.confirmUnassign(student.firstName, category.name);
       for (var i = 0; i < $scope.userStudents.length; i++){
         if($scope.userStudents[i]._id == student._id){
           for (var j = 0; j < $scope.userStudents[i].contextTags.length; j++){
-            if($scope.userStudents[i].contextTags[j].tagName == $scope.useCategory._id){
-              console.log("got here");
+            if($scope.userStudents[i].contextTags[j] == category._id){
               $scope.userStudents[i].contextTags.splice(j,1);
               $http.patch('/api/students/'+student._id,
                 {contextTags: $scope.userStudents[i].contextTags}).success(function(){
                   $scope.getAll();
                 });
               if (view == "category"){
-                $scope.displayCatInfo($scope.useCategory);
+                $scope.displayCatInfo(category);
               } else {
                 $scope.displayStudentInfo(student);
               }
@@ -377,26 +370,27 @@ angular.module('WordRiverApp')
       }
     };
 
+      $scope.unassignStudentFromCategory = function (student, category){
+        $scope.confirmUnassign(student.firstName, category);
+        //User API remove from studentList [{studentID: id, contextTags:[category ids]}]
+        //Student API remove from contextTags:[{tagName:id, creatorId:id}]
+      };
+
 //Tile view unassign functions
 
-    $scope.unassignWordFromCategory = function (word, category){
-      $scope.confirmUnassign(word.name, category);
+    $scope.unassignWordFromCategory = function (category, word){
+      $scope.confirmUnassign(word.name, category.name);
       //Tile API remove from context tags [{tagName:id}]
-      for(var z = 0; z < $scope.userCategories.length; z ++){
-        if ($scope.userCategories[z].name == category){
-          $scope.useCategory = $scope.userCategories[z];
-        }
-      }
       for(var i = 0; i < $scope.userTiles.length; i++){
         if($scope.userTiles[i]._id == word._id){
           for (var j = 0; j < $scope.userTiles[i].contextTags.length; j++){
-            if($scope.useCategory._id == $scope.userTiles[i].contextTags[j].tagName){
+            if(category._id == $scope.userTiles[i].contextTags[j].tagName){
               $scope.userTiles[i].contextTags.splice(j,1);
               $http.patch('/api/tile/'+word._id,
                 {contextTags: $scope.userTiles[i].contextTags}).success(function(){
                   $scope.getAll();
                 });
-              $scope.displayCatInfo($scope.useCategory);
+              $scope.displayTileInfo(word);
             }
           }
         }
@@ -404,11 +398,27 @@ angular.module('WordRiverApp')
     };
 
     $scope.unassignWordFromGroup = function (group, word){
-      $scope.confirmUnassign(group, word);
+      $scope.confirmUnassign(group.groupName, word.name);
+      for(var i = 0; i < $scope.userGroups.length; i++){
+        if($scope.userGroups[i] == group){
+          console.log($scope.userGroups[i].freeTiles);
+          for(var j = 0; j < $scope.userGroups[i].freeTiles[j].length; j++){
+            if($scope.userGroups[i].freeTiles[j] == word._id){
+              $scope.userGroups[i].freeTiles.splice(j,1);
+              $http.patch('/api/user/'+$scope.currentUser._id+'/group',
+                {groupList:$scope.userGroups}).success(function(){
+                  $scope.getAll();
+                });
+              $scope.displayTileInfo(word);
+            }
+          }
+        }
+      }
     };
 
     $scope.unassignWordFromStudent = function (student, word){
       $scope.confirmUnassign(student.firstName, word);
+
     };
 
 //Group view unassign functions
@@ -464,7 +474,7 @@ angular.module('WordRiverApp')
           alert("You must select at least 1 word.");
           return;
         }
-        
+
       } else if (!$scope.groupView && $scope.categoryView){
         //Function to add selected categories to selected students.
         if($scope.selectedStudents.length == 0){
@@ -502,18 +512,24 @@ angular.module('WordRiverApp')
 
     $scope.studentsInGroupAssignment = function(group) {
       $scope.groupedStudents=[];
-      for(var i = 0; i < $scope.studentArray.length; i++){
-        console.log($scope.studentArray[i].groupList.indexOf(group));
-        console.log(group.groupName);
-        if ($scope.studentArray[i].groupList.indexOf(group.groupName) > -1) {
+      for(var i = 0; i < $scope.userStudents.length; i++){
+        //console.log($scope.userStudents[i].groupList.length);
+        console.log($scope.userStudents[i].groupList.indexOf(group.groupName));
+        console.log($scope.userStudents[i].groupList);
+        console.log(group._id);
+        if ($scope.userStudents[i].groupList.indexOf(group._id) > -1) {
           console.log("we are in the if statement");
-          $scope.groupedStudents.push($scope.studentArray[i]);
-
+          $scope.groupedStudents.push($scope.userStudents[i]);
         }
       }
       console.log($scope.groupedStudents);
     };
 
-//$scope.groupedStudents = [];
+    $scope.oneAtATime = true;
+
+    $scope.status = {
+      isFirstOpen: true,
+      isFirstDisabled: false
+    };
 
   });

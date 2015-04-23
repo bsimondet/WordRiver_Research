@@ -72,6 +72,31 @@ exports.destroy = function(req, res) {
   });
 };
 
+//exports.updateTile =
+exports.updateTile = function(req, res, next) {
+  var userId = req.user._id;
+
+  var word = req.body.word;
+  var packId = req.body.packId;
+
+  User.findById(userId, function (err, user) {
+    var found = false;
+    for(var i = 0; i < user.tileBucket.length; i++){
+      if(user.tileBucket[i].wordName == word){
+        found = true;
+        user.tileBucket[i].tileTags.push(packId);
+      }
+    }
+    if(!found){
+      user.tileBucket.push({wordName: word, tileTags: [packId]});
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.removeFromCategory = function(req, res, next) {
   //var userId = req.user._id;
   console.log("function called");
@@ -93,7 +118,7 @@ exports.removeFromCategory = function(req, res, next) {
     console.log(tile);
     for(var i = 0; i < tile.contextTags.length; i++){
       console.log("for loop");
-      if(tile.contextTags[i].tagName == category._id){
+      if(tile.contextTags[i].tagName == category){
         console.log("splice me");
         tile.contextTags.splice(i,1);
       }
@@ -110,18 +135,18 @@ exports.removeFromCategory = function(req, res, next) {
 //  //var userId = req.user._id;
 //
 //  var word = req.body.word;
-//  var packId = req.body.packId;
+//  var tileId = req.body.tileId;
 //
-//  User.findById(userId, function (err, user) {
+//  tile.findById(tileId, function (err, user) {
 //    var found = false;
 //    for(var i = 0; i < user.tileBucket.length; i++){
 //      if(user.tileBucket[i].wordName == word){
 //        found = true;
-//        user.tileBucket[i].tileTags.push(packId);
+//        user.tileBucket[i].tileTags.push(tileId);
 //      }
 //    }
 //    if(!found){
-//      user.tileBucket.push({wordName: word, tileTags: [packId]});
+//      user.tileBucket.push({wordName: word, tileTags: [tileId]});
 //    }
 //    user.save(function(err) {
 //      if (err) return validationError(res, err);
@@ -129,7 +154,7 @@ exports.removeFromCategory = function(req, res, next) {
 //    });
 //  });
 //};
-
-function handleError(res, err) {
-  return res.send(500, err);
-}
+//
+//function handleError(res, err) {
+//  return res.send(500, err);
+//}

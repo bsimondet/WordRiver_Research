@@ -5,7 +5,8 @@
 #banner {
   border-bottom: none;
   margin-top: -20px;
-  top: 60px;
+  top: 50px;
+  border-radius: 20px;
 }
 
 #banner h1 {
@@ -25,7 +26,6 @@
   position: relative;
   padding: 15px 15px !important;
   color: #F5F5F5;
-  text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.24);
   background: #4393B9;
   height: 110px !important;
@@ -69,10 +69,16 @@ form{
 
 .assignButton {
   background-color: #008000;
+
+}
+.assignButton:hover {
+  background-color:red;
+
 }
 
 .center {
   text-align:center;
+
 }
 
 
