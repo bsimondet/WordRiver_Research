@@ -15,26 +15,20 @@
       <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
       <button class="btn btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="group in userGroups | orderBy:'groupName':order1">
-          <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
-          <span class="pull-right glyphicon" ng-class="{'glyphicon-chevron-right'  : status.open, 'glyphicon-chevron-down' : !status.open}" ng-model="oneAtATime" ng-click="studentsInGroupAssignment(group); status.open=!status.open; status.isFirstDisabled = !isFirstDisabled" ></span>
+
+        <li class="list-group-item" ng-repeat="group in userGroups | orderBy:'groupName':order1" ng-model="oneAtATime">
+          <!--close-others isnt working here and isnt allowed here, need to move it around or find another way to allow only one as open-->
+          <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group)" close-others="oneAtATime">{{group.groupName}}</a>
+          <span class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down'  : status.open, 'glyphicon-chevron-right' : !status.open}"   ng-click="studentsInGroupAssignment(group); status.open = !status.open"></span>
         <ul collapse = "!status.open">
-            <li class="list-group-item" ng-repeat="students in groupedStudents" close-others="oneAtATime" is-open=status.isFirstOpen" is-disabled="status.isFirstDisabled">
+            <li class="list-group-item" ng-repeat="students in groupedStudents">
               <a href ="" ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a></li>
           </ul>
         </li>
       </ul>
 
-
-<!--I don't know if this is needed or if we can just delete it-->
-      <!--<div id="groupCollapse" class = "panel-collapse collapse in">-->
-        <!--<div class="panel-body" ng-controller="StudentManagerCtrl" ng-click="displayGroupInfo(group)">-->
-          <!--<li class="list-group-item" ng-repeat="student in studentsInGroup"><label>{{student.lastName}}, {{student.firstName}}</label></li>-->
-        <!--</div>-->
-      <!--</div>-->
-
-
-<!--this is trying to use the accordion group way. but it only shows one group so far, although that one group works-->
+<!--this is trying to use the accordion group way. but it only shows one group so far, although that one group works also, checkmarks don't work-->
+ <!--Looking at this reference------------------------------------------------------------------------------------------https://angular-ui.github.io/bootstrap/-->
       <!--<accordion close-others="oneAtATime">-->
         <!--<accordion-group is-open = "status.open">-->
           <!--<accordion-heading ng-repeat="group in userGroups | orderBy: 'groupName' : order1" >-->
