@@ -388,7 +388,7 @@ Tile.find({}).remove(function() {
       "_id": "552c2418f3a3808dd9765a0f",
       "name": "eat",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d1c296f9753ce8447f"],
+      "contextTags": ["553167d1c296f9753ce8447f", "553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Verb"
     },
@@ -907,14 +907,6 @@ Tile.find({}).remove(function() {
     {
       "_id": "552d5b088f9b179c9f41b915",
       "name": "do",
-      "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
-      "wordType": "Verb"
-    },
-    {
-      "_id": "552d5b083415e4dd5d9a985e",
-      "name": "eat",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
