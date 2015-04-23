@@ -88,6 +88,21 @@ exports.updateTags = function(req, res) {
   });
 };
 
+//Not finished--Working Here!
+exports.assignToGroup = function(req, res) {
+  var userId = req.params.id;
+  var group = req.body.groupID;
+  Student.findById(userId, function (err, user) {
+
+      user.groupList.push(group);
+
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.deleteFromGroup = function(req, res) {
   var userId = req.params.id;
   var group = req.body.groupID;
