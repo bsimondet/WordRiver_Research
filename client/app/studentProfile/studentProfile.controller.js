@@ -8,10 +8,9 @@ angular.module('WordRiverApp')
     //console.log($scope.currentStudent);
 
     $scope.students = []; //List of actual student objects
-
+    $scope.studentGroups = [];
     $scope.selectedStudents = [];
-
-    $scope.currentCategory = null;
+    $scope.teacherGroups = [];
     $scope.categoryArray = [];
     $scope.wordArray = [];
     $scope.hide = true;
@@ -22,17 +21,42 @@ angular.module('WordRiverApp')
     //$scope.getStudentList();
     //
 
+    // Code for groups that we may or may not use
 
+    //$scope.getTeacherGroups = function(student) {
+    //  $scope.teacherGroups = [];
+    //  $http.get('/api/users').success(function (user) {
+    //    for (var i = 0; i < student.teachers.length; i++) {
+    //      for(var j = 0; j < user.length; j++){
+    //        if(user[j]._id == student.teachers[i]){
+    //          $scope.teacherGroups.push(user[j].groupList);
+    //        }
+    //      }
+    //    }
+    //  });
+    //};
+    //
+    //$scope.getStudentGroups = function(student) {
+    //  console.log("Groups: " + $scope.teacherGroups);
+    //  $scope.studentGroups = [];
+    //  for (var i = 0; i < student.groupList.length; i++) {
+    //    for(var j = 0; j < $scope.teacherGroups.length; j++){
+    //      if($scope.teacherGroups[j]._id == student.groupList[i]){
+    //        $scope.studentGroups.push($scope.teacherGroups[j].groupName);
+    //      }
+    //    }
+    //  }
+    //};
 
     $scope.getCategories = function(student) {
       $scope.categoryArray = [];
       $scope.selectedStudent = student;
       $http.get('/api/categories').success(function (allCategories) {
-        console.log(allCategories);
+ //       console.log(allCategories);
         for (var i = 0; i < $scope.selectedStudent.contextTags.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
             if(allCategories[j]._id == $scope.selectedStudent.contextTags[i]){
-              $scope.categoryArray.push(allCategories[i].name);
+              $scope.categoryArray.push(allCategories[j].name);
             }
           }
         }
@@ -44,11 +68,11 @@ angular.module('WordRiverApp')
       $scope.wordArray = [];
       $scope.selectedStudent = student;
       $http.get('/api/tile').success(function (allWords) {
-        console.log(allWords);
+  //      console.log(allWords);
         for (var i = 0; i < $scope.selectedStudent.tileBucket.length; i++) {
           for(var j = 0; j < allWords.length; j++){
             if(allWords[j]._id == $scope.selectedStudent.tileBucket[i]){
-              $scope.wordArray.push(allWords[i].name);
+              $scope.wordArray.push(allWords[j].name);
             }
           }
         }
@@ -89,8 +113,10 @@ angular.module('WordRiverApp')
       $scope.getCategories(student);
       $scope.getWords(student);
       $scope.hide = false;
+      //$scope.getTeacherGroups(student);
+      //$scope.getStudentGroups(student);
 
-      };
+    };
 
 
 

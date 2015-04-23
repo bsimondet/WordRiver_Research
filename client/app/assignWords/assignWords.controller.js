@@ -417,24 +417,25 @@ angular.module('WordRiverApp')
     };
 
     $scope.unassignStudentFromGroup = function (student, group, type){
-      $scope.confirmUnassign(student.firstName, group.groupName);
-      for (var i = 0; i < $scope.userStudents.length; i++){
-        console.log($scope.userStudents[i]._id);
-        if($scope.userStudents[i]._id == student._id){
-          console.log("step 1");
-          for(var j = 0; j < $scope.userStudents[i].groupList.length; j++){
-            if ($scope.userStudents[i].groupList[j]==group._id){
-              console.log("step B");
-              $scope.userStudents[i].groupList.splice(j,1);
-              $http.patch('api/students/'+student._id,
-                {groupList: $scope.userStudents[i].groupList}).success(function(){
-                  $scope.getAll();
-                });
-              if(type == 'student'){
-                $scope.displayStudentInfo(student);
-              } else {
-                console.log("step Last");
-                $scope.displayGroupInfo(group);
+      if ($scope.confirmUnassign(student.firstName, group.groupName) == true) {
+        for (var i = 0; i < $scope.userStudents.length; i++) {
+          console.log($scope.userStudents[i]._id);
+          if ($scope.userStudents[i]._id == student._id) {
+            console.log("step 1");
+            for (var j = 0; j < $scope.userStudents[i].groupList.length; j++) {
+              if ($scope.userStudents[i].groupList[j] == group._id) {
+                console.log("step B");
+                $scope.userStudents[i].groupList.splice(j, 1);
+                $http.patch('api/students/' + student._id,
+                  {groupList: $scope.userStudents[i].groupList}).success(function () {
+                    $scope.getAll();
+                  });
+                if (type == 'student') {
+                  $scope.displayStudentInfo(student);
+                } else {
+                  console.log("step Last");
+                  $scope.displayGroupInfo(group);
+                }
               }
             }
           }
@@ -444,7 +445,7 @@ angular.module('WordRiverApp')
 
 
     $scope.confirmUnassign = function (thing, place){
-      confirm("Are you sure that you would like to unassign " + thing + " from "+ place + "?")
+      return confirm("Are you sure that you would like to unassign " + thing + " from "+ place + "?")
     };
 
 ////////////////////////////////////////////////////////////////////////////
@@ -457,11 +458,26 @@ angular.module('WordRiverApp')
           alert("You must select at least 1 group.");
           return;
         }
-        if($scope.selectedCategories.length == 0){
+        else if($scope.selectedCategories.length == 0){
           alert("You must select at least 1 category.");
           return;
         }
-
+        else{
+          for(var a = 0; a < $scope.userGroups.length; a++){
+            for (var b = 0; b < $scope.selectedGroups.length; b++){
+              if ($scope.userGroups[a].name == $scope.selectedGroups[j]){
+                for (var k = 0; k < $scope.selectedCategories.length; k++){
+                  for (var l = 0; l < $scope.userCategories.length; l++){
+                    if($scope.selectedCategories[k] == $scope.userCategories[l].name){
+                      $scope.userGroups[a].contextTags.push($scope.userCategories[l]._id);
+                    }
+                  }
+                }
+                $scope.userGroups.contextTags.push($sc)
+              }
+            }
+          }
+        }
       } else if ($scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected groups.
         if($scope.selectedGroups.length == 0){
@@ -494,6 +510,31 @@ angular.module('WordRiverApp')
           alert("You must select at least 1 word.");
           return;
         }
+        for(var i = 0; i < $scope.selectedStudents.length; i++){
+          for(var j = 0; j <$scope.selectedWords.length; j++){
+            var match = false;
+            for(var h = 0; h < $scope.selectedStudents[i].tileBucket.length; h++){
+              if($scope.selectedStudents[i].tileBucket[h] == $scope.selectedWords[j]._id){
+                match = true;
+              }
+            }
+            if(match == false){
+              $scope.selectedStudents[i].tileBucket.push($scope.selectedWords[j]._id)
+            }
+          }
+          //patch request
+          $http.patch('/api/students/' + $scope.selectedStudents[i]._id,
+            {tileBucket:$scope.selectedStudents[i].tileBucket}
+          ).success(function(){
+              $scope.getAll();
+            });
+          if(type == 'tile'){
+            console.log("final step");
+            $scope.displayTileInfo(word);
+          } else {
+            $scope.displayStudentInfo(student);
+          }
+        }
 
       }
     };
@@ -511,10 +552,6 @@ angular.module('WordRiverApp')
     $scope.studentsInGroupAssignment = function(group) {
       $scope.groupedStudents=[];
       for(var i = 0; i < $scope.userStudents.length; i++){
-        //console.log($scope.userStudents[i].groupList.length);
-        console.log($scope.userStudents[i].groupList.indexOf(group.groupName));
-        console.log($scope.userStudents[i].groupList);
-        console.log(group._id);
         if ($scope.userStudents[i].groupList.indexOf(group._id) > -1) {
           console.log("we are in the if statement");
           $scope.groupedStudents.push($scope.userStudents[i]);
