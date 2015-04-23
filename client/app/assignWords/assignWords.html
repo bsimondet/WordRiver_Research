@@ -124,7 +124,7 @@
         <h4>The groups {{studentSelected.firstName}} {{studentSelected.lastName}} is in are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="group in matchGroups | orderBy:'groupName'">
-          <a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignGroupFromStudent(studentSelected, group,'student')"></span></li>
+          <a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignStudentFromGroup(studentSelected, group,'student')"></span></li>
         </ul>
         <h4>The categories that this student has are:</h4>
         <ul class="list-group">
