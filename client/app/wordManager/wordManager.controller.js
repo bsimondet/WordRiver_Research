@@ -50,20 +50,24 @@ angular.module('WordRiverApp')
     };
 
 
-    $scope.checkCheckbox = function(category){
-      var counter;
-        for (var i = 0; i < $scope.selectedCategories.length; i++) {
-          if ($scope.selectedCategories[i].tagName == category) {
-            $scope.selectedCategories.splice(i, 1);
-            counter = 1;
-          }
+    $scope.addWordsToCategory = function() {
+      console.log("Test");
+      for(var i = 0; i < $scope.selectedCategories; i++){
+        console.log("Test2");
+        for(var j = 0; j < $scope.selectedTiles; j++){
+          console.log("Test3");
+          //$scope.selectedTiles[j].tileTags.push($scope.selectedCategories[i])
+          $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id, newCategory: $scope.selectedCategories[i]})
+          $scope.selectedTiles[j].contextTags.push($scope.selectedCategories[i]);
+          console.log("Test4");
         }
-      if (counter != 1){
-        $scope.selectedCategories.push({
-          tagName:category
-        });
       }
-    };
+      //for(var j = 0; j < $scope.selectedTiles; j++){
+      //  $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id})
+      //}
+    }
+
+
 
     $scope.getCategories();
 
