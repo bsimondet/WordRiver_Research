@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <header class="hero-unit" id="banner">
-  <div class="container">
+  <div class="">
     <h1>Assign Content to People</h1>
   </div>
 </header>
@@ -20,7 +20,7 @@
           <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="studentsInGroupAssignment(group); status.open=!status.open; status.isFirstDisabled = !isFirstDisabled"></span>
           <!--isCollapsed = !isCollapsed;-->
           <!--<ul collapse="!isCollapsed">-->
-          
+
         <ul collapse = "!status.open" ng-model="oneAtATime">
             <li class="list-group-item" ng-repeat="students in groupedStudents" close-others="oneAtATime" is-open=status.isFirstOpen" is-disabled="status.isFirstDisabled">
               <a href ="" ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a></li>
