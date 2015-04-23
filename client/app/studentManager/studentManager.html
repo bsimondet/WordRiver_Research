@@ -45,9 +45,10 @@
 
 <div class="col-xs-3">
   <h1 class="page-header">All Students:</h1>
-  <button class="btn btn-primary" title="Sort A-Z" ng-click="students.sort(orderBy('lastName'))">A-Z</button>
+
   <ul class="list-group">
     <li class="list-group-item">
+      <button class="btn btn-primary" title="Sort A-Z" ng-click="students.sort(orderBy('lastName'))">A-Z</button>
       <form ng-submit="addTag()">
       </form>
     </li>
