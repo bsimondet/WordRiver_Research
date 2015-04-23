@@ -194,7 +194,7 @@ angular.module('WordRiverApp')
         for (var l = 0; l<$scope.userStudents[k].groupList.length; l++){
           if ($scope.userStudents[k].groupList[l] === group._id){
             $scope.matchStudents.push($scope.userStudents[k]);
-          }Group
+          }
         }
       }
       for (var m = 0; m<$scope.userGroups.length; m++){
@@ -309,8 +309,6 @@ angular.module('WordRiverApp')
 ////////////////////////////////////////////////////////////////////////////
 //This is the section for the unassign functions
 
-//Category view unassign functions
-
     $scope.unassignTileFromCategory = function (word, category, view){
       $scope.confirmUnassign(word.name, category.name);
       //Tile API remove from context tags [{tagName:id}]
@@ -319,11 +317,16 @@ angular.module('WordRiverApp')
           for (var j = 0; j < $scope.userTiles[i].contextTags.length; j++){
             if(category._id == $scope.userTiles[i].contextTags[j].tagName){
               $scope.userTiles[i].contextTags.splice(j,1);
-              $http.patch('/api/tile/'+word._id+'/unassign',
+              $scope.i = i;
+              $http.patch('/api/tile/'+word._id,
                 {contextTags: $scope.userTiles[i].contextTags}).success(function(){
                   $scope.getAll();
                 });
-              $scope.displayCatInfo(category);
+              if (view == 'category'){
+                $scope.displayCatInfo(category);
+              } else {
+                $scope.displayTileInfo(word);
+              }
             }
           }
         }
@@ -345,7 +348,11 @@ angular.module('WordRiverApp')
         {groupList: $scope.userGroups}).success(function(){
           $scope.getAll();
         });
-      $scope.displayCatInfo(category);
+      if (view == 'category'){
+        $scope.displayCatInfo(category);
+      } else {
+        $scope.displayGroupInfo(group);
+      }
     };
 
     $scope.unassignStudentFromCategory = function (student, category, view){
@@ -370,31 +377,11 @@ angular.module('WordRiverApp')
       }
     };
 
-      $scope.unassignStudentFromCategory = function (student, category){
-        $scope.confirmUnassign(student.firstName, category);
-        //User API remove from studentList [{studentID: id, contextTags:[category ids]}]
-        //Student API remove from contextTags:[{tagName:id, creatorId:id}]
-      };
+    $scope.unassignStudentFromCategory = function (student, category){
+      $scope.confirmUnassign(student.firstName, category);
+      //User API remove from studentList [{studentID: id, contextTags:[category ids]}]
+      //Student API remove from contextTags:[{tagName:id, creatorId:id}]
 
-//Tile view unassign functions
-
-    $scope.unassignWordFromCategory = function (category, word){
-      $scope.confirmUnassign(word.name, category.name);
-      //Tile API remove from context tags [{tagName:id}]
-      for(var i = 0; i < $scope.userTiles.length; i++){
-        if($scope.userTiles[i]._id == word._id){
-          for (var j = 0; j < $scope.userTiles[i].contextTags.length; j++){
-            if(category._id == $scope.userTiles[i].contextTags[j].tagName){
-              $scope.userTiles[i].contextTags.splice(j,1);
-              $http.patch('/api/tile/'+word._id,
-                {contextTags: $scope.userTiles[i].contextTags}).success(function(){
-                  $scope.getAll();
-                });
-              $scope.displayTileInfo(word);
-            }
-          }
-        }
-      }
     };
 
     $scope.unassignWordFromGroup = function (group, word){
@@ -416,33 +403,32 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.unassignWordFromStudent = function (student, word){
-      $scope.confirmUnassign(student.firstName, word);
-
+    $scope.unassignWordFromStudent = function (student, word, type){
+      $scope.confirmUnassign(student.firstName, word.name);
+      for(var i = 0; i < $scope.userStudents.length; i ++){
+        if ($scope.userStudents[i]._id == student._id){
+          for (var j = 0; j < $scope.userStudents[i].tileBucket.length; j++){
+            if ($scope.userStudents[i].tileBucket[j] == word._id){
+              console.log("second step");
+              $scope.userStudents[i].tileBucket.splice(j,1);
+              $http.patch('api/students/' + student._id,
+                {tileBucket: $scope.userStudents[i].tileBucket}).success(function(){
+                  $scope.getAll();
+                });
+              if(type == 'tile'){
+                console.log("final step");
+                $scope.displayTileInfo(word);
+              } else {
+                $scope.displayStudentInfo(student);
+              }
+            }
+          }
+        }
+      }
     };
 
-//Group view unassign functions
     $scope.unassignStudentFromGroup = function (student, group){
       $scope.confirmUnassign(student.firstName, group);
-    };
-
-    $scope.unassignCategoryFromGroup = function(category, group){
-
-    };
-
-    $scope.unassignTileFromGroup = function (tile, group){
-      $scope.confirmUnassign(tile.name, group);
-    };
-
-//Student view unassign function
-    $scope.unassignGroupFromStudent = function (group, student){
-      $scope.confirmUnassign(group, student);
-    };
-    $scope.unassignCategoryFromStudent = function (category, student){
-      $scope.confirmUnassign(category, student);
-    };
-    $scope.unassignTileFromStudent = function (tile, student){
-      $scope.confirmUnassign(tile, student);
     };
 
     $scope.confirmUnassign = function (thing, place){

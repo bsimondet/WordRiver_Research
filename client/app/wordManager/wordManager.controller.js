@@ -12,6 +12,7 @@ angular.module('WordRiverApp')
     $scope.categoryArray = [];
     $scope.currentUser = Auth.getCurrentUser();
     $scope.selectedCategories = [];
+    $scope.selectedTiles = [];
     $scope.allTiles = [];
     $scope.allCatTiles = [];
     $scope.userTiles = [];
@@ -46,23 +47,27 @@ angular.module('WordRiverApp')
           }
         }
       });
+    };
+
+
+    $scope.addWordsToCategory = function() {
+      console.log("Test");
+      for(var i = 0; i < $scope.selectedCategories; i++){
+        console.log("Test2");
+        for(var j = 0; j < $scope.selectedTiles; j++){
+          console.log("Test3");
+          //$scope.selectedTiles[j].tileTags.push($scope.selectedCategories[i])
+          $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id, newCategory: $scope.selectedCategories[i]})
+          $scope.selectedTiles[j].contextTags.push($scope.selectedCategories[i]);
+          console.log("Test4");
+        }
+      }
+      //for(var j = 0; j < $scope.selectedTiles; j++){
+      //  $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id})
+      //}
     }
 
 
-    $scope.checkCheckbox = function(category){
-      var counter;
-        for (var i = 0; i < $scope.selectedCategories.length; i++) {
-          if ($scope.selectedCategories[i].tagName == category) {
-            $scope.selectedCategories.splice(i, 1);
-            counter = 1;
-          }
-        }
-      if (counter != 1){
-        $scope.selectedCategories.push({
-          tagName:category
-        });
-      }
-    };
 
     $scope.getCategories();
 
@@ -93,6 +98,7 @@ angular.module('WordRiverApp')
         }
       });
     };
+
     $scope.getWords();
 
     $scope.addWord = function() {
@@ -108,18 +114,18 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.getAllTiles = function(){
-      $http.get('/api/tile').success(function (allTiles) {
-        $scope.allCatTiles = allTiles;
-        for (var i = 0; i < $scope.allCatTiles.length; i++) {
-          if ($scope.currentUser._id == $scope.allCatTiles[i].creatorID) {
-            $scope.userTiles.push($scope.allCatTiles[i]);
-          }
-        }
-      });
-    };
-
-    $scope.getAllTiles();
+    //$scope.getAllTiles = function(){
+    //  $http.get('/api/tile').success(function (allTiles) {
+    //    $scope.allCatTiles = allTiles;
+    //    for (var i = 0; i < $scope.allCatTiles.length; i++) {
+    //      if ($scope.currentUser._id == $scope.allCatTiles[i].creatorID) {
+    //        $scope.userTiles.push($scope.allCatTiles[i]);
+    //      }
+    //    }
+    //  });
+    //};
+    //
+    //$scope.getAllTiles();
     //cat is short for category
     $scope.displayCatInfo = function (category) {
       //$scope.userTiles = [];
@@ -187,6 +193,14 @@ angular.module('WordRiverApp')
 
       };
 
+    $scope.addWordToCatoegry = function() {
+
+    };
+
+    //$scope.updateTileV2 = function(tile) {
+    //
+    //  $http.put('/api/tile' + $scope.tileId + "/updateTile", {})
+    //}
     //Deletes a category
     $scope.removeCategory = function(index) {
       $scope.categoryArray.splice(index, 1);
