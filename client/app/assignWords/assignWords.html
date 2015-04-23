@@ -20,7 +20,7 @@
           <span class="glyphicon glyphicon-chevron-right floatRight close" ng-click="studentsInGroupAssignment(group); status.open=!status.open; status.isFirstDisabled = !isFirstDisabled"></span>
           <!--isCollapsed = !isCollapsed;-->
           <!--<ul collapse="!isCollapsed">-->
-          
+
         <ul collapse = "!status.open" ng-model="oneAtATime">
             <li class="list-group-item" ng-repeat="students in groupedStudents" close-others="oneAtATime" is-open=status.isFirstOpen" is-disabled="status.isFirstDisabled">
               <a href ="" ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a></li>
@@ -80,7 +80,7 @@
         <h4>The tile "{{tileSelected.name}}" is in the categories:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="category in matchCategories | orderBy:'name'">
-          <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromCategory(category, tileSelected, 'tile')"></span></li>
+          <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromCategory(tileSelected, category, 'tile')"></span></li>
         </ul>
         <h4>The groups that have this tile are:</h4>
         <ul class="list-group">
@@ -112,7 +112,7 @@
         <h4>The words that this group has are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy:'name'">
-          <a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromGroup(tile, groupSelected, 'group')"></span></li>
+          <a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromGroup(groupSelected, tile, 'group')"></span></li>
         </ul>
       </div>
     </div>
@@ -134,7 +134,7 @@
         <h4>The words that this student has are:</h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy:'name'">
-          <a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignTileFromStudent(tile, studentSelected, 'student')"></span></li>
+          <a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" style="color: red; " ng-click="unassignWordFromStudent(studentSelected, tile,  'student')"></span></li>
         </ul>
       </div>
     </div>
