@@ -50,20 +50,24 @@ angular.module('WordRiverApp')
     };
 
 
-    $scope.checkCheckbox = function(category){
-      var counter;
-        for (var i = 0; i < $scope.selectedCategories.length; i++) {
-          if ($scope.selectedCategories[i].tagName == category) {
-            $scope.selectedCategories.splice(i, 1);
-            counter = 1;
-          }
+    $scope.addWordsToCategory = function() {
+      console.log("Test");
+      for(var i = 0; i < $scope.selectedCategories; i++){
+        console.log("Test2");
+        for(var j = 0; j < $scope.selectedTiles; j++){
+          console.log("Test3");
+          //$scope.selectedTiles[j].tileTags.push($scope.selectedCategories[i])
+          $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id, newCategory: $scope.selectedCategories[i]})
+          $scope.selectedTiles[j].contextTags.push($scope.selectedCategories[i]);
+          console.log("Test4");
         }
-      if (counter != 1){
-        $scope.selectedCategories.push({
-          tagName:category
-        });
       }
-    };
+      //for(var j = 0; j < $scope.selectedTiles; j++){
+      //  $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id})
+      //}
+    }
+
+
 
     $scope.getCategories();
 
@@ -137,7 +141,7 @@ angular.module('WordRiverApp')
         for (var j = 0; j < $scope.userTiles.length; j++) {
           for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
             console.log($scope.userTiles[j].contextTags[z].tagName)
-            if ($scope.userTiles[j].contextTags[z].tagName == category._id) {
+            if ($scope.userTiles[j].contextTags[z] == category._id) {
               $scope.matchTiles.push($scope.userTiles[j]);
               //console.log($scope.userTiles[j].name);
             }
@@ -155,7 +159,7 @@ angular.module('WordRiverApp')
     $scope.getCategoryFromTagName = function(tile, index) {
       for(var i = 0; i < $scope.categoryArray.length; i++){
         //console.log(tile.contextTags[index]);
-        if(tile.contextTags[index].tagName == $scope.categoryArray[i]._id){
+        if(tile.contextTags[index] == $scope.categoryArray[i]._id){
           $scope.contextTagsTemp.push($scope.categoryArray[i]);
           //console.log($scope.categoryArray[i]);
         }
