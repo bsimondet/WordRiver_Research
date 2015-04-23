@@ -141,7 +141,7 @@ angular.module('WordRiverApp')
         for (var j = 0; j < $scope.userTiles.length; j++) {
           for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
             console.log($scope.userTiles[j].contextTags[z].tagName)
-            if ($scope.userTiles[j].contextTags[z].tagName == category._id) {
+            if ($scope.userTiles[j].contextTags[z] == category._id) {
               $scope.matchTiles.push($scope.userTiles[j]);
               //console.log($scope.userTiles[j].name);
             }
@@ -159,7 +159,7 @@ angular.module('WordRiverApp')
     $scope.getCategoryFromTagName = function(tile, index) {
       for(var i = 0; i < $scope.categoryArray.length; i++){
         //console.log(tile.contextTags[index]);
-        if(tile.contextTags[index].tagName == $scope.categoryArray[i]._id){
+        if(tile.contextTags[index] == $scope.categoryArray[i]._id){
           $scope.contextTagsTemp.push($scope.categoryArray[i]);
           //console.log($scope.categoryArray[i]);
         }
