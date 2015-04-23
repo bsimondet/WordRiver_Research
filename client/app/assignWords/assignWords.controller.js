@@ -509,19 +509,18 @@ angular.module('WordRiverApp')
             for(var h = 0; h < $scope.selectedStudents[i].tileBucket.length; h++){
               if($scope.selectedStudents[i].tileBucket[h] == $scope.selectedWords[j]._id){
                 match = true;
-                console.log($scope.selectedWords[j]._id)
               }
             }
             if(match == false){
               unmatchedWords.push($scope.selectedWords[j]._id)
             }
           }
-          console.log()
-          console.log($scope.selectedStudents[i].tileBucket)
-          //patch request
-          $http.patch('/api/students/' + $scope.selectedStudents[i]._id,
-            {tileBucket:unmatchedWords}
-          ).success(function(){});
+          //console.log()
+          //console.log($scope.selectedStudents[i].tileBucket)
+          ////patch request
+          //$http.patch('/api/students/' + $scope.selectedStudents[i]._id,
+          //  {tileBucket:unmatchedWords}
+          //).success(function(){});
         }
 
       }
