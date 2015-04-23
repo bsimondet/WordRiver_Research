@@ -482,6 +482,27 @@ angular.module('WordRiverApp')
           alert("You must select at least 1 word.");
           return;
         }
+        for(var i = 0; i < $scope.selectedStudents.length; i++){
+          var unmatchedWords = [];
+          for(var j = 0; j <$scope.selectedWords.length; j++){
+            var match = false;
+            for(var h = 0; h < $scope.selectedStudents[i].tileBucket.length; h++){
+              if($scope.selectedStudents[i].tileBucket[h] == $scope.selectedWords[j]._id){
+                match = true;
+                console.log($scope.selectedWords[j]._id)
+              }
+            }
+            if(match == false){
+              unmatchedWords.push($scope.selectedWords[j]._id)
+            }
+          }
+          console.log()
+          console.log($scope.selectedStudents[i].tileBucket)
+          //patch request
+          $http.patch('/api/students/' + $scope.selectedStudents[i]._id,
+            {tileBucket:unmatchedWords}
+          ).success(function(){});
+        }
 
       }
     };
