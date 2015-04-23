@@ -47,7 +47,7 @@ User.find({}).remove(function() {
         {"groupName": "Group C",
           "_id": "5535520dd7b5c70193c4993c",
           "contextPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86"],
-          "freeTiles": []
+          "freeTiles": ["5511ae8cf6f121e4c3108cd6", "552c24183b10b8ec888e042b", "552d5b08e1a3de8740774fad"]
         },
         {"groupName": "Group D",
           "_id": "5535520dff3a52f2757e5944",
