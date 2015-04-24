@@ -50,10 +50,6 @@ describe('Controller: StudentManagerCtrl', function () {
   //  expect(scope.localGroupArray.length).toEqual(0);
   //});
 
-  it('should test findStudentInList', function () {
-    scope.studentList = [{studentID: 1}];
-    expect(scope.findStudentInList(1)).toEqual(0);
-  });
 
   it('should test findStudentAccount', function () {
     scope.students = [{_id: 2}];
@@ -83,6 +79,9 @@ describe('Controller: StudentManagerCtrl', function () {
 
   it('should test addStudentsToGroups', function () {
     expect(1).toEqual(1);
+    //scope.studentList = [];
+    //scope.selectedStudents = [];
+    //scope.addStudentsToGroups();
   });
 
   it('should test allCheckedGroups', function () {
@@ -101,5 +100,10 @@ describe('Controller: StudentManagerCtrl', function () {
     expect(true).toBe(true);
   });
 
+  it('should test removeStudentFromGroup, should remove blubber', function (){
+    //expect(true).toBe(true);
+    scope.studentList = [{_id:'blubber'}, {_id:'giggles'}, {_id:'steward'}, {_id:'nigel'}, {_id:'thornberry'}, {_id:'pickles'}];
+    expect(scope.findStudentInList('blubber')).toBe(0);
 
+  });
 });
