@@ -50,12 +50,11 @@ angular.module('WordRiverApp')
 
     $scope.getCategories = function(student) {
       $scope.categoryArray = [];
-      $scope.selectedStudent = student;
       $http.get('/api/categories').success(function (allCategories) {
  //       console.log(allCategories);
-        for (var i = 0; i < $scope.selectedStudent.contextTags.length; i++) {
+        for (var i = 0; i < student.contextTags.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
-            if(allCategories[j]._id == $scope.selectedStudent.contextTags[i]){
+            if(allCategories[j]._id == student.contextTags[i]){
               $scope.categoryArray.push(allCategories[j].name);
             }
           }
@@ -63,15 +62,13 @@ angular.module('WordRiverApp')
       });
     };
 
-
     $scope.getWords = function(student) {
       $scope.wordArray = [];
-      $scope.selectedStudent = student;
       $http.get('/api/tile').success(function (allWords) {
   //      console.log(allWords);
-        for (var i = 0; i < $scope.selectedStudent.tileBucket.length; i++) {
+        for (var i = 0; i < student.tileBucket.length; i++) {
           for(var j = 0; j < allWords.length; j++){
-            if(allWords[j]._id == $scope.selectedStudent.tileBucket[i]){
+            if(allWords[j]._id == student.tileBucket[i]){
               $scope.wordArray.push(allWords[j].name);
             }
           }
