@@ -382,7 +382,6 @@ angular.module('WordRiverApp')
         if($scope.confirmUnassign(group.groupName, word.name)==true) {
           for (var i = 0; i < $scope.userGroups.length; i++) {
             if ($scope.userGroups[i] == group) {
-              console.log($scope.userGroups[i].freeTiles);
               for (var j = 0; j < $scope.userGroups[i].freeTiles[j].length; j++) {
                 if ($scope.userGroups[i].freeTiles[j] == word._id) {
                   $scope.userGroups[i].freeTiles.splice(j, 1);
@@ -408,14 +407,12 @@ angular.module('WordRiverApp')
             if ($scope.userStudents[i]._id == student._id) {
               for (var j = 0; j < $scope.userStudents[i].tileBucket.length; j++) {
                 if ($scope.userStudents[i].tileBucket[j] == word._id) {
-                  console.log("second step");
                   $scope.userStudents[i].tileBucket.splice(j, 1);
                   $http.patch('api/students/' + student._id,
                       {tileBucket: $scope.userStudents[i].tileBucket}).success(function () {
                         $scope.getAll();
                       });
                   if (type == 'tile') {
-                    console.log("final step");
                     $scope.displayTileInfo(word);
                   } else {
                     $scope.displayStudentInfo(student);
@@ -430,12 +427,9 @@ angular.module('WordRiverApp')
       $scope.unassignStudentFromGroup = function (student, group, type){
         if ($scope.confirmUnassign(student.firstName, group.groupName) == true) {
           for (var i = 0; i < $scope.userStudents.length; i++) {
-            console.log($scope.userStudents[i]._id);
             if ($scope.userStudents[i]._id == student._id) {
-              console.log("step 1");
               for (var j = 0; j < $scope.userStudents[i].groupList.length; j++) {
                 if ($scope.userStudents[i].groupList[j] == group._id) {
-                  console.log("step B");
                   $scope.userStudents[i].groupList.splice(j, 1);
                   $http.patch('api/students/' + student._id,
                       {groupList: $scope.userStudents[i].groupList}).success(function () {
@@ -444,7 +438,6 @@ angular.module('WordRiverApp')
                   if (type == 'student') {
                     $scope.displayStudentInfo(student);
                   } else {
-                    console.log("step Last");
                     $scope.displayGroupInfo(group);
                   }
                 }
@@ -561,6 +554,7 @@ angular.module('WordRiverApp')
             alert("You must select at least 1 word.");
           }
           for (var r = 0; r < $scope.userStudents.length; r++) {
+            console.log($scope.userStudents[r].tileBucket);
             for (var y = 0; y < $scope.selectedStudents.length; y++) {
               if ($scope.userStudents[r]._id == $scope.selectedStudents[y]._id) {
                 for (var v = 0; v < $scope.selectedWords.length; v++) {
