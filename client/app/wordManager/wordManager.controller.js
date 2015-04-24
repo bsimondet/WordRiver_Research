@@ -263,12 +263,12 @@ angular.module('WordRiverApp')
     };
 
     //deletes a word
-    $scope.removeWord = function(index) {
-      $scope.wordToRemove = $scope.userTiles[index];
+    $scope.removeWord = function(tile) {
+      $scope.wordToRemove = $scope.userTiles[$scope.findIndexOfTile(tile)];
       $http.delete('/api/tile/'+ $scope.wordToRemove._id);
       $scope.getWords();
       //var wordToRemove = $scope.userTiles[index];
-      $scope.userTiles.splice(index,1);
+      $scope.userTiles.splice($scope.findIndexOfTile(tile),1);
       for(var i = 0; i < $scope.allTiles.length; i++){
         if($scope.wordToRemove.id == $scope.allTiles[i].id) {
             $scope.allTiles.splice(i,1);
@@ -276,34 +276,60 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.editWord = function(index){
-        $scope.editWordIndex = index;
-        $scope.showValue = false;
-        $scope.wordToEdit = $scope.userTiles[index];
+    $scope.findIndexOfTile = function(tile){
+      for(var i = 0; i < $scope.userTiles.length; i++){
+        if(tile._id == $scope.userTiles[i]._id){
+          return i;
+        }
+      }
+    }
+
+    $scope.editWord = function(tile){
+      $scope.editWordIndex = $scope.findIndexOfTile(tile);
+      $scope.showValue = false;
+      $scope.wordToEdit = $scope.userTiles[index];
     };
 
-    $scope.updateTile = function(tile) {
+    $scope.updateTile = function() {
       if($scope.editField.length >= 1 && $scope.editType.length < 1){
         //Only editing the word text
-        $scope.tileId = tile._id;
-
-        //$http.put('/api/tile/' + $scope.tileId + "/update", {category: $scope.currentCategory, tileId: tile._id});
+        $http.post('/api/tile', {
+          name: $scope.editField,
+          contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
+          creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
+          wordType: $scope.userTiles[$scope.editWordIndex].wordType
+        });
+        $scope.removeWord($scope.editWordIndex);
 
         $scope.editField = "";
       }
       else if($scope.editField.length == 0 && $scope.editType.length >= 1){
         //Only editing the word type
+        $http.post('/api/tile', {
+          name: $scope.userTiles[$scope.editWordIndex].name,
+          contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
+          creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
+          wordType: $scope.editType
+        });
+        $scope.removeWord($scope.editWordIndex);
 
         $scope.editType = "";
       }
       else if($scope.editField.length >= 1 && $scope.editType.length >= 1){
         //Editing both the word type and the word text
+        $http.post('/api/tile', {
+          name: $scope.editField,
+          contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
+          creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
+          wordType: $scope.editType
+        });
+        $scope.removeWord($scope.editWordIndex);
 
         $scope.editField = "";
         $scope.editType = "";
       }
 
-        $scope.showValue = true;
+      $scope.showValue = true;
     }
 
   });
