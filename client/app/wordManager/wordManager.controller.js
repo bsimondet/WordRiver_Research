@@ -107,9 +107,10 @@ angular.module('WordRiverApp')
 
     $scope.addCategory = function () {
       if ($scope.categoryField.length >= 1) {
-        $scope.categoryArray.push($scope.categoryField);
-        $http.patch('/api/users/' + $scope.currentUser._id + '/category',
-          {contextPacks: $scope.categoryArray}
+        //$scope.categoryArray.push($scope.categoryField);
+        console.log($scope.categoryArray);
+        $http.patch('/api/category/' +
+          {name:$scope.categoryField, creatorID: $scope.currentUser._id}
         ).success(function(){
           });
       }

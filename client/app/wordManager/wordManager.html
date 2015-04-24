@@ -90,7 +90,7 @@
   <div class ="col-xs-3" ng-hide="showValue">
     <input ng-model="editField" type="text" size="15" placeholder={{userTiles[editWordIndex].name}}>
     <input ng-model="editType" type="text" size="15" placeholder={{userTiles[editWordIndex].wordType}}>
-    <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateTile(tile)">
+    <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateTile(userTiles[editWordIndex])">
   </div>
 </div>
       <!--<div class="col-xs-2">-->
