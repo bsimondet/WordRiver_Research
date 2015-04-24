@@ -162,7 +162,7 @@ Student.find({}).remove(function() {
     {
       "_id": "552c20f8b21be14535092a6a",
       "firstName": "Rodriguez",
-      "lastName": "Madden",
+      "lastName": "Mad-den",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -184,8 +184,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "552c20f8842d066cb9945d93",
-      "firstName": "Deloris",
-      "lastName": "Alvarado",
+      "firstName": "Deloris Jr.",
+      "lastName": "Alvarado von Heiss",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -209,7 +209,7 @@ Student.find({}).remove(function() {
     {
       "_id": "552c20f8f403787cef74f326",
       "firstName": "Lucinda",
-      "lastName": "Bass",
+      "lastName": "McCloud",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -233,7 +233,7 @@ Student.find({}).remove(function() {
     {
       "_id": "552c20f8236b5a09d40cfaf0",
       "firstName": "Marva",
-      "lastName": "Mcgowan",
+      "lastName": "Null",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -244,7 +244,7 @@ Student.find({}).remove(function() {
     {
       "_id": "552c20f80645c32973a23dfc",
       "firstName": "Jefferson",
-      "lastName": "Bean",
+      "lastName": "Bean Stalk",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
