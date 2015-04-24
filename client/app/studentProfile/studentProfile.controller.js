@@ -90,7 +90,6 @@ angular.module('WordRiverApp')
     //};.studentID
 
     $scope.getStudents = function(){
-      for(var i = 0; i < $scope.currentUser.studentList.length; i++) {
         $http.get("/api/students/").success(function(student) {
           for (var i = 0; i < $scope.currentUser.studentList.length; i++) {
             for (var j = 0; j < student.length; j++) {
@@ -100,7 +99,6 @@ angular.module('WordRiverApp')
             }
           }
         })
-      }
     };
 
     $scope.getStudents();
