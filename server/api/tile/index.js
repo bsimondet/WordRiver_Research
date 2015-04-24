@@ -15,6 +15,6 @@ router.patch('/', controller.update);
 //router.patch('/:id/unassign', controller.updateTile);
 router.delete('/:id', controller.destroy);
 router.put('/:id/removeFromCategory', controller.removeFromCategory);
-router.put('/:id/updateTile', controller.removeFromCategory);
+router.put('/:id/updateTile', controller.updateTile);
 
 module.exports = router;
