@@ -1,5 +1,8 @@
 'use strict';
 
+//https://docs.google.com/a/morris.umn.edu/document/d/1rRWzv1iwGQuElMlcFg4IzM9rntObJzXhG9P7GkVYoHc/edit#heading=h.az0aa1oc8xo4
+//^^^ Link to the google documentation on the webpage and specific functionality
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
@@ -15,12 +18,14 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   contextPacks: [], //List of tags that can be applied to tiles
-  groupList: [{
+
+  groupList: [{     //A list of groups to apply to students. A student with this group has access to the free tiles and context packs defined within the group JSON object within the user
     groupName: String,
     _id: String,
-    contextPacks: [],
-    freeTiles: []
-  }], //JSON object containing the groupname and an array of associated context pack names.
+    contextPacks: [], //Context packs the students within a group has access to
+    freeTiles: []     //Free tiles that may not be associated with a specific context pack that students have access to within the group
+  }],
+
   tileBucket: [], //List of tile IDs the user has access to
   studentList: [] //Array of student ids
 });

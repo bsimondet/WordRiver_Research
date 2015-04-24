@@ -11,9 +11,10 @@ var StudentSchema = new Schema({
 //    contextPack: String //Context pack tag associated with the tile used in the JSON object
 //}]],
   teachers: [], //Array of user account IDs associated with this student
+//##########^^^This array should never be empty, since a student does not need to exist if it isn't associated with a teacher account.####################
   tileBucket: [], //List of tile IDs the student has access to
   groupList: [], //Groups that a student is in, represented by an array of group ids
-  contextTags: [] //Array of category ids, where each object is a context tag grouping containing the tag used and the id of the user that created the context pack
+  contextTags: [] //Array of category ids, where each id is the category a user has access to
 
 });
 
