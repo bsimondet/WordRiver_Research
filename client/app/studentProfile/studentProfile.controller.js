@@ -48,17 +48,31 @@ angular.module('WordRiverApp')
     //  }
     //};
 
+    $scope.getElementsByID = function(idArray, objectArray, resultArray){
+      for (var i = 0; i < idArray.length; i++) {
+        for(var j = 0; j < objectArray.length; j++){
+          console.log(objectArray[i]._id);
+          if(objectArray[j]._id == idArray[i]){
+            resultArray.push(objectArray[i]);
+            console.log("result: " + resultArray);
+          }
+        }
+      }
+    };
+
+
     $scope.getCategories = function(student) {
       $scope.categoryArray = [];
       $http.get('/api/categories').success(function (allCategories) {
  //       console.log(allCategories);
-        for (var i = 0; i < student.contextTags.length; i++) {
-          for(var j = 0; j < allCategories.length; j++){
-            if(allCategories[j]._id == student.contextTags[i]){
-              $scope.categoryArray.push(allCategories[j].name);
-            }
-          }
-        }
+        $scope.getElementsByID(student.contextTags, allCategories,$scope.categoryArray);
+ //       for (var i = 0; i < student.contextTags.length; i++) {
+ //         for(var j = 0; j < allCategories.length; j++){
+ //           if(allCategories[j]._id == student.contextTags[i]){
+ //             $scope.categoryArray.push(allCategories[j].name);
+ //           }
+ //         }
+ //       }
       });
     };
 
@@ -91,7 +105,7 @@ angular.module('WordRiverApp')
           for (var i = 0; i < $scope.currentUser.studentList.length; i++) {
             for (var j = 0; j < student.length; j++) {
               if (student[j]._id == $scope.currentUser.studentList[i]) {
-                $scope.students.push(student[i]);
+                $scope.students.push(student[j]);
               }
             }
           }
