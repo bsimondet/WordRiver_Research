@@ -18,7 +18,7 @@
 
         <li class="list-group-item" ng-repeat="group in userGroups | orderBy:'groupName':order1" ng-model="oneAtATime">
           <!--close-others isnt working here and isnt allowed here, need to move it around or find another way to allow only one as open-->
-          <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group)" close-others="oneAtATime">{{group.groupName}}</a>
+          <input type="checkbox" value='value' ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group)" close-others="oneAtATime">{{group.groupName}}</a>
           <span class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down'  : status.open, 'glyphicon-chevron-right' : !status.open}"   ng-click="studentsInGroupAssignment(group); status.open = !status.open"></span>
         <ul collapse = "!status.open">
             <li class="list-group-item" ng-repeat="students in groupedStudents">
@@ -52,7 +52,7 @@
       <input type="text" ng-Model="searchText0" placeholder="Search">
       <ul class="list-group scroll">
         <li class="list-group-item " ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:searchText0">
-          <input type="checkbox" value="studentChecked"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}} </a>
+          <input type="checkbox" value="value"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}} </a>
       </ul>
     </div>
     <!--This section is for the middle column-->
