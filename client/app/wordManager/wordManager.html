@@ -82,7 +82,7 @@
       <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
       <div>
         <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-model="selectedTiles[$index]" ng-true-value="'{{tile._id}}'">
-          <a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord(tile)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord(tile)"></span></li>
+          <a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord($index)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord($index)"></span></li>
       </div>
     </ul>
   </div>
@@ -90,7 +90,7 @@
   <div class ="col-xs-3" ng-hide="showValue">
     <input ng-model="editField" type="text" size="15" placeholder={{userTiles[editWordIndex].name}}>
     <input ng-model="editType" type="text" size="15" placeholder={{userTiles[editWordIndex].wordType}}>
-    <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateTile()">
+    <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateTile(userTiles[editWordIndex])">
   </div>
 </div>
       <!--<div class="col-xs-2">-->
