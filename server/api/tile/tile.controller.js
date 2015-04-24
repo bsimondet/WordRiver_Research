@@ -96,10 +96,10 @@ exports.updateTile = function(req, res, next) {
   //var tile = req.body.tile;
   var tileId = req.body.tileId;
 
-  User.findById(tileId, function (err, tile) {
-
+  tile.findById(tileId, function (err, tile) {
+  console.log(tile);
     tile.contextTags.push(newCategory);
-
+    console.log(tile);
     tile.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);

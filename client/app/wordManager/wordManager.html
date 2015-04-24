@@ -17,7 +17,7 @@
         </form>
       </li>
       <div>
-        <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-click="checkCheckbox(category)">
+        <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-model="selectedCategories[$index]" ng-true-value="'{{category._id}}'">
           <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete($index)"></span></li>
       </div>
     </ul>
@@ -26,7 +26,9 @@
 
   <div>
     <div class="col-xs-6 center">
-      <form ng-submit="addCategory()">
+      <h1 class="clear">Middle Column:</h1>
+      <hr>
+      <form ng-submit="addTileToCategory()">
         <input class="btn btn-primary center-block assignButton" type="submit" value="Add selected words to selected categories" class="btn btn-primary">
       </form>
       <div class="col-xs-3 wordfooter wordsIn">
@@ -79,7 +81,7 @@
       <!--</li>-->
       <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
       <div>
-        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-click="checkCheckbox(category)">
+        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-model="selectedTiles[$index]" ng-true-value="'{{tile._id}}'">
           <a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord($index)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord($index)"></span></li>
       </div>
     </ul>

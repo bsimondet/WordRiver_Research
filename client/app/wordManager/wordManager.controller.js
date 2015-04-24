@@ -37,6 +37,7 @@ angular.module('WordRiverApp')
 
 
     $scope.getCategories = function() {
+      $scope.categoryArray = [];
       $http.get('/api/categories').success(function (allCategories) {
         console.log(allCategories);
         for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
@@ -50,23 +51,52 @@ angular.module('WordRiverApp')
     };
 
 
-    $scope.addWordsToCategory = function() {
-      console.log("Test");
-      for(var i = 0; i < $scope.selectedCategories; i++){
-        console.log("Test2");
-        for(var j = 0; j < $scope.selectedTiles; j++){
-          console.log("Test3");
-          //$scope.selectedTiles[j].tileTags.push($scope.selectedCategories[i])
-          $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id, newCategory: $scope.selectedCategories[i]})
-          $scope.selectedTiles[j].contextTags.push($scope.selectedCategories[i]);
-          console.log("Test4");
+    $scope.addTileToCategory = function() {
+      //console.log($scope.selectedCategories.length);
+      var index =-1;
+      for(var i = 0; i < $scope.selectedCategories.length; i++){
+        //console.log("Test2");
+        for(var j = 0; j < $scope.selectedTiles.length; j++){
+          index =  $scope.findTileByIndex($scope.selectedTiles[j]);
+          //$scope.selectedTiles[j].contextTags.push($scope.selectedCategories[i]);
+          if(!$scope.inArray($scope.userTiles[index].contextTags, $scope.selectedCategories[i])) {
+            $http.put('/api/tile/' + $scope.userTiles[index]._id + "/updateTile", {
+              tile: $scope.userTiles[index],
+              tileId: $scope.userTiles[index]._id,
+              newCategory: $scope.selectedCategories[i]
+            }).success(function () {
+              $scope.getCategories();
+            });
+            $scope.userTiles[index].contextTags.push($scope.selectedCategories[i]);
+          }
+          //$scope.selectedTiles[j].test = [];
+          //$scope.selectedTiles[j].test.push($scope.selectedCategories[i]);
+          //console.log("Test4");
         }
       }
       //for(var j = 0; j < $scope.selectedTiles; j++){
       //  $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id})
       //}
-    }
+    };
 
+    $scope.findTileByIndex = function(tile){
+      for(var i = 0; i < $scope.userTiles.length; i++){
+        if($scope.userTiles[i]._id == tile){
+          return i;
+        }
+      }
+      return -1;
+    };
+
+    $scope.inArray = function(array, item){
+      for(var i = 0; i < array.length; i++){
+        console.log("Thing"+array[i]);
+        if(array[i] == item){
+          return true;
+        }
+      }
+      return false;
+    };
 
 
     $scope.getCategories();
@@ -140,7 +170,6 @@ angular.module('WordRiverApp')
         //  }
         for (var j = 0; j < $scope.userTiles.length; j++) {
           for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
-            console.log($scope.userTiles[j].contextTags[z].tagName)
             if ($scope.userTiles[j].contextTags[z] == category._id) {
               $scope.matchTiles.push($scope.userTiles[j]);
               //console.log($scope.userTiles[j].name);
@@ -158,10 +187,10 @@ angular.module('WordRiverApp')
 
     $scope.getCategoryFromTagName = function(tile, index) {
       for(var i = 0; i < $scope.categoryArray.length; i++){
-        //console.log(tile.contextTags[index]);
+        console.log(tile.contextTags[index] + " "+ $scope.categoryArray[i]._id);
         if(tile.contextTags[index] == $scope.categoryArray[i]._id){
           $scope.contextTagsTemp.push($scope.categoryArray[i]);
-          //console.log($scope.categoryArray[i]);
+          console.log($scope.categoryArray[i]);
         }
       }
     };
@@ -170,7 +199,7 @@ angular.module('WordRiverApp')
         $scope.contextTagsTemp = [];
         $scope.currentTile = word;
         //for(var i =0; i < $scope.allTiles.length; i++){
-        // //console.log(word.name)
+        //console.log(word.name)
         //  if($scope.allTiles[i]._id == word._id){
         //    if($scope.allTiles[i].contextTags.length > 0) {
         //      for (var j = 0; j < $scope.allTiles[i].contextTags.length; j++){
@@ -186,7 +215,6 @@ angular.module('WordRiverApp')
 
 
         for (var j = 0; j < word.contextTags.length; j++) {
-          console.log(word.contextTags.length);
           $scope.getCategoryFromTagName(word, j);
         }
 
