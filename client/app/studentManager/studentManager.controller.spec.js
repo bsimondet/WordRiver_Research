@@ -100,10 +100,16 @@ describe('Controller: StudentManagerCtrl', function () {
     expect(true).toBe(true);
   });
 
-  it('should test removeStudentFromGroup, should remove blubber', function (){
-    //expect(true).toBe(true);
+  it('should test findStudentInList', function (){
     scope.studentList = [{_id:'blubber'}, {_id:'giggles'}, {_id:'steward'}, {_id:'nigel'}, {_id:'thornberry'}, {_id:'pickles'}];
     expect(scope.findStudentInList('blubber')).toBe(0);
+  });
 
+  it('should test remove blubber from the list', function (){
+    scope.studentList = [{_id:'blubber', groupList: {_id: 'testGroup'}}, {_id:'giggles'}, {_id:'steward'}, {_id:'nigel'}, {_id:'thornberry'}, {_id:'pickles'}];
+    scope.selectedGroup = {_id: 'testGroup'};
+      //, [{_id:'blubber', groupList: 'testGroup'}, {_id:'nigel', groupList: 'testGroup'}, {_id:'thornberry', groupList: 'testGroup'}]};
+    scope.removeStudentFromGroup({_id:'blubber', groupList: {_id: 'testGroup'}});
+    expect(scope.findStudentInList({_id: 'blubber', groupList: {_id: 'testGroup'}})).toBe(-1);
   });
 });
