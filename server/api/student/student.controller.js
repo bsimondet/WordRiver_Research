@@ -66,7 +66,7 @@ exports.updateTags = function(req, res) {
   // Uses _id provided in request (url) to find pack in database
   Student.findById(req.params.id, function(err, users) {
     // Handle Errors
-    if(err){ return handleError(res, err) }
+    if(err){return handleError(res, err) }
     if(!users){ return res.send(404) }
 
     // Merging request body and pack from DB. Special callback for arrays!
@@ -82,7 +82,7 @@ exports.updateTags = function(req, res) {
 
     // Saves to database
     updated.save(function(err){
-      if(err){ return handleError(res, err); }
+      if(err){ console.log(err);return handleError(res, err); }
       return res.json(200, users);
     });
   });
