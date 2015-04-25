@@ -15,6 +15,8 @@ angular.module('WordRiverApp')
       $scope.userTiles = [];
       $scope.studentCategories = [];
       $scope.groupedStudents = [];
+      $scope.value = false;
+
 
 
       ////////////////////////////////////////////////////////////////////////////
@@ -466,6 +468,12 @@ angular.module('WordRiverApp')
         return array;
       };
 
+    // Notes
+    // Assigning categories to students occasionally runs multiple (and bad) patch requests, esp. when adding and removing from a single student
+    // Removing a student from a group does not remove that group's content from the student
+    // clicking a single word does not tell you what groups it's assigned to when it's assigned to them through a context pack, only shows up when added as a free tile.
+
+
       $scope.assignWords = function (view) {
         if ($scope.groupView && $scope.categoryView) {
           //Function to add selected categories to selected groups.
@@ -537,7 +545,6 @@ angular.module('WordRiverApp')
                 $scope.userStudents[g].contextTags = $scope.checkForDuplicates($scope.userStudents[g].contextTags);
                 $http.patch('api/students/' + $scope.userStudents[g]._id,
                     {contextTags: $scope.userStudents[g].contextTags}).success(function () {
-                      $scope.getAll();
                     });
               }
             }
@@ -572,6 +579,11 @@ angular.module('WordRiverApp')
           alert("Successfully assigned!");
           $scope.switchMiddle("middle");
         }
+        $scope.checkedCategories = [];
+        $scope.checkedWords = [];
+        $scope.checkedGroups = [];
+        $scope.checkedStudents = [];
+
       };
 
       $scope.studentsInGroupAssignment = function(group) {
