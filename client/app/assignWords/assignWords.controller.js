@@ -62,30 +62,35 @@ angular.module('WordRiverApp')
         $scope.studentView = false;
         $scope.showGroup = false;
         $scope.showMiddle = true;
+        $scope.help = false;
       } else if (section == "word"){
         $scope.showCategory = false;
         $scope.wordView = true;
         $scope.studentView = false;
         $scope.showGroup = false;
         $scope.showMiddle = true;
+        $scope.help = false;
       } else if (section == "student"){
         $scope.showCategory = false;
         $scope.wordView = false;
         $scope.studentView = true;
         $scope.showGroup = false;
         $scope.showMiddle = true;
+        $scope.help = false;
       } else if (section == "group"){
         $scope.showCategory = false;
         $scope.wordView = false;
         $scope.studentView = false;
         $scope.showGroup = true;
         $scope.showMiddle = true;
+        $scope.help = false;
       } else if (section == "middle"){
         $scope.showCategory = false;
         $scope.wordView = false;
         $scope.studentView = false;
         $scope.showGroup = false;
         $scope.showMiddle = false;
+        $scope.help = false;
       }
     };
 
