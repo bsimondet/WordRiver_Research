@@ -20,10 +20,10 @@
     <hr>
     <div class="col-xs-9 rightScroll">
     <h3 class="page-header"> Groups: </h3>
-    <!--<ul class="list-group">-->
-      <!--<li class="list-group-item" ng-repeat="group in studentGroups"><label>{{group}}</label>-->
-      <!--</li>-->
-    <!--</ul>-->
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="group in studentGroups"><label>{{group.groupName}}</label>
+      </li>
+    </ul>
 
     <h3 class="page-header">Context Packs:</h3>
     <ul class="list-group">
@@ -32,12 +32,8 @@
     </ul>
 
     <h3 class="page-header">Words:</h3>
-    <!--<table>-->
-      <!--<tr></tr>-->
-    <!--</table>-->
-
     <ul class="words-table">
-      <li class="list-group-item" ng-repeat="word in wordArray track by $index"><label>{{word}}</label></li>
+      <li class="list-group-item" ng-repeat="word in wordArray track by $index"><label>{{word.name}}</label></li>
     </ul>
     <br />
 
