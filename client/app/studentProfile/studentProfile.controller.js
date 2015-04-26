@@ -3,10 +3,6 @@
 angular.module('WordRiverApp')
   .controller('StudentProfileCtrl', function ($rootScope, $scope, $http, socket, Auth) {
     $scope.currentUser = Auth.getCurrentUser();
-    //$scope.currentStudent = $rootScope.currentStudent;
-
-    //console.log($scope.currentStudent);
-
     $scope.students = []; //List of actual student objects
     $scope.studentGroups = [];
     $scope.selectedStudents = [];
@@ -15,11 +11,7 @@ angular.module('WordRiverApp')
     $scope.wordArray = [];
     $scope.hide = true;
 
-    //$scope.getStudentList = function(){
-    //  $scope.studentList = $scope.currentUser.studentList;
-    //};
-    //$scope.getStudentList();
-    //
+
 
     // Code for groups that we may or may not use
 
@@ -55,7 +47,7 @@ angular.module('WordRiverApp')
         for(var j = 0; j < objectArray.length; j++){
           //console.log(objectArray[i]._id);
           if(objectArray[j]._id == idArray[i]){
-            resultArray.push(objectArray[i]);
+            resultArray.push(objectArray[j]);
             //console.log("result: " + resultArray);
           }
         }
@@ -68,13 +60,6 @@ angular.module('WordRiverApp')
       $scope.studentGroups = [];
       $http.get('/api/users/me').success(function (user) {
         $scope.getElementsByID(student.groupList,user.groupList,$scope.studentGroups);
-        //for (var i = 0; i < student.groupList.length; i++) {
-        //  for(var j = 0; j < user.groupList.length; j++){
-        //    if(user.groupList[j]._id == student.groupList[i]){
-        //      $scope.studentGroups.push(user.groupList[j].groupName);
-        //    }
-        //  }
-        //}
       });
     };
 
@@ -83,63 +68,29 @@ angular.module('WordRiverApp')
     $scope.getCategories = function(student) {
       $scope.categoryArray = [];
       $http.get('/api/categories').success(function (allCategories) {
- //       console.log(allCategories);
         $scope.getElementsByID(student.contextTags, allCategories,$scope.categoryArray);
- //       for (var i = 0; i < student.contextTags.length; i++) {
- //         for(var j = 0; j < allCategories.length; j++){
- //           if(allCategories[j]._id == student.contextTags[i]){
- //             $scope.categoryArray.push(allCategories[j].name);
- //           }
- //         }
- //       }
       });
     };
 
     $scope.getWords = function(student) {
       $scope.wordArray = [];
       $http.get('/api/tile').success(function (allWords) {
-  //      console.log(allWords);
         $scope.getElementsByID(student.tileBucket, allWords,$scope.wordArray);
-        //for (var i = 0; i < student.tileBucket.length; i++) {
-        //  for(var j = 0; j < allWords.length; j++){
-        //    if(allWords[j]._id == student.tileBucket[i]){
-        //      $scope.wordArray.push(allWords[j].name);
-        //    }
-        //  }
-        //}
       });
     };
 
 
-    //$scope.searchCategories = function() {
-    //  for (var i = 0; i < $scope.selectedStudent.contextTags.length; i++){
-    //    for (var j = 0; j < categoryArray.length; j++){
-    //      if ($scope.selectedStudent.contextTags[i] == $scope.categoryArray[j].name){
-    //      }
-    //    }
-    //  }
-    //};.studentID
 
     $scope.getStudents = function(){
         $http.get("/api/students/").success(function(student) {
           $scope.getElementsByID($scope.currentUser.studentList, student, $scope.students);
-          //for (var i = 0; i < $scope.currentUser.studentList.length; i++) {
-          //  for (var j = 0; j < student.length; j++) {
-          //    if (student[j]._id == $scope.currentUser.studentList[i]) {
-          //      $scope.students.push(student[j]);
-          //    }
-          //  }
-          //}
         })
     };
-
     $scope.getStudents();
 
-    $scope.displayStudentProfile = function(student){
 
-      //$scope.tilesID = [];
+    $scope.displayStudentProfile = function(student){
       $scope.selectedStudent = student;
-      //$scope.tilesID = $scope.selectedStudent.tileBucket;
       $scope.getCategories(student);
       $scope.getWords(student);
       $scope.hide = false;
@@ -151,19 +102,4 @@ angular.module('WordRiverApp')
 
 
 
-    //$scope.addThing = function () {
-    //  if ($scope.newThing === '') {
-    //    return;
-    //  }Student
-    //  $http.post('/api/things', {name: $scope.newThing});
-    //  $scope.newThing = '';
-    //};Student
-    //
-    //$scope.deleteThing = function (thing) {
-    //  $http.delete('/api/things/' + thing._id);
-    //};
-    //
-    //$scope.$on('$destroy', function () {
-    //  socket.unsyncUpdates('thing');
-    //});
   });
