@@ -6,12 +6,15 @@
   </div>
 </header>
 
-<div class="container">
+<div ng-show = "help">
+  <p class="col-xs-3 container">Click on any group or student to view that group's or student's information.</p>
+  <p class="col-xs-6 container">Click on any group, student, category, or word to find out more information.<br> You can also select any number of groups or students and categories or words,<br> and simply click "Assign Words" to assign them.</p>
+  <p class="col-xs-3 container">Click on any category to view category information, or "Show Words" to choose a word.</p>
+</div>
+
+<div class="container" style="margin-top:15px">
     <!--This section is for the left column-->
     <div class="col-xs-3 accordion-toggle" ng-show="groupView">
-      <div ng-show="help">
-        <p>Click on any group to view group information, or "Show Students" to choose a student.</p>
-      </div>
       <button class="btn btn-primary" title="Show Students" ng-click="groupView=!groupView">Show Students</button>
       <h1 class="">Groups:</h1>
       <hr>
@@ -47,9 +50,6 @@
 
     </div>
     <div class="col-xs-3" ng-hide="groupView">
-      <div ng-show="help">
-        <p>Click on any student to view student information, or "Show Groups" to choose a group.</p>
-      </div>
       <button class="btn btn-primary" title="Show Groups" ng-click="groupView=!groupView">Show Groups</button>
       <h1 class="">Students:</h1>
       <hr>
@@ -62,9 +62,6 @@
       </ul>
     </div>
     <!--This section is for the middle column-->
-    <div class = "col-xs-5 center" ng-show="help">
-      <p>Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.</p>
-    </div>
     <div class="col-xs-6 center" ng-hide="showMiddle">
       <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
       <br/>
@@ -160,10 +157,7 @@
       </div>
     </div>
     <!--This section is for the right column-->
-    <div class="col-xs-3" ng-show="categoryView">
-      <div ng-show="help">
-        <p>Click on any category to view category information, or "Show Words" to choose a word.</p>
-      </div>
+    <div class="col-xs-3" style="margin-top:0" ng-show="categoryView">
       <button class="btn btn-primary" title="Show Words" ng-click="categoryView=!categoryView">Show Words</button>
       <h1 class="">Categories:</h1>
       <hr>
@@ -176,9 +170,6 @@
       </ul>
     </div>
     <div class="col-xs-3" ng-hide="categoryView">
-      <div ng-show="help">
-        <p>Click on any word to view word information, or "Show Categories" to choose a category.</p>
-      </div>
       <button class="btn btn-primary" title="Show Categories" ng-click="categoryView=!categoryView">Show Categories</button>
       <h1 class="">Words:</h1>
       <hr>
