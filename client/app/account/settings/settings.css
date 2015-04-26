@@ -1,0 +1,158 @@
+.thing-form {
+  margin: 20px 0;
+}
+body, html{
+  height: 100%;
+}
+
+#banner {
+  border-bottom: none;
+  margin-top: -20px;
+}
+
+#banner h1 {
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.hero {
+  position: relative;
+  padding: 30px 15px;
+  color: #F5F5F5;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 70px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.upperText {
+  margin-top: -2%;
+  font-size: 170% !important;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 0.5px #000000;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mainDivBox {
+  position: fixed;
+  width: 470px;
+  height: auto;
+  border-radius: 25px;
+  opacity: 0.75;
+  background: #000000;
+  margin-left: 18%;
+}
+
+.navbar {
+  position: fixed;
+  top: 1px;
+  width: 100%;
+  height: 35px;
+  min-height: 10px;
+}
+
+.background {
+  background-repeat: no-repeat;
+  padding: 35px;
+  position: fixed !important;
+  margin-top: 60px;
+  width: 100%;
+  height: 400px;
+}
+.test{
+  margin-top: 800px;
+  overflow: auto;
+  height: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
+  z-index: 1;
+}
+
+.input {
+  float: left;
+  opacity: 1;
+  color: black;
+  width: 250px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+.label {
+  float: left;
+  margin-left: 10px;
+  margin-top: 17px;
+  font-size: 120%;
+}
+
+.clear {
+  clear: both;
+}
+
+.buttonSizeUpperLogIn {
+  margin-left: 10px;
+  margin-top: 2px;
+  float: left;
+  width: 16%;
+  height: 15%;
+  font-size: 100%;
+  padding: 6px;
+  color: #000000;
+  font-size: 100%;
+}
+
+.buttonSizeUpperSignUp {
+  margin-left: 10px;
+  margin-top: 17px;
+  float: left;
+  width: 16%;
+  height: 15%;
+  font-size: 100%;
+  padding: 6px;
+  color: #000000;
+}
+
+.buttonLower {
+  margin-left: 10px;
+  margin-top: 15px;
+  margin-bottom: 17px;
+  float: left;
+  width: 25%;
+  height: 15%;
+  font-size: 100%;
+  padding: 6px;
+  color: #000000;
+}
+
+.container {
+  height: 100%;
+}
+
+.help-block{
+  float: left;
+  color: #ff0000 !important;
+  margin-bottom: -2%;
+  margin-left: 10px;
+}
+
+
+.welcomeText {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  font-size: 200% !important;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 0.5px #000000;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}

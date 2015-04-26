@@ -3,6 +3,10 @@
 angular.module('WordRiverApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
+    $scope.backgroundImage = {
+      background: "url(assets/images/river.jpg) no-repeat center",
+      "background-attachment": "scroll"
+    };
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;

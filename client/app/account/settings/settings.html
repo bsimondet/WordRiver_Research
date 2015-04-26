@@ -1,38 +1,78 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <h1>Change Password</h1>
+
+<header class="hero background" id="banner" ng-style="backgroundImage">
+  <div class="container">
+    <div class="mainDivBox">
+      <br>
+      <h2 class = "upperText">Change Password</h2>
+        <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+          <div class="clear">
+            <div class="form-group has-error">
+            <span class="help-block" ng-show="form.password.$error.mongoose">
+            {{ errors.other }}
+            </span>
+            </div>
+            <br>
+            <input type="password" name="password" class="input" ng-model="user.oldPassword"
+                   mongoose-error/>
+            <label class="label">: Current Password</label>
+          </div>
+
+          <div class="clear">
+            <div class="form-group has-error">
+            <span class="help-block"
+                  ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+              Password must be at least 3 characters.
+            </span>
+            </div>
+            <input type="password" name="newPassword" class="input" ng-model="user.newPassword"
+                   ng-minlength="3"
+                   required/>
+            <label class="label">: New Password</label>
+          </div>
+
+          <div class="clear">
+            <button class="btn btn-lg btn-login buttonLower" type="submit">
+              Save changes
+            </button>
+            <br>
+            <span class="help-block">
+              {{ message }}
+            </span>
+          </div>
+        </form>
+    </div>
+  </div>
 </header>
-<div class="container">
-  <div class="col-sm-3">
-  </div>
-  <div class="col-sm-6">
-    <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
-      <div class="form-group">
-        <label>Current Password</label>
-        <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
-               mongoose-error/>
-        <p class="help-block" ng-show="form.password.$error.mongoose">
-          {{ errors.other }}
-        </p>
-      </div>
 
-      <div class="form-group">
-        <label>New Password</label>
+  <!--<div class="col-sm-6">-->
+    <!--<form class="form" name="form" ng-submit="changePassword(form)" novalidate>-->
+      <!--<div class="form-group">-->
+        <!--<label>Current Password</label>-->
+        <!--<input type="password" name="password" class="form-control" ng-model="user.oldPassword"-->
+               <!--mongoose-error/>-->
+        <!--<p class="help-block" ng-show="form.password.$error.mongoose">-->
+          <!--{{ errors.other }}-->
+        <!--</p>-->
+      <!--</div>-->
 
-        <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
-               ng-minlength="3"
-               required/>
-        <p class=""
-           ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
-          Password must be at least 3 characters.
-        </p>
-      </div>
+      <!--<div class="form-group">-->
+        <!--<label>New Password</label>-->
 
-      <p class="help-block"> {{ message }} </p>
-      <div class="submitButton">
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-      </div>
-    </form>
-  </div>
-</div>
+        <!--<input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"-->
+               <!--ng-minlength="3"-->
+               <!--required/>-->
+        <!--<p class=""-->
+           <!--ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">-->
+          <!--Password must be at least 3 characters.-->
+        <!--</p>-->
+      <!--</div>-->
+
+      <!--<p class="help-block"> {{ message }} </p>-->
+      <!--<div class="submitButton">-->
+        <!--<button class="btn btn-lg btn-primary" type="submit">Save changes</button>-->
+      <!--</div>-->
+    <!--</form>-->
+  <!--</div>-->
+
