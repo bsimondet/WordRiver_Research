@@ -18,9 +18,13 @@
       </li>
       <div>
         <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-model="selectedCategories[$index]" ng-true-value="'{{category._id}}'">
-          <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete($index)"></span></li>
+          <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><input type="checkbox" name="WT" value=value" ng-click="setWordType(category)">WT <span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete($index)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editCategory(category)"></span></li>
       </div>
     </ul>
+    <div class ="col-xs-3" ng-hide="showValue1">
+      <input ng-model="editField" type="text" size="15" placeholder={{categoryArray[editCatIndex].name}}>
+      <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateCategory()">
+    </div>
   </div>
 
 
@@ -46,13 +50,12 @@
           <li class="list-group-item">
           </li>
           <div>
-            <li class="list-group-item" ng-repeat="category in contextTagsTemp | orderBy: toSort:order">{{category.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeCategoryFromWord($index)"></span></li>
+            <li class="list-group-item" ng-repeat="category in contextTagsTemp | orderBy: toSort:order">{{category.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeCategoryFromWord($index)"></span><</li>
           </div>
         </ul>
       </div>
     </div>
   </div>
-
 
   <div class="col-xs-3">
     <h1 class="">Existing words:</h1>
