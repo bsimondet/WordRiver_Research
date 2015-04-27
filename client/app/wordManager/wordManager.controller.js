@@ -284,11 +284,11 @@ angular.module('WordRiverApp')
         }
       }
     }
-
+    //
     $scope.editWord = function(tile){
       $scope.editWordIndex = $scope.findIndexOfTile(tile);
       $scope.showValue = false;
-      $scope.wordToEdit = $scope.userTiles[index];
+      $scope.wordToEdit = $scope.userTiles[$scope.findIndexOfTile(tile)];
     };
 
     $scope.updateTile = function() {
@@ -300,7 +300,7 @@ angular.module('WordRiverApp')
           creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
           wordType: $scope.userTiles[$scope.editWordIndex].wordType
         });
-        $scope.removeWord($scope.editWordIndex);
+        $scope.removeWord($scope.wordToEdit);
 
         $scope.editField = "";
       }
@@ -312,7 +312,7 @@ angular.module('WordRiverApp')
           creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
           wordType: $scope.editType
         });
-        $scope.removeWord($scope.editWordIndex);
+        $scope.removeWord($scope.wordToEdit);
 
         $scope.editType = "";
       }
@@ -324,7 +324,7 @@ angular.module('WordRiverApp')
           creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
           wordType: $scope.editType
         });
-        $scope.removeWord($scope.editWordIndex);
+        $scope.removeWord($scope.wordToEdit);
 
         $scope.editField = "";
         $scope.editType = "";
