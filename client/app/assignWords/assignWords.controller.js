@@ -1,16 +1,14 @@
 'use strict';
 
+//var jquery = require('./../../bower_components/jquery/src/jquery.js');
+
 angular.module('WordRiverApp')
   .controller('AssignWordsCtrl', function ($rootScope, $scope, $http, socket, Auth) {
     $scope.currentUser = Auth.getCurrentUser();
     $scope.categoryArray = [];
     $scope.groupArray = [];
-    $scope.selectedCategories = [];
-    $scope.selectedGroups = [];
-    $scope.selectedStudents = [];
     $scope.studentArray = [];
     $scope.allStudents = [];
-    $scope.selectedWords = [];
     $scope.matchTiles = [];
     $scope.userTiles = [];
     $scope.studentCategories = [];
@@ -18,7 +16,10 @@ angular.module('WordRiverApp')
     $scope.value = false;
     $scope.help = false;
 
-
+    $scope.selectedCategories = [];
+    $scope.selectedGroups = [];
+    $scope.selectedStudents = [];
+    $scope.selectedWords = [];
 
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for getting all the things
@@ -479,17 +480,6 @@ angular.module('WordRiverApp')
       return array;
     };
 
-    // Notes
-    // Assigning categories to students occasionally runs multiple (and bad) patch requests, esp. when adding and removing from a single student
-    // Removing a student from a group does not remove that group's content from the student
-    // clicking a single word does not tell you what groups it's assigned to when it's assigned to them through a context pack, only shows up when added as a free tile.
-
-    //More Notes
-    //Assigning categories to students occasionally runs one patch and cant find the document, but it automatically runs it again and can find it the second time - any ideas on fixing?
-    //Fixed the problem by reordering some post-patch request events and by clearing selected things arrays after each assign words function call!!
-    //Removing a student from a group does remove that group's content from the student, but the seed currently has everything double assigned to the individual students and groups
-    //clicking a single word shouldn't tell you the groups it is assigned to when it's assigned to them through a context pack, kk only wanted free tiles shown
-
     $scope.assignWords = function (view) {
       if ($scope.groupView && $scope.categoryView) {
         //Function to add selected categories to selected groups.
@@ -561,11 +551,11 @@ angular.module('WordRiverApp')
               $scope.userStudents[g].contextTags = $scope.checkForDuplicates($scope.userStudents[g].contextTags);
               $http.patch('api/students/' + $scope.userStudents[g]._id,
                 {contextTags: $scope.userStudents[g].contextTags}).success(function () {
+                  alert("Successfully assigned!");
                 });
             }
           }
         }
-        alert("Successfully assigned!");
         $scope.switchMiddle("middle");
         $scope.getAll();
       } else if (!$scope.groupView && !$scope.categoryView){
@@ -587,19 +577,18 @@ angular.module('WordRiverApp')
               $http.patch('api/students/' + $scope.userStudents[r]._id,
                 {tileBucket: $scope.userStudents[r].tileBucket}).success(function () {
                   $scope.getAll();
+                  alert("Successfully assigned!");
                 });
             }
           }
         }
         $scope.getAll();
-        alert("Successfully assigned!");
         $scope.switchMiddle("middle");
       }
       $scope.selectedCategories = [];
       $scope.selectedWords = [];
       $scope.selectedGroups = [];
       $scope.selectedStudents = [];
-
     };
 
 
@@ -629,8 +618,6 @@ angular.module('WordRiverApp')
         else{
           $scope.userGroups[i].isCollapsed = true;
           console.log("else statement");
-
-
         }
       }
 
