@@ -602,22 +602,39 @@ angular.module('WordRiverApp')
 
     };
 
+
+//getting the list of students within a group to show for collapsibility purposes in the assign content to people page
+
     $scope.studentsInGroupAssignment = function(group) {
-      $scope.groupedStudents=[];
-      for(var i = 0; i < $scope.userStudents.length; i++){
+      $scope.groupedStudents = [];
+      for (var i = 0; i < $scope.userStudents.length; i++) {
         if ($scope.userStudents[i].groupList.indexOf(group._id) > -1) {
-          console.log("we are in the if statement");
           $scope.groupedStudents.push($scope.userStudents[i]);
         }
       }
       console.log($scope.groupedStudents);
     };
 
-    $scope.oneAtATime = true;
+    //$scope.oneAtATime = true;
 
-    $scope.status = {
-      isFirstOpen: true,
-      isFirstDisabled: false
+    $scope.openingOnlyOneGroup = function(group){
+      for(var i = 0; i < $scope.userGroups.length; i++){
+
+        console.log($scope.userGroups[i]);
+
+        if($scope.userGroups[i]._id == group._id){
+          $scope.userGroups[i].isCollapsed = !$scope.userGroups[i].isCollapsed;
+          console.log("if statement");
+        }
+        else{
+          $scope.userGroups[i].isCollapsed = true;
+          console.log("else statement");
+
+
+        }
+      }
+
     };
+
 
   });
