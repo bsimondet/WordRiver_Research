@@ -31,8 +31,8 @@
         <li class="list-group-item" ng-repeat="group in userGroups | orderBy:'groupName':order1">
           <!--accordion groups do not like to work with an ng-repeat within an ng-repeat-->
           <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
-          <span class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down'  : isCollapsed, 'glyphicon-chevron-right' : !isCollapsed}" ng-click="studentsInGroupAssignment(group); openingOnlyOneGroup(group); isCollapsed = !isCollapsed"></span>
-        <ul collapse = "!isCollapsed">
+          <span class="glyphicon glyphicon-eye-close floatRight close" ng-click="studentsInGroupAssignment(group); openingOnlyOneGroup(group); isCollapsed = !isCollapsed"></span>
+        <ul collapse = "group.isCollapsed">
             <li class="list-group-item" ng-repeat="students in groupedStudents">
               <a href ="" ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a></li>
           </ul>
