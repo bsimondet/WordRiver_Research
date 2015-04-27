@@ -135,15 +135,13 @@ exports.updatePack = function(req, res, next) {
 
 
 exports.removeCategoryID = function(req, res) {
-  var userId = req.params.id;
+  var userId = req.body.userId;
   var categoryID = req.body.categoryID;
 
   User.findById(userId, function (err, user) {
-    for(var i = 0 ; i < user.category.length; i++){
-      console.log(user.groupList[i]._id + " " + group);
-      if(user.groupList[i]._id == group){
-        user.groupList.splice(i, 1);
-
+    for(var i = 0 ; i < user.contextPacks.length; i++){
+      if(user.contextPacks[i] == categoryID){
+        user.contextPacks.splice(i, 1);
       }
     }
     user.save(function(err) {

@@ -240,14 +240,18 @@ angular.module('WordRiverApp')
     //}
     //Deletes a category
     $scope.removeCategory = function(index) {
-      $scope.categoryArray.splice(index, 1);
-      var categoryArrayIDS = [];
-      for(var i = 0; i < $scope.categoryArray.length; i ++){
-        categoryArrayIDS.push($scope.categoryArray[i]._id);
-      }
-      $http.patch('/api/users/' + $scope.currentUser._id +  "/updateCategories", {
-        contextPacks : categoryArrayIDS
+      //$scope.categoryArray.splice(index, 1);
+      //var categoryArrayIDS = [];
+      console.log($scope.categoryArray[index]);
+      var categoryID = $scope.categoryArray[index]._id;
+      //for(var i = 0; i < $scope.categoryArray.length; i ++){
+      //  categoryArrayIDS.push($scope.categoryArray[i]._id);
+      //}
+      $http.put('/api/users/' + $scope.currentUser._id +  "/removeCategoryID", {
+       categoryID : categoryID, userId:  $scope.currentUser._id
       });
+
+      $scope.categoryArray.splice(index, 1);
     };
 
       //Removes a word from a category
