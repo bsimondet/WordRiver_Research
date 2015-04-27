@@ -253,7 +253,7 @@ angular.module('WordRiverApp')
     $scope.removeFromCategory = function(tile, index) {
       //console.log("test");
       $scope.tileId = tile._id;
-      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.currentCategory, tileId: tile._id});
+      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.currentCategory._id, tileId: tile._id});
       //console.log("test");
       //console.log(tile._id);
       $scope.matchTiles.splice(index, 1);
@@ -264,7 +264,7 @@ angular.module('WordRiverApp')
     //Removes a category from a word, on the server side this does the same thing as removeFromCategory
     $scope.removeCategoryFromWord = function(index) {
       $scope.tileId = $scope.currentTile._id;
-      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.contextTagsTemp[index], tileId: $scope.currentTile._id});
+      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.contextTagsTemp[index]._id, tileId: $scope.currentTile._id});
       //console.log("test");
       //console.log(tile._id);
       $scope.contextTagsTemp.splice(index, 1);
