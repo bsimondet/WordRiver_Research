@@ -81,7 +81,7 @@ angular.module('WordRiverApp')
           ).success(function () {
                 $scope.getGroups();
               });
-          $scope.localGroupArray.splice(index, 1);
+          $scope.localGroupArray.splice($scope.findGroupInList(group), 1);
         }
 
       };
