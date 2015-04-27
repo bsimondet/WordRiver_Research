@@ -629,8 +629,6 @@ angular.module('WordRiverApp')
         else{
           $scope.userGroups[i].isCollapsed = true;
           console.log("else statement");
-
-
         }
       }
 
