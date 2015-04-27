@@ -7,13 +7,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/"><img class="resizeNav" src="assets/images/WordRiverLogo.png" alt="Home"></a>
+      <a ng-click="goHome()" href="/"><img class="resizeNav" src="assets/images/WordRiverLogo.png" alt="Home"></a>
     </div>
 
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
         <li class="font-size" ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
+            <a ng-click="goHome()" ng-href="{{item.link}}">{{item.title}}</a>
         </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>

@@ -4,6 +4,7 @@
   <div class="container">
     <img class="resize" src="assets/images/WordRiverLogo.png" alt="we have a logo!"><br>
     <h2 class = "h2" ng-hide="changePasswordShow">Assisting students in creative learning</h2>
+    <h2 class = "changePasswordText" ng-show="changePasswordShow">Change Password</h2>
     <div class="loginBox">
 
       <!--Login screen-->
@@ -120,7 +121,6 @@
 
       <!--Change password show-->
       <div ng-show="changePasswordShow">
-        <h2 class = "">Change Password</h2>
         <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
           <div class="clear">
             <div class="form-group has-error">
