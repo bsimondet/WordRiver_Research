@@ -43,6 +43,7 @@ angular.module('WordRiverApp')
         console.log(allCategories);
         for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
+            console.log('PLEASE WORK');
             if(allCategories[j]._id == $scope.currentUser.contextPacks[i]){
               $scope.categoryArray.push(allCategories[i]);
             }
@@ -116,11 +117,10 @@ angular.module('WordRiverApp')
     $scope.addCategory = function () {
       if ($scope.categoryField.length >= 1) {
         //$scope.categoryArray.push($scope.categoryField);
-        console.log($scope.categoryArray);
-        $http.patch('/api/category/' +
-          {name:$scope.categoryField, creatorID: $scope.currentUser._id}
-        ).success(function(){
-          });
+        console.log($scope.categoryField);
+        $http.post('/api/categories/',
+          {name:$scope.categoryField, isWordType: false, creatorID: $scope.currentUser._id}
+        ).success(function(){console.log($scope.currentUser._id)});
       }
       $scope.categoryField="";
       $scope.getCategories();
