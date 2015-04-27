@@ -95,11 +95,8 @@ angular.module('WordRiverApp')
     };
 
     $scope.toggleHelp = function(){
-      if ($scope.help == true){
-        $scope.help = false;
-      } else {
-        $scope.help = true;
-      }
+      if ($scope.help == true)$scope.help = false;
+      else $scope.help = true;
     };
 
     ////////////////////////////////////////////////////////////////////////////
@@ -489,6 +486,7 @@ angular.module('WordRiverApp')
 
     //More Notes
     //Assigning categories to students occasionally runs one patch and cant find the document, but it automatically runs it again and can find it the second time - any ideas on fixing?
+    //Fixed the problem by reordering some post-patch request events and by clearing selected things arrays after each assign words function call!!
     //Removing a student from a group does remove that group's content from the student, but the seed currently has everything double assigned to the individual students and groups
     //clicking a single word shouldn't tell you the groups it is assigned to when it's assigned to them through a context pack, kk only wanted free tiles shown
 
@@ -567,9 +565,9 @@ angular.module('WordRiverApp')
             }
           }
         }
-        $scope.getAll();
         alert("Successfully assigned!");
         $scope.switchMiddle("middle");
+        $scope.getAll();
       } else if (!$scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected students.
         if($scope.selectedStudents.length == 0){
@@ -597,10 +595,10 @@ angular.module('WordRiverApp')
         alert("Successfully assigned!");
         $scope.switchMiddle("middle");
       }
-      $scope.checkedCategories = [];
-      $scope.checkedWords = [];
-      $scope.checkedGroups = [];
-      $scope.checkedStudents = [];
+      $scope.selectedCategories = [];
+      $scope.selectedWords = [];
+      $scope.selectedGroups = [];
+      $scope.selectedStudents = [];
 
     };
 
