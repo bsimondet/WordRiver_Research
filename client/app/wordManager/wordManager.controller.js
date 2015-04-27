@@ -244,7 +244,7 @@ angular.module('WordRiverApp')
       for(var i = 0; i < $scope.categoryArray.length; i ++){
         categoryArrayIDS.push($scope.categoryArray[i]._id);
       }
-      $http.patch('/api/users/' + $scope.currentUser._id, {
+      $http.patch('/api/users/' + $scope.currentUser._id +  "/updateCategories", {
         contextPacks : categoryArrayIDS
       });
     };
