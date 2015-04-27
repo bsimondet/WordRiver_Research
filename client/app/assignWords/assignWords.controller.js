@@ -15,6 +15,7 @@ angular.module('WordRiverApp')
     $scope.groupedStudents = [];
     $scope.value = false;
     $scope.help = false;
+    $scope.displayTiles = [];
 
     $scope.selectedCategories = [];
     $scope.selectedGroups = [];
@@ -29,7 +30,7 @@ angular.module('WordRiverApp')
       $scope.userCategories = [];
       $scope.userStudents = [];
       $scope.userGroups = [];
-      $scope.isCollapsed = false;
+      //$scope.isCollapsed = false;
       $scope.userGroups = $scope.currentUser.groupList;
       $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
         $scope.userCategories = userCategories;
@@ -618,6 +619,35 @@ angular.module('WordRiverApp')
         }
         else{
           $scope.userGroups[i].isCollapsed = true;
+          console.log("else statement");
+        }
+      }
+
+    };
+
+    $scope.populateDisplayTile = function(category){
+      $scope.displayTiles = [];
+      console.log(category.isColl)
+      for (var j = 0; j < $scope.userTiles.length; j++) {
+        for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
+          if ($scope.userTiles[j].contextTags[z] == category._id) {
+            $scope.displayTiles.push($scope.userTiles[j]);
+          }
+        }
+      }
+    }
+
+    $scope.openingOnlyOneCategory = function(category){
+      for(var i = 0; i < $scope.userCategories.length; i++){
+
+        console.log($scope.userCategories[i]);
+
+        if($scope.userCategories[i]._id == category._id){
+          $scope.userCategories[i].isCollapsed = !$scope.userCategories[i].isCollapsed;
+          console.log("if statement");
+        }
+        else{
+          $scope.userCategories[i].isCollapsed = true;
           console.log("else statement");
         }
       }

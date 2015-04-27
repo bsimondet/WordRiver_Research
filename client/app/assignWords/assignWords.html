@@ -24,7 +24,7 @@
           <input type="checkbox" value="value" ng-click="checkGroups(group)"><a href="" ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
           <span class="glyphicon glyphicon-eye-close floatRight close" ng-click="studentsInGroupAssignment(group); openingOnlyOneGroup(group); isCollapsed = !isCollapsed"></span>
         <ul collapse = "group.isCollapsed">
-            <li class="list-group-item" ng-repeat="students in groupedStudents">
+            <li  ng-repeat="students in groupedStudents">
               <a href ="" ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a></li>
           </ul>
         </li>
@@ -191,14 +191,12 @@
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:searchText1">
           <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category.name}}</a>
-          <span class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down'  : isCollapsed, 'glyphicon-chevron-right' : !isCollapsed}" ng-click="isCollapsed = !isCollapsed"></span>
-          <div collapse="!isCollapsed">
-            <ul>
-              <li ng-repeat="word in userCategories">
-                {{word.name}}
+          <span class="glyphicon glyphicon-eye-close floatRight close" ng-click="isCollapsed = !isCollapsed; populateDisplayTile(category); openingOnlyOneCategory(category)"></span>
+            <ul collapse="category.isCollapsed">
+              <li ng-repeat="word in displayTiles">
+                <a href="" ng-click="displayTileInfo(word)">{{word.name}}</a>
               </li>
             </ul>
-          </div>
       </ul>
     </div>
     <div class="col-xs-3" ng-hide="categoryView">
