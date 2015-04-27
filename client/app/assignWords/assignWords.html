@@ -202,6 +202,14 @@
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:searchText1">
           <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category.name}}</a>
+          <span class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down'  : isCollapsed, 'glyphicon-chevron-right' : !isCollapsed}" ng-click="isCollapsed = !isCollapsed"></span>
+          <div collapse="!isCollapsed">
+            <ul>
+              <li ng-repeat="word in userCategories">
+                {{word.name}}
+              </li>
+            </ul>
+          </div>
       </ul>
     </div>
     <div class="col-xs-3" ng-hide="categoryView">

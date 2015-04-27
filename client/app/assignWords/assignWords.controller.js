@@ -609,6 +609,7 @@ angular.module('WordRiverApp')
       $scope.groupedStudents = [];
       for (var i = 0; i < $scope.userStudents.length; i++) {
         if ($scope.userStudents[i].groupList.indexOf(group._id) > -1) {
+          console.log("we are in the if statement");
           $scope.groupedStudents.push($scope.userStudents[i]);
         }
       }
