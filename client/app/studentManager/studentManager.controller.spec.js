@@ -50,6 +50,10 @@ describe('Controller: StudentManagerCtrl', function () {
   //  expect(scope.localGroupArray.length).toEqual(0);
   //});
 
+  it('should test findStudentInList', function () {
+    scope.studentList = [{studentID: 1}];
+    expect(scope.findStudentInList(1)).toEqual(0);
+  });
 
   it('should test findStudentAccount', function () {
     scope.students = [{_id: 2}];
@@ -79,9 +83,6 @@ describe('Controller: StudentManagerCtrl', function () {
 
   it('should test addStudentsToGroups', function () {
     expect(1).toEqual(1);
-    //scope.studentList = [];
-    //scope.selectedStudents = [];
-    //scope.addStudentsToGroups();
   });
 
   it('should test allCheckedGroups', function () {
@@ -99,17 +100,5 @@ describe('Controller: StudentManagerCtrl', function () {
   it('should be true', function() {
     expect(true).toBe(true);
   });
-
-  it('should test findStudentInList', function (){
-    scope.studentList = [{_id:'blubber'}, {_id:'giggles'}, {_id:'steward'}, {_id:'nigel'}, {_id:'thornberry'}, {_id:'pickles'}];
-    expect(scope.findStudentInList('blubber')).toBe(0);
-  });
-
-  it('should test remove blubber from the list', function (){
-    scope.studentList = [{_id:'blubber', groupList: {_id: 'testGroup'}}, {_id:'giggles'}, {_id:'steward'}, {_id:'nigel'}, {_id:'thornberry'}, {_id:'pickles'}];
-    scope.selectedGroup = {_id: 'testGroup'};
-      //, [{_id:'blubber', groupList: 'testGroup'}, {_id:'nigel', groupList: 'testGroup'}, {_id:'thornberry', groupList: 'testGroup'}]};
-    scope.removeStudentFromGroup({_id:'blubber', groupList: {_id: 'testGroup'}});
-    expect(scope.findStudentInList({_id: 'blubber', groupList: {_id: 'testGroup'}})).toBe(-1);
-  });
+  
 });
