@@ -1,17 +1,30 @@
 'use strict';
 
 angular.module('WordRiverApp')
-  .controller('HomeCtrl', function ($scope, Auth, $location) {
+  .controller('HomeCtrl', function ($scope, $rootScope, Auth, $location) {
     $scope.user = {email: "rosemariemaxwell@plexia.com", password: "culpa"};
     $scope.errors = {};
     $scope.logInShow = true;
     $scope.signUpShow = false;
     $scope.signedInShow = false;
     $scope.buttonsShow = true;
+    $scope.changePasswordShow = false;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.backgroundImage = {
       background: "url(assets/images/river.jpg) no-repeat center",
       "background-attachment": "scroll"
+    };
+
+    $scope.checkChangePassword = function() {
+      var values = $location.absUrl().split("=");
+      console.log(values);
+      if(values[1] == "true"){
+        $scope.changePasswordShow = true;
+        $scope.signedInShow = false;
+        $scope.buttonsShow = false;
+        $scope.logInShow = false;
+        $scope.signUpShow = false;
+      }
     };
 
     $scope.login = function(form) {
@@ -81,6 +94,9 @@ angular.module('WordRiverApp')
     }
 
     $scope.checkedLoggedIn();
+
+    $scope.checkChangePassword();
+
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;

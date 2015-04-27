@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('WordRiverApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $rootScope, $location, Auth) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -15,8 +15,15 @@ angular.module('WordRiverApp')
     $scope.logout = function() {
       Auth.logout();
       window.location = "/";
-
     };
+
+    //this function activates a variable that sends the user to the home page rather than a seperate settings page
+    $scope.changePassword = function(){
+      window.location = "/?changePassword=true";
+    };
+
+
+
 
     $scope.isActive = function(route) {
       return route === $location.path();

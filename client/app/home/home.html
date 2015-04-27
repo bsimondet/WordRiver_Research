@@ -3,7 +3,7 @@
 <header class="hero background" id="banner" ng-style="backgroundImage">
   <div class="container">
     <img class="resize" src="assets/images/WordRiverLogo.png" alt="we have a logo!"><br>
-    <h2 class = "h2">Assisting students in creative learning</h2>
+    <h2 class = "h2" ng-hide="changePasswordShow">Assisting students in creative learning</h2>
     <div class="loginBox">
 
       <!--Login screen-->
@@ -106,7 +106,6 @@
               Submit
             </button>
           </div>
-
         </form>
       </div>
 
@@ -118,9 +117,53 @@
           </span>
         </div>
       </div>
+
+      <!--Change password show-->
+      <div ng-show="changePasswordShow">
+        <h2 class = "">Change Password</h2>
+        <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+          <div class="clear">
+            <div class="form-group has-error">
+            <span class="help-block" ng-show="form.password.$error.mongoose">
+            <h5 class="errorText">Incorrect Password.</h5>
+            </span>
+            </div>
+            <input type="password" name="password" class="input inputSize" ng-model="user.oldPassword"
+                   mongoose-error/>
+            <label class="label">: Current Password</label>
+          </div>
+
+          <div class="clear">
+            <div class="form-group has-error">
+            <span class="help-block"
+                  ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+              <h5 class="errorText">Password must be at least 3 characters.</h5>
+            </span>
+            </div>
+            <input type="password" name="newPassword" class="input inputSize" ng-model="user.newPassword"
+                   ng-minlength="3"
+                   required/>
+            <label class="label">: New Password</label>
+          </div>
+
+          <div class="clear">
+            <button class="btn btn-lg btn-login buttonLower" type="submit">
+              Save changes
+            </button>
+            <br>
+            <span class="help-block">
+              {{ message }}
+            </span>
+          </div>
+        </form>
+      </div>
+
+
     </div>
   </div>
 </header>
+
+
 <div class="test">
   <p>Small description of the project</p>
 </div>
