@@ -18,6 +18,7 @@ angular.module('WordRiverApp')
       $scope.studentGroups = [];
       $scope.selectedStudent = [];
       $scope.localGroupArray = $scope.currentUser.groupList;
+      $scope.help = false;
 
 ///////////////////////////////////
 //    $scope.getStudentList = function(){
@@ -28,6 +29,10 @@ angular.module('WordRiverApp')
 //
 //    $scope.getStudentList();
 //////////////////////////////////
+    $scope.toggleHelp = function(){
+      if ($scope.help == true)$scope.help = false;
+      else $scope.help = true;
+    };
 
       $scope.getStudents = function(){
         $http.get("/api/students/").success(function(student) {

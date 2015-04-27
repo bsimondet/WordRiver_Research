@@ -6,15 +6,21 @@
   </div>
 </header>
 
-<div ng-show = "help">
-  <p class="col-xs-3 container">Click on any group or student to view that group's or student's information.</p>
-  <p class="col-xs-6 container">Click on any group, student, category, or word to find out more information.<br> You can also select any number of groups or students and categories or words,<br> and simply click "Assign Words" to assign them.</p>
-  <p class="col-xs-3 container">Click on any category to view category information, or "Show Words" to choose a word.</p>
-</div>
+<!--<div ng-show = "help">-->
+  <!--<p> class="col-xs-3 container">Click on any group or student to view that group's or student's information.</p>-->
+  <!--<p class="col-xs-6 container">Click on any group, student, category, or word to find out more information.<br> You can also select any number of groups or students and categories or words,<br> and simply click "Assign Words" to assign them.</p>-->
+  <!--<p class="col-xs-3 container">Click on any category to view category information, or "Show Words" to choose a word.</p>-->
+<!--</div>-->
 
-<div class="container" style="margin-top:15px">
+<div class="container">
+
     <!--This section is for the left column-->
-    <div class="col-xs-3 accordion-toggle" ng-show="groupView">
+
+    <div class="col-xs-3" ng-show="groupView">
+      <div ng-show = "help">
+        <p> Click on any group or student to view that group's or student's information.
+        </p>
+      </div>
       <button class="btn btn-primary" title="Show Students" ng-click="groupView=!groupView">Show Students</button>
       <h1 class="">Groups:</h1>
       <hr>
@@ -61,14 +67,28 @@
           <input type="checkbox" value="value"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}} </a>
       </ul>
     </div>
+
     <!--This section is for the middle column-->
-    <div class="col-xs-6 center" ng-hide="showMiddle">
+
+    <div class="col-xs-6" ng-hide="showMiddle">
+      <div ng-show = "help">
+        <p>Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        </p>
+      </div>
       <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
       <br/>
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
-      <h3>Click on anything to begin.</h3>
+      <h3 class="center">Click on anything to begin.</h3>
     </div>
     <div class="col-xs-6" ng-show="showCategory">
+
+      <div ng-show = "help">
+        <p>Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        </p>
+      </div>
+      <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
+      <br/>
+
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br/>
       <br/>
@@ -91,6 +111,14 @@
       </div>
     </div>
     <div class="col-xs-6" ng-show="wordView">
+
+      <div ng-show = "help">
+        <p>Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        </p>
+      </div>
+      <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
+      <br/>
+
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br/>
       <br/>
@@ -113,6 +141,14 @@
       </div>
     </div>
     <div class="col-xs-6" ng-show="showGroup">
+
+      <div ng-show = "help">
+        <p>Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        </p>
+      </div>
+      <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
+      <br/>
+
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br/>
       <br/>
@@ -135,6 +171,14 @@
       </div>
     </div>
     <div class="col-xs-6" ng-show="studentView">
+
+      <div ng-show = "help">
+        <p>Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        </p>
+      </div>
+      <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
+      <br/>
+
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br/>
       <br/>
@@ -156,8 +200,14 @@
         </ul>
       </div>
     </div>
+
     <!--This section is for the right column-->
-    <div class="col-xs-3" style="margin-top:0" ng-show="categoryView">
+
+    <div class="col-xs-3" ng-show="categoryView">
+      <div ng-show = "help">
+       <p>Click on any category to view category information, or "Show Words" to choose a word.
+       </p>
+      </div>
       <button class="btn btn-primary" title="Show Words" ng-click="categoryView=!categoryView">Show Words</button>
       <h1 class="">Categories:</h1>
       <hr>
