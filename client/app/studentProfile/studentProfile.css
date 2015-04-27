@@ -69,6 +69,11 @@ table, th, td {
 
 }
 
+.profilePicture {
+  width: auto;
+  height: 200px;
+}
+
 .words-table {
   -webkit-column-count: 3; /* Chrome, Safari, Opera */
   -moz-column-count: 3; /* Firefox */
