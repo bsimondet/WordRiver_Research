@@ -135,19 +135,20 @@ angular.module('WordRiverApp')
       var studentIndex = $scope.findStudentInList(student);
       console.log(studentIndex);
 
-      if($scope.studentList[studentIndex].groupList.indexOf(group) == -1){
+      if($scope.studentList[studentIndex].groupList.indexOf(group._id) == -1){
         $scope.studentList[studentIndex].groupList.push(group);
         if(group._id == $scope.selectedGroup._id){
           $scope.studentsInGroup.push($scope.studentList[studentIndex]);
         }
         $scope.addGroupsContextPacksToStudent(student);
+        $http.put("/api/students/" + student + "/assignToGroup",
+          {groupID: group._id}
+        ).success(function () {
+            $scope.getStudents();
+          });
       }
       //Not sure what to do here...
-      $http.put("/api/students/" + student + "/assignToGroup",
-        {groupID: group._id}
-      ).success(function () {
-          $scope.getStudents();
-        });
+
     };
 
     $scope.addGroupsContextPacksToStudent = function(student){
