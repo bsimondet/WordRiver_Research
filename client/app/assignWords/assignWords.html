@@ -192,7 +192,7 @@
       <button class="btn btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
       <input type="text" ng-Model="searchText1" placeholder="Search">
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:searchText1">
+        <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:{name:searchText1}">
           <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category.name}}</a>
           <span class="glyphicon glyphicon-eye-close floatRight close" ng-click="isCollapsed = !isCollapsed; populateDisplayTile(category); openingOnlyOneCategory(category)"></span>
             <ul collapse="category.isCollapsed">
@@ -213,7 +213,7 @@
       <button class="btn btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
       <input type="text" ng-Model="searchText2" placeholder="Search">
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:searchText2">
+        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:{name:searchText2}">
           <input type="checkbox" value="value" ng-click="checkWords(tile)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
       </ul>
     </div>
