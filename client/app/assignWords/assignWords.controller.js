@@ -22,6 +22,8 @@ angular.module('WordRiverApp')
     $scope.selectedStudents = [];
     $scope.selectedWords = [];
 
+    $scope.helpText = "Get Help";
+
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for getting all the things
 
@@ -97,8 +99,13 @@ angular.module('WordRiverApp')
     };
 
     $scope.toggleHelp = function(){
-      if ($scope.help)$scope.help = false;
-      else $scope.help = true;
+      if ($scope.help){
+        $scope.helpText= "Get Help";
+      }
+      else {
+        $scope.helpText = "Hide Help";
+      }
+      $scope.help = !$scope.help;
     };
 
     ////////////////////////////////////////////////////////////////////////////
