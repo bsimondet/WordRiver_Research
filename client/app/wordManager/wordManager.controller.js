@@ -26,7 +26,7 @@ angular.module('WordRiverApp')
     $scope.showValue = true;
     $scope.showValue1 = true;
     $scope.wordToEdit = null;
-
+    $scope.tempIndex = null;
     $scope.theIDWeWant = null;
    // $scope.wordToRemove = null;
     //$scope.selectedCategories = [];
@@ -42,7 +42,7 @@ angular.module('WordRiverApp')
     $scope.getCategories = function() {
       $scope.categoryArray.splice(0, $scope.categoryArray.length);
       $http.get('/api/categories').success(function (allCategories) {
-        console.log(allCategories);
+        //console.log(allCategories);
         for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
             if(allCategories[j]._id == $scope.currentUser.contextPacks[i]){
@@ -249,15 +249,17 @@ angular.module('WordRiverApp')
     //}
     //Deletes a category
     $scope.removeCategory = function(category) {
-      $scope.catToRemove = $scope.categoryArray[$scope.findIndexOfCat(category)];
+      $scope.tempIndex = $scope.findIndexOfCat(category);
+      $scope.catToRemove = $scope.categoryArray[$scope.tempIndex];
       console.log(category.name);
-      $http.delete('/api/categories/'+ $scope.catToRemove._id);
-      $scope.categoryArray.splice($scope.findIndexOfCat(category), 1);
       for(var i = 0; i<$scope.currentUser.contextPacks.length; i++){
         if($scope.currentUser.contextPacks[i] == $scope.catToRemove._id){
           $scope.currentUser.contextPacks.splice(i,1);
+          console.log($scope.catToRemove.name);
         }
       }
+      $http.delete('/api/categories/'+ $scope.catToRemove._id).success(function(){console.log('success')});
+      $scope.categoryArray.splice($scope.tempIndex, 1);
       $scope.getCategories();
       //var categoryArrayIDS = [];
       //for(var i = 0; i < $scope.categoryArray.length; i ++){
