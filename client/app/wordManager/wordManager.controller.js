@@ -130,7 +130,7 @@ angular.module('WordRiverApp')
           $scope.currentUser.contextPacks.push($scope.theIDWeWant);
         });
       }
-      
+
       $scope.categoryField="";
       $scope.getCategories();
     };
