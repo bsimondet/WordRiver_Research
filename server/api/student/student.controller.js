@@ -118,6 +118,21 @@ exports.addPack = function(req, res) {
   });
 };
 
+exports.addWord = function(req, res) {
+  var userId = req.params.id;
+  var word = req.body.word;
+  console.log(packId);
+  Student.findById(userId, function (err, user) {
+
+    user.tileBucket.push(word);
+
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.deleteFromGroup = function(req, res) {
   var userId = req.params.id;
   var group = req.body.groupID;

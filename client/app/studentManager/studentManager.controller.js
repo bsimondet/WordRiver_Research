@@ -17,6 +17,7 @@ angular.module('WordRiverApp')
     $scope.showGroups = true;
     $scope.studentGroups = [];
     $scope.selectedStudent = [];
+    $scope.tiles = [];
     $scope.localGroupArray = $scope.currentUser.groupList;
     $scope.help = false;
     $scope.toGroupSort = "";
@@ -35,10 +36,17 @@ angular.module('WordRiverApp')
     $scope.getGroups = function(){
       $http.get("/api/users/me").success(function(user){
         $scope.currentUser = user;
-        console.log(user);
         $scope.localGroupArray = user.groupList;
       })
     };
+
+    $scope.getTiles = function(){
+      $http.get("/api/tile").success(function(tiles){
+        $scope.tiles = tiles;
+      });
+    };
+
+    $scope.getTiles();
 
     $scope.toggleHelp = function(){
       if ($scope.help == true)$scope.help = false;
@@ -147,7 +155,6 @@ angular.module('WordRiverApp')
             $scope.getStudents();
           });
       }
-      //Not sure what to do here...
 
     };
 
@@ -180,6 +187,18 @@ angular.module('WordRiverApp')
           $scope.students[studentIndex].contextTags.push({tagName: contextArray[i], creatorID: $scope.currentUser._id});
           //$scope.addTilesToStudent($scope.students[studentIndex], contextArray[i]);
           $http.put("/api/students/"+student._id+"/addPack", {packId: contextArray[i]});
+          $scope.addWordsToStudent(contextArray[i], student);
+        }
+      }
+    };
+
+    $scope.addWordsToStudent = function(pack, student){
+      for(var i = 0; i < $scope.tiles.length; i++){
+        if($scope.inArray($scope.tiles[i].contextTags, pack)){
+          if(!$scope.inArray(student.tileBucket, pack)) {
+            student.tileBucket.push(pack);
+            $http.put("api/students/" + student._id + "/addWord", {word: $scope.tiles[i]._id});
+          }
         }
       }
     };
