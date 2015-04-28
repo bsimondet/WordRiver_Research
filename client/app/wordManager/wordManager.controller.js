@@ -46,8 +46,9 @@ angular.module('WordRiverApp')
         for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
             if(allCategories[j]._id == $scope.currentUser.contextPacks[i]){
-              $scope.categoryArray.push(allCategories[i]);
-              console.log($scope.categoryArray.length);
+              $scope.categoryArray.push(allCategories[j]);
+              console.log(allCategories[j]._id);
+              console.log($scope.currentUser.contextPacks[i]);
             }
           }
         }
@@ -121,14 +122,25 @@ angular.module('WordRiverApp')
         console.log($scope.categoryField);
         $http.post('/api/categories/',
           {name:$scope.categoryField, isWordType: false, creatorID: $scope.currentUser._id}
-        ).success(function(){console.log($scope.currentUser._id)});
+        ).success(function(data){
+            console.log(data);
+            $scope.currentUser.contextPacks.push(data._id);
+            $http.put('/api/users/' + $scope.currentUser._id + '/addContextID',
+              {contextID: data._id}
+            ).success(function(){
+                console.log('something');
+              });
+          });
 
         $scope.theIDWeWant = null;
-        $http.get('/api/categories').success(function(allCats){
-          $scope.theIDWeWant = allCats[allCats.length - 1]._id
-          console.log("success??");
-          $scope.currentUser.contextPacks.push($scope.theIDWeWant);
-        });
+        //$http.get('/api/categories').success(function(allCats){
+        //  $scope.theIDWeWant = allCats[allCats.length - 1]._id
+        //  console.log("success??");
+        //  $scope.currentUser.contextPacks.push($scope.theIDWeWant);
+        //  $http.put('/api/users/' + $scope.currentUser._id + '/addContextID',
+        //    {contextID: $scope.theIDWeWant}
+        //  ).success(function(){console.log($scope.currentUser._id)});
+        //});
       }
 
       $scope.categoryField="";
@@ -255,6 +267,7 @@ angular.module('WordRiverApp')
       for(var i = 0; i<$scope.currentUser.contextPacks.length; i++){
         if($scope.currentUser.contextPacks[i] == $scope.catToRemove._id){
           $scope.currentUser.contextPacks.splice(i,1);
+
           console.log($scope.catToRemove.name);
         }
       }
