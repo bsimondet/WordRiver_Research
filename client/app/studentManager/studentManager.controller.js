@@ -179,6 +179,7 @@ angular.module('WordRiverApp')
         if(notAdded){
           $scope.students[studentIndex].contextTags.push({tagName: contextArray[i], creatorID: $scope.currentUser._id});
           //$scope.addTilesToStudent($scope.students[studentIndex], contextArray[i]);
+          $http.put("/api/students/"+student._id+"/addPack", {packId: contextArray[i]});
         }
       }
     };

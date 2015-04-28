@@ -94,7 +94,22 @@ exports.assignToGroup = function(req, res) {
   var group = req.body.groupID;
   Student.findById(userId, function (err, user) {
 
-      user.groupList.push(group);
+    user.groupList.push(group);
+
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+exports.addPack = function(req, res) {
+  var userId = req.params.id;
+  var packId = req.body.packId;
+  console.log(packId);
+  Student.findById(userId, function (err, user) {
+
+    user.contextTags.push(packId);
 
     user.save(function(err) {
       if (err) return validationError(res, err);
