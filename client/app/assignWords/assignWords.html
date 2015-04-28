@@ -54,7 +54,7 @@
         <p>Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
         </p>
       </div>
-      <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
+      <button class="btn btn-primary center-block" title={{helpText}} ng-click="toggleHelp()">{{helpText}}</button>
       <br/>
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <h3 class="center">Click on anything to begin.</h3>
@@ -192,7 +192,7 @@
       <button class="btn btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
       <input type="text" ng-Model="searchText1" placeholder="Search">
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:searchText1">
+        <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:{name:searchText1}">
           <input type="checkbox" value="value" ng-click="checkCategories(category)"><a href="" ng-click="displayCatInfo(category)">{{category.name}}</a>
           <span class="glyphicon glyphicon-eye-close floatRight close" ng-click="isCollapsed = !isCollapsed; populateDisplayTile(category); openingOnlyOneCategory(category)"></span>
             <ul collapse="category.isCollapsed">
@@ -213,7 +213,7 @@
       <button class="btn btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
       <input type="text" ng-Model="searchText2" placeholder="Search">
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:searchText2">
+        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:{name:searchText2}">
           <input type="checkbox" value="value" ng-click="checkWords(tile)"><a href="" ng-click="displayTileInfo(tile)">{{tile.name}}</a>
       </ul>
     </div>
