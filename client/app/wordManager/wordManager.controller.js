@@ -26,13 +26,15 @@ angular.module('WordRiverApp')
     $scope.showValue = true;
     $scope.showValue1 = true;
     $scope.wordToEdit = null;
+
+    $scope.theIDWeWant = null;
    // $scope.wordToRemove = null;
     //$scope.selectedCategories = [];
 
-    $scope.confirmDelete = function(index) {
-      this.index = index;
-      if (confirm("Are you sure you want to delete " + $scope.categoryArray[index] + "?") == true) {
-        $scope.removeCategory(index);
+    $scope.confirmDelete = function(category) {
+      this.index = $scope.findIndexOfCat(category);
+      if (confirm("Are you sure you want to delete " + $scope.categoryArray[$scope.findIndexOfCat(category)].name + "?") == true) {
+        $scope.removeCategory(category);
       }
     };
 
@@ -43,9 +45,9 @@ angular.module('WordRiverApp')
         console.log(allCategories);
         for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
-            console.log('PLEASE WORK');
             if(allCategories[j]._id == $scope.currentUser.contextPacks[i]){
               $scope.categoryArray.push(allCategories[i]);
+              console.log($scope.categoryArray.length);
             }
           }
         }
@@ -116,12 +118,19 @@ angular.module('WordRiverApp')
 
     $scope.addCategory = function () {
       if ($scope.categoryField.length >= 1) {
-        //$scope.categoryArray.push($scope.categoryField);
         console.log($scope.categoryField);
         $http.post('/api/categories/',
           {name:$scope.categoryField, isWordType: false, creatorID: $scope.currentUser._id}
         ).success(function(){console.log($scope.currentUser._id)});
+
+        $scope.theIDWeWant = null;
+        $http.get('/api/categories').success(function(allCats){
+          $scope.theIDWeWant = allCats[allCats.length - 1]._id
+          console.log("success??");
+          $scope.currentUser.contextPacks.push($scope.theIDWeWant);
+        });
       }
+      
       $scope.categoryField="";
       $scope.getCategories();
     };
@@ -230,24 +239,33 @@ angular.module('WordRiverApp')
 
       };
 
-    $scope.addWordToCatoegry = function() {
-
-    };
+    //$scope.addWordToCategory = function() {
+    //
+    //};
 
     //$scope.updateTileV2 = function(tile) {
     //
     //  $http.put('/api/tile' + $scope.tileId + "/updateTile", {})
     //}
     //Deletes a category
-    $scope.removeCategory = function(index) {
-      $scope.categoryArray.splice(index, 1);
-      var categoryArrayIDS = [];
-      for(var i = 0; i < $scope.categoryArray.length; i ++){
-        categoryArrayIDS.push($scope.categoryArray[i]._id);
+    $scope.removeCategory = function(category) {
+      $scope.catToRemove = $scope.categoryArray[$scope.findIndexOfCat(category)];
+      console.log(category.name);
+      $http.delete('/api/categories/'+ $scope.catToRemove._id);
+      $scope.categoryArray.splice($scope.findIndexOfCat(category), 1);
+      for(var i = 0; i<$scope.currentUser.contextPacks.length; i++){
+        if($scope.currentUser.contextPacks[i] == $scope.catToRemove._id){
+          $scope.currentUser.contextPacks.splice(i,1);
+        }
       }
-      $http.patch('/api/users/' + $scope.currentUser._id, {
-        contextPacks : categoryArrayIDS
-      });
+      $scope.getCategories();
+      //var categoryArrayIDS = [];
+      //for(var i = 0; i < $scope.categoryArray.length; i ++){
+      //  categoryArrayIDS.push($scope.categoryArray[i]._id);
+      //}
+      //$http.patch('/api/users/' + $scope.currentUser._id, {
+      //  contextPacks : categoryArrayIDS
+      //});
     };
 
       //Removes a word from a category
