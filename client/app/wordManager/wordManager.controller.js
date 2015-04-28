@@ -122,15 +122,15 @@ angular.module('WordRiverApp')
         $http.post('/api/categories/',
           {name:$scope.categoryField, isWordType: false, creatorID: $scope.currentUser._id}
         ).success(function(){console.log($scope.currentUser._id)});
+
+        $scope.theIDWeWant = null;
+        $http.get('/api/categories').success(function(allCats){
+          $scope.theIDWeWant = allCats[allCats.length - 1]._id
+          console.log("success??");
+          $scope.currentUser.contextPacks.push($scope.theIDWeWant);
+        });
       }
-
-      $scope.theIDWeWant = null;
-      $http.get('/api/categories').success(function(allCats){
-        $scope.theIDWeWant = allCats[allCats.length - 1]._id
-        console.log("success??");
-        $scope.currentUser.contextPacks.push($scope.theIDWeWant);
-      });
-
+      
       $scope.categoryField="";
       $scope.getCategories();
     };
