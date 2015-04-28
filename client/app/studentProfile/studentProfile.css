@@ -75,9 +75,9 @@ table, th, td {
 }
 
 .words-table {
-  -webkit-column-count: 3; /* Chrome, Safari, Opera */
-  -moz-column-count: 3; /* Firefox */
-  column-count: 3;
+  -webkit-column-count: 5; /* Chrome, Safari, Opera */
+  -moz-column-count: 5; /* Firefox */
+  column-count: 5;
   -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
   -moz-column-gap: 0px; /* Firefox */
   column-gap: 0px;
