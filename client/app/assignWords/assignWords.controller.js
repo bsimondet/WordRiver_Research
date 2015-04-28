@@ -97,7 +97,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.toggleHelp = function(){
-      if ($scope.help == true)$scope.help = false;
+      if ($scope.help)$scope.help = false;
       else $scope.help = true;
     };
 
@@ -153,6 +153,17 @@ angular.module('WordRiverApp')
       }
       if(counter != 1){
         $scope.selectedWords.push(word);
+      }
+    };
+
+    $scope.uncheckAll = function () {
+      var checkboxes = [];
+      checkboxes = document.getElementsByTagName('input');
+
+      for (var i=0; i<checkboxes.length; i++)  {
+        if (checkboxes[i].type == 'checkbox')   {
+          checkboxes[i].checked = false;
+        }
       }
     };
 
@@ -482,6 +493,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.assignWords = function (view) {
+      $scope.success = false;
       if ($scope.groupView && $scope.categoryView) {
         //Function to add selected categories to selected groups.
         if ($scope.selectedGroups.length == 0) {
@@ -507,6 +519,7 @@ angular.module('WordRiverApp')
               alert("Successfully assigned!");
             });
           $scope.switchMiddle("middle");
+          $scope.success = true;
         }
 
       } else if ($scope.groupView && !$scope.categoryView) {
@@ -534,6 +547,7 @@ angular.module('WordRiverApp')
               alert("Successfully assigned!");
             });
           $scope.switchMiddle("middle");
+          $scope.success = true;
         }
       } else if (!$scope.groupView && $scope.categoryView) {
         //Function to add selected categories to selected students.
@@ -558,6 +572,7 @@ angular.module('WordRiverApp')
           }
         }
         $scope.switchMiddle("middle");
+        $scope.success = true;
         $scope.getAll();
       } else if (!$scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected students.
@@ -568,7 +583,6 @@ angular.module('WordRiverApp')
           alert("You must select at least 1 word.");
         }
         for (var r = 0; r < $scope.userStudents.length; r++) {
-          console.log($scope.userStudents[r].tileBucket);
           for (var y = 0; y < $scope.selectedStudents.length; y++) {
             if ($scope.userStudents[r]._id == $scope.selectedStudents[y]._id) {
               for (var v = 0; v < $scope.selectedWords.length; v++) {
@@ -584,12 +598,16 @@ angular.module('WordRiverApp')
           }
         }
         $scope.getAll();
+        $scope.success = true;
         $scope.switchMiddle("middle");
       }
-      $scope.selectedCategories = [];
-      $scope.selectedWords = [];
-      $scope.selectedGroups = [];
-      $scope.selectedStudents = [];
+      if ($scope.success == true) {
+        $scope.selectedCategories = [];
+        $scope.selectedWords = [];
+        $scope.selectedGroups = [];
+        $scope.selectedStudents = [];
+        $scope.uncheckAll();
+      }
     };
 
 
@@ -627,7 +645,7 @@ angular.module('WordRiverApp')
 
     $scope.populateDisplayTile = function(category){
       $scope.displayTiles = [];
-      console.log(category.isColl)
+      console.log(category.isColl);
       for (var j = 0; j < $scope.userTiles.length; j++) {
         for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
           if ($scope.userTiles[j].contextTags[z] == category._id) {
@@ -635,7 +653,7 @@ angular.module('WordRiverApp')
           }
         }
       }
-    }
+    };
 
     $scope.openingOnlyOneCategory = function(category){
       for(var i = 0; i < $scope.userCategories.length; i++){

@@ -32,6 +32,9 @@
 
     </div>
     <div class="col-xs-3" ng-hide="groupView">
+      <div ng-show="help">
+        <p>Click on any student to view student information, or "Show Groups" to choose a group.</p>
+      </div>
       <button class="btn btn-primary" title="Show Groups" ng-click="groupView=!groupView">Show Groups</button>
       <h1 class="">Students:</h1>
       <hr>
