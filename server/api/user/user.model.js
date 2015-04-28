@@ -21,7 +21,6 @@ var UserSchema = new Schema({
 
   groupList: [{     //A list of groups to apply to students. A student with this group has access to the free tiles and context packs defined within the group JSON object within the user
     groupName: String,
-    _id: String,
     contextPacks: [], //Context packs the students within a group has access to
     freeTiles: []     //Free tiles that may not be associated with a specific context pack that students have access to within the group
   }],
