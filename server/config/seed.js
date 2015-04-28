@@ -14,7 +14,7 @@ var Category = require('../api/category/category.model');
 User.find({}).remove(function() {
   User.create({
       "_id": "5511a83da168f8b5f3144f02",
-      "name": "Rosemarie Maxwell",
+      "name": "Elena Machkasova",
       "email": "rosemariemaxwell@plexia.com",
       "role": {
         "type": "user"
@@ -80,7 +80,13 @@ User.find({}).remove(function() {
         "552c20f81e2f0b90bb8b354a",
         "552c20f8236b5a09d40cfaf0",
         "552c20f80645c32973a23dfc",
-        "552c20f8daa1ff88495504d5"
+        "552c20f8daa1ff88495504d5",
+        "553fd47c0b4dda81b98a7f70",
+        "553fd47c689eeea244d06b3b",
+        "553fd47c3246994599144960",
+        "553fd47cd258d7a1da8e0ce7",
+        "553fd47c3cd99bec88d86afb",
+        "553fd47ca47e5cd02c57ab84"
       ]
     }
   );
@@ -90,8 +96,8 @@ Student.find({}).remove(function() {
   Student.create(
     {
       "_id": "5511ab56117e23f0412fd08f",
-      "firstName": "Cardenas",
-      "lastName": "Coffey",
+      "firstName": "Aaron",
+      "lastName": "Lemmon",
       "artifacts": [],
       "teachers": [
         "5511a83da168f8b5f3144f02"
@@ -104,8 +110,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "5511ab564ac02dbaf337270d",
-      "firstName": "Aisha",
-      "lastName": "Wheeler",
+      "firstName": "Ben",
+      "lastName": "Simondet",
       "artifacts": [],
       "teachers": [
         "5511a83da168f8b5f3144f02"
@@ -116,8 +122,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "5511ab5617fda1233df3f6dd",
-      "firstName": "Weiss",
-      "lastName": "Tanner",
+      "firstName": "Myles",
+      "lastName": "Gavic",
       "artifacts": [],
       "teachers": [
         "5511a83da168f8b5f3144f02"
@@ -128,8 +134,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "552c20f8be17b267b77b5a19",
-      "firstName": "Burke",
-      "lastName": "Mayer",
+      "firstName": "Jack",
+      "lastName": "Lynch",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -139,8 +145,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "552c20f8d1172952c6f268fe",
-      "firstName": "Mueller",
-      "lastName": "David",
+      "firstName": "Molly",
+      "lastName": "Grove",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -150,8 +156,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "552c20f878838eab8bf3f0b1",
-      "firstName": "Kimberley",
-      "lastName": "Lloyd",
+      "firstName": "Resa",
+      "lastName": "Brockman",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -172,8 +178,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "552c20f8c91389f9a90eea7e",
-      "firstName": "Garza",
-      "lastName": "Massey",
+      "firstName": "Preston",
+      "lastName": "Miller",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -196,8 +202,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "552c20f835f5e056a3e3c932",
-      "firstName": "Hahn",
-      "lastName": "Melendez",
+      "firstName": "Jessica",
+      "lastName": "Haugen",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -208,8 +214,8 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "552c20f8f403787cef74f326",
-      "firstName": "Lucinda",
-      "lastName": "McCloud",
+      "firstName": "Bailey",
+      "lastName": "Denzer",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
@@ -255,8 +261,74 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "552c20f8daa1ff88495504d5",
-      "firstName": "Claire",
-      "lastName": "Patterson",
+      "firstName": "Yuting",
+      "lastName": "Xiao",
+      "teachers": [
+        "5511a83da168f8b5f3144f02"
+      ],
+      "tileBucket": [],
+      "groupList": [],
+      "contextTags": []
+    },
+    {
+      "_id": "553fd47c0b4dda81b98a7f70",
+      "firstName": "Issac",
+      "lastName": "Koak",
+      "teachers": [
+        "5511a83da168f8b5f3144f02"
+      ],
+      "tileBucket": [],
+      "groupList": [],
+      "contextTags": []
+    },
+    {
+      "_id": "553fd47c689eeea244d06b3b",
+      "firstName": "Jocelyn",
+      "lastName": "Bayer",
+      "teachers": [
+        "5511a83da168f8b5f3144f02"
+      ],
+      "tileBucket": [],
+      "groupList": [],
+      "contextTags": []
+    },
+    {
+      "_id": "553fd47c3246994599144960",
+      "firstName": "Zach",
+      "lastName": "Copic",
+      "teachers": [
+        "5511a83da168f8b5f3144f02"
+      ],
+      "tileBucket": [],
+      "groupList": [],
+      "contextTags": []
+    },
+    {
+      "_id": "553fd47cd258d7a1da8e0ce7",
+      "firstName": "Valencia",
+      "lastName": "Ingram",
+      "teachers": [
+        "5511a83da168f8b5f3144f02"
+      ],
+      "tileBucket": [],
+      "groupList": [],
+      "contextTags": []
+    },
+    {
+      "_id": "553fd47c3cd99bec88d86afb",
+      "firstName": "Tyler",
+      "lastName": "Lemke",
+      "teachers": [
+        "5511a83da168f8b5f3144f02"
+      ],
+      "tileBucket": [],
+      "groupList": [],
+      "contextTags": []
+    },
+    {
+      "_id": "553fd47ca47e5cd02c57ab84",
+      "firstName": "Ryan",
+      "lastName": "McArthur",
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
