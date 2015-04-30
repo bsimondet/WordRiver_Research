@@ -15,7 +15,6 @@ var StudentSchema = new Schema({
   tileBucket: [], //List of tile IDs the student has access to
   groupList: [], //Groups that a student is in, represented by an array of group ids
   contextTags: [] //Array of category ids, where each id is the category a user has access to
-
 });
 
 module.exports = mongoose.model('Student', StudentSchema);

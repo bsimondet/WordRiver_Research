@@ -2,6 +2,8 @@
 
 angular.module('WordRiverApp')
   .controller('WordManagerCtrl', function ($scope, $http, socket, Auth) {
+
+    //Lotsa global variables
     $scope.currentUser = Auth.getCurrentUser();
     $scope.categoryField = "";
     $scope.addField = "";
@@ -17,8 +19,8 @@ angular.module('WordRiverApp')
     $scope.allCatTiles = [];
     $scope.userTiles = [];
     $scope.matchTiles = [];
-    $scope.toSort = "tile";
-    $scope.order = true;
+    $scope.toSort = "name";
+    $scope.order = false;
     $scope.currentCategory = null;
     $scope.currentTile = null;
     $scope.tileId = "";
@@ -28,8 +30,6 @@ angular.module('WordRiverApp')
     $scope.wordToEdit = null;
     $scope.tempIndex = null;
     $scope.theIDWeWant = null;
-   // $scope.wordToRemove = null;
-    //$scope.selectedCategories = [];
 
     $scope.confirmDelete = function(category) {
       this.index = $scope.findIndexOfCat(category);
@@ -40,15 +40,14 @@ angular.module('WordRiverApp')
 
 
     $scope.getCategories = function() {
-      $scope.categoryArray.splice(0, $scope.categoryArray.length);
+      $scope.categoryArray = [];
       $http.get('/api/categories').success(function (allCategories) {
-        //console.log(allCategories);
         for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
           for(var j = 0; j < allCategories.length; j++){
             if(allCategories[j]._id == $scope.currentUser.contextPacks[i]){
               $scope.categoryArray.push(allCategories[j]);
-              console.log(allCategories[j]._id);
-              console.log($scope.currentUser.contextPacks[i]);
+              //console.log(allCategories[j]._id);
+              //console.log($scope.currentUser.contextPacks[i]);
             }
           }
         }
@@ -57,14 +56,12 @@ angular.module('WordRiverApp')
 
 
     $scope.addTileToCategory = function() {
-      //console.log($scope.selectedCategories.length);
       var index =-1;
       for(var i = 0; i < $scope.selectedCategories.length; i++){
-        //console.log("Test2");
         for(var j = 0; j < $scope.selectedTiles.length; j++){
+          console.log("asdasd "+$scope.selectedTiles[j]);
           index =  $scope.findTileByIndex($scope.selectedTiles[j]);
-          //$scope.selectedTiles[j].contextTags.push($scope.selectedCategories[i]);
-          if(!$scope.inArray($scope.userTiles[index].contextTags, $scope.selectedCategories[i])) {
+          if(index != -1 && !$scope.inArray($scope.userTiles[index].contextTags, $scope.selectedCategories[i])) {
             $http.put('/api/tile/' + $scope.userTiles[index]._id + "/updateTile", {
               tile: $scope.userTiles[index],
               tileId: $scope.userTiles[index]._id,
@@ -75,20 +72,22 @@ angular.module('WordRiverApp')
             });
             $scope.userTiles[index].contextTags.push($scope.selectedCategories[i]);
           }
-          //$scope.selectedTiles[j].test = [];
-          //$scope.selectedTiles[j].test.push($scope.selectedCategories[i]);
-          //console.log("Test4");
         }
       }
-      //for(var j = 0; j < $scope.selectedTiles; j++){
-      //  $http.put('/api/tile/' + $scope.selectedTiles[j]._id + "/updateTile", {tile: $scope.selectedTiles[j], tileId: $scope.selectedTiles[j]._id})
-      //}
+
       if($scope.currentTile != null) {
         $scope.displayWordInfo($scope.currentTile);
       }
       if($scope.currentCategory != null) {
         $scope.displayCatInfo($scope.currentCategory);
       }
+
+      //Don't refresh anything if there isn't anything to add
+      if($scope.selectedCategories.length > 0 && $scope.selectedTiles.length > 0) {
+        $scope.getWords();
+        $scope.getCategories();
+      }
+
     };
 
     $scope.findTileByIndex = function(tile){
@@ -123,7 +122,7 @@ angular.module('WordRiverApp')
         $http.post('/api/categories/',
           {name:$scope.categoryField, isWordType: false, creatorID: $scope.currentUser._id}
         ).success(function(data){
-            console.log(data);
+            console.log("data:"+data);
             $scope.currentUser.contextPacks.push(data._id);
             $http.put('/api/users/' + $scope.currentUser._id + '/addContextID',
               {contextID: data._id}
@@ -148,12 +147,13 @@ angular.module('WordRiverApp')
     };
 
     $scope.getWords = function(){
-      $scope.userTiles.splice(0,$scope.userTiles.length);
+      $scope.userTiles = [];
       $http.get('/api/tile').success(function(allTiles) {
         $scope.allTiles = allTiles;
         for(var i= 0; i < $scope.allTiles.length; i++){
           if($scope.currentUser._id == $scope.allTiles[i].creatorID){
             $scope.userTiles.push($scope.allTiles[i]);
+            console.log($scope.allTiles[i]);
           }
         }
       });
@@ -172,6 +172,11 @@ angular.module('WordRiverApp')
         $scope.addField = "";
         $scope.getWords();
       }
+    };
+
+
+    $scope.uncheckAll = function(){
+      $scope.selectedTiles = [];
     };
 
     //$scope.getAllTiles = function(){
@@ -325,7 +330,7 @@ angular.module('WordRiverApp')
         }
       }
     }
-    //
+    //THIS FUNCTION IS TERRIBLE - we made it this way due to time and labor constraints. PLEASE FIX.
     $scope.editWord = function(tile){
       $scope.editWordIndex = $scope.findIndexOfTile(tile);
       $scope.showValue = false;
