@@ -28,10 +28,10 @@ angular.module('WordRiverApp')
     //This is the section for getting all the things
 
     $scope.getAll = function () {
-      //$scope.userTiles = [];
-      //$scope.userCategories = [];
-      //$scope.userStudents = [];
-      //$scope.userGroups = [];
+      $scope.userTiles = [];
+      $scope.userCategories = [];
+      $scope.userStudents = [];
+      $scope.userGroups = [];
       //$scope.isCollapsed = false;
       $scope.userGroups = $scope.currentUser.groupList;
       $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
@@ -182,6 +182,7 @@ angular.module('WordRiverApp')
     $scope.displayCatInfo = function (category) {
       $scope.switchMiddle("category");
       $scope.categorySelected = category;
+      $scope.middleElement = category;
       $scope.matchStudent = [];
       $scope.matchGroup = [];
       $scope.matchTiles = [];
@@ -211,6 +212,7 @@ angular.module('WordRiverApp')
     $scope.displayGroupInfo = function (group){
       $scope.switchMiddle("group");
       $scope.groupSelected = group;
+      $scope.middleElement = group;
       $scope.matchCategoryIds = [];
       $scope.matchCategories = [];
       $scope.matchStudents = [];
@@ -257,6 +259,7 @@ angular.module('WordRiverApp')
       $scope.studentSelected = student;
       $scope.switchMiddle("student");
       $scope.matchGroups = [];
+      $scope.middleElement = student;
       $scope.studentCategories = [];
       $scope.matchTiles = [];
       $scope.matchTileIds = [];
@@ -300,6 +303,7 @@ angular.module('WordRiverApp')
     $scope.displayTileInfo = function (word) {
       $scope.tileSelected = word;
       $scope.switchMiddle("word");
+      $scope.middleElement = word;
       $scope.matchCategoryIds = [];
       $scope.matchCategories = [];
       $scope.matchGroup = [];
@@ -607,6 +611,15 @@ angular.module('WordRiverApp')
         $scope.selectedGroups = [];
         $scope.selectedStudents = [];
         $scope.uncheckAll();
+      }
+      if ($scope.middleText == 'category'){
+        $scope.displayCatInfo($scope.middleElement);
+      }if ($scope.middleText == 'group'){
+        $scope.displayGroupInfo($scope.middleElement);
+      }if ($scope.middleText == 'word'){
+        $scope.displayWordInfo($scope.middleElement);
+      }if ($scope.middleText == 'student'){
+        $scope.displayStudentInfo($scope.middleElement);
       }
     };
 
