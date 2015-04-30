@@ -139,7 +139,7 @@ angular.module('WordRiverApp')
 
     //Takes in a student's ID and a groups name
     $scope.assignStudentToGroup = function(student, group){
-      console.log(student + " "+ group);
+      console.log(student + " " + group);
       var studentIndex = $scope.findStudentInList(student);
       console.log(studentIndex);
 
