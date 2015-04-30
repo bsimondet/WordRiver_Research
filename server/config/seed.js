@@ -19,7 +19,7 @@ User.find({}).remove(function() {
       "role": {
         "type": "user"
       },
-      "password": "culpa",
+      "password": "joethe",
       "contextPacks": [
         "553167d183c193d16d03ce80",
         "553167d1afa1bda9bc0d055a",
@@ -313,7 +313,7 @@ Student.find({}).remove(function() {
         "5511a83da168f8b5f3144f02"
       ],
       "tileBucket": [],
-      "groupList": [],
+      "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6", "5535520dd7b5c70193c4993c", "5535520dff3a52f2757e5944", "5535520d147a722a4e7233a3" ],
       "contextTags": []
     },
     {

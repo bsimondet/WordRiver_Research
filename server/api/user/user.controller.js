@@ -133,6 +133,24 @@ exports.updatePack = function(req, res, next) {
 //  });
 //};
 
+
+exports.removeCategoryID = function(req, res) {
+  var userId = req.body.userId;
+  var categoryID = req.body.categoryID;
+
+  User.findById(userId, function (err, user) {
+    for(var i = 0 ; i < user.contextPacks.length; i++){
+      if(user.contextPacks[i] == categoryID){
+        user.contextPacks.splice(i, 1);
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.updateCategories = function(req, res) {
   // deletes _id in req body to not screw things up...
   if(req.body._id){ delete req.body._id }
