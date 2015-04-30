@@ -12,7 +12,7 @@
       <div ng-show="help">
         <p>Click on any group to view group information, or "Show Students" to choose a student.</p>
       </div>
-      <button class="btn btn-primary" title="Show Students" ng-click="groupView=!groupView">Show Students</button>
+      <button class="btn btn-primary" title="Show Students" ng-click="groupView=!groupView;fullName()">Show Students</button>
       <h1 class="">Groups:</h1>
       <hr>
       <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
@@ -42,7 +42,7 @@
       <button class="btn btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
       <input type="text" ng-Model="searchText0" placeholder="Search">
       <ul class="list-group scroll">
-        <li class="list-group-item " ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:searchText0">
+        <li class="list-group-item " ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:{fullName:searchText0}">
           <input type="checkbox" value="value"  ng-click="checkStudents(student)"><a href="" ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}} </a>
       </ul>
     </div>

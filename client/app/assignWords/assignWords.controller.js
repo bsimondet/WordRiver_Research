@@ -24,6 +24,8 @@ angular.module('WordRiverApp')
 
     $scope.helpText = "Get Help";
 
+
+
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for getting all the things
 
@@ -80,7 +82,7 @@ angular.module('WordRiverApp')
         $scope.studentView = true;
         $scope.showGroup = false;
         $scope.showMiddle = true;
-        $scope.help = false;
+        $scope.help =   $scope.fullName();false;
       } else if (section == "group"){
         $scope.showCategory = false;
         $scope.wordView = false;
@@ -677,6 +679,17 @@ angular.module('WordRiverApp')
         }
       }
 
+    };
+
+    $scope.fullNameBoolean = true;
+
+    $scope.fullName = function() {
+      if ($scope.fullNameBoolean) {
+        for (var i = 0; i < $scope.userStudents.length; i++) {
+          $scope.userStudents[i].fullName = $scope.userStudents[i].firstName + $scope.userStudents[i].lastName;
+          $scope.fullNameBoolean = false;
+        }
+      }
     };
 
 
