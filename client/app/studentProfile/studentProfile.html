@@ -28,14 +28,14 @@
       <img class="profilePicture" src="assets/images/cat.jpg" alt="we have a logo!"><br>
       <br />
       <h3 class="page-header"> Groups: </h3>
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="group in studentGroups"><label>{{group.groupName}}</label>
+      <ul>
+        <li ng-repeat="group in studentGroups"><label>{{group.groupName}}</label>
         </li>
       </ul>
 
       <h3 class="page-header">Context Packs:</h3>
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="contextPack in categoryArray"><label>{{contextPack.name}}</label>
+      <ul >
+        <li  ng-repeat="contextPack in categoryArray"><label>{{contextPack.name}}</label>
         </li>
       </ul>
 
