@@ -9,13 +9,11 @@
   <div class="col-xs-3 accordion-toggle" id="categories">
     <h1 class="">Categories:</h1>
     <hr>
+    <form ng-submit="addCategory()">
+      <input ng-model="categoryField" type="text" size="15" placeholder="Add a category">
+      <input type="submit" value="Add" class="btn btn-primary">
+    </form>
     <ul class="list-group scroll">
-      <li class="list-group-item">
-        <form ng-submit="addCategory()">
-          <input ng-model="categoryField" type="text" size="15" placeholder="Add a category">
-          <input type="submit" value="Add" class="btn btn-primary">
-        </form>
-      </li>
       <div>
         <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-model="selectedCategories[$index]" ng-true-value="'{{category._id}}'">
           <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete(category)"></span></li>
@@ -44,7 +42,7 @@
         </ul>
       </div>
       <div class="col-xs-3 wordfooter categoriesIn">
-        <h2 class="">Categories in {{currentTile.name}}:</h2>
+        <h2 class="">Categories that include {{currentTile.name}}:</h2>
         <ul class="list-group middleScroll">
           <li class="list-group-item">
           </li>
