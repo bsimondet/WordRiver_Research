@@ -28,10 +28,10 @@ angular.module('WordRiverApp')
     //This is the section for getting all the things
 
     $scope.getAll = function () {
-      $scope.userTiles = [];
-      $scope.userCategories = [];
-      $scope.userStudents = [];
-      $scope.userGroups = [];
+      //$scope.userTiles = [];
+      //$scope.userCategories = [];
+      //$scope.userStudents = [];
+      //$scope.userGroups = [];
       //$scope.isCollapsed = false;
       $scope.userGroups = $scope.currentUser.groupList;
       $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
@@ -523,7 +523,7 @@ angular.module('WordRiverApp')
           }
           $http.patch('api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.userGroups}).success(function () {
-              alert("Successfully assigned!");
+              //alert("Successfully assigned!");
               $scope.getAll();
             });
           $scope.success = true;
@@ -550,7 +550,7 @@ angular.module('WordRiverApp')
           }
           $http.patch('api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.userGroups}).success(function () {
-              alert("Successfully assigned!");
+              //alert("Successfully assigned!");
               $scope.getAll();
             });
           $scope.success = true;
@@ -572,7 +572,7 @@ angular.module('WordRiverApp')
               $scope.userStudents[g].contextTags = $scope.checkForDuplicates($scope.userStudents[g].contextTags);
               $http.patch('api/students/' + $scope.userStudents[g]._id,
                 {contextTags: $scope.userStudents[g].contextTags}).success(function () {
-                  alert("Successfully assigned!");
+                  //alert("Successfully assigned!");
                   $scope.getAll();
                 });
             }
@@ -597,7 +597,7 @@ angular.module('WordRiverApp')
               $http.patch('api/students/' + $scope.userStudents[r]._id,
                 {tileBucket: $scope.userStudents[r].tileBucket}).success(function () {
                   $scope.getAll();
-                  alert("Successfully assigned!");
+                  //alert("Successfully assigned!");
                 });
             }
           }
@@ -605,15 +605,23 @@ angular.module('WordRiverApp')
         $scope.success = true;
       }
       if ($scope.success) {
+        $scope.getNewInfo();
         $scope.selectedCategories = [];
         $scope.selectedWords = [];
         $scope.selectedGroups = [];
         $scope.selectedStudents = [];
         $scope.uncheckAll();
       }
-      $scope.switchMiddle("middle");
     };
 
+    //Refreshes the page
+$scope.getNewInfo = function() {
+  if($scope.showGroup){
+    $scope.displayGroupInfo($scope.groupSelected);
+  }else if($scope.showCategory){
+    $scope.displayCatInfo($scope.categorySelected);
+  }
+}
 
 //getting the list of students within a group to show for collapsibility purposes in the assign content to people page
 
