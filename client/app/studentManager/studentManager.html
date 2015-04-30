@@ -48,8 +48,8 @@
   <div ng-show="showGroups">
     <!--adapt for students-->
     <h1 class="">Students in {{selectedGroupName}}:</h1>
-    <li class="list-group-item" ng-repeat="student in studentsInGroup"><label>{{student.lastName}}, {{student.firstName}}</label>
-      <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Delete Student From Group" ng-click="removeStudentFromGroup(student)"></span>
+    <li class="list-group-item" ng-repeat="student in studentsInGroup | orderBy: toSort:order"><label>{{student.lastName}}, {{student.firstName}}</label>
+      <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Remove Student From Group" ng-click="removeStudentFromGroup(student)"></span>
     </li>
     </ul>
     <div>
