@@ -8,12 +8,15 @@
 <div class="container">
   <div class="col-xs-3 accordion-toggle" id="categories">
     <h1 class="">Categories:</h1>
-    <hr>
+
     <form ng-submit="addCategory()">
       <input ng-model="categoryField" type="text" size="15" placeholder="Add a category">
       <input type="submit" value="Add" class="btn btn-primary">
     </form>
     <ul class="list-group scroll">
+      <li class="list-group-item">
+
+      </li>
       <div>
         <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-model="selectedCategories[$index]" ng-true-value="'{{category._id}}'">
           <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete(category)"></span></li>
@@ -32,7 +35,7 @@
         <input class="btn btn-primary center-block assignButton" type="submit" value="Add selected words to selected categories" class="btn btn-primary">
       </form>
       <div class="col-xs-3 wordfooter wordsIn">
-        <h2 class="">Words in {{currentCategory.name}}</h2>
+        <h2 class="">Words in <i>{{currentCategory.name}}</i></h2>
         <ul class="list-group middleScroll">
           <li class="list-group-item">
           </li>
@@ -42,7 +45,7 @@
         </ul>
       </div>
       <div class="col-xs-3 wordfooter categoriesIn">
-        <h2 class="">Categories that include {{currentTile.name}}:</h2>
+        <h2 class="">Categories containing <i>{{currentTile.name}}</i>:</h2>
         <ul class="list-group middleScroll">
           <li class="list-group-item">
           </li>
@@ -65,6 +68,10 @@
       </form>
 
       <br/>
+
+      <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
+      <button class="btn btn-primary" ng-click="uncheckAll()">Uncheck all</button>
+
     </div>
     <ul class="list-group scroll">
       <!--<li class="list-group-item">-->
@@ -78,9 +85,9 @@
       <!--<input type="submit" value="Search" class="btn btn-primary">&ndash;&gt;-->
       <!--</form>-->
       <!--</li>-->
-      <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
+
       <div>
-        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-model="selectedTiles[$index]" ng-true-value="'{{tile._id}}'">
+        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-model="selectedTiles[$index]" ng-true-value="'{{tile._id}}'" ng-click="console.log(tile)">
           <a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord(tile)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord(tile)"></span></li>
       </div>
     </ul>
