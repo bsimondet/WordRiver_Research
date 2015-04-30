@@ -19,7 +19,7 @@ User.find({}).remove(function() {
       "role": {
         "type": "user"
       },
-      "password": "culpa",
+      "password": "joethe",
       "contextPacks": [
         "553167d183c193d16d03ce80",
         "553167d1afa1bda9bc0d055a",
@@ -272,7 +272,7 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "553fd47c0b4dda81b98a7f70",
-      "firstName": "Issac",
+      "firstName": "Isaac",
       "lastName": "Koak",
       "teachers": [
         "5511a83da168f8b5f3144f02"
