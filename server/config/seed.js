@@ -19,7 +19,7 @@ User.find({}).remove(function() {
       "role": {
         "type": "user"
       },
-      "password": "culpa",
+      "password": "joethe",
       "contextPacks": [
         "553167d183c193d16d03ce80",
         "553167d1afa1bda9bc0d055a",
