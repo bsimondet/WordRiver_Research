@@ -15,11 +15,14 @@ angular.module('WordRiverApp')
     $scope.groupedStudents = [];
     $scope.value = false;
     $scope.help = false;
+    $scope.displayTiles = [];
 
     $scope.selectedCategories = [];
     $scope.selectedGroups = [];
     $scope.selectedStudents = [];
     $scope.selectedWords = [];
+
+    $scope.helpText = "Get Help";
 
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for getting all the things
@@ -29,7 +32,7 @@ angular.module('WordRiverApp')
       $scope.userCategories = [];
       $scope.userStudents = [];
       $scope.userGroups = [];
-      $scope.isCollapsed = false;
+      //$scope.isCollapsed = false;
       $scope.userGroups = $scope.currentUser.groupList;
       $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
         $scope.userCategories = userCategories;
@@ -93,11 +96,17 @@ angular.module('WordRiverApp')
         $scope.showMiddle = false;
         $scope.help = false;
       }
+      $scope.middleText = section;
     };
 
     $scope.toggleHelp = function(){
-      if ($scope.help == true)$scope.help = false;
-      else $scope.help = true;
+      if ($scope.help){
+        $scope.helpText= "Get Help";
+      }
+      else {
+        $scope.helpText = "Hide Help";
+      }
+      $scope.help = !$scope.help;
     };
 
     ////////////////////////////////////////////////////////////////////////////
@@ -152,6 +161,17 @@ angular.module('WordRiverApp')
       }
       if(counter != 1){
         $scope.selectedWords.push(word);
+      }
+    };
+
+    $scope.uncheckAll = function () {
+      var checkboxes = [];
+      checkboxes = document.getElementsByTagName('input');
+
+      for (var i=0; i<checkboxes.length; i++)  {
+        if (checkboxes[i].type == 'checkbox')   {
+          checkboxes[i].checked = false;
+        }
       }
     };
 
@@ -481,6 +501,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.assignWords = function (view) {
+      $scope.success = false;
       if ($scope.groupView && $scope.categoryView) {
         //Function to add selected categories to selected groups.
         if ($scope.selectedGroups.length == 0) {
@@ -502,10 +523,10 @@ angular.module('WordRiverApp')
           }
           $http.patch('api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.userGroups}).success(function () {
-              $scope.getAll();
               alert("Successfully assigned!");
+              $scope.getAll();
             });
-          $scope.switchMiddle("middle");
+          $scope.success = true;
         }
 
       } else if ($scope.groupView && !$scope.categoryView) {
@@ -529,10 +550,10 @@ angular.module('WordRiverApp')
           }
           $http.patch('api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.userGroups}).success(function () {
-              $scope.getAll();
               alert("Successfully assigned!");
+              $scope.getAll();
             });
-          $scope.switchMiddle("middle");
+          $scope.success = true;
         }
       } else if (!$scope.groupView && $scope.categoryView) {
         //Function to add selected categories to selected students.
@@ -552,12 +573,12 @@ angular.module('WordRiverApp')
               $http.patch('api/students/' + $scope.userStudents[g]._id,
                 {contextTags: $scope.userStudents[g].contextTags}).success(function () {
                   alert("Successfully assigned!");
+                  $scope.getAll();
                 });
             }
           }
         }
-        $scope.switchMiddle("middle");
-        $scope.getAll();
+        $scope.success = true;
       } else if (!$scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected students.
         if($scope.selectedStudents.length == 0){
@@ -567,7 +588,6 @@ angular.module('WordRiverApp')
           alert("You must select at least 1 word.");
         }
         for (var r = 0; r < $scope.userStudents.length; r++) {
-          console.log($scope.userStudents[r].tileBucket);
           for (var y = 0; y < $scope.selectedStudents.length; y++) {
             if ($scope.userStudents[r]._id == $scope.selectedStudents[y]._id) {
               for (var v = 0; v < $scope.selectedWords.length; v++) {
@@ -582,13 +602,16 @@ angular.module('WordRiverApp')
             }
           }
         }
-        $scope.getAll();
-        $scope.switchMiddle("middle");
+        $scope.success = true;
       }
-      $scope.selectedCategories = [];
-      $scope.selectedWords = [];
-      $scope.selectedGroups = [];
-      $scope.selectedStudents = [];
+      if ($scope.success) {
+        $scope.selectedCategories = [];
+        $scope.selectedWords = [];
+        $scope.selectedGroups = [];
+        $scope.selectedStudents = [];
+        $scope.uncheckAll();
+      }
+      $scope.switchMiddle("middle");
     };
 
 
@@ -598,6 +621,7 @@ angular.module('WordRiverApp')
       $scope.groupedStudents = [];
       for (var i = 0; i < $scope.userStudents.length; i++) {
         if ($scope.userStudents[i].groupList.indexOf(group._id) > -1) {
+          console.log("we are in the if statement");
           $scope.groupedStudents.push($scope.userStudents[i]);
         }
       }
@@ -617,6 +641,35 @@ angular.module('WordRiverApp')
         }
         else{
           $scope.userGroups[i].isCollapsed = true;
+          console.log("else statement");
+        }
+      }
+
+    };
+
+    $scope.populateDisplayTile = function(category){
+      $scope.displayTiles = [];
+      console.log(category.isColl);
+      for (var j = 0; j < $scope.userTiles.length; j++) {
+        for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
+          if ($scope.userTiles[j].contextTags[z] == category._id) {
+            $scope.displayTiles.push($scope.userTiles[j]);
+          }
+        }
+      }
+    };
+
+    $scope.openingOnlyOneCategory = function(category){
+      for(var i = 0; i < $scope.userCategories.length; i++){
+
+        console.log($scope.userCategories[i]);
+
+        if($scope.userCategories[i]._id == category._id){
+          $scope.userCategories[i].isCollapsed = !$scope.userCategories[i].isCollapsed;
+          console.log("if statement");
+        }
+        else{
+          $scope.userCategories[i].isCollapsed = true;
           console.log("else statement");
         }
       }

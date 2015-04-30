@@ -11,7 +11,7 @@
   <div ng-show = "help">
   <p>
     Click on a group to display the list of students that are in that specific group.
-    Click the pencil to edit the groups name or click the trash can to delete the group.
+    Click the pencil to edit the group's name or click the trash can to delete the group.
   </p>
     </div>
   <h1 class="">Groups:</h1>
@@ -48,14 +48,14 @@
   <div ng-show="showGroups">
     <!--adapt for students-->
     <h1 class="">Students in {{selectedGroupName}}:</h1>
-    <li class="list-group-item" ng-repeat="student in studentsInGroup"><label>{{student.lastName}}, {{student.firstName}}</label>
-      <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Delete Student From Group" ng-click="removeStudentFromGroup(student)"></span>
+    <li class="list-group-item" ng-repeat="student in studentsInGroup | orderBy: toSort:order"><label>{{student.lastName}}, {{student.firstName}}</label>
+      <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Remove Student From Group" ng-click="removeStudentFromGroup(student)"></span>
     </li>
     </ul>
     <div>
     </div>
   </div>
-  
+
   <div ng-hide="showGroups">
     <h1 class="">{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s Groups:</h1>
     <p ng-show="studentGroups.length==0">This student isn't assigned to any groups.</p>

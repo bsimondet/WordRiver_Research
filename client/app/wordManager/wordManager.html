@@ -10,13 +10,13 @@
     <h1 class="">Categories:</h1>
     <hr>
     <form ng-submit="addCategory()">
-      <input ng-model="categoryField" type="text" size="15" placeholder="Add a category!">
-      <input type="submit" value="Submit" class="btn btn-primary">
+      <input ng-model="categoryField" type="text" size="15" placeholder="Add a category">
+      <input type="submit" value="Add" class="btn btn-primary">
     </form>
     <ul class="list-group scroll">
       <div>
         <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-model="selectedCategories[$index]" ng-true-value="'{{category._id}}'">
-          <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><input type="checkbox" name="WT" value=value" ng-click="setWordType(category)">WT <span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete($index)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editCategory(category)"></span></li>
+          <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete(category)"></span></li>
       </div>
     </ul>
     <div class ="col-xs-3" ng-hide="showValue1">
@@ -31,11 +31,10 @@
       <form ng-submit="addTileToCategory()">
         <input class="btn btn-primary center-block assignButton" type="submit" value="Add selected words to selected categories" class="btn btn-primary">
       </form>
-      <hr>
       <div class="col-xs-3 wordfooter wordsIn">
         <h2 class="">Words in {{currentCategory.name}}</h2>
         <ul class="list-group middleScroll">
-          <li class="list-group-item listWidth">
+          <li class="list-group-item">
           </li>
           <div>
             <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy: toSort:order">{{tile.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeFromCategory(tile, $index)"></span></li>
@@ -43,7 +42,7 @@
         </ul>
       </div>
       <div class="col-xs-3 wordfooter categoriesIn">
-        <h2 class="">Categories in {{currentTile.name}}:</h2>
+        <h2 class="">Categories that include {{currentTile.name}}:</h2>
         <ul class="list-group middleScroll">
           <li class="list-group-item">
           </li>
@@ -60,12 +59,12 @@
     <hr>
     <div class="" >
       <form ng-submit="addWord()">
-        <input ng-model="addField" type="text" size="15" placeholder="Add a word!">
-        <input ng-model="addType" type="text" size="15" placeholder="Add a type!">
+        <input ng-model="addField" type="text" size="15" placeholder="Add a word">
+        <input ng-model="addType" type="text" size="15" placeholder="Add a type">
         <input type="submit" value="Add" class="btn btn-primary">
       </form>
-      <br>
-      <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
+
+      <br/>
     </div>
     <ul class="list-group scroll">
       <!--<li class="list-group-item">-->
@@ -79,7 +78,7 @@
       <!--<input type="submit" value="Search" class="btn btn-primary">&ndash;&gt;-->
       <!--</form>-->
       <!--</li>-->
-
+      <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
       <div>
         <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-model="selectedTiles[$index]" ng-true-value="'{{tile._id}}'">
           <a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord(tile)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord(tile)"></span></li>
