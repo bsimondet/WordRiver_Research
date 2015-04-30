@@ -179,6 +179,9 @@ angular.module('WordRiverApp')
       $scope.selectedTiles = [];
     };
 
+    $scope.uncheckAllCategories = function(){
+      $scope.selectedCategories = [];
+    };
     //$scope.getAllTiles = function(){
     //  $http.get('/api/tile').success(function (allTiles) {
     //    $scope.allCatTiles = allTiles;
