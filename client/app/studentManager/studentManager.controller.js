@@ -40,6 +40,8 @@ angular.module('WordRiverApp')
       })
     };
 
+    $scope.getGroups();
+
     $scope.getTiles = function(){
       $http.get("/api/tile").success(function(tiles){
         $scope.tiles = tiles;
