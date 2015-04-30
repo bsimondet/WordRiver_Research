@@ -2,3 +2,4 @@
 <h1>Word River Application</h1>
 <h3>Assisting Students in Creative Learning</h3>
 <p>This application was created by the students in the Spring 2015 Software Development class at the University of Minnesota- Morris.</p>
+<a href="https://docs.google.com/document/d/1Q88Lmm4vfegQ9DpcoLY0fu3uiAHq677n_SDK7NlJ7oo/edit">Documentation</a>

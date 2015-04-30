@@ -98,6 +98,7 @@ angular.module('WordRiverApp')
         $scope.showMiddle = false;
         $scope.help = false;
       }
+      $scope.middleText = section;
     };
 
     $scope.toggleHelp = function(){
@@ -183,6 +184,7 @@ angular.module('WordRiverApp')
     $scope.displayCatInfo = function (category) {
       $scope.switchMiddle("category");
       $scope.categorySelected = category;
+      $scope.middleElement = category;
       $scope.matchStudent = [];
       $scope.matchGroup = [];
       $scope.matchTiles = [];
@@ -212,6 +214,7 @@ angular.module('WordRiverApp')
     $scope.displayGroupInfo = function (group){
       $scope.switchMiddle("group");
       $scope.groupSelected = group;
+      $scope.middleElement = group;
       $scope.matchCategoryIds = [];
       $scope.matchCategories = [];
       $scope.matchStudents = [];
@@ -258,6 +261,7 @@ angular.module('WordRiverApp')
       $scope.studentSelected = student;
       $scope.switchMiddle("student");
       $scope.matchGroups = [];
+      $scope.middleElement = student;
       $scope.studentCategories = [];
       $scope.matchTiles = [];
       $scope.matchTileIds = [];
@@ -301,6 +305,7 @@ angular.module('WordRiverApp')
     $scope.displayTileInfo = function (word) {
       $scope.tileSelected = word;
       $scope.switchMiddle("word");
+      $scope.middleElement = word;
       $scope.matchCategoryIds = [];
       $scope.matchCategories = [];
       $scope.matchGroup = [];
@@ -524,10 +529,9 @@ angular.module('WordRiverApp')
           }
           $http.patch('api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.userGroups}).success(function () {
-              $scope.getAll();
               alert("Successfully assigned!");
+              $scope.getAll();
             });
-          $scope.switchMiddle("middle");
           $scope.success = true;
         }
 
@@ -552,10 +556,9 @@ angular.module('WordRiverApp')
           }
           $http.patch('api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.userGroups}).success(function () {
-              $scope.getAll();
               alert("Successfully assigned!");
+              $scope.getAll();
             });
-          $scope.switchMiddle("middle");
           $scope.success = true;
         }
       } else if (!$scope.groupView && $scope.categoryView) {
@@ -576,13 +579,12 @@ angular.module('WordRiverApp')
               $http.patch('api/students/' + $scope.userStudents[g]._id,
                 {contextTags: $scope.userStudents[g].contextTags}).success(function () {
                   alert("Successfully assigned!");
+                  $scope.getAll();
                 });
             }
           }
         }
-        $scope.switchMiddle("middle");
         $scope.success = true;
-        $scope.getAll();
       } else if (!$scope.groupView && !$scope.categoryView){
         //Function to add selected words to selected students.
         if($scope.selectedStudents.length == 0){
@@ -606,16 +608,23 @@ angular.module('WordRiverApp')
             }
           }
         }
-        $scope.getAll();
         $scope.success = true;
-        $scope.switchMiddle("middle");
       }
-      if ($scope.success == true) {
+      if ($scope.success) {
         $scope.selectedCategories = [];
         $scope.selectedWords = [];
         $scope.selectedGroups = [];
         $scope.selectedStudents = [];
         $scope.uncheckAll();
+      }
+      if ($scope.middleText == 'category'){
+        $scope.displayCatInfo($scope.middleElement);
+      }if ($scope.middleText == 'group'){
+        $scope.displayGroupInfo($scope.middleElement);
+      }if ($scope.middleText == 'word'){
+        $scope.displayWordInfo($scope.middleElement);
+      }if ($scope.middleText == 'student'){
+        $scope.displayStudentInfo($scope.middleElement);
       }
     };
 
