@@ -523,7 +523,6 @@ angular.module('WordRiverApp')
           }
           $http.patch('api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.userGroups}).success(function () {
-              //alert("Successfully assigned!");
               $scope.getAll();
             });
           $scope.success = true;
@@ -550,7 +549,6 @@ angular.module('WordRiverApp')
           }
           $http.patch('api/users/' + $scope.currentUser._id + '/group',
             {groupList: $scope.userGroups}).success(function () {
-              //alert("Successfully assigned!");
               $scope.getAll();
             });
           $scope.success = true;
@@ -572,7 +570,6 @@ angular.module('WordRiverApp')
               $scope.userStudents[g].contextTags = $scope.checkForDuplicates($scope.userStudents[g].contextTags);
               $http.patch('api/students/' + $scope.userStudents[g]._id,
                 {contextTags: $scope.userStudents[g].contextTags}).success(function () {
-                  //alert("Successfully assigned!");
                   $scope.getAll();
                 });
             }
@@ -597,7 +594,6 @@ angular.module('WordRiverApp')
               $http.patch('api/students/' + $scope.userStudents[r]._id,
                 {tileBucket: $scope.userStudents[r].tileBucket}).success(function () {
                   $scope.getAll();
-                  //alert("Successfully assigned!");
                 });
             }
           }
