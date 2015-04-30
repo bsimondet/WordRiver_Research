@@ -45,3 +45,7 @@
 .unassignIconColor:hover {
   opacity: 1.0;
 }
+
+.list-group-item {
+  padding: 6px 15px;
+}

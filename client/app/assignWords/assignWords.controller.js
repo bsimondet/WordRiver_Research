@@ -698,5 +698,4 @@ $scope.getNewInfo = function() {
       }
     };
 
-
   });
