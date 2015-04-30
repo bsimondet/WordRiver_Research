@@ -85,5 +85,8 @@ form{
   color:#008000;
 }
 
+.list-group-item {
+  padding: 6px 15px;
+}
 
 

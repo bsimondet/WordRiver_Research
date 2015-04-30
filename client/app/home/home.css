@@ -78,6 +78,7 @@ img.resize{
   height: 400px;
 }
 .test{
+  text-align: center;
   margin-top: 800px;
   overflow: auto;
   height: 100%;
