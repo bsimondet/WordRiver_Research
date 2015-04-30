@@ -272,7 +272,7 @@ Student.find({}).remove(function() {
     },
     {
       "_id": "553fd47c0b4dda81b98a7f70",
-      "firstName": "Issaac",
+      "firstName": "Isaac",
       "lastName": "Koak",
       "teachers": [
         "5511a83da168f8b5f3144f02"
