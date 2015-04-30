@@ -604,6 +604,7 @@ angular.module('WordRiverApp')
             }
           }
         }
+        alert("Successfully assigned!");
         $scope.success = true;
       }
       if ($scope.success) {
@@ -614,15 +615,6 @@ angular.module('WordRiverApp')
         $scope.selectedStudents = [];
         $scope.uncheckAll();
       }
-      if ($scope.middleText == 'category'){
-        $scope.displayCatInfo($scope.middleElement);
-      }if ($scope.middleText == 'group'){
-        $scope.displayGroupInfo($scope.middleElement);
-      }if ($scope.middleText == 'word'){
-        $scope.displayWordInfo($scope.middleElement);
-      }if ($scope.middleText == 'student'){
-        $scope.displayStudentInfo($scope.middleElement);
-      }
     };
 
     //Refreshes the page
@@ -632,7 +624,7 @@ $scope.getNewInfo = function() {
   }else if($scope.showCategory){
     $scope.displayCatInfo($scope.categorySelected);
   }
-}
+};
 
 //getting the list of students within a group to show for collapsibility purposes in the assign content to people page
 
