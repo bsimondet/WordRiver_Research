@@ -76,9 +76,10 @@
   <h1 class="">All Students:</h1>
   <hr>
   <button class="btn btn-primary" title="Sort A-Z" ng-click="toSort = 'lastName'; order = !order">A-Z</button>
+  Search: <input type="text" ng-model="searchText"/>
   <ul class="list-group scroll">
     <!--TODO Attach to database to display all the words-->
-    <li class="list-group-item" type="checkbox" ng-repeat="student in students | orderBy: toSort:order"><label><input type="checkbox" id="myCheck" value="value" ng-click="allCheckedStudents(student._id)"><a ng-click="displayStudentGroups(student)">{{student.lastName}}, {{student.firstName}}</a></label></li>
+    <li class="list-group-item" type="checkbox" ng-repeat="student in students | filter: searchText | orderBy: toSort:order"><label><input type="checkbox" id="myCheck" value="value" ng-click="allCheckedStudents(student._id)"><a ng-click="displayStudentGroups(student)">{{student.lastName}}, {{student.firstName}}</a></label></li>
   </ul>
 </div>
 </div>
