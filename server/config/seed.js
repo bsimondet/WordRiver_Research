@@ -13,6 +13,7 @@ var Category = require('../api/category/category.model');
 
 User.find({}).remove(function() {
   User.create({
+      /*This is the only teacher in the system, includes login*/
       "_id": "5511a83da168f8b5f3144f02",
       "name": "Elena Machkasova",
       "email": "rosemariemaxwell@plexia.com",
@@ -20,6 +21,7 @@ User.find({}).remove(function() {
         "type": "user"
       },
       "password": "joethe",
+      /*Names of all current context packs by id*/
       "contextPacks": [
         "553167d183c193d16d03ce80",
         "553167d1afa1bda9bc0d055a",
@@ -33,6 +35,7 @@ User.find({}).remove(function() {
         "553167d123b90c175f9b3a86",
         "553167d171ef5955ded609ef"
       ],
+      /*Names of groups with assigned context packs by id*/
       "groupList": [
         {"groupName": "Group A",
           "_id": "5535520d4e9e3d82b7283ca2",
@@ -59,12 +62,13 @@ User.find({}).remove(function() {
           "contextPacks": ["553167d1c296f9753ce8447f"],
           "freeTiles": []
         }],
-
+      /*All current words in system by id*/
       "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" , "552c24185768cb166a497fdb", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c805b0d983f66e2cd", "552c2418684d651eee7cea6e", "552c24183b10b8ec888e042b", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "552c241885a79608d3f3ead5", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5c8011d58a4ad979d9b0", "552d5c80d6a8d78c5541b508", "552d5c80c0b37217fd3eded3", "552d5c80af62cb1c0a09f7bf", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc",
         "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951", "552d5b082d9c84e6c572461f", "552d5b08f186ab84dd36bd24", "552d5b08ecffac6643646176", "552d5b08461def276c7589ea", "552d5b08caede2169f0ab287", "552d5b08acda561db7b3c022",
         "552d5b0873d2087138f0b0e3", "552d5b080ddd0f4c449a6930", "552d5b08e54bac39a0fa5303", "552d5b082efcaa22520e444b", "552d5b0807228254a78d0266", "552d5b088f9b179c9f41b915", "552d5b083415e4dd5d9a985e", "552d5b08e971cb2f0c9c4a3b", "552d5b082fb9929fbcc7639e", "552d5b0835f412b5e2610557", "552d5b08cd63a5895aac2582", "552d5b08ff86b2bcff1588c2", "552d5b08e723ee4287d0e8c6", "552d5b087f7d2946369694ec", "552d5b08efa1707df67f3c69", "552d5b089f3cd6659ecec9f7", "552d5b084dd671476f5b2f19", "552d5b08d359fad21a131789", "552d5b082c63acb89b72cf89", "552d5b089c748571cac88a40", "552d5b085524dd49b0aa933f", "552d5b08cb8d71b90811efe3", "552d5b08a9dc076e610ffc7d", "552d5b084c21c73298f493bd", "552d5b0861219d0e0572b532",
         "552d5b08a55d156939bff935", "552d5b08b40c993e7068dca1", "552d5b0820c26a478b95f7bd", "552d5b0836a6578211cb2886", "552d5b08619b6ef36f95f8fd", "552d5b08e274fc1a6591c02b", "552d5b08267ab9df7ef30c11", "552d5b0875ccfa12a218aa77", "552d5b08e511287e53be311d", "552d5b08873a6b80dde989f9", "552d5b081bc5d94baaee575c", "552d5b0808eff2d9ee6452b4", "552d5b08142365901ff49f2e", "552d5b08c8e6226ce98cdafd", "552d5b08d9031837ac352ecb", "552d5b081003bdec4c0446c4", "552d5b083599e39053bc5ac9", "552d5b087260cda8fa58b0ef", "552d5b08c50289e73d8a9e99", "552d5b085a5caeb37158c286", "552d5b08f198fb94de7fccd9"],
+      /*All students in system by id*/
       "studentList": [
         "5511ab56117e23f0412fd08f",
         "5511ab564ac02dbaf337270d",
@@ -94,6 +98,15 @@ User.find({}).remove(function() {
 
 Student.find({}).remove(function() {
   Student.create(
+    /*Current students,
+    id,
+    firstname,
+    lastname,
+    artifacts ~ results from application,
+    assigned teachers,
+    assigned words,
+    assigned groups,
+    assigned contextpacks*/
     {
       "_id": "5511ab56117e23f0412fd08f",
       "firstName": "Aaron",
@@ -349,7 +362,13 @@ Student.find({}).remove(function() {
 
 Tile.find({}).remove(function() {
   Tile.create({
-
+      /*Current words,
+       id,
+       name,
+       creatorID (who made word?),
+       assigned to context packs,
+       active state,
+       word type*/
       "_id": "5511ae8c805b0d983f66e2cd",
       "name": "mail",
       "creatorID": "5511a83da168f8b5f3144f02",
