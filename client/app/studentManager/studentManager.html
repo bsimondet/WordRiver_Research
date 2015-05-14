@@ -56,9 +56,10 @@
     <div ng-hide="showGroups">
       <h1>{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s Groups</h1>
       <p ng-show="studentGroups.length == 0">This student isn't assigned to any groups.</p>
-      <li class="list-group-item" ng-repeat="groups in studentGroups"><label>{{groups.groupName}}</label>
-        <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Delete Group From Student" ng-click="removeGroupFromStudent(groups)"></span>
-      </li>
+      <ul class="list-group-item" ng-repeat="groups in studentGroups">
+        <li><label>{{groups.groupName}}</label>
+          <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Delete Group From Student" ng-click="removeGroupFromStudent(groups)"></span>
+        </li>
       </ul>
     </div>
   </div>
