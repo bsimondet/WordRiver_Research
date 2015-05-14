@@ -7,87 +7,77 @@
 </header>
 
 <div class="container">
-<div class="col-xs-3 accordion-toggle">
-  <div ng-show = "help">
-  <p>
-    Click on a group to display the list of students that are in that specific group.
-    Click the pencil to edit the group's name or click the trash can to delete the group.
-  </p>
-    </div>
-  <h1 class="">Groups:</h1>
-  <hr>
-  <form ng-submit="addGroup()">
-    <input ng-model="groupField" type="text" size="15" placeholder="Add a group">
-    <input type="submit" value="Submit" class="btn btn-primary">
-  </form>
-  <button class="btn btn-primary" title="Sort A-Z" ng-click="toGroupSort = 'groupName'; groupOrder = !groupOrder">A-Z</button>
-  <ul class="list-group scroll">
-    <li class="list-group-item" type="checkbox" ng-repeat="group in localGroupArray | orderBy: toGroupSort:groupOrder"><label>
-      <input type="checkbox" id="myCheck" value="value" ng-click="allCheckedGroups(group)"><a href="" ng-click="displayGroupInfo(group); groupShow()">{{group.groupName}}</a></label>
-      <span class="glyphicon glyphicon-trash floatRight close" title="Delete Group" ng-click="removeGroup($index, group)"></span>
-      <span class="glyphicon glyphicon-pencil floatLeft close" title="Edit Group Name" ng-click="editGroupName(group)"></span>
-    </li>
-    <!--adapt for groups-->
+  <div class="col-xs-3 accordion-toggle">
+    <!--Help text-->
+    <p ng-show= "help">
+      Click on a group to display the list of students that are in that specific group.
+      Click the pencil to edit the group's name or click the trash can to delete the group.
+    </p>
 
-    <!--<li class="list-group-item" ng-repeat="group in localGroupArray">-->
-    <!--{{group}}-->
-
-  </ul>
-</div>
-
-
-<div class="col-xs-6 center">
-  <div ng-show = "help">
-  <p>
-    Click the minus sign to remove a student from a group.
-  </p>
-    </div>
-  <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
-  <br/>
-  <input class="btn btn-primary center-block assignButton" type="submit" value="Add Selected Students to Selected Groups" class="btn btn-primary" ng-click="addStudentsToGroups()">
-  <div ng-show="showGroups">
-    <!--adapt for students-->
-    <h1 class="">Students in {{selectedGroupName}}:</h1>
-    <li class="list-group-item" ng-repeat="student in studentsInGroup | orderBy: toSort:order"><label>{{student.lastName}}, {{student.firstName}}</label>
-      <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Remove Student From Group" ng-click="removeStudentFromGroup(student)"></span>
-    </li>
-    </ul>
-    <div>
-    </div>
-  </div>
-
-  <div ng-hide="showGroups">
-    <h1 class="">{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s Groups:</h1>
-    <p ng-show="studentGroups.length==0">This student isn't assigned to any groups.</p>
-    <li class="list-group-item" ng-repeat="groups in studentGroups"><label>{{groups.groupName}}</label>
-      <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Delete Group From Student" ng-click="removeGroupFromStudent(groups)"></span>
-    </li>
+    <h1>Groups:</h1>
+    <!--Add a new group to add students to-->
+    <form ng-submit="addGroup()">
+      <input ng-model="groupField" type="text" size="15" placeholder="Add a group">
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+    <!--Sorting A-Z or Z-A option-->
+    <button class="btn btn-primary" title="Sort A-Z" ng-click="toGroupSort = 'groupName'; groupOrder = !groupOrder">A-Z</button>
+    <!--List of current groups with edit and remove options-->
+    <ul class="list-group scroll">
+      <li class="list-group-item" type="checkbox" ng-repeat="group in localGroupArray | orderBy: toGroupSort:groupOrder"><label>
+        <input type="checkbox" value="value" ng-click="allCheckedGroups(group)"><a href="" ng-click="displayGroupInfo(group); groupShow()">{{group.groupName}}</a></label>
+        <span class="glyphicon glyphicon-trash floatRight close" title="Delete Group" ng-click="removeGroup($index, group)"></span>
+        <span class="glyphicon glyphicon-pencil floatLeft close" title="Edit Group Name" ng-click="editGroupName(group)"></span>
+      </li>
     </ul>
   </div>
 
-</div>
-
-<div class="col-xs-3">
-  <div ng-show = "help">
-  <p>Click on a student to display a list of their groups.
-    Check both groups and students and then click the "Add Selected Students to Selected Groups" button in order to assign students to different groups.
-  </p>
+  <div class="col-xs-6 center">
+    <!--Help text-->
+    <p ng-show= "help">
+      Click the minus sign to remove a student from a group.
+    </p>
+    <!--Button to show help text-->
+    <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
+    <!--Spacing before next button-->
+    <br>
+    <!--Button to assign checked students to checked groups-->
+    <input class="btn btn-primary center-block assignButton" type="submit" value="Add Selected Students to Selected Groups" class="btn btn-primary" ng-click="addStudentsToGroups()">
+    <!--Shows the students that are in a selected group-->
+    <div ng-show="showGroups">
+      <h1>Students in {{selectedGroupName}}</h1>
+        <ul>
+          <li class="list-group-item" ng-repeat="student in studentsInGroup | orderBy: toSort:order"><label>{{student.lastName}}, {{student.firstName}}</label>
+            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Remove Student From Group" ng-click="removeStudentFromGroup(student)"></span>
+          </li>
+        </ul>
     </div>
-  <h1 class="">All Students:</h1>
-  <hr>
-  <button class="btn btn-primary" title="Sort A-Z" ng-click="toSort = 'lastName'; order = !order">A-Z</button>
-  <input type="text" placeholder="Search" ng-model="searchText"/>
-  <ul class="list-group scroll">
-    <!--TODO Attach to database to display all the words-->
-    <li class="list-group-item" type="checkbox" ng-repeat="student in students | filter: searchText | orderBy: toSort:order"><label><input type="checkbox" id="myCheck" value="value" ng-click="allCheckedStudents(student._id)"><a ng-click="displayStudentGroups(student)">{{student.lastName}}, {{student.firstName}}</a></label></li>
-  </ul>
-</div>
-</div>
-<!--<form ng-submit="addGroup()">-->
-<!--<input ng-model="groupField" type="text" size="15" placeholder="Add a group!">-->
-<!--<input type="submit" value="Submit" class="btn btn-primary">-->
-<!--</form>-->
-<!--</li>-->
-<!--<li class="list-group-item" type="checkbox" ng-repeat="group in localGroupArray"><label><input type="checkbox" id="myCheck" value="value" ng-click="allCheckedGroups(group)">{{group.groupName}}</label><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="removeData($index)"></span></li>-->
-<!--&lt;!&ndash;adapt for groups&ndash;&gt;-->
+    <!--Shows the groups that the selected student is in-->
+    <div ng-hide="showGroups">
+      <h1>{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s Groups</h1>
+      <p ng-show="studentGroups.length == 0">This student isn't assigned to any groups.</p>
+      <li class="list-group-item" ng-repeat="groups in studentGroups"><label>{{groups.groupName}}</label>
+        <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Delete Group From Student" ng-click="removeGroupFromStudent(groups)"></span>
+      </li>
+      </ul>
+    </div>
+  </div>
 
+  <div class="col-xs-3">
+    <!--Help text-->
+    <p ng-show = "help">
+        Click on a student to display a list of their groups.
+        Check both groups and students and then click the "Add Selected Students to Selected Groups" button in order to assign students to different groups.
+    </p>
+
+    <h1>All Students:</h1>
+    <!--Sorting A-Z or Z-A option, additional search box-->
+    <button class="btn btn-primary" title="Sort A-Z" ng-click="toSort = 'lastName'; order = !order">A-Z</button>
+    <input type="text" placeholder="Search" ng-model="searchText"/>
+    <!--List of students-->
+    <ul class="list-group scroll">
+      <!--TODO Attach to database to display all the words-->
+      <li class="list-group-item" type="checkbox" ng-repeat="student in students | filter: searchText | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-click="allCheckedStudents(student._id)"><a ng-click="displayStudentGroups(student)">{{student.lastName}}, {{student.firstName}}</a></label></li>
+    </ul>
+  </div>
+</div>
