@@ -1,130 +1,84 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <header class="hero-unit" id="banner">
-  <div class="">
     <h1>Word Manager</h1>
-  </div>
 </header>
+
 <div class="container">
   <div class="col-xs-3 accordion-toggle" id="categories">
-    <h1 class="">Categories:</h1>
+    <h1>Context Packs:</h1>
 
+    <!--Add context pack-->
     <form ng-submit="addCategory()">
-      <input ng-model="categoryField" type="text" size="15" placeholder="Add a category">
+      <input ng-model="categoryField" type="text" size="15" placeholder="Add a Context Pack">
       <input type="submit" value="Add" class="btn btn-primary">
     </form>
-    <button class="btn btn-primary" ng-click="uncheckAllCategories()">Uncheck all</button>
+    <button class="btn btn-primary" ng-click="uncheckAllCategories()">Uncheck All</button>
+    <!--List of all Context Packs-->
     <ul class="list-group scroll">
-      <li class="list-group-item">
-
-      </li>
-      <div>
         <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-model="selectedCategories[$index]" ng-true-value="'{{category._id}}'">
           <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete(category)"></span></li>
-      </div>
     </ul>
+    <!--Code for editing context packs, not sure if this is used since not edit button exists?-->
     <div class ="col-xs-3" ng-hide="showValue1">
       <input ng-model="editField" type="text" size="15" placeholder={{categoryArray[editCatIndex].name}}>
       <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateCategory()">
     </div>
   </div>
 
-
-  <div>
-    <div class="col-xs-6 center">
-      <form ng-submit="addTileToCategory()">
-        <input class="btn btn-primary center-block assignButton" type="submit" value="Add selected words to selected categories" class="btn btn-primary">
-      </form>
-      <div class="col-xs-3 wordfooter wordsIn">
-        <h2 class="">Words in <i>{{currentCategory.name}}</i></h2>
-        <ul class="list-group middleScroll">
-          <li class="list-group-item">
-          </li>
-          <div>
-            <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy: toSort:order">{{tile.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeFromCategory(tile, $index)"></span></li>
-          </div>
-        </ul>
-      </div>
-      <div class="col-xs-3 wordfooter categoriesIn">
-        <h2 class="">Categories containing <i>{{currentTile.name}}</i>:</h2>
-        <ul class="list-group middleScroll">
-          <li class="list-group-item">
-          </li>
-          <div>
-            <li class="list-group-item" ng-repeat="category in contextTagsTemp | orderBy: toSort:order">{{category.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeCategoryFromWord($index)"></span></li>
-          </div>
-        </ul>
-      </div>
+  <div class="col-xs-6 center">
+    <!--Button to add checked words to checked context packs-->
+    <form ng-submit="addTileToCategory()">
+      <input class="btn btn-primary center-block assignButton" type="submit" value="Add selected words to selected categories" class="btn btn-primary">
+    </form>
+    <!--Shows selected context pack's assigned words-->
+    <div class="col-xs-3 wordfooter wordsIn">
+      <h2>Words in <i>{{currentCategory.name}}</i></h2>
+      <ul class="list-group middleScroll">
+          <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy: toSort:order">{{tile.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeFromCategory(tile, $index)"></span></li>
+      </ul>
+    </div>
+    <!--Shows selected word's assigned context packs-->
+    <div class="col-xs-3 wordfooter categoriesIn">
+      <h2>Categories containing <i>{{currentTile.name}}</i></h2>
+      <ul class="list-group middleScroll">
+          <li class="list-group-item" ng-repeat="category in contextTagsTemp | orderBy: toSort:order">{{category.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeCategoryFromWord($index)"></span></li>
+      </ul>
     </div>
   </div>
 
+
   <div class="col-xs-3">
-    <h1 class="">Existing words:</h1>
-    <hr>
-    <div class="" >
+    <h1>Existing words:</h1>
+    <div>
+      <!--Section for adding a new word and it's type to the system-->
       <form ng-submit="addWord()">
         <input ng-model="addField" type="text" size="15" placeholder="Add a word">
         <input ng-model="addType" type="text" size="15" placeholder="Add a type">
         <input type="submit" value="Add" class="btn btn-primary">
       </form>
-
-      <br/>
-
-      <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
-      <button class="btn btn-primary" ng-click="uncheckAll()">Uncheck all</button>
-
-
-
     </div>
 
-    <div class ="col-xs-3" ng-hide="showValue">
+    <!--Editing options for selected word-->
+    <div class="" ng-hide="showValue">
+      <br>
       <input ng-model="editField" type="text" size="15" placeholder={{userTiles[editWordIndex].name}}>
       <input ng-model="editType" type="text" size="15" placeholder={{userTiles[editWordIndex].wordType}}>
       <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateTile()">
     </div>
-    <ul class="list-group scroll">
-      <!--<li class="list-group-item">-->
-      <!--&lt;!&ndash; <form ng-submit="searchW  $scope.editWord = function(index){
-  $scope.editWordIndex = index;
-  $scope.showValue = false;
-  $scope.wordToEdit = $scope.userTiles[index];
 
-};ords()">-->
-      <!--<input ng-model="searchField" type="text" size="15" placeholder="Search for a word!">-->
-      <!--<input type="submit" value="Search" class="btn btn-primary">&ndash;&gt;-->
-      <!--</form>-->
-      <!--</li>-->
-
-      <div>
-        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-model="selectedTiles[$index]" ng-true-value="'{{tile._id}}'" ng-click="console.log(tile)">
-          <a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord(tile)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord(tile)"></span></li>
-      </div>
-    </ul>
+    <!--List of words with their type, also edit and delete option-->
+    <div>
+      <!--Break between add word and sorting options-->
+      <br>
+      <!--Sorting options-->
+      <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
+      <button class="btn btn-primary" ng-click="uncheckAll()">Uncheck all</button>
+      <ul class="list-group scroll">
+          <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-model="selectedTiles[$index]" ng-true-value="'{{tile._id}}'" ng-click="console.log(tile)">
+            <a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord(tile)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord(tile)"></span></li>
+      </ul>
+    </div>
   </div>
-
-
 </div>
 
-      <!--<div class="col-xs-2">-->
-        <!--<h1 class="page-header">Existing words:</h1>-->
-        <!--<div class="container">-->
-          <!--<form ng-submit="addWord()">-->
-            <!--<input ng-model="addField" type="text" size="15" placeholder="Add a word!">-->
-            <!--<input ng-model="addType" type="text" size="15" placeholder="Add a type!">-->
-            <!--<input type="submit" value="Add" class="btn btn-primary">-->
-          <!--</form>-->
-          <!--<br/>-->
-        <!--</div>-->
-        <!--<ul class="list-group">-->
-          <!--<li class="list-group-item">-->
-           <!--&lt;!&ndash; <form ng-submit="searchWords()">-->
-              <!--<input ng-model="searchField" type="text" size="15" placeholder="Search for a word!">-->
-              <!--<input type="submit" value="Search" class="btn btn-primary">&ndash;&gt;-->
-            <!--</form>-->
-          <!--</li>-->
-          <!--<button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>-->
-            <!--&lt;!&ndash;<li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-click="checkCheckbox(category)">&ndash;&gt;-->
-            <!--<li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a><span class="glyphicon glyphicon-trash floatRight close" style="color: #000000" ng-click="removeWord($index)"></span></li>-->
-        <!--</ul>-->
-      <!--</div>-->
-  <!--</div>-->
