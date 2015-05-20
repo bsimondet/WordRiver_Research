@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('WordRiverApp')
-  .controller('JsonFileCtrl', function ($scope) {
+  .controller('JsonFileCtrl', function ($scope, $http) {
     $scope.allTiles = [];
 
     $scope.getWords = function(){
