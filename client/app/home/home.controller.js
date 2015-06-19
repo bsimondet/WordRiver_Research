@@ -6,8 +6,7 @@ angular.module('WordRiverApp')
     $scope.errors = {};
     $scope.logInShow = true;
     $scope.signUpShow = false;
-    //Changed to true to skip login
-    $scope.signedInShow = true;
+    $scope.signedInShow = false;
     $scope.buttonsShow = true;
     $scope.changePasswordShow = false;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -21,8 +20,7 @@ angular.module('WordRiverApp')
       console.log(values);
       if(values[1] == "true"){
         $scope.changePasswordShow = true;
-        //Changed to true to skip login
-        $scope.signedInShow = true;
+        $scope.signedInShow = false;
         $scope.buttonsShow = false;
         $scope.logInShow = false;
         $scope.signUpShow = false;
