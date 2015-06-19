@@ -154,7 +154,7 @@ angular.module('WordRiverApp')
           name: $scope.addField,
           contextTags: $scope.selectedCategories,
           creatorID: $scope.currentUser._id,
-          wordType: $scope.selection.addType
+          wordType: $scope.addType
         });
         $scope.addField = "";
         $scope.getWords();
