@@ -4,7 +4,8 @@ angular.module('WordRiverApp')
   .controller('HomeCtrl', function ($scope, $rootScope, Auth, $location) {
     $scope.user = {email: "rosemariemaxwell@plexia.com", password: "joethe"};
     $scope.errors = {};
-    $scope.logInShow = true;
+    //$scope.logInShow = true;
+    $scope.logInShow = false;
     $scope.signUpShow = false;
     $scope.signedInShow = true;
     $scope.buttonsShow = true;
@@ -86,7 +87,8 @@ angular.module('WordRiverApp')
         $scope.logInShow = false;
         $scope.signUpShow = false;
       }else{
-        $scope.logInShow = true;
+        //    $scope.logInShow = true;
+        $scope.logInShow = false;
         $scope.signUpShow = false;
         $scope.signedInShow = false;
         $scope.buttonsShow = true;
