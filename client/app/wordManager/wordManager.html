@@ -11,11 +11,13 @@
     <!--Add context pack-->
     <form ng-submit="addCategory()">
       <input ng-model="categoryField" type="text" size="15" placeholder="Add a Context Pack">
-      <input type="submit" value="Add" class="btn btn-primary">
+      <input type="submit" value="Add" class="btn-primary">
     </form>
+    <br>
     <button class="btn btn-primary" ng-click="uncheckAllCategories()">Uncheck All</button>
     <!--List of all Context Packs-->
     <ul class="list-group scroll">
+      <p>
         <li class="list-group-item" ng-repeat="category in categoryArray"><label><input type="checkbox" value="value" ng-model="selectedCategories[$index]" ng-true-value="'{{category._id}}'">
           <a href="" ng-click="displayCatInfo(category)">{{category.name}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="confirmDelete(category)"></span></li>
     </ul>
@@ -55,7 +57,7 @@
       <form ng-submit="addWord()">
         <input ng-model="addField" type="text" size="15" placeholder="Add a word">
         <input ng-model="addType" type="text" size="15" placeholder="Add a type">
-        <input type="submit" value="Add" class="btn btn-primary">
+        <input type="submit" value="Add" class="btn-primary">
       </form>
     </div>
 
@@ -74,7 +76,9 @@
       <!--Sorting options-->
       <button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>
       <button class="btn btn-primary" ng-click="uncheckAll()">Uncheck all</button>
+
       <ul class="list-group scroll">
+        <p>
           <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-model="selectedTiles[$index]" ng-true-value="'{{tile._id}}'" ng-click="console.log(tile)">
             <a href="" ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a></label><span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord(tile)"></span><span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord(tile)"></span></li>
       </ul>

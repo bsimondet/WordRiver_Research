@@ -6,15 +6,17 @@
   </div>
 </header>
 <div class="container">
-  <div class="col-xs-3" align="center">
+  <div class="col-xs-3" >
     <h2>All Students:</h2>
     <!--Sorting options-->
     <p>Search: <input type="text" ng-model="searchText"/></p>
     <button class="btn btn-primary btn-sm" ng-click="toSort = 'lastName'; order = !order">Sort by last name</button>
     <button class="btn btn-primary btn-sm" ng-click="toSort = 'firstName'; order = !order">Sort by first name</button>
+
     <ul class="list-group leftScroll">
+    <p>
       <li class="list-group-item" type="checkbox" style="text-align: left" ng-repeat="student in students | filter: searchText | orderBy: toSort:order">
-        <a ng-click="displayStudentProfile(student)">{{student.lastName}}, {{student.firstName}}</a>
+        <label><a ng-click="displayStudentProfile(student)">{{student.lastName}}, {{student.firstName}}</a></label>
       </li>
     </ul>
   </div>

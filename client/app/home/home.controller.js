@@ -90,7 +90,8 @@ angular.module('WordRiverApp')
         //    $scope.logInShow = true;
         $scope.logInShow = false;
         $scope.signUpShow = false;
-        $scope.signedInShow = false;
+        //$scope.signedInShow = false;
+        $scope.signedInShow = true;
         $scope.buttonsShow = true;
       }
     }

@@ -19,13 +19,14 @@
 
       <h1>Groups:</h1>
       <!--Sorting options for groups-->
-      <button class="btn btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
-      <button class="btn btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
+      <button class="btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
+      <button class="btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
       <!--Listing all current groups-->
       <ul class="list-group scroll">
+        <p>
         <li class="list-group-item" ng-repeat="group in userGroups | orderBy:'groupName':order1">
           <!--accordion groups do not like to work with an ng-repeat within an ng-repeat also, click the eyeball twice the first time you are on the page and then it will work fine-->
-          <input type="checkbox" value="value" ng-click="checkGroups(group)"><a ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
+        <label><input type="checkbox" value="value" ng-click="checkGroups(group)"><a ng-click="displayGroupInfo(group)">{{group.groupName}}</a></label>
           <span class="glyphicon glyphicon-eye-close floatRight close" title="Show students in group" ng-click="studentsInGroupAssignment(group); openingOnlyOneGroup(group); isCollapsed = !isCollapsed"></span>
           <ul collapse = "group.isCollapsed">
             <li  ng-repeat="students in groupedStudents">
@@ -45,14 +46,17 @@
 
       <h1>Students:</h1>
       <!--Sorting options for students-->
-      <button class="btn btn-primary" ng-show="!AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0; AZ0=!AZ0">Z-A</button>
-      <button class="btn btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
+      <button class="btn-primary" ng-show="!AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0; AZ0=!AZ0">Z-A</button>
+      <button class="btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
       <input type="text" ng-Model="searchText0" placeholder="Search">
       <!--Listing all current students-->
       <ul class="list-group scroll">
+        <p>
         <li class="list-group-item " ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:{fullName:searchText0}">
-          <input type="checkbox" value="value"  ng-click="checkStudents(student)">
-          <a ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}} </a>
+          <label><input type="checkbox" value="value"  ng-click="checkStudents(student)">
+            <a ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}}
+            </a>
+          </label>
         </li>
       </ul>
     </div>
@@ -252,14 +256,16 @@
       <button class="btn btn-primary" title="Show Words" ng-click="categoryView=!categoryView">Show Words</button>
       <h1>Context Packs:</h1>
       <!--Sorting options-->
-      <button class="btn btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
-      <button class="btn btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
+      <button class="btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
+      <button class="btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
       <input type="text" ng-Model="searchText1" placeholder="Search">
       <!--Listing all current context packs in system-->
       <ul class="list-group scroll">
+        <p>
         <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:{name:searchText1}">
-          <input type="checkbox" value="value" ng-click="checkCategories(category)">
-          <a ng-click="displayCatInfo(category)">{{category.name}}</a>
+          <label><input type="checkbox" value="value" ng-click="checkCategories(category)">
+            <a ng-click="displayCatInfo(category)">{{category.name}}</a>
+          </label>
           <span class="glyphicon glyphicon-eye-close floatRight close" title= "Show words in category" ng-click="isCollapsed = !isCollapsed; populateDisplayTile(category); openingOnlyOneCategory(category)"></span>
             <ul collapse="category.isCollapsed">
               <li ng-repeat="word in displayTiles">
@@ -278,14 +284,16 @@
       <button class="btn btn-primary" title="Show Categories" ng-click="categoryView=!categoryView">Show Categories</button>
       <h1>Words:</h1>
       <!--Sorting options-->
-      <button class="btn btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
-      <button class="btn btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
+      <button class="btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
+      <button class="btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
       <input type="text" ng-Model="searchText2" placeholder="Search">
       <!--Listing all current words in system-->
       <ul class="list-group scroll">
+        <p>
         <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:{name:searchText2}">
-          <input type="checkbox" value="value" ng-click="checkWords(tile)">
-          <a ng-click="displayTileInfo(tile)">{{tile.name}}</a>
+          <label><input type="checkbox" value="value" ng-click="checkWords(tile)">
+            <a ng-click="displayTileInfo(tile)">{{tile.name}}</a>
+          </label>
         </li>
       </ul>
     </div>
