@@ -6,7 +6,7 @@ angular.module('WordRiverApp')
     $scope.errors = {};
     $scope.logInShow = true;
     $scope.signUpShow = false;
-    $scope.signedInShow = false;
+    $scope.signedInShow = true;
     $scope.buttonsShow = true;
     $scope.changePasswordShow = false;
     $scope.getCurrentUser = Auth.getCurrentUser;
