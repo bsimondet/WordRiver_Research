@@ -15,7 +15,7 @@ User.find({}).remove(function() {
   User.create({
       /*This is the only teacher in the system, includes login*/
       "_id": "5511a83da168f8b5f3144f02",
-      "name": "Elena Machkasova",
+      "name": "Casey Jones",
       "email": "rosemariemaxwell@plexia.com",
       "role": {
         "type": "user"

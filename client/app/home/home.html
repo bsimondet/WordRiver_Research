@@ -8,7 +8,7 @@
     <div class="loginBox">
 
       <!--Login screen-->
-      <!--
+
       <div ng-show = "logInShow">
         <form class="form" name="logIn" ng-submit="login(logIn)" novalidate>
           <a class="btn btn-default btn-lg btn-register buttonSizeUpperLogIn" ng-click="logInShow = true; signUpShow = false;">
@@ -47,11 +47,11 @@
         </form>
       </div>
 
-            -->
+
 
 
       <!--sign up screen-->
-      <!--
+
 
   <div ng-show="signUpShow">
     <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
@@ -114,21 +114,20 @@
       </div>
         </form>
       </div>
-      -->
 
 
-      <!--<div ng-show = "signedInShow">-->
-      <div>
+      <div ng-show = "signedInShow">
+      <!--<div>-->
         <div class = "welcomeText">
           <span>
-            Hello Casey Jones
-            <!--Hello {{ getCurrentUser().name }}-->
+            <!--Hello Casey Jones-->
+            Hello {{ getCurrentUser().name }}
           </span>
         </div>
       </div>
 
       <!--Change password show-->
-      <!--
+
       <div ng-show="changePasswordShow">
         <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
           <div class="clear">
@@ -166,7 +165,7 @@
           </div>
         </form>
       </div>
-            -->
+
 
 
 
