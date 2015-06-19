@@ -29,7 +29,18 @@ angular.module('WordRiverApp')
     $scope.wordToEdit = null;
     $scope.tempIndex = null;
     $scope.theIDWeWant = null;
-
+    $scope.typeOptions =
+      [ "",
+        "Adjective",
+        "Adverb",
+        "Article",
+        "Conjunction",
+        "Noun",
+        "Preposition",
+        "Pronoun",
+        "Verb"
+      ];
+    $scope.selection = {addType: ""};
 
 
     $scope.getCategories = function() {
@@ -143,7 +154,7 @@ angular.module('WordRiverApp')
           name: $scope.addField,
           contextTags: $scope.selectedCategories,
           creatorID: $scope.currentUser._id,
-          wordType: $scope.addType
+          wordType: $scope.selection.addType
         });
         $scope.addField = "";
         $scope.getWords();
