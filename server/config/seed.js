@@ -519,7 +519,7 @@ Tile.find({}).remove(function() {
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1cd3291e1352efe94"],
       "active": false,
-      "wordType": "noun"
+      "wordType": "Noun"
     },
     {
       "_id": "552c24183b10b8ec888e042b",
