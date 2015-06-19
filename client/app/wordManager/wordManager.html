@@ -57,7 +57,7 @@
       <form ng-submit="addWord()">
         <input ng-model="addField" type="text" size="15" placeholder="Add a word">
         <br><br>
-        <select ng-model="addType">
+        <select ng-model="selection.addType">
           <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
         </select>
         <!--<input ng-model="addType" type="text" size="15" placeholder="Add a type">-->
