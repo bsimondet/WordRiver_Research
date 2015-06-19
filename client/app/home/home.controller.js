@@ -21,7 +21,8 @@ angular.module('WordRiverApp')
       console.log(values);
       if(values[1] == "true"){
         $scope.changePasswordShow = true;
-        $scope.signedInShow = false;
+        //Changed to true to skip login
+        $scope.signedInShow = true;
         $scope.buttonsShow = false;
         $scope.logInShow = false;
         $scope.signUpShow = false;
