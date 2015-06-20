@@ -119,7 +119,7 @@ Student.find({}).remove(function() {
         "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b",
         "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
-      "contextTags": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80"]
+      "contextTags": ["55856f5e08209fde1a2b8af3", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80", "553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"]
     },
     {
       "_id": "5511ab564ac02dbaf337270d",
@@ -409,14 +409,6 @@ Tile.find({}).remove(function() {
       "wordType": "Noun"
     },
     {
-      "_id": "5511ae8c081ccbd0d072d7b4",
-      "name": "run",
-      "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d183c193d16d03ce80"],
-      "active": false,
-      "wordType": "Verb"
-    },
-    {
       "_id": "5511ae8cfb1b2d41b9f92888",
       "name": "desk",
       "creatorID": "5511a83da168f8b5f3144f02",
@@ -498,12 +490,159 @@ Tile.find({}).remove(function() {
       "wordType": "Noun"
     },
     {
-      "_id": "552c24181e58616ee17366ad",
-      "name": "catch",
+      "name": "good",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d13562bc39e23e4d3b"],
+      "wordType": "Adjective",
+      "_id": "55857b941eb0b1273145eaff",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "bad",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Adjective",
+      "_id": "55857b981eb0b1273145eb00",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "guy",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55857b9d1eb0b1273145eb01",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "Superman",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55857bb01eb0b1273145eb02",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "city",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55857bb81eb0b1273145eb03",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "peace",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55857bbe1eb0b1273145eb04",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "cape",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55857bc41eb0b1273145eb05",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "villain",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55857bc91eb0b1273145eb06",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "hero",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55857bd21eb0b1273145eb07",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "quick",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55857bf01eb0b1273145eb09",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "save",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Verb",
+      "_id": "55857c0d1eb0b1273145eb0a",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "protect",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Verb",
+      "_id": "55857c131eb0b1273145eb0b",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "wears",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Verb",
+      "_id": "55857c181eb0b1273145eb0c",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "__v": 2,
+      "_id": "552d5b08e1a3de8740774fad",
       "active": false,
-      "wordType": "Verb"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "name": "away",
+      "wordType": "Adverb",
+      "contextTags": ["553167d183c193d16d03ce80", "553167d1c67764f3773612dc"]
+    },
+    {
+      "__v": 2,
+      "_id": "552c24181e58616ee17366ad",
+      "active": false,
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "name": "catch",
+      "wordType": "Verb",
+      "contextTags": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc"]
+    }, {
+      "__v": 2,
+      "_id": "552d5b0824d1092b1ed1c157",
+      "active": false,
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "name": "find",
+      "wordType": "Verb",
+      "contextTags": ["553167d183c193d16d03ce80", "553167d1c67764f3773612dc"]
+    }, {
+      "__v": 2,
+      "_id": "552d5b0835f412b5e2610557",
+      "active": false,
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "name": "good",
+      "wordType": "Adjective",
+      "contextTags": ["553167d1afa1bda9bc0d055a", "553167d1c67764f3773612dc"]
+    }, {
+      "__v": 2,
+      "_id": "552d5b084c21c73298f493bd",
+      "active": false,
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "name": "ran",
+      "wordType": "Verb",
+      "contextTags": ["553167d1afa1bda9bc0d055a", "553167d1c67764f3773612dc"]
+    }, {
+      "__v": 2,
+      "_id": "5511ae8c081ccbd0d072d7b4",
+      "active": false,
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "name": "run",
+      "wordType": "Verb",
+      "contextTags": ["553167d183c193d16d03ce80", "553167d1c67764f3773612dc"]
+    }, {
+      "name": "quickly",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Adverb",
+      "_id": "55857d171eb0b1273145eb0d",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
+    }, {
+      "name": "evil",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Adjective",
+      "_id": "55857d531eb0b1273145eb0e",
+      "__v": 0,
+      "contextTags": ["553167d1c67764f3773612dc"]
     },
     {
       "_id": "552c24185768cb166a497fdb",
@@ -632,14 +771,6 @@ Tile.find({}).remove(function() {
       "contextTags": ["553167d183c193d16d03ce80"],
       "active": false,
       "wordType": "Adverb"
-    },
-    {
-      "_id": "552d5b0824d1092b1ed1c157",
-      "name": "find",
-      "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d183c193d16d03ce80"],
-      "active": false,
-      "wordType": "Verb"
     },
     {
       "_id": "552d5b08f631321946da8341",
@@ -994,14 +1125,6 @@ Tile.find({}).remove(function() {
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b0835f412b5e2610557",
-      "name": "good",
-      "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
-      "wordType": "Adjective"
-    },
-    {
       "_id": "552d5b08cd63a5895aac2582",
       "name": "have",
       "creatorID": "5511a83da168f8b5f3144f02",
@@ -1104,14 +1227,6 @@ Tile.find({}).remove(function() {
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adjective"
-    },
-    {
-      "_id": "552d5b084c21c73298f493bd",
-      "name": "ran",
-      "creatorID": "5511a83da168f8b5f3144f02",
-      "contextTags": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
-      "wordType": "Verb"
     },
     {
       "_id": "552d5b0861219d0e0572b532",
@@ -1288,7 +1403,87 @@ Tile.find({}).remove(function() {
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adverb"
-    })
+    },
+    {
+      "__v": 2,
+      "_id": "55856fb708209fde1a2b8af5",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "name": "his",
+      "wordType": "Pronoun",
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }
+    ,
+    {
+      "__v": 2,
+      "_id": "55856f7608209fde1a2b8af4",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "name": "of",
+      "wordType": "Article",
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }
+    ,
+    {
+      "name": "had",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Verb",
+      "_id": "5585701708209fde1a2b8af7",
+      "__v": 0,
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }
+    ,
+    {
+      "name": "him",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "5585704a08209fde1a2b8af8",
+      "__v": 0,
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }
+    ,
+    {
+      "name": "as",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Adverb",
+      "_id": "558570aa08209fde1a2b8af9",
+      "__v": 0,
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }
+    ,
+    {
+      "name": "then",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Adverb",
+      "_id": "558570d208209fde1a2b8afa",
+      "__v": 0,
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }
+    ,
+    {
+      "name": "could",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Verb",
+      "_id": "558570fa08209fde1a2b8afb",
+      "__v": 0,
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }
+    ,
+    {
+      "name": "when",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Verb",
+      "_id": "5585712508209fde1a2b8afc",
+      "__v": 0,
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    },
+    {
+      "name": "were",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Verb",
+      "_id": "5585713b08209fde1a2b8afd",
+      "__v": 0,
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }
+  )
 });
 
 Category.find({}).remove(function() {
@@ -1304,6 +1499,13 @@ Category.find({}).remove(function() {
       "name": "Dolch 2",
       "isWordType": false,
       "creatorID": "5511a83da168f8b5f3144f02"
+    },
+    {
+      "_id": "55856f5e08209fde1a2b8af3",
+      "name": "Dolch 3",
+      "isWordType": false,
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "__v": 0
     },
     {
       "_id": "553167d1cd3291e1352efe94",
