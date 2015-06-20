@@ -4,10 +4,11 @@ angular.module('WordRiverApp')
   .controller('HomeCtrl', function ($scope, $rootScope, Auth, $location) {
     $scope.user = {email: "rosemariemaxwell@plexia.com", password: "joethe"};
     $scope.errors = {};
-    //$scope.logInShow = true;
-    $scope.logInShow = false;
+    $scope.logInShow = true;
+    //$scope.logInShow = false;
+    $scope.loggedIn = Auth.isLoggedIn()
     $scope.signUpShow = false;
-    $scope.signedInShow = true;
+    $scope.signedInShow = false;
     $scope.buttonsShow = true;
     $scope.changePasswordShow = false;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -21,7 +22,7 @@ angular.module('WordRiverApp')
       console.log(values);
       if(values[1] == "true"){
         $scope.changePasswordShow = true;
-        $scope.signedInShow = true;
+        $scope.signedInShow = false;
         $scope.buttonsShow = false;
         $scope.logInShow = false;
         $scope.signUpShow = false;
@@ -81,17 +82,17 @@ angular.module('WordRiverApp')
     };
 
     $scope.checkedLoggedIn = function() {
-      if(Auth.isLoggedIn()){
+      if($scope.loggedIn){
         $scope.signedInShow = true;
         $scope.buttonsShow = false;
         $scope.logInShow = false;
         $scope.signUpShow = false;
       }else{
-        //    $scope.logInShow = true;
-        $scope.logInShow = false;
+        $scope.logInShow = true;
+        //$scope.logInShow = false;
         $scope.signUpShow = false;
-        //$scope.signedInShow = false;
-        $scope.signedInShow = true;
+        $scope.signedInShow = false;
+        //$scope.signedInShow = true;
         $scope.buttonsShow = true;
       }
     }
