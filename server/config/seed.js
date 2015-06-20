@@ -33,7 +33,8 @@ User.find({}).remove(function() {
         "553167d13562bc39e23e4d3b",
         "553167d14651465f11201014",
         "553167d123b90c175f9b3a86",
-        "553167d171ef5955ded609ef"
+        "553167d171ef5955ded609ef",
+        "55856f5e08209fde1a2b8af3"
       ],
       /*Names of groups with assigned context packs by id*/
       "groupList": [
