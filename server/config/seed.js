@@ -25,6 +25,7 @@ User.find({}).remove(function() {
       "contextPacks": [
         "553167d183c193d16d03ce80",
         "553167d1afa1bda9bc0d055a",
+        "55856f5e08209fde1a2b8af3",
         "553167d1cd3291e1352efe94",
         "553167d1d26d6cb60967d8a5",
         "553167d1c296f9753ce8447f",
@@ -34,7 +35,8 @@ User.find({}).remove(function() {
         "553167d14651465f11201014",
         "553167d123b90c175f9b3a86",
         "553167d171ef5955ded609ef",
-        "55856f5e08209fde1a2b8af3"
+        "558584084afb8b051fa83846",
+        "55858751d0ec44402530da01"
       ],
       /*Names of groups with assigned context packs by id*/
       "groupList": [
@@ -120,7 +122,7 @@ Student.find({}).remove(function() {
         "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b",
         "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
-      "contextTags": ["55856f5e08209fde1a2b8af3", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80", "553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"]
+      "contextTags": ["55856f5e08209fde1a2b8af3", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80", "553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a", "558584084afb8b051fa83846", "55858751d0ec44402530da01"]
     },
     {
       "_id": "5511ab564ac02dbaf337270d",
@@ -1483,6 +1485,133 @@ Tile.find({}).remove(function() {
       "_id": "5585713b08209fde1a2b8afd",
       "__v": 0,
       "contextTags": ["55856f5e08209fde1a2b8af3"]
+    },
+    {
+      "name": "mom",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "5585850e9600193b2058a717",
+      "__v": 0,
+      "contextTags": ["558584084afb8b051fa83846"]
+    }, {
+      "name": "dad",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558585129600193b2058a718",
+      "__v": 0,
+      "contextTags": ["558584084afb8b051fa83846"]
+    }, {
+      "name": "sister",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "5585851d9600193b2058a719",
+      "__v": 0,
+      "contextTags": ["558584084afb8b051fa83846"]
+    }, {
+      "name": "brother",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558585239600193b2058a71a",
+      "__v": 0,
+      "contextTags": ["558584084afb8b051fa83846"]
+    }, {
+      "name": "Spencer",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558585df76957bfd22fcfd64",
+      "__v": 0,
+      "contextTags": ["558584084afb8b051fa83846"]
+    }, {
+      "name": "Maura",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558585e976957bfd22fcfd65",
+      "__v": 0,
+      "contextTags": ["558584084afb8b051fa83846"]
+    }, {
+      "name": "Lambo",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558585f076957bfd22fcfd66",
+      "__v": 0,
+      "contextTags": ["558584084afb8b051fa83846"]
+    }, {
+      "name": "Mylee",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558585f576957bfd22fcfd67",
+      "__v": 0,
+      "contextTags": ["558584084afb8b051fa83846"]
+    }, {
+      "name": "Willie's",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587c2147e142026ba8c65",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "Library",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587c9147e142026ba8c66",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "Bello Cucina",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587d3147e142026ba8c67",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "East Side Park",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587da147e142026ba8c68",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "Wells Park",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587e4147e142026ba8c69",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "Common Cup",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587eb147e142026ba8c6a",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "Dairy Queen",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587f1147e142026ba8c6b",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "McDonald's",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587f9147e142026ba8c6c",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "Bank",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "558587fe147e142026ba8c6d",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
+    }, {
+      "name": "Scool",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Noun",
+      "_id": "55858803147e142026ba8c6e",
+      "__v": 0,
+      "contextTags": ["55858751d0ec44402530da01"]
     }
   )
 });
@@ -1561,6 +1690,19 @@ Category.find({}).remove(function() {
       "name": "Noun",
       "isWordType": false,
       "creatorID": "5511a83da168f8b5f3144f02"
+    },
+    {
+      "name": "My Family",
+      "isWordType": false,
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "_id": "558584084afb8b051fa83846"
+    },
+    {
+      "name": "Morris",
+      "isWordType": false,
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "_id": "55858751d0ec44402530da01",
+      "__v": 0
     }
   )
 });
