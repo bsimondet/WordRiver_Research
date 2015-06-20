@@ -55,7 +55,7 @@
     <div>
       <!--Section for adding a new word and it's type to the system-->
       <form ng-submit="addWord()">
-        <input ng-model="addField" type="text" size="15" placeholder="Add a word">
+        <input ng-model="addField" type="text" size="15" placeholder="Add a New word">
         <br><br>
         <select ng-model="addType">
           <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
@@ -69,8 +69,12 @@
     <div ng-hide="showValue">
       <br>
       <input ng-model="editField" type="text" size="15" placeholder={{userTiles[editWordIndex].name}}>
-      <input ng-model="editType" type="text" size="15" placeholder={{userTiles[editWordIndex].wordType}}>
-      <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateTile()">
+      <!--<input ng-model="editType" type="text" size="15" placeholder={{userTiles[editWordIndex].wordType}}>-->
+      <br><br>
+      <select ng-model="editType">
+        <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
+      </select>
+      <input type="submit" value="Edit" class="btn-primary" ng-click="updateTile()">
     </div>
 
     <!--List of words with their type, also edit and delete option-->
