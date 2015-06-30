@@ -43,6 +43,19 @@ angular.module('WordRiverApp')
       ];
     $scope.selection = {addType: ""};
 
+    $scope.getWords = function(){
+      $scope.userTiles = [];
+      $http.get('/api/tile').success(function(allTiles) {
+        $scope.allTiles = allTiles;
+        for(var i= 0; i < $scope.allTiles.length; i++){
+          if($scope.currentUser._id == $scope.allTiles[i].creatorID){
+            $scope.userTiles.push($scope.allTiles[i]);
+            //console.log($scope.allTiles[i]);
+          }
+        }
+      });
+    };
+    $scope.getWords();
 
     $scope.getCategories = function() {
       $scope.categoryArray = [];
@@ -57,20 +70,60 @@ angular.module('WordRiverApp')
       });
     };
 
+    //Named poorly just to ensure no overlaps between functions in different models
+    $scope.checkCategorys = function (category) {
+      var counter;
+      for (var i = 0; i < $scope.selectedCategories.length; i++) {
+        if ($scope.selectedCategories[i] == category) {
+          $scope.selectedCategories.splice(i, 1);
+          counter = 1;
+        }
+      }
+      if (counter != 1) {
+        $scope.selectedCategories.push(category);
+      }
+    };
+
+    //Named poorly just to ensure no overlaps between functions in different models
+    $scope.checkTiles = function (word) {
+      console.log("This is the selected word "+word);
+      var counter = 0;
+      for(var i = 0; i < $scope.selectedTiles.length; i++){
+        if($scope.selectedTiles[i] == word) {
+          $scope.selectedTiles.splice(i,1);
+          counter = 1;
+        }
+      }
+      if(counter != 1){
+        $scope.selectedTiles.push(word);
+      }
+    };
+
+    $scope.checkForDuplicatesInCat = function(array){
+      for (var i = 0; i < array.length; i++) {
+        for (var j = i + 1; j < array.length; j++) {
+          if (array[i]==array[j]){
+            array.splice(j,1);
+          }
+        }
+      }
+      return array;
+    };
+
     $scope.addTileToCategory = function() {
-      var index =-1;
-      for(var i = 0; i < $scope.selectedCategories.length; i++){
-        for(var j = 0; j < $scope.selectedTiles.length; j++){
-          console.log("asdasd "+$scope.selectedTiles[j]);
-          index =  $scope.findTileByIndex($scope.selectedTiles[j]);
-          if(index != -1 && !$scope.inArray($scope.userTiles[index].contextTags, $scope.selectedCategories[i])) {
-            $http.put('/api/tile/' + $scope.userTiles[index]._id + "/updateTile", {
-              tile: $scope.userTiles[index],
-              tileId: $scope.userTiles[index]._id,
-              newCategory: $scope.selectedCategories[i]
-            }).success(function () {
-            });
-            $scope.userTiles[index].contextTags.push($scope.selectedCategories[i]);
+      for(var r = 0; r < $scope.userTiles.length; r++){
+        for(var y = 0; y < $scope.selectedTiles.length; y++){
+          console.log("Looking for ID have "+$scope.userTiles[r]._id);
+          console.log("Looking for ID want "+$scope.selectedTiles[y]._id);
+          if ($scope.userTiles[r]._id == $scope.selectedTiles[y]._id) {
+            for (var v = 0; v < $scope.selectedCategories.length; v++) {
+              $scope.userTiles[r].contextTags.push($scope.selectedCategories[v]._id);
+            }
+            $scope.userTiles[r].contextTags = $scope.checkForDuplicatesInCat($scope.userTiles[r].contextTags);
+            $http.patch('api/tile/' + $scope.userTiles[r]._id,
+              {contextTags: $scope.userTiles[r].contextTags}).success(function () {
+                //$scope.getWords();
+              });
           }
         }
       }
@@ -100,7 +153,7 @@ angular.module('WordRiverApp')
 
     $scope.inArray = function(array, item){
       for(var i = 0; i < array.length; i++){
-        console.log("Thing"+array[i]);
+        //console.log("Thing"+array[i]);
         if(array[i] == item){
           return true;
         }
@@ -116,16 +169,16 @@ angular.module('WordRiverApp')
 
     $scope.addCategory = function () {
       if ($scope.categoryField.length >= 1) {
-        console.log($scope.categoryField);
+        //console.log($scope.categoryField);
         $http.post('/api/categories/',
           {name:$scope.categoryField, isWordType: false, creatorID: $scope.currentUser._id}
         ).success(function(data){
-            console.log("data:"+data);
+            //console.log("data:"+data);
             $scope.currentUser.contextPacks.push(data._id);
             $http.put('/api/users/' + $scope.currentUser._id + '/addContextID',
               {contextID: data._id}
             ).success(function(){
-                console.log('something');
+                //console.log('something');
               });
           });
         $scope.theIDWeWant = null;
@@ -134,20 +187,6 @@ angular.module('WordRiverApp')
       $scope.categoryField="";
       $scope.getCategories();
     };
-
-    $scope.getWords = function(){
-      $scope.userTiles = [];
-      $http.get('/api/tile').success(function(allTiles) {
-        $scope.allTiles = allTiles;
-        for(var i= 0; i < $scope.allTiles.length; i++){
-          if($scope.currentUser._id == $scope.allTiles[i].creatorID){
-            $scope.userTiles.push($scope.allTiles[i]);
-            console.log($scope.allTiles[i]);
-          }
-        }
-      });
-    };
-    $scope.getWords();
 
     $scope.addWord = function() {
       if ($scope.addField.length >= 1 && $scope.addType.length >= 1) {
@@ -193,10 +232,10 @@ angular.module('WordRiverApp')
 
     $scope.getCategoryFromTagName = function(tile, index) {
       for(var i = 0; i < $scope.categoryArray.length; i++){
-        console.log(tile.contextTags[index] + " "+ $scope.categoryArray[i]._id);
+        //console.log(tile.contextTags[index] + " "+ $scope.categoryArray[i]._id);
         if(tile.contextTags[index] == $scope.categoryArray[i]._id){
           $scope.contextTagsTemp.push($scope.categoryArray[i]);
-          console.log($scope.categoryArray[i]);
+          //console.log($scope.categoryArray[i]);
         }
       }
     };
@@ -213,12 +252,12 @@ angular.module('WordRiverApp')
     $scope.removeCategory = function(category) {
       $scope.tempIndex = $scope.findIndexOfCat(category);
       $scope.catToRemove = $scope.categoryArray[$scope.tempIndex];
-      console.log(category.name);
+      //console.log(category.name);
       for(var i = 0; i<$scope.currentUser.contextPacks.length; i++){
         if($scope.currentUser.contextPacks[i] == $scope.catToRemove._id){
           $scope.currentUser.contextPacks.splice(i,1);
 
-          console.log($scope.catToRemove.name);
+          //console.log($scope.catToRemove.name);
         }
       }
       $http.delete('/api/categories/'+ $scope.catToRemove._id).success(function(){console.log('success')});

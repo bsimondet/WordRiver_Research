@@ -54,8 +54,7 @@
         <p>
         <li class="list-group-item " ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:{fullName:searchText0}">
           <label><input type="checkbox" value="value"  ng-click="checkStudents(student)">
-            <a ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}}
-            </a>
+            <a ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}}</a>
           </label>
         </li>
       </ul>
@@ -177,14 +176,6 @@
       <br>
       <!--Listing things after group is selected-->
       <div class="middleScroll">
-        <!--Listing students assigned to the selected group-->
-        <h4>The group "{{groupSelected.groupName}}" has the students: </h4>
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="student in matchStudents | orderBy:'firstName'">
-            <a ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a>
-            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignStudentFromGroup(student, groupSelected, 'group')"></span>
-          </li>
-        </ul>
         <!--Listing context packs assigned to the selected group-->
         <h4>The context packs that this group has are:</h4>
         <ul class="list-group">
@@ -197,6 +188,14 @@
           <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy:'name'">
             <a ng-click="displayTileInfo(tile)">{{tile.name}}</a>
             <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignWordFromGroup(groupSelected, tile, 'group')"></span>
+          </li>
+        </ul>
+        <!--Listing students assigned to the selected group-->
+        <h4>The group "{{groupSelected.groupName}}" has the students: </h4>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="student in matchStudents | orderBy:'firstName'">
+            <a ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a>
+            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignStudentFromGroup(student, groupSelected, 'group')"></span>
           </li>
         </ul>
       </div>
