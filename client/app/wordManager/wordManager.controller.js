@@ -86,7 +86,7 @@ angular.module('WordRiverApp')
 
     //Named poorly just to ensure no overlaps between functions in different models
     $scope.checkTiles = function (word) {
-      console.log("This is the selected word "+word);
+      //console.log("This is the selected word "+word);
       var counter = 0;
       for(var i = 0; i < $scope.selectedTiles.length; i++){
         if($scope.selectedTiles[i] == word) {
@@ -113,8 +113,8 @@ angular.module('WordRiverApp')
     $scope.addTileToCategory = function() {
       for(var r = 0; r < $scope.userTiles.length; r++){
         for(var y = 0; y < $scope.selectedTiles.length; y++){
-          console.log("Looking for ID have "+$scope.userTiles[r]._id);
-          console.log("Looking for ID want "+$scope.selectedTiles[y]._id);
+          //console.log("Looking for ID have "+$scope.userTiles[r]._id);
+          //console.log("Looking for ID want "+$scope.selectedTiles[y]._id);
           if ($scope.userTiles[r]._id == $scope.selectedTiles[y]._id) {
             for (var v = 0; v < $scope.selectedCategories.length; v++) {
               $scope.userTiles[r].contextTags.push($scope.selectedCategories[v]._id);
@@ -201,12 +201,14 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.uncheckAll = function(){
+    $scope.uncheckAllWords = function(){
       $scope.selectedTiles = [];
+      $scope.getWords();
     };
 
     $scope.uncheckAllCategories = function(){
       $scope.selectedCategories = [];
+      $scope.getCategories();
     };
 
     //cat is short for category
