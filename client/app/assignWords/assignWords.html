@@ -21,13 +21,17 @@
       <!--Sorting options for groups-->
       <button class="btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
       <button class="btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
+      <!--Tried implementing a search, but groups disappear everytime you start to type?-->
+      <!--<input type="text" ng-Model="searchGroups" placeholder="Search Groups">-->
       <!--Listing all current groups-->
       <ul class="list-group scroll">
         <p>
         <li class="list-group-item" ng-repeat="group in userGroups | orderBy:'groupName':order1">
           <!--accordion groups do not like to work with an ng-repeat within an ng-repeat also, click the eyeball twice the first time you are on the page and then it will work fine-->
-        <label><input type="checkbox" value="value" ng-click="checkGroups(group)"><a ng-click="displayGroupInfo(group)">{{group.groupName}}</a></label>
-          <span class="glyphicon glyphicon-eye-close floatRight close" title="Show students in group" ng-click="studentsInGroupAssignment(group); openingOnlyOneGroup(group); isCollapsed = !isCollapsed"></span>
+        <label><input type="checkbox" value="value" ng-click="checkGroups(group)">
+          <a ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
+        </label>
+        <span class="glyphicon glyphicon-eye-close floatRight close" title="Show students in group" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group); openingOnlyOneGroup(group)"></span>
           <ul collapse = "group.isCollapsed">
             <li  ng-repeat="students in groupedStudents">
               <a ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a>
@@ -48,11 +52,11 @@
       <!--Sorting options for students-->
       <button class="btn-primary" ng-show="!AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0; AZ0=!AZ0">Z-A</button>
       <button class="btn-primary" ng-show="AZ0" ng-click="toSort0 = 'lastName'; order0 = !order0 ;AZ0=!AZ0">A-Z</button>
-      <input type="text" ng-Model="searchText0" placeholder="Search">
+      <input type="text" ng-Model="searchStudents" placeholder="Search Students">
       <!--Listing all current students-->
       <ul class="list-group scroll">
         <p>
-        <li class="list-group-item " ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:{fullName:searchText0}">
+        <li class="list-group-item " ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:{fullName:searchStudents}">
           <label><input type="checkbox" value="value"  ng-click="checkStudents(student)">
             <a ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}}</a>
           </label>
@@ -257,11 +261,11 @@
       <!--Sorting options-->
       <button class="btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
       <button class="btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
-      <input type="text" ng-Model="searchText1" placeholder="Search">
+      <input type="text" ng-Model="searchCategories" placeholder="Search Packs">
       <!--Listing all current context packs in system-->
       <ul class="list-group scroll">
         <p>
-        <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:{name:searchText1}">
+        <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:{name:searchCategories}">
           <label><input type="checkbox" value="value" ng-click="checkCategories(category)">
             <a ng-click="displayCatInfo(category)">{{category.name}}</a>
           </label>
@@ -285,11 +289,11 @@
       <!--Sorting options-->
       <button class="btn-primary" ng-show="AZ3" ng-click=" order3 = !order3; AZ3=!AZ3">A-Z</button>
       <button class="btn-primary" ng-show="!AZ3" ng-click=" order3 = !order3 ;AZ3=!AZ3">Z-A</button>
-      <input type="text" ng-Model="searchText2" placeholder="Search">
+      <input type="text" ng-Model="searchWords" placeholder="Search Words">
       <!--Listing all current words in system-->
       <ul class="list-group scroll">
         <p>
-        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:{name:searchText2}">
+        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:{name:searchWords}">
           <label><input type="checkbox" value="value" ng-click="checkWords(tile)">
             <a ng-click="displayTileInfo(tile)">{{tile.name}}</a>
           </label>

@@ -15,10 +15,11 @@
     </form>
     <br>
     <button class="btn btn-primary" ng-click="uncheckAllCategories()">Uncheck All</button>
+    <input type="text" ng-Model="searchPacks" placeholder="Search Words">
     <!--List of all Context Packs-->
     <ul class="list-group scroll">
       <p>
-        <li class="list-group-item" ng-repeat="category in categoryArray">
+        <li class="list-group-item" ng-repeat="category in categoryArray | filter:{name:searchPacks}">
         <label><input type="checkbox" value="value"  ng-click="checkCategorys(category)">
           <a ng-click="displayCatInfo(category)">{{category.name}}</a>
         </label>
@@ -88,10 +89,10 @@
       <!--Sorting options-->
       <!--<button class="btn btn-primary" ng-click="toSort = 'name'; order = !order">Sort Alphabetically</button>-->
       <button class="btn btn-primary" ng-click="uncheckAll()">Uncheck all</button>
-
+      <input type="text" ng-Model="searchWords" placeholder="Search Words">
       <ul class="list-group scroll">
         <p>
-          <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order">
+          <li class="list-group-item" ng-repeat="tile in userTiles | orderBy: toSort:order | filter:{name:searchWords}">
             <label><input type="checkbox" value="value"  ng-click="checkTiles(tile)">
               <a ng-click="displayWordInfo(tile)">{{tile.name}}, {{tile.wordType}}</a>
             </label>

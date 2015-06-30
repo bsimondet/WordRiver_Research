@@ -7,9 +7,9 @@
 </header>
 <div class="container">
   <div class="col-xs-3" >
-    <h2>All Students:</h2>
+    <h1>All Students:</h1>
     <!--Sorting options-->
-    <p>Search: <input type="text" ng-model="searchText"/></p>
+    <p><input type="text" ng-model="searchText" placeholder="Search Students"></p>
     <button class="btn btn-primary btn-sm" ng-click="toSort = 'lastName'; order = !order">Sort by last name</button>
     <button class="btn btn-primary btn-sm" ng-click="toSort = 'firstName'; order = !order">Sort by first name</button>
 
