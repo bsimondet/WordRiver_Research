@@ -11,7 +11,7 @@ var Student = require('../api/student/student.model');
 var Tile = require('../api/tile/tile.model');
 var Category = require('../api/category/category.model');
 
-User.find({}).remove(function() {
+User.find({}).remove(function () {
   User.create({
       /*This is the only teacher in the system, includes login*/
       "_id": "5511a83da168f8b5f3144f02",
@@ -40,33 +40,38 @@ User.find({}).remove(function() {
       ],
       /*Names of groups with assigned context packs by id*/
       "groupList": [
-        {"groupName": "Group A",
+        {
+          "groupName": "Group A",
           "_id": "5535520d4e9e3d82b7283ca2",
           "contextPacks": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"],
           "freeTiles": []
         },
-        {"groupName": "Group B",
+        {
+          "groupName": "Group B",
           "_id": "5535520db654746a2361ffb6",
           "contextPacks": ["553167d1c67764f3773612dc"],
           "freeTiles": ["5511ae8c1fb25384d865e514"]
         },
-        {"groupName": "Group C",
+        {
+          "groupName": "Group C",
           "_id": "5535520dd7b5c70193c4993c",
           "contextPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86"],
           "freeTiles": ["5511ae8cf6f121e4c3108cd6", "552c24183b10b8ec888e042b", "552d5b08e1a3de8740774fad"]
         },
-        {"groupName": "Group D",
+        {
+          "groupName": "Group D",
           "_id": "5535520dff3a52f2757e5944",
           "contextPacks": ["553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"],
           "freeTiles": []
         },
-        {"groupName": "Group E",
+        {
+          "groupName": "Group E",
           "_id": "5535520d147a722a4e7233a3",
           "contextPacks": ["553167d1c296f9753ce8447f"],
           "freeTiles": []
         }],
       /*All current words in system by id*/
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" , "552c24185768cb166a497fdb", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c805b0d983f66e2cd", "552c2418684d651eee7cea6e", "552c24183b10b8ec888e042b", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c805b0d983f66e2cd", "552c2418684d651eee7cea6e", "552c24183b10b8ec888e042b", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5c8011d58a4ad979d9b0", "552d5c80d6a8d78c5541b508", "552d5c80c0b37217fd3eded3", "552d5c80af62cb1c0a09f7bf", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc",
         "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951", "552d5b082d9c84e6c572461f", "552d5b08f186ab84dd36bd24", "552d5b08ecffac6643646176", "552d5b08461def276c7589ea", "552d5b08caede2169f0ab287", "552d5b08acda561db7b3c022",
         "552d5b0873d2087138f0b0e3", "552d5b080ddd0f4c449a6930", "552d5b08e54bac39a0fa5303", "552d5b082efcaa22520e444b", "552d5b0807228254a78d0266", "552d5b088f9b179c9f41b915", "552d5b083415e4dd5d9a985e", "552d5b08e971cb2f0c9c4a3b", "552d5b082fb9929fbcc7639e", "552d5b0835f412b5e2610557", "552d5b08cd63a5895aac2582", "552d5b08ff86b2bcff1588c2", "552d5b08e723ee4287d0e8c6", "552d5b087f7d2946369694ec", "552d5b08efa1707df67f3c69", "552d5b089f3cd6659ecec9f7", "552d5b084dd671476f5b2f19", "552d5b08d359fad21a131789", "552d5b082c63acb89b72cf89", "552d5b089c748571cac88a40", "552d5b085524dd49b0aa933f", "552d5b08cb8d71b90811efe3", "552d5b08a9dc076e610ffc7d", "552d5b084c21c73298f493bd", "552d5b0861219d0e0572b532",
@@ -99,17 +104,17 @@ User.find({}).remove(function() {
   );
 });
 
-Student.find({}).remove(function() {
+Student.find({}).remove(function () {
   Student.create(
     /*Current students,
-    id,
-    firstname,
-    lastname,
-    artifacts ~ results from application,
-    assigned teachers,
-    assigned words,
-    assigned groups,
-    assigned contextpacks*/
+     id,
+     firstname,
+     lastname,
+     artifacts ~ results from application,
+     assigned teachers,
+     assigned words,
+     assigned groups,
+     assigned contextpacks*/
     {
       "_id": "5511ab56117e23f0412fd08f",
       "firstName": "Aaron",
@@ -199,7 +204,7 @@ Student.find({}).remove(function() {
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" ,  "552c24185768cb166a497fdb", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "groupList": ["5535520d4e9e3d82b7283ca2"],
       "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"]
@@ -211,7 +216,7 @@ Student.find({}).remove(function() {
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" ,  "552c24185768cb166a497fdb", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951", "552d5b082d9c84e6c572461f", "552d5b08f186ab84dd36bd24", "552d5b08ecffac6643646176", "552d5b08461def276c7589ea", "552d5b08caede2169f0ab287", "552d5b08acda561db7b3c022", "552d5b0873d2087138f0b0e3", "552d5b080ddd0f4c449a6930", "552d5b08e54bac39a0fa5303", "552d5b082efcaa22520e444b", "552d5b0807228254a78d0266", "552d5b088f9b179c9f41b915", "552d5b083415e4dd5d9a985e", "552d5b08e971cb2f0c9c4a3b", "552d5b082fb9929fbcc7639e", "552d5b0835f412b5e2610557", "552d5b08cd63a5895aac2582", "552d5b08ff86b2bcff1588c2", "552d5b08e723ee4287d0e8c6", "552d5b087f7d2946369694ec", "552d5b08efa1707df67f3c69", "552d5b089f3cd6659ecec9f7", "552d5b084dd671476f5b2f19", "552d5b08d359fad21a131789", "552d5b082c63acb89b72cf89", "552d5b089c748571cac88a40", "552d5b085524dd49b0aa933f", "552d5b08cb8d71b90811efe3", "552d5b08a9dc076e610ffc7d", "552d5b084c21c73298f493bd", "552d5b0861219d0e0572b532", "552d5b08a55d156939bff935", "552d5b08b40c993e7068dca1", "552d5b0820c26a478b95f7bd", "552d5b0836a6578211cb2886", "552d5b08619b6ef36f95f8fd", "552d5b08e274fc1a6591c02b", "552d5b08267ab9df7ef30c11", "552d5b0875ccfa12a218aa77", "552d5b08e511287e53be311d", "552d5b08873a6b80dde989f9", "552d5b081bc5d94baaee575c", "552d5b0808eff2d9ee6452b4", "552d5b08142365901ff49f2e", "552d5b08c8e6226ce98cdafd", "552d5b08d9031837ac352ecb", "552d5b081003bdec4c0446c4", "552d5b083599e39053bc5ac9", "552d5b087260cda8fa58b0ef", "552d5b08c50289e73d8a9e99", "552d5b085a5caeb37158c286", "552d5b08f198fb94de7fccd9"],
       "groupList": ["5535520dff3a52f2757e5944", "5535520d4e9e3d82b7283ca2"],
       "contextTags": ["553167d1d969a916cab51920", "553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1afa1bda9bc0d055a"]
@@ -223,7 +228,7 @@ Student.find({}).remove(function() {
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" , "552c24185768cb166a497fdb", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6", "5535520d147a722a4e7233a3"],
       "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc", "553167d1c296f9753ce8447f"]
@@ -235,7 +240,7 @@ Student.find({}).remove(function() {
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" , "552c24185768cb166a497fdb", "552d5c8011d58a4ad979d9b0", "552d5c80d6a8d78c5541b508", "552d5c80c0b37217fd3eded3", "552d5c80af62cb1c0a09f7bf", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "552d5c8011d58a4ad979d9b0", "552d5c80d6a8d78c5541b508", "552d5c80c0b37217fd3eded3", "552d5c80af62cb1c0a09f7bf", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520dd7b5c70193c4993c", "5535520d147a722a4e7233a3"],
       "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d14651465f11201014", "553167d123b90c175f9b3a86", "553167d1c296f9753ce8447f"]
@@ -247,7 +252,7 @@ Student.find({}).remove(function() {
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" , "552c24185768cb166a497fdb", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
       "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc"]
@@ -270,7 +275,7 @@ Student.find({}).remove(function() {
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" , "552c24185768cb166a497fdb", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951", "552d5b082d9c84e6c572461f", "552d5b08f186ab84dd36bd24", "552d5b08ecffac6643646176", "552d5b08461def276c7589ea", "552d5b08caede2169f0ab287", "552d5b08acda561db7b3c022", "552d5b0873d2087138f0b0e3", "552d5b080ddd0f4c449a6930", "552d5b08e54bac39a0fa5303", "552d5b082efcaa22520e444b", "552d5b0807228254a78d0266", "552d5b088f9b179c9f41b915", "552d5b083415e4dd5d9a985e", "552d5b08e971cb2f0c9c4a3b", "552d5b082fb9929fbcc7639e", "552d5b0835f412b5e2610557", "552d5b08cd63a5895aac2582", "552d5b08ff86b2bcff1588c2", "552d5b08e723ee4287d0e8c6", "552d5b087f7d2946369694ec", "552d5b08efa1707df67f3c69", "552d5b089f3cd6659ecec9f7", "552d5b084dd671476f5b2f19", "552d5b08d359fad21a131789", "552d5b082c63acb89b72cf89", "552d5b089c748571cac88a40", "552d5b085524dd49b0aa933f", "552d5b08cb8d71b90811efe3", "552d5b08a9dc076e610ffc7d", "552d5b084c21c73298f493bd", "552d5b0861219d0e0572b532", "552d5b08a55d156939bff935", "552d5b08b40c993e7068dca1", "552d5b0820c26a478b95f7bd", "552d5b0836a6578211cb2886", "552d5b08619b6ef36f95f8fd", "552d5b08e274fc1a6591c02b", "552d5b08267ab9df7ef30c11", "552d5b0875ccfa12a218aa77", "552d5b08e511287e53be311d", "552d5b08873a6b80dde989f9", "552d5b081bc5d94baaee575c", "552d5b0808eff2d9ee6452b4", "552d5b08142365901ff49f2e", "552d5b08c8e6226ce98cdafd", "552d5b08d9031837ac352ecb", "552d5b081003bdec4c0446c4", "552d5b083599e39053bc5ac9", "552d5b087260cda8fa58b0ef", "552d5b08c50289e73d8a9e99", "552d5b085a5caeb37158c286", "552d5b08f198fb94de7fccd9"],
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520dff3a52f2757e5944"],
       "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1d969a916cab51920"]
@@ -293,7 +298,7 @@ Student.find({}).remove(function() {
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" ,  "552c24185768cb166a497fdb", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "5511ae8cf6f121e4c3108cd6", "5511ae8cb5ac0ff225f5fde2", "5511ae8cfb1b2d41b9f92888", "552c2418e365512da04e88c6", "552c241822d53b21154c0cc0", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951", "552d5b082d9c84e6c572461f", "552d5b08f186ab84dd36bd24", "552d5b08ecffac6643646176", "552d5b08461def276c7589ea", "552d5b08caede2169f0ab287", "552d5b08acda561db7b3c022", "552d5b0873d2087138f0b0e3", "552d5b080ddd0f4c449a6930", "552d5b08e54bac39a0fa5303", "552d5b082efcaa22520e444b", "552d5b0807228254a78d0266", "552d5b088f9b179c9f41b915", "552d5b083415e4dd5d9a985e", "552d5b08e971cb2f0c9c4a3b", "552d5b082fb9929fbcc7639e", "552d5b0835f412b5e2610557", "552d5b08cd63a5895aac2582", "552d5b08ff86b2bcff1588c2", "552d5b08e723ee4287d0e8c6", "552d5b087f7d2946369694ec", "552d5b08efa1707df67f3c69", "552d5b089f3cd6659ecec9f7", "552d5b084dd671476f5b2f19", "552d5b08d359fad21a131789", "552d5b082c63acb89b72cf89", "552d5b089c748571cac88a40", "552d5b085524dd49b0aa933f", "552d5b08cb8d71b90811efe3", "552d5b08a9dc076e610ffc7d", "552d5b084c21c73298f493bd", "552d5b0861219d0e0572b532", "552d5b08a55d156939bff935", "552d5b08b40c993e7068dca1", "552d5b0820c26a478b95f7bd", "552d5b0836a6578211cb2886", "552d5b08619b6ef36f95f8fd", "552d5b08e274fc1a6591c02b", "552d5b08267ab9df7ef30c11", "552d5b0875ccfa12a218aa77", "552d5b08e511287e53be311d", "552d5b08873a6b80dde989f9", "552d5b081bc5d94baaee575c", "552d5b0808eff2d9ee6452b4", "552d5b08142365901ff49f2e", "552d5b08c8e6226ce98cdafd", "552d5b08d9031837ac352ecb", "552d5b081003bdec4c0446c4", "552d5b083599e39053bc5ac9", "552d5b087260cda8fa58b0ef", "552d5b08c50289e73d8a9e99", "552d5b085a5caeb37158c286", "552d5b08f198fb94de7fccd9"],
       "groupList": ["5535520dff3a52f2757e5944", "5535520d4e9e3d82b7283ca2"],
       "contextTags": ["553167d1d969a916cab51920", "553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d1afa1bda9bc0d055a"]
@@ -316,7 +321,7 @@ Student.find({}).remove(function() {
       "teachers": [
         "5511a83da168f8b5f3144f02"
       ],
-      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048" , "552c24185768cb166a497fdb", "552d5c8011d58a4ad979d9b0", "552d5c80d6a8d78c5541b508", "552d5c80c0b37217fd3eded3", "552d5c80af62cb1c0a09f7bf", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
+      "tileBucket": ["5511ae8c081ccbd0d072d7b4", "5511ae8ce28633ca8ad95f7f", "552c2418c7134c9a280c8048", "552c24185768cb166a497fdb", "552d5c8011d58a4ad979d9b0", "552d5c80d6a8d78c5541b508", "552d5c80c0b37217fd3eded3", "552d5c80af62cb1c0a09f7bf", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926", "552c24180d441ed98f5c9b3b", "552c2418971878c01bab1e7c", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d", "5511ae8c8b6533965921e512", "552c24181e58616ee17366ad",
         "552c2418c036ef35fe0bac32", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61", "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b", "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520dd7b5c70193c4993c", "5535520d147a722a4e7233a3"],
       "contextTags": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b", "553167d14651465f11201014", "553167d123b90c175f9b3a86", "553167d1c296f9753ce8447f"]
@@ -329,7 +334,7 @@ Student.find({}).remove(function() {
         "5511a83da168f8b5f3144f02"
       ],
       "tileBucket": [],
-      "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6", "5535520dd7b5c70193c4993c", "5535520dff3a52f2757e5944", "5535520d147a722a4e7233a3" ],
+      "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6", "5535520dd7b5c70193c4993c", "5535520dff3a52f2757e5944", "5535520d147a722a4e7233a3"],
       "contextTags": []
     },
     {
@@ -362,8 +367,7 @@ Student.find({}).remove(function() {
 });
 
 
-
-Tile.find({}).remove(function() {
+Tile.find({}).remove(function () {
   Tile.create({
       /*Current words,
        id,
@@ -654,6 +658,13 @@ Tile.find({}).remove(function() {
       "contextTags": ["553167d183c193d16d03ce80"],
       "active": false,
       "wordType": "Conjunction"
+    }, {
+      "name": "or",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Conjunction",
+      "_id": "5592cbe9b0983c8b19453446",
+      "__v": 0,
+      "contextTags": ["553167d183c193d16d03ce80"]
     },
     {
       "_id": "552c2418971878c01bab1e7c",
@@ -781,7 +792,7 @@ Tile.find({}).remove(function() {
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d183c193d16d03ce80"],
       "active": false,
-      "wordType": "Preposition"
+      "wordType": "Conjunction"
     },
     {
       "_id": "552d5b08adc822e8831e298b",
@@ -814,6 +825,13 @@ Tile.find({}).remove(function() {
       "contextTags": ["553167d183c193d16d03ce80"],
       "active": false,
       "wordType": "Adverb"
+    }, {
+      "name": "her",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Pronoun",
+      "_id": "5592d77415d5e2b723c66de3",
+      "__v": 0,
+      "contextTags": ["553167d1afa1bda9bc0d055a"]
     },
     {
       "_id": "552d5b08cb39389025769c04",
@@ -1085,7 +1103,7 @@ Tile.find({}).remove(function() {
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
-      "wordType": "Preposition"
+      "wordType": "Conjunction"
     },
     {
       "_id": "552d5b082efcaa22520e444b",
@@ -1184,6 +1202,14 @@ Tile.find({}).remove(function() {
       "wordType": "Adverb"
     },
     {
+      "name": "nor",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Conjunction",
+      "_id": "5592cc8fc7919c731a730d67",
+      "__v": 0,
+      "contextTags": ["553167d183c193d16d03ce80"]
+    },
+    {
       "_id": "552d5b08d359fad21a131789",
       "name": "now",
       "creatorID": "5511a83da168f8b5f3144f02",
@@ -1206,287 +1232,280 @@ Tile.find({}).remove(function() {
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adjective"
-    },
-    {
+    }, {
       "_id": "552d5b085524dd49b0aa933f",
       "name": "out",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adverb"
-    },
-    {
+    }, {
       "_id": "552d5b08cb8d71b90811efe3",
       "name": "please",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Verb"
-    },
-    {
+    }, {
       "_id": "552d5b08a9dc076e610ffc7d",
       "name": "pretty",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adjective"
-    },
-    {
+    }, {
       "_id": "552d5b0861219d0e0572b532",
       "name": "ride",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a", "553167d14651465f11201014"],
       "active": false,
       "wordType": "Verb"
-    },
-    {
+    }, {
       "_id": "552d5b08a55d156939bff935",
       "name": "saw",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Verb"
-    },
-    {
+    }, {
       "_id": "552d5b08b40c993e7068dca1",
       "name": "say",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Verb"
-    },
-    {
+    }, {
       "_id": "552d5b0820c26a478b95f7bd",
       "name": "she",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Pronoun"
-    },
-    {
+    }, {
       "_id": "552d5b0836a6578211cb2886",
       "name": "so",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
-      "wordType": "Adverb"
-    },
-    {
+      "wordType": "Conjunction"
+    }, {
+      "name": "yet",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Conjunction",
+      "_id": "5592cd1c47dca2be1a798bc9",
+      "__v": 0,
+      "contextTags": ["553167d1afa1bda9bc0d055a"]
+    }, {
+      "name": "oh",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Interjection",
+      "_id": "5592d648545790d31af9f70a",
+      "__v": 0,
+      "contextTags": ["5511a83da168f8b5f3144f02"]
+    }, {
+      "name": "ah",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Interjection",
+      "_id": "5592d64d545790d31af9f70b",
+      "__v": 0,
+      "contextTags": ["5511a83da168f8b5f3144f02"]
+    }, {
+      "name": "hello",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Interjection",
+      "_id": "5592d6a5ffee94f722170617",
+      "__v": 0,
+      "contextTags": ["5511a83da168f8b5f3144f02"]
+    }, {
+      "name": "hey",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Interjection",
+      "_id": "5592d6d31104590823faeb32",
+      "__v": 0,
+      "contextTags": ["5511a83da168f8b5f3144f02"]
+    }, {
       "_id": "552d5b08619b6ef36f95f8fd",
       "name": "soon",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adverb"
-    },
-    {
+    }, {
       "_id": "552d5b08e274fc1a6591c02b",
       "name": "that",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Pronoun"
-    },
-    {
+    }, {
       "_id": "552d5b08267ab9df7ef30c11",
       "name": "there",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adverb"
-    },
-    {
+    }, {
       "_id": "552d5b0875ccfa12a218aa77",
       "name": "they",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Pronoun"
-    },
-    {
+    }, {
       "_id": "552d5b08e511287e53be311d",
       "name": "this",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Pronoun"
-    },
-    {
+    }, {
       "_id": "552d5b08873a6b80dde989f9",
       "name": "too",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adverb"
-    },
-    {
+    }, {
       "_id": "552d5b081bc5d94baaee575c",
       "name": "under",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adverb"
-    },
-    {
+    }, {
       "_id": "552d5b0808eff2d9ee6452b4",
       "name": "want",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Verb"
-    },
-    {
+    }, {
       "_id": "552d5b08142365901ff49f2e",
       "name": "was",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Verb"
-    },
-    {
+    }, {
       "_id": "552d5b08c8e6226ce98cdafd",
       "name": "well",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adjective"
-    },
-    {
+    }, {
       "_id": "552d5b08d9031837ac352ecb",
       "name": "went",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Verb"
-    },
-    {
+    }, {
       "_id": "552d5b081003bdec4c0446c4",
       "name": "what",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Pronoun"
-    },
-    {
+    }, {
       "_id": "552d5b083599e39053bc5ac9",
       "name": "white",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adjective"
-    },
-    {
+    }, {
       "_id": "552d5b087260cda8fa58b0ef",
       "name": "who",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Pronoun"
-    },
-    {
+    }, {
       "_id": "552d5b08c50289e73d8a9e99",
       "name": "will",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Verb"
-    },
-    {
+    }, {
       "_id": "552d5b085a5caeb37158c286",
       "name": "with",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Preposition"
-    },
-    {
+    }, {
       "_id": "552d5b08f198fb94de7fccd9",
       "name": "yes",
       "creatorID": "5511a83da168f8b5f3144f02",
       "contextTags": ["553167d1afa1bda9bc0d055a"],
       "active": false,
       "wordType": "Adverb"
-    },
-    {
+    }, {
       "__v": 2,
       "_id": "55856fb708209fde1a2b8af5",
       "creatorID": "5511a83da168f8b5f3144f02",
       "name": "his",
       "wordType": "Pronoun",
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    }
-    ,
-    {
+    }, {
       "__v": 2,
       "_id": "55856f7608209fde1a2b8af4",
       "creatorID": "5511a83da168f8b5f3144f02",
       "name": "of",
       "wordType": "Article",
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    }
-    ,
-    {
+    }, {
       "name": "had",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Verb",
       "_id": "5585701708209fde1a2b8af7",
       "__v": 0,
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    }
-    ,
-    {
+    }, {
       "name": "him",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Noun",
       "_id": "5585704a08209fde1a2b8af8",
       "__v": 0,
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    }
-    ,
-    {
+    }, {
       "name": "as",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Adverb",
       "_id": "558570aa08209fde1a2b8af9",
       "__v": 0,
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    }
-    ,
-    {
+    }, {
       "name": "then",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Adverb",
       "_id": "558570d208209fde1a2b8afa",
       "__v": 0,
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    }
-    ,
-    {
+    }, {
       "name": "could",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Verb",
       "_id": "558570fa08209fde1a2b8afb",
       "__v": 0,
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    }
-    ,
-    {
+    }, {
       "name": "when",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Verb",
       "_id": "5585712508209fde1a2b8afc",
       "__v": 0,
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    },
-    {
+    }, {
       "name": "were",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Verb",
       "_id": "5585713b08209fde1a2b8afd",
       "__v": 0,
       "contextTags": ["55856f5e08209fde1a2b8af3"]
-    },
-    {
+    }, {
       "name": "mom",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Noun",
@@ -1550,7 +1569,7 @@ Tile.find({}).remove(function() {
       "__v": 0,
       "contextTags": ["55858751d0ec44402530da01"]
     }, {
-      "name": "Library",
+      "name": "library",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Noun",
       "_id": "558587c9147e142026ba8c66",
@@ -1599,14 +1618,21 @@ Tile.find({}).remove(function() {
       "__v": 0,
       "contextTags": ["55858751d0ec44402530da01"]
     }, {
-      "name": "Bank",
+      "name": "bank",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Noun",
       "_id": "558587fe147e142026ba8c6d",
       "__v": 0,
       "contextTags": ["55858751d0ec44402530da01"]
     }, {
-      "name": "Scool",
+      "name": "an",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordType": "Article",
+      "_id": "5592cb4c510c1c3c186f6232",
+      "__v": 0,
+      "contextTags": ["55856f5e08209fde1a2b8af3"]
+    }, {
+      "name": "school",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordType": "Noun",
       "_id": "55858803147e142026ba8c6e",
@@ -1616,7 +1642,7 @@ Tile.find({}).remove(function() {
   )
 });
 
-Category.find({}).remove(function() {
+Category.find({}).remove(function () {
   Category.create(
     {
       "_id": "553167d183c193d16d03ce80",

@@ -35,6 +35,7 @@ angular.module('WordRiverApp')
         "Adverb",
         "Article",
         "Conjunction",
+        "Interjection",
         "Noun",
         "Preposition",
         "Pronoun",
