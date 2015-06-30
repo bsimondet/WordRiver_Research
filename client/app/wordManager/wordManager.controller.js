@@ -69,6 +69,7 @@ angular.module('WordRiverApp')
         }
       });
     };
+    $scope.getCategories();
 
     //Named poorly just to ensure no overlaps between functions in different models
     $scope.checkCategorys = function (category) {
@@ -113,8 +114,6 @@ angular.module('WordRiverApp')
     $scope.addTileToCategory = function() {
       for(var r = 0; r < $scope.userTiles.length; r++){
         for(var y = 0; y < $scope.selectedTiles.length; y++){
-          //console.log("Looking for ID have "+$scope.userTiles[r]._id);
-          //console.log("Looking for ID want "+$scope.selectedTiles[y]._id);
           if ($scope.userTiles[r]._id == $scope.selectedTiles[y]._id) {
             for (var v = 0; v < $scope.selectedCategories.length; v++) {
               $scope.userTiles[r].contextTags.push($scope.selectedCategories[v]._id);
@@ -122,7 +121,6 @@ angular.module('WordRiverApp')
             $scope.userTiles[r].contextTags = $scope.checkForDuplicatesInCat($scope.userTiles[r].contextTags);
             $http.patch('api/tile/' + $scope.userTiles[r]._id,
               {contextTags: $scope.userTiles[r].contextTags}).success(function () {
-                //$scope.getWords();
               });
           }
         }
@@ -161,8 +159,6 @@ angular.module('WordRiverApp')
       return false;
     };
 
-    $scope.getCategories();
-
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('pack');
     });
@@ -170,15 +166,15 @@ angular.module('WordRiverApp')
     $scope.addCategory = function () {
       if ($scope.categoryField.length >= 1) {
         //console.log($scope.categoryField);
-        $http.post('/api/categories/',
-          {name:$scope.categoryField, isWordType: false, creatorID: $scope.currentUser._id}
-        ).success(function(data){
-            //console.log("data:"+data);
+        $http.post('/api/categories/', {
+            name: $scope.categoryField,
+            isWordType: false,
+            creatorID: $scope.currentUser._id
+          }).success(function(data){
             $scope.currentUser.contextPacks.push(data._id);
             $http.put('/api/users/' + $scope.currentUser._id + '/addContextID',
               {contextID: data._id}
             ).success(function(){
-                //console.log('something');
               });
           });
         $scope.theIDWeWant = null;

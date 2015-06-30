@@ -17,7 +17,7 @@
     <h1>Groups:</h1>
     <!--Add a new group to add students to-->
     <form ng-submit="addGroup()">
-      <input ng-model="groupField" type="text" size="15" placeholder="Add a group">
+      <input ng-model="groupField" type="text" size="15" placeholder="Add a Group">
       <input type="submit" value="Submit" class="btn-primary">
     </form>
     <br>
@@ -73,10 +73,17 @@
         Check both groups and students and then click the "Add Selected Students to Selected Groups" button in order to assign students to different groups.
     </p>
 
-    <h1>All Students:</h1>
+    <h1>Students:</h1>
+    <!--Add a new student-->
+    <form ng-submit="addStudent()">
+      <input ng-model="firstName" type="text" size="15" placeholder="First Name">
+      <input ng-model="lastName" type="text" size="15" placeholder="Last Name">
+      <input type="submit" value="Submit" class="btn-primary">
+    </form>
+    <br>
     <!--Sorting A-Z or Z-A option, additional search box-->
     <button class="btn-primary" title="Sort A-Z" ng-click="toSort = 'lastName'; order = !order">A-Z</button>
-    <input type="text" placeholder="Search" ng-model="searchText"/>
+    <input type="text" placeholder="Search Students" ng-model="searchText">
     <!--List of students-->
     <ul class="list-group scroll">
       <p>

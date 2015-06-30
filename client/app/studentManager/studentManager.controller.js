@@ -5,6 +5,7 @@ angular.module('WordRiverApp')
     //add group, delete group,
     $scope.studentList = []; //List of user references to students
     $scope.students = []; //List of actual student objects
+    $scope.studentByID = []; //List of the current users students listed by id
     $scope.currentUser = Auth.getCurrentUser();
     $scope.groupField = "";
     $scope.studentField = "";
@@ -68,10 +69,48 @@ angular.module('WordRiverApp')
       $scope.studentList = [];
       for(var i = 0; i < students.length; i++){
         if($scope.inArray($scope.currentUser.studentList, students[i]._id)){
-          console.log(students[i]);
+          //console.log(students[i]);
           $scope.students.push(students[i]);
           $scope.studentList.push(students[i]);
+          $scope.studentByID.push(students[i]._id);
         }
+      }
+    };
+
+    $scope.checkForDuplicates = function(array){
+      for (var i = 0; i < array.length; i++) {
+        for (var j = i + 1; j < array.length; j++) {
+          if (array[i]==array[j]){
+            array.splice(j,1);
+          }
+        }
+      }
+      return array;
+    };
+
+    $scope.addStudent = function () {
+      if ($scope.firstName.length >= 1 && $scope.lastName.length >= 1) {
+        $http.post('/api/students/',
+          {firstName:$scope.firstName, lastName:$scope.lastName, teachers: $scope.currentUser._id}
+        ).success(function(){
+            $scope.getStudents();
+            $scope.addStudentIDToUser($scope.firstName, $scope.lastName);
+          });
+      }
+      $scope.firstName="";
+      $scope.lastName="";
+      $scope.getCategories();
+    };
+
+    $scope.addStudentIDToUser = function (firstName, lastName) {
+      for(var r = 0; r < $scope.students.length; r++) {
+          if ($scope.students[r].firstName == firstName && $scope.students[r].lastName == lastName) {
+            $scope.studentByID.push($scope.students[r]._id);
+            $scope.studentByID = $scope.checkForDuplicatesInCat($scope.studentByID);
+            $http.patch('api/user/' + $scope.currentUser._id,
+              {studentList: $scope.studentByID}).success(function () {
+              });
+          }
       }
     };
 
