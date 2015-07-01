@@ -28,7 +28,8 @@ angular.module('WordRiverApp')
     $scope.showValue1 = true; //not in use, hide value for the edit field for categories
     $scope.wordToEdit = null;
     $scope.tempIndex = null;
-    $scope.theIDWeWant = null;
+    $scope.needToAddID = false;
+    $scope.IDtoAdd = "";
     $scope.typeOptions =
       [ "",
         "Adjective",
@@ -58,17 +59,23 @@ angular.module('WordRiverApp')
     $scope.getWords();
 
     $scope.getCategories = function() {
-      $scope.categoryArray = [];
       $http.get('/api/categories').success(function (allCategories) {
-        for (var i = 0; i < $scope.currentUser.contextPacks.length; i++) {
-          for(var j = 0; j < allCategories.length; j++){
-            if(allCategories[j]._id == $scope.currentUser.contextPacks[i]){
-              $scope.categoryArray.push(allCategories[j]);
-            }
-          }
-        }
+        $scope.manageCategories(allCategories);
       });
     };
+
+    $scope.manageCategories = function(mycategories){
+      $scope.categoryArray = [];
+      for (var i = 0; i < mycategories.length; i++) {
+          if(mycategories[i].creatorID == $scope.currentUser._id){
+            $scope.categoryArray.push(mycategories[i]);
+          }
+      }
+      if( $scope.needToAddID ){
+        $scope.addCategoryIDToUser($scope.IDtoAdd);
+      }
+    };
+
     $scope.getCategories();
 
     //Named poorly just to ensure no overlaps between functions in different models
@@ -100,7 +107,7 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.checkForDuplicatesInCat = function(array){
+    $scope.checkForDuplicates = function(array){
       for (var i = 0; i < array.length; i++) {
         for (var j = i + 1; j < array.length; j++) {
           if (array[i]==array[j]){
@@ -118,7 +125,7 @@ angular.module('WordRiverApp')
             for (var v = 0; v < $scope.selectedCategories.length; v++) {
               $scope.userTiles[r].contextTags.push($scope.selectedCategories[v]._id);
             }
-            $scope.userTiles[r].contextTags = $scope.checkForDuplicatesInCat($scope.userTiles[r].contextTags);
+            $scope.userTiles[r].contextTags = $scope.checkForDuplicates($scope.userTiles[r].contextTags);
             $http.patch('api/tile/' + $scope.userTiles[r]._id,
               {contextTags: $scope.userTiles[r].contextTags}).success(function () {
               });
@@ -151,7 +158,6 @@ angular.module('WordRiverApp')
 
     $scope.inArray = function(array, item){
       for(var i = 0; i < array.length; i++){
-        //console.log("Thing"+array[i]);
         if(array[i] == item){
           return true;
         }
@@ -165,23 +171,34 @@ angular.module('WordRiverApp')
 
     $scope.addCategory = function () {
       if ($scope.categoryField.length >= 1) {
-        //console.log($scope.categoryField);
         $http.post('/api/categories/', {
             name: $scope.categoryField,
             isWordType: false,
             creatorID: $scope.currentUser._id
-          }).success(function(data){
-            $scope.currentUser.contextPacks.push(data._id);
-            $http.put('/api/users/' + $scope.currentUser._id + '/addContextID',
-              {contextID: data._id}
-            ).success(function(){
-              });
+          }).success(function(object){
+            $scope.makeGlobalID(object._id);
           });
-        $scope.theIDWeWant = null;
       }
-
       $scope.categoryField="";
+    };
+
+    $scope.makeGlobalID = function (id) {
+      $scope.needToAddID = true;
       $scope.getCategories();
+      $scope.IDtoAdd = id;
+    };
+
+    $scope.addCategoryIDToUser = function (toAddID) {
+      for(var index = 0; index < $scope.categoryArray.length; index++) {
+        if ($scope.categoryArray[index]._id == toAddID) {
+          $http.put('api/users/' + $scope.currentUser._id + '/addContextID',
+            {contextID: toAddID}
+          ).success(function () {
+              console.log("Successfully added ID to teacher!");
+            });
+        }
+      }
+      $scope.IDtoAdd = "";
     };
 
     $scope.addWord = function() {

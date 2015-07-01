@@ -363,6 +363,20 @@ exports.addStudent = function(req, res, next) {
   });
 };
 
+exports.addContextID = function(req, res, next) {
+  var userId = req.user._id;
+
+  var contextID = req.body.contextID;
+
+  User.findById(userId, function (err, user) {
+    user.contextPacks.push(contextID);
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.updateTile = function(req, res, next) {
   var userId = req.user._id;
 

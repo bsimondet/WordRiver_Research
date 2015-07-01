@@ -23,7 +23,6 @@ angular.module('WordRiverApp')
     $scope.help = false;
     $scope.toGroupSort = "";
     $scope.groupOrder = false;
-    $scope.testing = false;
     $scope.needToAddID = false;
     $scope.IDtoAdd = "";
     $scope.firstname="";
@@ -62,16 +61,12 @@ angular.module('WordRiverApp')
     };
 
     $scope.getStudents = function(){
-      $http.get("/api/students").success(function(student) {
-        $scope.manageStudents(student);
-      })
+      $http.get("/api/students").success(function(allStudents) {
+        $scope.manageStudents(allStudents);
+      });
     };
-////////////////////////////////////
 
     $scope.manageStudents = function(myStudents){
-      if( !($scope.needToAddID) ){
-        console.log("1");
-      }
       $scope.students = [];
       $scope.studentList = [];
       $scope.studentByID = [];
@@ -83,7 +78,6 @@ angular.module('WordRiverApp')
         }
       }
       if( $scope.needToAddID ){
-        console.log("6");
         $scope.addStudentIDToUser($scope.IDtoAdd);
       }
     };
@@ -102,13 +96,10 @@ angular.module('WordRiverApp')
     };
 
     $scope.addStudent = function () {
-      console.log("2");
       if ($scope.firstname.length > 0 && $scope.lastname.length > 0) {
-        console.log("3");
         $http.post('/api/students/',
           {firstName:$scope.firstname, lastName:$scope.lastname, teachers: $scope.currentUser._id}
         ).success(function(object){
-            console.log("4");
             $scope.makeGlobalID(object._id);
           });
       }
@@ -117,32 +108,20 @@ angular.module('WordRiverApp')
     };
 
     $scope.makeGlobalID = function (id) {
-      console.log("5");
       $scope.needToAddID = true;
       $scope.getStudents();
       $scope.IDtoAdd = id;
-    }
+    };
 
     $scope.addStudentIDToUser = function (toAddID) {
-      console.log("Inside addStudentIDToUser with: "+toAddID);
-      console.log("length of students: "+$scope.students.length);
       for(var index = 0; index < $scope.students.length; index++) {
-        /*console.log("Named: "+$scope.students[index].firstName+" Our current index is: "+index);
-        console.log("HAVE: "+toAddID);
-        console.log("WANT: "+$scope.students[index]._id);*/
         if ($scope.students[index]._id == toAddID) {
-          console.log("Match!");
-/*          $scope.studentByID.push($scope.students[index]._id);
-          $scope.studentByID = $scope.checkForDuplicates($scope.studentByID);
-          for(var x = 0; x < $scope.studentByID.length; x++){
-            console.log(x+" Current student id: "+$scope.studentByID[x]);
-          }*/
           $http.put('api/users/' + $scope.currentUser._id + '/addStudent',
               {studentID: toAddID}
           ).success(function () {
-              console.log("Successfully added ID!");
+              console.log("Successfully added ID to teacher!");
             });
-          }
+        }
       }
       $scope.IDtoAdd = "";
     };
@@ -168,7 +147,6 @@ angular.module('WordRiverApp')
     $scope.removeGroup = function (index, group) {
       var choice = confirm("Are you sure you want to delete " + group.groupName + "?");
       if (choice == true) {
-        //console.log(group);
         $http.put('/api/users/' + $scope.currentUser._id + '/deleteGroup',
           {group: group._id}
         ).success(function () {
