@@ -545,8 +545,7 @@ Tile.find({}).remove(function () {
       "contextTags": ["553167d1d26d6cb60967d8a5"],
       "active": false,
       "wordType": "Noun"
-    },
-    /*{
+    }, {
       "_id": "5511ae8cec56277a4af216a5",
       "name": "Batman",
       "creatorID": "5511a83da168f8b5f3144f02",
@@ -1773,7 +1772,7 @@ Tile.find({}).remove(function () {
       "_id": "558587f1147e142026ba8c6b",
       "__v": 0,
       "contextTags": ["55858751d0ec44402530da01"]
-    }, */
+    }, 
     {
       "name": "McDonald's",
       "creatorID": "5511a83da168f8b5f3144f02",
