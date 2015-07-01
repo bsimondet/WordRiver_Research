@@ -377,6 +377,20 @@ exports.addContextID = function(req, res, next) {
   });
 };
 
+exports.addWordID = function(req, res, next) {
+  var userId = req.user._id;
+
+  var wordID = req.body.wordID;
+
+  User.findById(userId, function (err, user) {
+    user.tileBucket.push(wordID);
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.updateTile = function(req, res, next) {
   var userId = req.user._id;
 

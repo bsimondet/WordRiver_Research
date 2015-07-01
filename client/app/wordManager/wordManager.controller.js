@@ -30,6 +30,8 @@ angular.module('WordRiverApp')
     $scope.tempIndex = null;
     $scope.needToAddID = false;
     $scope.IDtoAdd = "";
+    $scope.needToAddWordID = false;
+    $scope.WordIDtoAdd = "";
     $scope.typeOptions =
       [ "",
         "Adjective",
@@ -45,17 +47,25 @@ angular.module('WordRiverApp')
     $scope.selection = {addType: ""};
 
     $scope.getWords = function(){
-      $scope.userTiles = [];
       $http.get('/api/tile').success(function(allTiles) {
-        $scope.allTiles = allTiles;
-        for(var i= 0; i < $scope.allTiles.length; i++){
-          if($scope.currentUser._id == $scope.allTiles[i].creatorID){
-            $scope.userTiles.push($scope.allTiles[i]);
-            //console.log($scope.allTiles[i]);
-          }
-        }
+        $scope.manageWords(allTiles);
       });
     };
+
+    $scope.manageWords = function(myTiles){
+      $scope.userTiles = [];
+      $scope.allTiles = myTiles;
+      for(var i= 0; i < myTiles.length; i++){
+        if($scope.currentUser._id == myTiles[i].creatorID){
+          $scope.userTiles.push(myTiles[i]);
+        }
+      }
+      if( $scope.needToAddWordID ){
+        $scope.addWordIDToUser($scope.WordIDtoAdd);
+        $scope.needToAddWordID = false;
+      }
+    };
+
     $scope.getWords();
 
     $scope.getCategories = function() {
@@ -73,6 +83,7 @@ angular.module('WordRiverApp')
       }
       if( $scope.needToAddID ){
         $scope.addCategoryIDToUser($scope.IDtoAdd);
+        $scope.needToAddID = false;
       }
     };
 
@@ -169,6 +180,7 @@ angular.module('WordRiverApp')
       socket.unsyncUpdates('pack');
     });
 
+    /*For creating a new category*/
     $scope.addCategory = function () {
       if ($scope.categoryField.length >= 1) {
         $http.post('/api/categories/', {
@@ -182,19 +194,21 @@ angular.module('WordRiverApp')
       $scope.categoryField="";
     };
 
+    /*Helper for creating a new category*/
     $scope.makeGlobalID = function (id) {
       $scope.needToAddID = true;
       $scope.getCategories();
       $scope.IDtoAdd = id;
     };
 
+    /*Helper for adding a new category's id to user's contextids array*/
     $scope.addCategoryIDToUser = function (toAddID) {
       for(var index = 0; index < $scope.categoryArray.length; index++) {
         if ($scope.categoryArray[index]._id == toAddID) {
           $http.put('api/users/' + $scope.currentUser._id + '/addContextID',
             {contextID: toAddID}
           ).success(function () {
-              console.log("Successfully added ID to teacher!");
+              //console.log("Successfully added ID to teacher!");
             });
         }
       }
@@ -202,16 +216,40 @@ angular.module('WordRiverApp')
     };
 
     $scope.addWord = function() {
-      if ($scope.addField.length >= 1 && $scope.addType.length >= 1) {
+      if ($scope.addField.length > 0 && $scope.addType.length > 0) {
         $http.post('/api/tile', {
           name: $scope.addField,
           contextTags: $scope.selectedCategories,
           creatorID: $scope.currentUser._id,
-          wordType: $scope.addType
+          wordType: $scope.addType}
+        ).success(function(object){
+          $scope.makeGlobalWordID(object._id);
         });
         $scope.addField = "";
-        $scope.getWords();
       }
+    };
+
+    $scope.makeGlobalWordID = function (id) {
+      $scope.needToAddWordID = true;
+      $scope.getWords();
+      $scope.WordIDtoAdd = id;
+    };
+
+    $scope.addWordIDToUser = function (toAddID) {
+      console.log("Size: "+$scope.userTiles.length);
+      console.log("Have: "+toAddID);
+      for(var z = 0; z < $scope.userTiles.length; z++) {
+        console.log("Want: "+$scope.userTiles[z]._id);
+        if ($scope.userTiles[z]._id == toAddID) {
+          console.log("Match");
+          $http.put('/api/users/' + $scope.currentUser._id + '/addWordID',
+            {wordID: toAddID}
+          ).success(function () {
+              console.log("Successfully added ID to teacher!");
+            });
+        }
+      }
+      $scope.IDtoAdd = "";
     };
 
     $scope.uncheckAllWords = function(){

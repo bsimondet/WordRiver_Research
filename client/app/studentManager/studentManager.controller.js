@@ -119,7 +119,7 @@ angular.module('WordRiverApp')
           $http.put('api/users/' + $scope.currentUser._id + '/addStudent',
               {studentID: toAddID}
           ).success(function () {
-              console.log("Successfully added ID to teacher!");
+              //console.log("Successfully added ID to teacher!");
             });
         }
       }
