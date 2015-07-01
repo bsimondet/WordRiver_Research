@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="col-xs-3 accordion-toggle" id="categories">
-    <h1>Context Packs:</h1>
+    <h1>Your {{categoryArray.length}} Context Packs:</h1>
 
     <!--Add context pack-->
     <form ng-submit="addCategory()">
@@ -56,7 +56,7 @@
 
 
   <div class="col-xs-3">
-    <h1>Existing words:</h1>
+    <h1>Your {{userTiles.length}} Existing words:</h1>
     <div>
       <!--Section for adding a new word and it's type to the system-->
       <form ng-submit="addWord()">

@@ -305,7 +305,7 @@ angular.module('WordRiverApp')
         }
       }
     }
-    //THIS FUNCTION IS TERRIBLE - we made it this way due to time and labor constraints. PLEASE FIX.
+    //TODO: THIS FUNCTION IS TERRIBLE - we made it this way due to time and labor constraints. PLEASE FIX.
     $scope.editWord = function(tile){
       $scope.editWordIndex = $scope.findIndexOfTile(tile);
       $scope.showValue = false;
