@@ -341,7 +341,21 @@ exports.addGroup = function(req, res, next) {
   var groupName = req.body.groupName;
 
   User.findById(userId, function (err, user) {
-    user.groupList.push({ groupName: groupName, contextPacks: [], freeTiles: []})
+    user.groupList.push({ groupName: groupName, contextPacks: [], freeTiles: []});
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+exports.addStudent = function(req, res, next) {
+  var userId = req.user._id;
+
+  var studentID = req.body.studentID;
+
+  User.findById(userId, function (err, user) {
+    user.studentList.push(studentID);
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);

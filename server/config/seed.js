@@ -81,7 +81,7 @@ User.find({}).remove(function () {
         "5511ab56117e23f0412fd08f",
         "5511ab564ac02dbaf337270d",
         "5511ab5617fda1233df3f6dd",
-        "552c20f8be17b267b77b5a19",
+        /*  "552c20f8be17b267b77b5a19",
         "552c20f8d1172952c6f268fe",
         "552c20f878838eab8bf3f0b1",
         "552c20f8b21be14535092a6a",
@@ -97,7 +97,7 @@ User.find({}).remove(function () {
         "553fd47c689eeea244d06b3b",
         "553fd47c3246994599144960",
         "553fd47cd258d7a1da8e0ce7",
-        "553fd47c3cd99bec88d86afb",
+        "553fd47c3cd99bec88d86afb",*/
         "553fd47ca47e5cd02c57ab84"
       ]
     }
@@ -153,7 +153,7 @@ Student.find({}).remove(function () {
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6", "5535520d147a722a4e7233a3"],
       "contextTags": ["553167d13562bc39e23e4d3b", "553167d183c193d16d03ce80", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d1c296f9753ce8447f"]
     },
-    {
+   /* {
       "_id": "552c20f8be17b267b77b5a19",
       "firstName": "Jack",
       "lastName": "Lynch",
@@ -350,6 +350,7 @@ Student.find({}).remove(function () {
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
       "contextTags": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80"]
     },
+    */
     {
       "_id": "553fd47ca47e5cd02c57ab84",
       "firstName": "Ryan",

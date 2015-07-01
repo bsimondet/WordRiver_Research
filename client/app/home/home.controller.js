@@ -19,7 +19,7 @@ angular.module('WordRiverApp')
 
     $scope.checkChangePassword = function() {
       var values = $location.absUrl().split("=");
-      console.log(values);
+      //console.log(values);
       if(values[1] == "true"){
         $scope.changePasswordShow = true;
         $scope.signedInShow = false;

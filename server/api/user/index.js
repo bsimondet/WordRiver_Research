@@ -24,5 +24,6 @@ router.put('/:id/updateTile', auth.isAuthenticated(), controller.updateTile);
 router.put('/:id/deleteTile', auth.isAuthenticated(), controller.deleteTile);
 router.put('/:id/deleteGroup', auth.isAuthenticated(), controller.deleteGroup);
 router.put('/:id/addGroup', auth.isAuthenticated(), controller.addGroup);
+router.put('/:id/addStudent', auth.isAuthenticated(), controller.addStudent);
 router.put('/:id/removeCategoryID', auth.isAuthenticated(), controller.removeCategoryID);
 module.exports = router;

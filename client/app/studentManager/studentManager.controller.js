@@ -23,6 +23,11 @@ angular.module('WordRiverApp')
     $scope.help = false;
     $scope.toGroupSort = "";
     $scope.groupOrder = false;
+    $scope.testing = false;
+    $scope.needToAddID = false;
+    $scope.IDtoAdd = "";
+    $scope.firstname="";
+    $scope.lastname="";
 
 ///////////////////////////////////
 //    $scope.getStudentList = function(){
@@ -57,25 +62,33 @@ angular.module('WordRiverApp')
     };
 
     $scope.getStudents = function(){
-      $http.get("/api/students/").success(function(student) {
+      $http.get("/api/students").success(function(student) {
         $scope.manageStudents(student);
       })
     };
-    $scope.getStudents();
 ////////////////////////////////////
 
-    $scope.manageStudents = function(students){
+    $scope.manageStudents = function(myStudents){
+      if( !($scope.needToAddID) ){
+        console.log("1");
+      }
       $scope.students = [];
       $scope.studentList = [];
-      for(var i = 0; i < students.length; i++){
-        if($scope.inArray($scope.currentUser.studentList, students[i]._id)){
-          //console.log(students[i]);
-          $scope.students.push(students[i]);
-          $scope.studentList.push(students[i]);
-          $scope.studentByID.push(students[i]._id);
+      $scope.studentByID = [];
+      for(var i = 0; i < myStudents.length; i++){
+        if($scope.inArray(myStudents[i].teachers, $scope.currentUser._id)){
+          $scope.students.push(myStudents[i]);
+          $scope.studentList.push(myStudents[i]);
+          $scope.studentByID.push(myStudents[i]._id);
         }
       }
+      if( $scope.needToAddID ){
+        console.log("6");
+        $scope.addStudentIDToUser($scope.IDtoAdd);
+      }
     };
+
+    $scope.getStudents();
 
     $scope.checkForDuplicates = function(array){
       for (var i = 0; i < array.length; i++) {
@@ -89,29 +102,49 @@ angular.module('WordRiverApp')
     };
 
     $scope.addStudent = function () {
-      if ($scope.firstName.length >= 1 && $scope.lastName.length >= 1) {
+      console.log("2");
+      if ($scope.firstname.length > 0 && $scope.lastname.length > 0) {
+        console.log("3");
         $http.post('/api/students/',
-          {firstName:$scope.firstName, lastName:$scope.lastName, teachers: $scope.currentUser._id}
-        ).success(function(){
-            $scope.getStudents();
-            $scope.addStudentIDToUser($scope.firstName, $scope.lastName);
+          {firstName:$scope.firstname, lastName:$scope.lastname, teachers: $scope.currentUser._id}
+        ).success(function(object){
+            console.log("4");
+            $scope.makeGlobalID(object._id);
           });
       }
-      $scope.firstName="";
-      $scope.lastName="";
-      $scope.getCategories();
+      $scope.firstname="";
+      $scope.lastname="";
     };
 
-    $scope.addStudentIDToUser = function (firstName, lastName) {
-      for(var r = 0; r < $scope.students.length; r++) {
-          if ($scope.students[r].firstName == firstName && $scope.students[r].lastName == lastName) {
-            $scope.studentByID.push($scope.students[r]._id);
-            $scope.studentByID = $scope.checkForDuplicatesInCat($scope.studentByID);
-            $http.patch('api/user/' + $scope.currentUser._id,
-              {studentList: $scope.studentByID}).success(function () {
-              });
+    $scope.makeGlobalID = function (id) {
+      console.log("5");
+      $scope.needToAddID = true;
+      $scope.getStudents();
+      $scope.IDtoAdd = id;
+    }
+
+    $scope.addStudentIDToUser = function (toAddID) {
+      console.log("Inside addStudentIDToUser with: "+toAddID);
+      console.log("length of students: "+$scope.students.length);
+      for(var index = 0; index < $scope.students.length; index++) {
+        /*console.log("Named: "+$scope.students[index].firstName+" Our current index is: "+index);
+        console.log("HAVE: "+toAddID);
+        console.log("WANT: "+$scope.students[index]._id);*/
+        if ($scope.students[index]._id == toAddID) {
+          console.log("Match!");
+/*          $scope.studentByID.push($scope.students[index]._id);
+          $scope.studentByID = $scope.checkForDuplicates($scope.studentByID);
+          for(var x = 0; x < $scope.studentByID.length; x++){
+            console.log(x+" Current student id: "+$scope.studentByID[x]);
+          }*/
+          $http.put('api/users/' + $scope.currentUser._id + '/addStudent',
+              {studentID: toAddID}
+          ).success(function () {
+              console.log("Successfully added ID!");
+            });
           }
       }
+      $scope.IDtoAdd = "";
     };
 
     $scope.addGroup = function () {
@@ -135,7 +168,7 @@ angular.module('WordRiverApp')
     $scope.removeGroup = function (index, group) {
       var choice = confirm("Are you sure you want to delete " + group.groupName + "?");
       if (choice == true) {
-        console.log(group);
+        //console.log(group);
         $http.put('/api/users/' + $scope.currentUser._id + '/deleteGroup',
           {group: group._id}
         ).success(function () {
@@ -180,9 +213,9 @@ angular.module('WordRiverApp')
 
     //Takes in a student's ID and a groups name
     $scope.assignStudentToGroup = function(student, group){
-      console.log(student + " " + group);
+      //console.log(student + " " + group);
       var studentIndex = $scope.findStudentInList(student);
-      console.log(studentIndex);
+      //console.log(studentIndex);
 
       if($scope.studentList[studentIndex].groupList.indexOf(group._id) == -1){
         $scope.studentList[studentIndex].groupList.push(group);
@@ -216,7 +249,7 @@ angular.module('WordRiverApp')
         }
 
         //student side
-        console.log(student);
+        //console.log(student);
         var studentIndex = $scope.findStudentAccount(student._id);
         var notAdded = true;
         for(var j = 0; j < $scope.students[studentIndex].contextTags.length; j++){
@@ -258,7 +291,7 @@ angular.module('WordRiverApp')
 
     //Takes in a group name
     $scope.allCheckedGroups = function(category){
-      console.log(category);
+      //console.log(category);
       var counter;
       for (var i = 0; i < $scope.selectedGroups.length; i++) {
         if ($scope.selectedGroups[i] == category) {
@@ -343,7 +376,7 @@ angular.module('WordRiverApp')
         } else {
           result = 0;
         }
-        console.log("Things Should show up");
+        //console.log("Things Should show up");
         return result * sortOrder;
       }
     };
@@ -351,13 +384,13 @@ angular.module('WordRiverApp')
 
     $scope.removeGroupFromStudent = function (group){
       var index = $scope.findGroupInList(group.groupName);
-      console.log(index);
+      //console.log(index);
       $scope.selectedGroup = $scope.localGroupArray[index];
 
       $scope.removeStudentFromGroup($scope.selectedStudent);
-      console.log("Yo");
+      //console.log("Yo");
       for (var i = 0; i < $scope.studentGroups.length; i++){
-        console.log($scope.studentGroups[i]);
+        //console.log($scope.studentGroups[i]);
 
         if ($scope.studentGroups[i] == group._id){
 
@@ -373,7 +406,7 @@ angular.module('WordRiverApp')
       for (var i = 0; i < $scope.studentList.length; i++) {
         if (student == $scope.studentList[i]) {
           for (var j = 0; j < $scope.studentList[i].groupList.length; j++) {
-            console.log($scope.selectedGroupName + " "+ $scope.studentList[i].groupList[j] )
+            //console.log($scope.selectedGroupName + " "+ $scope.studentList[i].groupList[j] )
             if ($scope.studentList[i].groupList[j] == $scope.selectedGroup._id) {
               $scope.studentList[i].groupList.splice(j, 1);
 
