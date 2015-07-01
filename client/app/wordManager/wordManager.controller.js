@@ -236,16 +236,12 @@ angular.module('WordRiverApp')
     };
 
     $scope.addWordIDToUser = function (toAddID) {
-      console.log("Size: "+$scope.userTiles.length);
-      console.log("Have: "+toAddID);
       for(var z = 0; z < $scope.userTiles.length; z++) {
-        console.log("Want: "+$scope.userTiles[z]._id);
         if ($scope.userTiles[z]._id == toAddID) {
-          console.log("Match");
           $http.put('/api/users/' + $scope.currentUser._id + '/addWordID',
             {wordID: toAddID}
           ).success(function () {
-              console.log("Successfully added ID to teacher!");
+              //console.log("Successfully added ID to teacher!");
             });
         }
       }

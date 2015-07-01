@@ -72,7 +72,7 @@ User.find({}).remove(function () {
         }],
       /*All current words in system by id*/
       "tileBucket": [
-      /*  "552d5b08f631321946da8341",
+        "552d5b08f631321946da8341",
         "552d5b08adc822e8831e298b",
         "552d5b08acded8a6cd6e8dcd",
         "552d5b08791292bc5e665b61",
@@ -180,13 +180,13 @@ User.find({}).remove(function () {
         "558587da147e142026ba8c68",
         "558587e4147e142026ba8c69",
         "558587eb147e142026ba8c6a",
-        "558587f1147e142026ba8c6b", */
+        "558587f1147e142026ba8c6b",
         "558587f9147e142026ba8c6c",
         "558587fe147e142026ba8c6d",
         "5592cb4c510c1c3c186f6232",
         "55858803147e142026ba8c6e",
-        "5511ae8c805b0d983f66e2cd"
-        /*"5511ae8cec56277a4af216a5",
+        "5511ae8c805b0d983f66e2cd",
+        "5511ae8cec56277a4af216a5",
         "5511ae8c1fb25384d865e514",
         "5511ae8cf6f121e4c3108cd6",
         "5511ae8cb5ac0ff225f5fde2",
@@ -237,7 +237,7 @@ User.find({}).remove(function () {
         "552d5b08b1e363557b2d662c",
         "552d5b08a2385a889f90f803",
         "552d5b086a2b54d6b160c51d",
-        "552d5b0861219d0e0572b532"*/
+        "552d5b0861219d0e0572b532"
       ],
       /*All students in system by id*/
       "studentList": [
