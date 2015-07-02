@@ -33,6 +33,8 @@
     </div>
   </div>
 
+
+
   <div class="col-xs-6 center">
     <!--Button to add checked words to checked context packs-->
     <form ng-submit="addTileToCategory()">
@@ -42,7 +44,7 @@
     <div class="col-xs-3 wordfooter wordsIn">
       <h2>Words in <i>{{currentCategory.name}}</i></h2>
       <ul class="list-group middleScroll">
-          <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy: toSort:order">{{tile.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeFromCategory(tile, $index)"></span></li>
+          <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy: toSort:order">{{tile.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeFromCategory(tile, matchTiles.indexOf(tile))"></span></li>
       </ul>
     </div>
     <!--Shows selected word's assigned context packs-->
@@ -53,6 +55,7 @@
       </ul>
     </div>
   </div>
+
 
 
   <div class="col-xs-3">

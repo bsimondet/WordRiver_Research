@@ -327,7 +327,7 @@ angular.module('WordRiverApp')
         {category: $scope.currentCategory._id,
           tileId: tile._id}
       ).success(function(){
-          //$scope.displayCatInfo()
+          //$scope.displayCatInfo(category)
         });
       $scope.matchTiles.splice(index, 1);
     };
