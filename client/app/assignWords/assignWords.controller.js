@@ -29,22 +29,39 @@ angular.module('WordRiverApp')
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for getting all the things
 
-    $scope.getAll = function () {
+    $scope.getWords = function(){
       $scope.userTiles = [];
+      $http.get('/api/tile').success(function(allTiles) {
+        $scope.userTiles = allTiles;
+      });
+    };
+
+    $scope.getCategories = function() {
       $scope.userCategories = [];
-      $scope.userStudents = [];
+      $http.get('/api/categories/' + $scope.currentUser._id + '/categories'
+      ).success(function(userCategories){
+          $scope.userCategories = userCategories;
+        });
+    };
+
+    $scope.getGroups = function(){
       $scope.userGroups = [];
-      //$scope.isCollapsed = false;
       $scope.userGroups = $scope.currentUser.groupList;
-      $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
-        $scope.userCategories = userCategories;
-      });
-      $http.get('/api/tile/' + $scope.currentUser._id + '/tiles').success(function(userTiles){
-        $scope.userTiles = userTiles;
-      });
-      $http.get('/api/students/' + $scope.currentUser._id + '/students').success(function(userStudents){
-        $scope.userStudents = userStudents;
-      });
+    };
+
+    $scope.getStudents = function (){
+      $scope.userStudents = [];
+      $http.get('/api/students/' + $scope.currentUser._id + '/students'
+      ).success(function(userStudents){
+          $scope.userStudents = userStudents;
+        });
+    };
+
+    $scope.getAll = function () {
+      $scope.getWords();
+      $scope.getStudents();
+      $scope.getGroups();
+      $scope.getCategories();
     };
     $scope.getAll();
 
