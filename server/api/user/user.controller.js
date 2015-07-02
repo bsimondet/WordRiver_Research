@@ -106,6 +106,22 @@ exports.updatePack = function(req, res, next) {
   });
 };
 
+exports.removeWordID = function(req, res) {
+  var userId = req.user._id;
+  var wordID = req.body.wordID;
+
+  User.findById(userId, function (err, user) {
+    for(var i = 0 ; i < user.tileBucket.length; i++){
+      if(user.tileBucket[i] == wordID){
+        user.tileBucket.splice(i, 1);
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
 
 exports.removeCategoryID = function(req, res) {
   var userId = req.user._id;

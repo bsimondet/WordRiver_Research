@@ -322,12 +322,13 @@ angular.module('WordRiverApp')
       //Removes a word from a category
     $scope.removeFromCategory = function(tile, index) {
       $scope.tileId = tile._id;
+      console.log("This is the id I care about "+$scope.tileId);
       $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory",
         {category: $scope.currentCategory._id,
           tileId: tile._id}
       ).success(function(){
-          $scope.displayCatInfo()
-        })
+          //$scope.displayCatInfo()
+        });
       $scope.matchTiles.splice(index, 1);
     };
 
@@ -341,7 +342,12 @@ angular.module('WordRiverApp')
     //deletes a word
     $scope.removeWord = function(tile) {
       $scope.wordToRemove = $scope.userTiles[$scope.findIndexOfTile(tile)];
-      $http.delete('/api/tile/'+ $scope.wordToRemove._id);
+      $http.delete('/api/tile/'+ $scope.wordToRemove._id
+      ).success(function(){
+        $http.put('/api/users/' + $scope.currentUser._id + '/removeWordID',
+          {wordID: $scope.wordToRemove._id}
+        );
+      });
       $scope.getWords();
       $scope.userTiles.splice($scope.findIndexOfTile(tile),1);
       for(var i = 0; i < $scope.allTiles.length; i++){

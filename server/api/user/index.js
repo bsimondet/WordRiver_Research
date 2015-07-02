@@ -28,4 +28,5 @@ router.put('/:id/addStudent', auth.isAuthenticated(), controller.addStudent);
 router.put('/:id/addContextID', auth.isAuthenticated(), controller.addContextID);
 router.put('/:id/addWordID', auth.isAuthenticated(), controller.addWordID);
 router.put('/:id/removeCategoryID', auth.isAuthenticated(), controller.removeCategoryID);
+router.put('/:id/removeWordID', auth.isAuthenticated(), controller.removeWordID);
 module.exports = router;

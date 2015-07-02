@@ -27,6 +27,9 @@ angular.module('WordRiverApp')
       window.location = "/?changePassword=true";
     };
 
+    $scope.refreshPage = function(){
+      location.reload();
+    };
 
 
 

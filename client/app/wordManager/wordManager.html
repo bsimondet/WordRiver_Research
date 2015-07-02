@@ -65,7 +65,6 @@
         <select ng-model="addType">
           <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
         </select>
-        <!--<input ng-model="addType" type="text" size="15" placeholder="Add a type">-->
         <input type="submit" value="Add" class="btn-primary">
       </form>
     </div>
@@ -74,7 +73,6 @@
     <div ng-hide="showValue">
       <br>
       <input ng-model="editField" type="text" size="15" placeholder={{userTiles[editWordIndex].name}}>
-      <!--<input ng-model="editType" type="text" size="15" placeholder={{userTiles[editWordIndex].wordType}}>-->
       <br><br>
       <select ng-model="editType">
         <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
