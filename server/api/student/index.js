@@ -16,5 +16,6 @@ router.put('/:id/deleteFromGroup', controller.deleteFromGroup);
 router.put('/:id/assignToGroup', controller.assignToGroup);
 router.put('/:id/addPack', controller.addPack);
 router.put('/:id/addWord', controller.addPack);
+router.put('/:id/removeGroupID', controller.removeGroupID);
 
 module.exports = router;

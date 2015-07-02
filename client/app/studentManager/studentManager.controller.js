@@ -27,6 +27,8 @@ angular.module('WordRiverApp')
     $scope.IDtoAdd = "";
     $scope.firstname="";
     $scope.lastname="";
+    $scope.needToRemoveID = false;
+    $scope.IDtoRemove = "";
 
 ///////////////////////////////////
 //    $scope.getStudentList = function(){
@@ -79,6 +81,9 @@ angular.module('WordRiverApp')
       }
       if( $scope.needToAddID ){
         $scope.addStudentIDToUser($scope.IDtoAdd);
+      }
+      if ( $scope.needToRemoveID ){
+        $scope.removeGroupIDFromStudents($scope.IDtoRemove);
       }
     };
 
@@ -150,11 +155,33 @@ angular.module('WordRiverApp')
         $http.put('/api/users/' + $scope.currentUser._id + '/deleteGroup',
           {group: group._id}
         ).success(function () {
-            $scope.getGroups();
+            $scope.helperRemoveID(group._id);
           });
         $scope.localGroupArray.splice($scope.findGroupInList(group.groupName), 1);
       }
+    };
 
+    $scope.helperRemoveID = function (id) {
+      $scope.needToRemoveID = true;
+      $scope.getGroups();
+      $scope.getStudents();
+      $scope.IDtoRemove = id;
+    };
+
+    $scope.removeGroupIDFromStudents = function (toRemoveID) {
+      for(var index = 0; index < $scope.students.length; index++) {
+        console.log(index+"  in 1st loop with: "+$scope.students[index].groupList.length+" Named: "+$scope.students[index].name
+        );
+        for(var index2 = 0; index2 < $scope.students[index].groupList.length; index2++) {
+          if ($scope.students[index].groupList[index2]._id == toRemoveID) {
+            $http.put('/api/students/' + $scope.students[index]._id + '/removeCategoryID',
+              {categoryID: toRemoveID}
+            ).success(function () {
+                console.log('Patched to users context ids');
+              });
+          }
+        }
+      }
     };
 
     //returns -1 if student is not in list. should never actually return -1.

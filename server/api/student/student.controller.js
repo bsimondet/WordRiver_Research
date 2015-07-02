@@ -133,6 +133,23 @@ exports.addWord = function(req, res) {
   });
 };
 
+exports.removeGroupID = function (req, res) {
+  var userId = req.user._id;
+  var groupID = req.body.groupID;
+
+  User.findById(userId, function (err, user) {
+    for (var i = 0; i < user.groupList.length; i++) {
+      if (user.groupList[i] == groupID) {
+        user.groupList.splice(i, 1);
+      }
+    }
+    user.save(function (err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.deleteFromGroup = function(req, res) {
   var userId = req.params.id;
   var group = req.body.groupID;

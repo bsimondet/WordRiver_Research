@@ -300,7 +300,7 @@ angular.module('WordRiverApp')
       }
       $http.delete('/api/categories/'+ $scope.catToRemove._id
       ).success(function(){
-          console.log("ID to Remove "+$scope.catToRemove._id);
+          //console.log("ID to Remove "+$scope.catToRemove._id);
         $http.put('/api/users/' + $scope.currentUser._id + '/removeCategoryID',
           {categoryID: $scope.catToRemove._id}
         ).success(function(){
@@ -327,7 +327,6 @@ angular.module('WordRiverApp')
         {category: $scope.currentCategory._id,
           tileId: tile._id}
       ).success(function(){
-          //$scope.displayCatInfo(category)
         });
       $scope.matchTiles.splice(index, 1);
     };
