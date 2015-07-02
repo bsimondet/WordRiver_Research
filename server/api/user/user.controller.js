@@ -106,6 +106,23 @@ exports.updatePack = function(req, res, next) {
   });
 };
 
+exports.removeStudentID = function(req, res) {
+  var userId = req.user._id;
+  var studentID = req.body.studentID;
+
+  User.findById(userId, function (err, user) {
+    for(var i = 0 ; i < user.studentList.length; i++){
+      if(user.studentList[i] == studentID){
+        user.studentList.splice(i, 1);
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.removeWordID = function(req, res) {
   var userId = req.user._id;
   var wordID = req.body.wordID;

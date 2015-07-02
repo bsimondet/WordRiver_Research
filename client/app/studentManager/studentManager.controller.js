@@ -29,6 +29,8 @@ angular.module('WordRiverApp')
     $scope.lastname="";
     $scope.needToRemoveID = false;
     $scope.IDtoRemove = "";
+    $scope.needToRemoveStudID = false;
+    $scope.StudIDtoRemove = "";
 
 ///////////////////////////////////
 //    $scope.getStudentList = function(){
@@ -83,6 +85,9 @@ angular.module('WordRiverApp')
       }
       if ( $scope.needToRemoveID ){
         $scope.removeGroupIDFromStudents($scope.IDtoRemove);
+      }
+      if ( $scope.needToRemoveStudID ){
+        $scope.removeStudentIDFromUser($scope.StudIDtoRemove);
       }
     };
 
@@ -186,6 +191,23 @@ angular.module('WordRiverApp')
         }
       }
       console.log("Do we even get here?");
+    };
+
+    $scope.removeStudent = function (index, student) {
+      var choice = confirm("Are you sure you want to delete " + student.firstName + "?");
+      if (choice == true) {
+        $http.delete('/api/students/'+ student._id
+        ).success(function () {
+            $scope.getStudents();
+            console.log("Removed student from db!");
+            $http.put('/api/users/' + $scope.currentUser._id + '/removeStudentID',
+              {studentID: student._id}
+            ).success(function () {
+                console.log("Removed studentID from user!");
+              });
+          });
+        $scope.students.splice($scope.findGroupInList(student.firstName), 1);
+      }
     };
 
     //returns -1 if student is not in list. should never actually return -1.

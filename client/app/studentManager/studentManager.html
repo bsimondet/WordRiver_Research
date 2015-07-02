@@ -49,7 +49,8 @@
     <div ng-show="showGroups">
       <h1>Students in {{selectedGroupName}}</h1>
         <ul>
-          <li class="list-group-item" ng-repeat="student in studentsInGroup | orderBy: toSort:order"><label>{{student.lastName}}, {{student.firstName}}</label>
+          <li class="list-group-item" ng-repeat="student in studentsInGroup | orderBy: toSort:order">
+            <label>{{student.lastName}}, {{student.firstName}}</label>
             <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Remove Student From Group" ng-click="removeStudentFromGroup(student)"></span>
           </li>
         </ul>
@@ -87,8 +88,12 @@
     <!--List of students-->
     <ul class="list-group scroll">
       <p>
-      <!--TODO Attach to database to display all the words-->
-      <li class="list-group-item" type="checkbox" ng-repeat="student in students | filter: searchText | orderBy: toSort:order"><label><input type="checkbox" value="value" ng-click="allCheckedStudents(student._id)"><a ng-click="displayStudentGroups(student)">{{student.lastName}}, {{student.firstName}}</a></label></li>
+
+      <li class="list-group-item" type="checkbox" ng-repeat="student in students | filter: searchText | orderBy: toSort:order">
+        <input type="checkbox" value="value" ng-click="allCheckedStudents(student._id)">
+        <label><a ng-click="displayStudentGroups(student)">{{student.lastName}}, {{student.firstName}}</a></label>
+        <span class="glyphicon glyphicon-trash floatRight close" title="Delete Student" ng-click="removeStudent(students.indexOf(student), student)"></span>
+    </li>
     </ul>
   </div>
 </div>
