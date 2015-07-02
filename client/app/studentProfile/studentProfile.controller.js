@@ -10,6 +10,7 @@ angular.module('WordRiverApp')
     $scope.categoryArray = [];
     $scope.wordArray = [];
     $scope.hide = true;
+    $scope.holdCatID = [];
 
 
 
@@ -40,42 +41,54 @@ angular.module('WordRiverApp')
     //  }
     //};
 
-
+    $scope.checkForDuplicates = function(array){
+      for (var i = 0; i < array.length; i++) {
+        for (var j = i + 1; j < array.length; j++) {
+          if (array[i]==array[j]){
+            array.splice(j,1);
+          }
+        }
+      }
+      return array;
+    };
 
     $scope.getElementsByID = function(idArray, objectArray, resultArray){
       for (var i = 0; i < idArray.length; i++) {
         for(var j = 0; j < objectArray.length; j++){
-          //console.log(objectArray[i]._id);
           if(objectArray[j]._id == idArray[i]){
             resultArray.push(objectArray[j]);
-            //console.log("result: " + resultArray);
           }
         }
       }
+      $scope.checkForDuplicates(resultArray);
     };
-
-
 
     $scope.getGroups = function(student) {
       $scope.studentGroups = [];
       $http.get('/api/users/me').success(function (user) {
-        $scope.getElementsByID(student.groupList,user.groupList,$scope.studentGroups);
+        $scope.getElementsByID(student.groupList, user.groupList, $scope.studentGroups);
+//TODO: Make it so allll categories and words are displayed, not just indiviually assigned ones.
+/*        console.log($scope.studentGroups.length);
+        for(var index = 0; index < $scope.studentGroups.length; index++) {
+          console.log($scope.studentGroups[index].contextPacks.length);
+          for (var index2 = 0; index2 < $scope.studentGroups[index].contextPacks.length; index2++) {
+            $scope.holdCatID.push(student.groupList[index].contextPacks[index2]._id);
+          }
+        }*/
       });
     };
-
-
 
     $scope.getCategories = function(student) {
       $scope.categoryArray = [];
       $http.get('/api/categories').success(function (allCategories) {
-        $scope.getElementsByID(student.contextTags, allCategories,$scope.categoryArray);
+        $scope.getElementsByID(student.contextTags, allCategories, $scope.categoryArray);
       });
     };
 
     $scope.getWords = function(student) {
       $scope.wordArray = [];
       $http.get('/api/tile').success(function (allWords) {
-        $scope.getElementsByID(student.tileBucket, allWords,$scope.wordArray);
+        $scope.getElementsByID(student.tileBucket, allWords, $scope.wordArray);
       });
     };
 
