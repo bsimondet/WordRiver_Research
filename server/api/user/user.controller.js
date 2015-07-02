@@ -135,7 +135,7 @@ exports.updatePack = function(req, res, next) {
 
 
 exports.removeCategoryID = function(req, res) {
-  var userId = req.body.userId;
+  var userId = req.user._id;
   var categoryID = req.body.categoryID;
 
   User.findById(userId, function (err, user) {

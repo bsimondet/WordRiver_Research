@@ -301,15 +301,20 @@ angular.module('WordRiverApp')
     $scope.removeCategory = function(category) {
       $scope.tempIndex = $scope.findIndexOfCat(category);
       $scope.catToRemove = $scope.categoryArray[$scope.tempIndex];
-      //console.log(category.name);
       for(var i = 0; i<$scope.currentUser.contextPacks.length; i++){
         if($scope.currentUser.contextPacks[i] == $scope.catToRemove._id){
           $scope.currentUser.contextPacks.splice(i,1);
-
-          //console.log($scope.catToRemove.name);
         }
       }
-      $http.delete('/api/categories/'+ $scope.catToRemove._id).success(function(){console.log('success')});
+      $http.delete('/api/categories/'+ $scope.catToRemove._id
+      ).success(function(){
+          console.log("ID to Remove "+$scope.catToRemove._id);
+        $http.put('/api/users/' + $scope.currentUser._id + '/removeCategoryID',
+          {categoryID: $scope.catToRemove._id}
+        ).success(function(){
+            //console.log('Patched to users context ids');
+          })
+      });
       $scope.categoryArray.splice($scope.tempIndex, 1);
       $scope.getCategories();
     };
