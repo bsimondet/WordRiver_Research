@@ -262,13 +262,10 @@ angular.module('WordRiverApp')
           for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
             if ($scope.userTiles[j].contextTags[z] == category._id) {
               $scope.matchTiles.push($scope.userTiles[j]);
-              //console.log($scope.userTiles[j].name);
             }
           }
         }
-        if ($scope.matchTiles.length > 0) {
-
-        } else {
+        if ($scope.matchTiles.length <= 0) {
           alert("There are no tiles in this category");
         }
 
@@ -325,7 +322,12 @@ angular.module('WordRiverApp')
       //Removes a word from a category
     $scope.removeFromCategory = function(tile, index) {
       $scope.tileId = tile._id;
-      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.currentCategory._id, tileId: tile._id});
+      $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory",
+        {category: $scope.currentCategory._id,
+          tileId: tile._id}
+      ).success(function(){
+          $scope.displayCatInfo()
+        })
       $scope.matchTiles.splice(index, 1);
     };
 

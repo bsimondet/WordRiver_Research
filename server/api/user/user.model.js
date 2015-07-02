@@ -25,6 +25,16 @@ var UserSchema = new Schema({
     freeTiles: []     //Free tiles that may not be associated with a specific context pack that students have access to within the group
   }],
 
+  //TODO: implement class around groups
+/*  classList: [{
+    className: String,
+    groupList: [{
+      groupName: String,
+      contextPacks: [],
+      freeTiles: []
+    }]
+  }],*/
+
   tileBucket: [], //List of tile IDs the user has access to
   studentList: [] //Array of student ids
 });
