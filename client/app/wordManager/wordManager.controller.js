@@ -56,9 +56,7 @@ angular.module('WordRiverApp')
       $scope.userTiles = [];
       $scope.allTiles = myTiles;
       for(var i= 0; i < myTiles.length; i++){
-        if($scope.currentUser._id == myTiles[i].creatorID){
           $scope.userTiles.push(myTiles[i]);
-        }
       }
       if( $scope.needToAddWordID ){
         $scope.addWordIDToUser($scope.WordIDtoAdd);
@@ -220,7 +218,6 @@ angular.module('WordRiverApp')
         $http.post('/api/tile', {
           name: $scope.addField,
           contextTags: $scope.selectedCategories,
-          creatorID: $scope.currentUser._id,
           wordType: $scope.addType}
         ).success(function(object){
           $scope.makeGlobalWordID(object._id);
@@ -258,9 +255,7 @@ angular.module('WordRiverApp')
       $scope.getCategories();
     };
 
-    //cat is short for category
     $scope.displayCatInfo = function (category) {
-      //$scope.userTiles = [];
       $scope.matchTiles = [];
       $scope.currentCategory = category;
         for (var j = 0; j < $scope.userTiles.length; j++) {
@@ -374,7 +369,6 @@ angular.module('WordRiverApp')
         $http.post('/api/tile', {
           name: $scope.editField,
           contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
-          creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
           wordType: $scope.userTiles[$scope.editWordIndex].wordType
         });
         $scope.removeWord($scope.wordToEdit);
@@ -386,7 +380,6 @@ angular.module('WordRiverApp')
         $http.post('/api/tile', {
           name: $scope.userTiles[$scope.editWordIndex].name,
           contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
-          creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
           wordType: $scope.editType
         });
         $scope.removeWord($scope.wordToEdit);
@@ -398,7 +391,6 @@ angular.module('WordRiverApp')
         $http.post('/api/tile', {
           name: $scope.editField,
           contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
-          creatorID: $scope.userTiles[$scope.editWordIndex].creatorID,
           wordType: $scope.editType
         });
         $scope.removeWord($scope.wordToEdit);

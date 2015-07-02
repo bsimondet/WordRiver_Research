@@ -21,13 +21,13 @@ exports.index = function(req, res) {
   });
 };
 
-exports.getUserTiles = function(req, res) {
+/*exports.getUserTiles = function(req, res) {
   return res.status(208);
   //User.find({}, '-salt -hashedPassword', function (err, users) {
   //  if(err) return res.send(500, err);
   //  res.json(200, users);
   //});
-};
+};*/
 
 /**
  * Creates a new user
@@ -105,33 +105,6 @@ exports.updatePack = function(req, res, next) {
     }
   });
 };
-
-//exports.updateCategories = function(req, res, next) {
-//  var userId = req.user._id;
-//
-//  //var updates = req.body.user;
-//  if(req.body._id){delete req.body._id}
-//  User.findById(userId, function (err, user) {
-//   // user.contextPacks = request.user.contextPacks;
-//    if(err){ return handleError(res, err) }
-//    if(!user){ return res.send(404) }
-//
-//    var updated = _.merge(user, req.body, function(a, b) {
-//        if(_.isArray(a)) {
-//          //return arrayUnique(a.concat(b));
-//          return b;
-//        } else {
-//          // returning undefined lets _.merge use its default merging methods, rather than this callback.
-//          return undefined;
-//        }
-//      });
-//      //user = updates;
-//    updated.save(function(err){
-//      if(err){ return handleError(res, err); }
-//      return res.json(200, user);
-//    });
-//  });
-//};
 
 
 exports.removeCategoryID = function(req, res) {

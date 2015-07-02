@@ -113,23 +113,11 @@ exports.removeFromCategory = function(req, res, next) {
   var category = req.body.category;
   var tileId = req.body.tileId;
   tile.findById(tileId, function (err, tile) {
-    //for(var i = 0; i < user.tileBucket.length; i++){
-    //  console.log(word == user.tileBucket[i].wordName);
-    //  if(word == user.tileBucket[i].wordName){
-    //    console.log(word);
-    //    for(var j = 0; j < user.tileBucket[i].contextTags.length; j++){
-    //      if(user.tileBucket[i].contextTags[j] == packId){
-    //        console.log(j);
-    //        user.tileBucket[i].contextTags.splice(j, 1);
-    //      }
-    //    }
-    //  }
-    //}
-    console.log(tile);
+    //console.log(tile);
     for(var i = 0; i < tile.contextTags.length; i++){
-      console.log("for loop");
+      //console.log("for loop");
       if(tile.contextTags[i] == category){
-        console.log("splice me");
+        //console.log("splice me");
         tile.contextTags.splice(i,1);
       }
     }
