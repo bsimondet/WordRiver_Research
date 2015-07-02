@@ -58,8 +58,7 @@ angular.module('WordRiverApp')
     $scope.getTiles();
 
     $scope.toggleHelp = function(){
-      if ($scope.help == true)$scope.help = false;
-      else $scope.help = true;
+      $scope.help = !$scope.help;
     };
 
     $scope.getStudents = function(){
@@ -170,18 +169,23 @@ angular.module('WordRiverApp')
 
     $scope.removeGroupIDFromStudents = function (toRemoveID) {
       for(var index = 0; index < $scope.students.length; index++) {
-        console.log(index+"  in 1st loop with: "+$scope.students[index].groupList.length+" Named: "+$scope.students[index].name
-        );
         for(var index2 = 0; index2 < $scope.students[index].groupList.length; index2++) {
-          if ($scope.students[index].groupList[index2]._id == toRemoveID) {
-            $http.put('/api/students/' + $scope.students[index]._id + '/removeCategoryID',
-              {categoryID: toRemoveID}
+          console.log("Comparing: "+toRemoveID);
+          console.log("With: "+$scope.students[index].groupList[index2]);
+          if ($scope.students[index].groupList[index2] == toRemoveID) {
+            console.log("Match!");
+            $http.put('/api/students/' + $scope.students[index]._id + '/removeGroupID',
+              {
+                _id:$scope.students[index]._id,
+                groupID: toRemoveID
+              }
             ).success(function () {
                 console.log('Patched to users context ids');
               });
           }
         }
       }
+      console.log("Do we even get here?");
     };
 
     //returns -1 if student is not in list. should never actually return -1.

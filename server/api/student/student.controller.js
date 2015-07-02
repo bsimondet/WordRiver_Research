@@ -12,6 +12,10 @@
 var _ = require('lodash');
 var Student = require('./student.model');
 
+var validationError = function(res, err) {
+  return res.json(422, err);
+};
+
 // Get list of things
 exports.index = function(req, res) {
   Student.find(function (err, students) {
@@ -134,10 +138,9 @@ exports.addWord = function(req, res) {
 };
 
 exports.removeGroupID = function (req, res) {
-  var userId = req.user._id;
+  var userId = req.body._id;
   var groupID = req.body.groupID;
-
-  User.findById(userId, function (err, user) {
+  Student.findById(userId, function (err, user) {
     for (var i = 0; i < user.groupList.length; i++) {
       if (user.groupList[i] == groupID) {
         user.groupList.splice(i, 1);
