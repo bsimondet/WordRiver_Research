@@ -10,9 +10,7 @@ angular.module('WordRiverApp')
     $scope.categoryArray = [];
     $scope.wordArray = [];
     $scope.hide = true;
-    $scope.holdCatID = [];
-
-
+    $scope.tempCategoryArray = [];
 
     // Code for groups that we may or may not use
 
@@ -63,20 +61,32 @@ angular.module('WordRiverApp')
       $scope.checkForDuplicates(resultArray);
     };
 
+    //Get students that are in the current teacher's array of student IDs
+    $scope.getStudents = function(){
+      $http.get("/api/students/").success(function(student) {
+        $scope.getElementsByID($scope.currentUser.studentList, student, $scope.students);
+      })
+    };
+    $scope.getStudents();
+
+    //Get groups that are in the current teacher's array of groups && are assigned to the current student
     $scope.getGroups = function(student) {
       $scope.studentGroups = [];
+      $scope.tempCategoryArray = [];
       $http.get('/api/users/me').success(function (user) {
         $scope.getElementsByID(student.groupList, user.groupList, $scope.studentGroups);
-//TODO: Make it so allll categories and words are displayed, not just indiviually assigned ones.
-/*        console.log($scope.studentGroups.length);
-        for(var index = 0; index < $scope.studentGroups.length; index++) {
-          console.log($scope.studentGroups[index].contextPacks.length);
-          for (var index2 = 0; index2 < $scope.studentGroups[index].contextPacks.length; index2++) {
-            $scope.holdCatID.push(student.groupList[index].contextPacks[index2]._id);
-          }
-        }*/
+        //$scope.getCategoriesFromGroups($scope.studentGroups);
       });
     };
+
+    //TODO: Make it so all categories and words display related to groups
+/*    $scope.getCategoriesFromGroups = function(groups){
+      for (var i = 0; i < groups.length; i++) {
+        for (var x = 0; x < groups[i].contextPacks.length; x++) {
+          $scope.tempCategoryArray.push(groups[i].contextPacks[x]);
+        }
+      }
+    };*/
 
     $scope.getCategories = function(student) {
       $scope.categoryArray = [];
@@ -94,20 +104,13 @@ angular.module('WordRiverApp')
 
 
 
-    $scope.getStudents = function(){
-        $http.get("/api/students/").success(function(student) {
-          $scope.getElementsByID($scope.currentUser.studentList, student, $scope.students);
-        })
-    };
-    $scope.getStudents();
-
 
     $scope.displayStudentProfile = function(student){
       $scope.selectedStudent = student;
+      $scope.getGroups(student);
       $scope.getCategories(student);
       $scope.getWords(student);
       $scope.hide = false;
-      $scope.getGroups(student);
       //$scope.getTeacherGroups(student);
       //$scope.getStudentGroups(student);
 
