@@ -58,13 +58,16 @@ angular.module('WordRiverApp')
     };*/
 
     $scope.getAll = function () {
-      $scope.getWords();
+      $scope.userTiles = [];
       $scope.userCategories = [];
       $scope.userStudents = [];
       $scope.userGroups = [];
       $scope.userGroups = $scope.currentUser.groupList;
       $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(userCategories){
         $scope.userCategories = userCategories;
+      });
+      $http.get('/api/tile/' + $scope.currentUser._id + '/tiles').success(function(userTiles){
+        $scope.userTiles = userTiles;
       });
       $http.get('/api/students/' + $scope.currentUser._id + '/students').success(function(userStudents){
         $scope.userStudents = userStudents;
