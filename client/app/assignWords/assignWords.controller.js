@@ -58,7 +58,7 @@ angular.module('WordRiverApp')
     };*/
 
     $scope.getAll = function () {
-      $scope.userTiles = [];
+      $scope.getWords();
       $scope.userCategories = [];
       $scope.userStudents = [];
       $scope.userGroups = [];
