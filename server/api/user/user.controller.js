@@ -187,10 +187,8 @@ exports.updateCategories = function(req, res) {
 };
 
 exports.updateGroupsName = function(req, res) {
-  var id = req.params.id;
-  var groupName = req.body.groupName;
+  var className = req.body.className;
   var index = req.body.index;
-
   User.findById(req.params.id, function (err, users) {
     // Handle Errors
     if (err) {
@@ -199,10 +197,10 @@ exports.updateGroupsName = function(req, res) {
     if (!users) {
       return res.send(404)
     }
-    console.log(users.groupList[index]);
+    console.log(users.classList[index]);
     // Merging request body and pack from DB. Special callback for arrays!
-    users.groupList[index].groupName = groupName;
-    console.log(users.groupList[index]);
+    users.classList[index].className = className;
+    console.log(users.classList[index]);
     // Saves to database
     users.save(function (err) {
       if (err) {
@@ -213,7 +211,7 @@ exports.updateGroupsName = function(req, res) {
   });
 };
 
-exports.updateGroups = function(req, res) {
+exports.updateClasses = function(req, res) {
   // deletes _id in req body to not screw things up...
   if(req.body._id){ delete req.body._id }
 

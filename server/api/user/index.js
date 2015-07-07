@@ -17,8 +17,8 @@ router.put('/:id/updateBucket', auth.isAuthenticated(), controller.updateBucket)
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.patch('/:id/category', auth.isAuthenticated(), controller.updateCategories);
-router.patch('/:id/group', auth.isAuthenticated(), controller.updateGroups);
-router.put('/:id/group', auth.isAuthenticated(), controller.updateGroupsName);
+router.patch('/:id/class', auth.isAuthenticated(), controller.updateClasses);
+router.put('/:id/class', auth.isAuthenticated(), controller.updateGroupsName);
 router.put('/:id/updatePack', auth.isAuthenticated(), controller.updatePack);
 router.put('/:id/updateTile', auth.isAuthenticated(), controller.updateTile);
 router.put('/:id/deleteTile', auth.isAuthenticated(), controller.deleteTile);

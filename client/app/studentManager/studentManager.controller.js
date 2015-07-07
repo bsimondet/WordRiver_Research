@@ -159,7 +159,7 @@ angular.module('WordRiverApp')
         ).success(function () {
             $scope.helperRemoveID(myClass._id);
           });
-        $scope.classArray.splice($scope.findGroupInList(myClass.className), 1);
+        $scope.classArray.splice($scope.findClassInList(myClass.className), 1);
       }
     };
 
@@ -202,7 +202,7 @@ angular.module('WordRiverApp')
                 console.log("Removed studentID from user!");
               });
           });
-        $scope.students.splice($scope.findGroupInList(student.firstName), 1);
+        $scope.students.splice($scope.findClassInList(student.firstName), 1);
       }
     };
 
@@ -228,10 +228,10 @@ angular.module('WordRiverApp')
       return index;
     };
 
-    $scope.findGroupInList = function(groupName){
+    $scope.findClassInList = function(className){
       var index = -1;
       for(var i = 0; i < $scope.classArray.length; i++){
-        if($scope.classArray[i].groupName == groupName){
+        if($scope.classArray[i].className == className){
           index = i;
         }
       }
@@ -262,7 +262,7 @@ angular.module('WordRiverApp')
     $scope.addGroupsContextPacksToStudent = function(student){
       var fullStudent = $scope.studentList[$scope.findStudentInList(student)];
       for(var i = 0; i < $scope.selectedClasses.length; i++) {
-        var groupIndex = $scope.findGroupInList($scope.selectedClasses[i].groupName);
+        var groupIndex = $scope.findClassInList($scope.selectedClasses[i].groupName);
         $scope.addContextPacksToStudent($scope.classArray[groupIndex].contextPacks, fullStudent)
       }
     };
@@ -404,7 +404,7 @@ angular.module('WordRiverApp')
     //////////////////////////////////////////////////////////////////////////
 
     $scope.removeGroupFromStudent = function (group){
-      var index = $scope.findGroupInList(group.groupName);
+      var index = $scope.findClassInList(group.groupName);
       //console.log(index);
       $scope.selectedClass = $scope.classArray[index];
 
@@ -450,18 +450,15 @@ angular.module('WordRiverApp')
 
     //////////////////////////////////////////////////////////
     //Trying to write and edit group name function. Having troubles with changing just the name.
-    $scope.editGroupName = function (group) { // This is a good function
-      var index = $scope.findGroupInList(group.groupName);
-      var text = prompt("Provide a new name for " + $scope.classArray[index].groupName + ".", "");
+    $scope.editClassName = function (myclass) { // This is a good function
+      var index = $scope.findClassInList(myclass.className);
+      var text = prompt("Provide a new name for " + $scope.classArray[index].className + ".", "");
       if (text != null) {
-        var choice = confirm("Are you sure you want to change the name of " + $scope.classArray[index].groupName + " to " + text + "?");
+        var choice = confirm("Are you sure you want to change the name of " + $scope.classArray[index].className + " to " + text + "?");
         if (choice == true) {
-
-          //$scope.studentList[index].groupList.groupName = text;
-          $scope.classArray[index].groupName = text;
-
-          $http.put('/api/users/' + $scope.currentUser._id + '/group',
-            {index: index, groupName: text}
+          $scope.classArray[index].className = text;
+          $http.put('/api/users/' + $scope.currentUser._id + '/class',
+            {index: index, className: text}
           ).success(function () {
               $scope.getStudents();
             });
