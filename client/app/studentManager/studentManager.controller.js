@@ -82,7 +82,7 @@ angular.module('WordRiverApp')
         $scope.addStudentIDToUser($scope.IDtoAdd);
       }
       if ( $scope.needToRemoveID ){
-        $scope.removeGroupIDFromStudents($scope.IDtoRemove);
+        $scope.removeClassIDFromStudents($scope.IDtoRemove);
       }
       if ( $scope.needToRemoveStudID ){
         $scope.removeStudentIDFromUser($scope.StudIDtoRemove);
@@ -151,15 +151,15 @@ angular.module('WordRiverApp')
       $scope.showClasses=true;
     };
 
-    $scope.removeGroup = function (index, group) {
-      var choice = confirm("Are you sure you want to delete " + group.groupName + "?");
+    $scope.removeClass = function (index, myClass) {
+      var choice = confirm("Are you sure you want to delete " + myClass.className + "?");
       if (choice == true) {
-        $http.put('/api/users/' + $scope.currentUser._id + '/deleteGroup',
-          {group: group._id}
+        $http.put('/api/users/' + $scope.currentUser._id + '/deleteClass',
+          {myClass: myClass._id}
         ).success(function () {
-            $scope.helperRemoveID(group._id);
+            $scope.helperRemoveID(myClass._id);
           });
-        $scope.classArray.splice($scope.findGroupInList(group.groupName), 1);
+        $scope.classArray.splice($scope.findGroupInList(myClass.className), 1);
       }
     };
 
@@ -170,17 +170,15 @@ angular.module('WordRiverApp')
       $scope.IDtoRemove = id;
     };
 
-    $scope.removeGroupIDFromStudents = function (toRemoveID) {
+    $scope.removeClassIDFromStudents = function (toRemoveID) {
       for(var index = 0; index < $scope.students.length; index++) {
-        for(var index2 = 0; index2 < $scope.students[index].groupList.length; index2++) {
-          console.log("Comparing: "+toRemoveID);
-          console.log("With: "+$scope.students[index].groupList[index2]);
-          if ($scope.students[index].groupList[index2] == toRemoveID) {
+        for(var index2 = 0; index2 < $scope.students[index].classList.length; index2++) {
+          if ($scope.students[index].classList[index2]._id == toRemoveID) {
             console.log("Match!");
-            $http.put('/api/students/' + $scope.students[index]._id + '/removeGroupID',
+            $http.put('/api/students/' + $scope.students[index]._id + '/removeClass',
               {
                 _id:$scope.students[index]._id,
-                groupID: toRemoveID
+                classID: toRemoveID
               }
             ).success(function () {
                 console.log('Patched to users context ids');
@@ -353,7 +351,7 @@ angular.module('WordRiverApp')
       $scope.studentClasses = [];
       for (var i = 0; i < $scope.classArray.length; i++){
         for(var x = 0; x < $scope.studentList[i].classList.length; x++) {
-          if ($scope.selectedStudent.classList[x].className == $scope.classArray[i].className) {
+          if ($scope.selectedStudent.classList[x]._id == $scope.classArray[i]._id) {
             $scope.studentClasses.push($scope.classArray[i]);
           }
         }
@@ -366,8 +364,8 @@ angular.module('WordRiverApp')
       $scope.selectedClass = myclass;
       for(var i = 0; i < $scope.studentList.length; i++){
         for(var x = 0; x < $scope.studentList[i].classList.length; x++) {
-          if ($scope.studentList[i].classList[x].className == myclass.className) {
-            $scope.studentsInClass.push($scope.studentList[i].classList[x]);
+          if ($scope.studentList[i].classList[x]._id == myclass._id) {
+            $scope.studentsInClass.push($scope.studentList[i]);
           }
         }
       }

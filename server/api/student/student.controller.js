@@ -137,13 +137,13 @@ exports.addWord = function(req, res) {
   });
 };
 
-exports.removeGroupID = function (req, res) {
+exports.removeClass = function (req, res) {
   var userId = req.body._id;
-  var groupID = req.body.groupID;
+  var classID = req.body.classID;
   Student.findById(userId, function (err, user) {
-    for (var i = 0; i < user.groupList.length; i++) {
-      if (user.groupList[i] == groupID) {
-        user.groupList.splice(i, 1);
+    for (var i = 0; i < user.classList.length; i++) {
+      if (user.classList[i]._id == classID) {
+        user.classList.splice(i, 1);
       }
     }
     user.save(function (err) {

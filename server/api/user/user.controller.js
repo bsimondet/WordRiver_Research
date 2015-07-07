@@ -242,16 +242,13 @@ exports.updateGroups = function(req, res) {
   });
 };
 
-exports.deleteGroup = function(req, res) {
+exports.deleteClass = function(req, res) {
   var userId = req.params.id;
-  var group = req.body.group;
-
+  var myClass = req.body.myClass;
   User.findById(userId, function (err, user) {
-    for(var i = 0 ; i < user.groupList.length; i++){
-      console.log(user.groupList[i]._id + " " + group);
-      if(user.groupList[i]._id == group){
-        user.groupList.splice(i, 1);
-
+    for(var i = 0 ; i < user.classList.length; i++){
+        if(user.classList[i]._id == myClass){
+        user.classList.splice(i, 1);
       }
     }
     user.save(function(err) {

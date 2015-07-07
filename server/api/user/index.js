@@ -22,7 +22,7 @@ router.put('/:id/group', auth.isAuthenticated(), controller.updateGroupsName);
 router.put('/:id/updatePack', auth.isAuthenticated(), controller.updatePack);
 router.put('/:id/updateTile', auth.isAuthenticated(), controller.updateTile);
 router.put('/:id/deleteTile', auth.isAuthenticated(), controller.deleteTile);
-router.put('/:id/deleteGroup', auth.isAuthenticated(), controller.deleteGroup);
+router.put('/:id/deleteClass', auth.isAuthenticated(), controller.deleteClass);
 router.put('/:id/addClass', auth.isAuthenticated(), controller.addClass);
 router.put('/:id/addStudent', auth.isAuthenticated(), controller.addStudent);
 router.put('/:id/addContextID', auth.isAuthenticated(), controller.addContextID);
