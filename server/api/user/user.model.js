@@ -19,21 +19,21 @@ var UserSchema = new Schema({
   salt: String,
   contextPacks: [], //List of tags that can be applied to tiles
 
-  groupList: [{     //A list of groups to apply to students. A student with this group has access to the free tiles and context packs defined within the group JSON object within the user
+/*  groupList: [{     //A list of groups to apply to students. A student with this group has access to the free tiles and context packs defined within the group JSON object within the user
     groupName: String,
     contextPacks: [], //Context packs the students within a group has access to
     freeTiles: []     //Free tiles that may not be associated with a specific context pack that students have access to within the group
-  }],
+  }], */
 
   //TODO: implement class around groups
-/*  classList: [{
+  classList: [{
     className: String,
     groupList: [{
       groupName: String,
       contextPacks: [],
       freeTiles: []
     }]
-  }],*/
+  }],
 
   tileBucket: [], //List of tile IDs the user has access to
   studentList: [] //Array of student ids

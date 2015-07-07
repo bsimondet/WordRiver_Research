@@ -341,13 +341,16 @@ exports.updatePack = function(req, res, next) {
   });
 };
 
-exports.addGroup = function(req, res, next) {
+exports.addClass = function(req, res, next) {
   var userId = req.user._id;
 
-  var groupName = req.body.groupName;
+  var className = req.body.className;
 
   User.findById(userId, function (err, user) {
-    user.groupList.push({ groupName: groupName, contextPacks: [], freeTiles: []});
+    user.classList.push({
+      "className": className,
+      "groupList": []
+    });
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);

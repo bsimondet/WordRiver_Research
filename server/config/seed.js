@@ -39,37 +39,42 @@ User.find({}).remove(function () {
         "55858751d0ec44402530da01"
       ],
       /*Names of groups with assigned context packs by id*/
-      "groupList": [
-        {
-          "groupName": "Group A",
-          "_id": "5535520d4e9e3d82b7283ca2",
-          "contextPacks": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"],
-          "freeTiles": []
-        },
-        {
-          "groupName": "Group B",
-          "_id": "5535520db654746a2361ffb6",
-          "contextPacks": ["553167d1c67764f3773612dc"],
-          "freeTiles": ["5511ae8c1fb25384d865e514"]
-        },
-        {
-          "groupName": "Group C",
-          "_id": "5535520dd7b5c70193c4993c",
-          "contextPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86"],
-          "freeTiles": ["5511ae8cf6f121e4c3108cd6", "552c24183b10b8ec888e042b", "552d5b08e1a3de8740774fad"]
-        },
-        {
-          "groupName": "Group D",
-          "_id": "5535520dff3a52f2757e5944",
-          "contextPacks": ["553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"],
-          "freeTiles": []
-        },
-        {
-          "groupName": "Group E",
-          "_id": "5535520d147a722a4e7233a3",
-          "contextPacks": ["553167d1c296f9753ce8447f"],
-          "freeTiles": []
-        }],
+      "classList": [{
+        "className": "Reading 3rd Grade",
+        "_id": "553167d183c993d16d03ce80",
+        "groupList": [
+          {
+            "groupName": "Group A",
+            "_id": "5535520d4e9e3d82b7283ca2",
+            "contextPacks": ["553167d183c193d16d03ce80", "553167d1cd3291e1352efe94", "553167d13562bc39e23e4d3b"],
+            "freeTiles": []
+          },
+          {
+            "groupName": "Group B",
+            "_id": "5535520db654746a2361ffb6",
+            "contextPacks": ["553167d1c67764f3773612dc"],
+            "freeTiles": ["5511ae8c1fb25384d865e514"]
+          },
+          {
+            "groupName": "Group C",
+            "_id": "5535520dd7b5c70193c4993c",
+            "contextPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86"],
+            "freeTiles": ["5511ae8cf6f121e4c3108cd6", "552c24183b10b8ec888e042b", "552d5b08e1a3de8740774fad"]
+          }/* ,
+          {
+            "groupName": "Group D",
+            "_id": "5535520dff3a52f2757e5944",
+            "contextPacks": ["553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a"],
+            "freeTiles": []
+          },
+          {
+            "groupName": "Group E",
+            "_id": "5535520d147a722a4e7233a3",
+            "contextPacks": ["553167d1c296f9753ce8447f"],
+            "freeTiles": []
+          }*/
+        ]
+      }],
       /*All current words in system by id*/
       "tileBucket": [
         "552d5b08f631321946da8341",
@@ -242,7 +247,7 @@ User.find({}).remove(function () {
       /*All students in system by id*/
       "studentList": [
         "5511ab56117e23f0412fd08f",
-        "5511ab564ac02dbaf337270d",
+        /*"5511ab564ac02dbaf337270d",
         "5511ab5617fda1233df3f6dd",
         "552c20f8be17b267b77b5a19",
         "552c20f8d1172952c6f268fe",
@@ -260,7 +265,7 @@ User.find({}).remove(function () {
         "553fd47c689eeea244d06b3b",
         "553fd47c3246994599144960",
         "553fd47cd258d7a1da8e0ce7",
-        "553fd47c3cd99bec88d86afb",
+        "553fd47c3cd99bec88d86afb",*/
         "553fd47ca47e5cd02c57ab84"
       ]
     }
@@ -289,10 +294,13 @@ Student.find({}).remove(function () {
       "tileBucket": ["5511ae8cec56277a4af216a5", "5511ae8c1fb25384d865e514", "5511ae8c081ccbd0d072d7b4", "5511ae8c127053ad5bf17926", "5511ae8ce28633ca8ad95f7f", "5511ae8c8b6533965921e512", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61",
         "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b",
         "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
-      "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
+      "classList": [{
+        "className": "Reading 3rd Grade",
+        "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"]
+      }],
       "contextTags": ["55856f5e08209fde1a2b8af3", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80", "553167d1d969a916cab51920", "553167d1afa1bda9bc0d055a", "558584084afb8b051fa83846", "55858751d0ec44402530da01"]
     },
-    {
+    /*{
       "_id": "5511ab564ac02dbaf337270d",
       "firstName": "Ben",
       "lastName": "Simondet",
@@ -512,7 +520,7 @@ Student.find({}).remove(function () {
         "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
       "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
       "contextTags": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80"]
-    },
+    },*/
     {
       "_id": "553fd47ca47e5cd02c57ab84",
       "firstName": "Ryan",
@@ -523,7 +531,10 @@ Student.find({}).remove(function () {
       "tileBucket": ["5511ae8cec56277a4af216a5", "5511ae8cec56277a4af216a5", "5511ae8c1fb25384d865e514", "5511ae8c081ccbd0d072d7b4", "5511ae8c127053ad5bf17926", "5511ae8ce28633ca8ad95f7f", "5511ae8c8b6533965921e512", "552d5b08e1a3de8740774fad", "552d5b0887232647659a6296", "552d5b086d8bd05eb7a71766", "552d5b08b1e363557b2d662c", "552d5b08a2385a889f90f803", "552d5b086a2b54d6b160c51d", "552d5b0824d1092b1ed1c157", "552d5b08f631321946da8341", "552d5b08adc822e8831e298b", "552d5b08acded8a6cd6e8dcd", "552d5b08791292bc5e665b61",
         "552d5b0840b221baaad921ec", "552d5b08cb39389025769c04", "552d5b0815a9a1d0c6d88e3f", "552d5b086f1b0ace75ad66b6", "552d5b0887c944a743ba6031", "552d5b088b5e733aba8d2620", "552d5b08bc8421b20abb5a62", "552d5b089bd03191b7ec9afc", "552d5b08bd3cd8f963e1167c", "552d5b08a734bbb099a68155", "552d5b087608732157874619", "552d5b088f784a3f8ef312ef", "552d5b08a08d5bda499e42cf", "552d5b08ac6a61a811b9c664", "552d5b08597bf5df8d343bfb", "552d5b089948ede80f3adc37", "552d5b08bd843d9c13526d76", "552d5b082a0145f4a6ab126b",
         "552d5b0836a47a9760ce84bc", "552d5b08974d0d4e9a148336", "552d5b08960c4c9f31af08f9", "552d5b082ac06aace229fc18", "552d5b080a41ac71696ae275", "552d5b08ebef1861e6925df1", "552d5b086fdeebe962ffc171", "552d5b0881b0e2b117537951"],
-      "groupList": ["5535520d4e9e3d82b7283ca2", "5535520db654746a2361ffb6"],
+      "classList": [{
+        "className" : "Reading 3rd Grade",
+        "groupList": ["5535520d4e9e3d82b7283ca2"]
+      }],
       "contextTags": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc", "553167d1cd3291e1352efe94", "553167d183c193d16d03ce80"]
     }
   )

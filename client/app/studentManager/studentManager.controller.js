@@ -7,19 +7,18 @@ angular.module('WordRiverApp')
     $scope.students = []; //List of actual student objects
     $scope.studentByID = []; //List of the current users students listed by id
     $scope.currentUser = Auth.getCurrentUser();
-    $scope.groupField = "";
+    $scope.classField = "";
     $scope.studentField = "";
-    $scope.localGroupArray = [];
-    $scope.selectedGroups = [];
+    $scope.classArray = [];
+    $scope.selectedClasses = [];
     $scope.selectedStudents = [];
-    $scope.studentsInGroup = []; //Student references
-    $scope.selectedGroupName = "";
-    $scope.selectedGroup = {};
-    $scope.showGroups = true;
-    $scope.studentGroups = [];
+    $scope.studentsInClass = []; //Student references
+    $scope.selectedClassName = "";
+    $scope.selectedClass = {};
+    $scope.showClasses = true;
+    $scope.studentClasses = [];
     $scope.selectedStudent = [];
     $scope.tiles = [];
-    $scope.localGroupArray = $scope.currentUser.groupList;
     $scope.help = false;
     $scope.toGroupSort = "";
     $scope.groupOrder = false;
@@ -42,14 +41,13 @@ angular.module('WordRiverApp')
 //    $scope.getStudentList();
 //////////////////////////////////
 
-    $scope.getGroups = function(){
+    $scope.getClasses = function(){
       $http.get("/api/users/me").success(function(user){
-        $scope.currentUser = user;
-        $scope.localGroupArray = user.groupList;
+        $scope.classArray = user.classList;
       })
     };
 
-    $scope.getGroups();
+    $scope.getClasses();
 
     $scope.getTiles = function(){
       $http.get("/api/tile").success(function(tiles){
@@ -135,22 +133,22 @@ angular.module('WordRiverApp')
       $scope.IDtoAdd = "";
     };
 
-    $scope.addGroup = function () {
-      if ($scope.groupField.length >= 1) {
-        var newGroup = {groupName: $scope.groupField, contextPacks: []};
-        $scope.localGroupArray.push(newGroup);
-        $http.put('/api/users/' + $scope.currentUser._id + '/addGroup',
-          {groupName: $scope.groupField}
+    $scope.addClass = function () {
+      if ($scope.classField.length >= 1) {
+        var newGroup = {groupName: $scope.classField, contextPacks: []};
+        $scope.classArray.push(newGroup);
+        $http.put('/api/users/' + $scope.currentUser._id + '/addClass',
+          {className: $scope.classField}
         ).success(function(){
-            $scope.getGroups();
+            $scope.getClasses();
           });
       }
-      $scope.groupField="";
+      $scope.classField="";
 
     };
 
-    $scope.groupShow = function(){
-      $scope.showGroups=true;
+    $scope.classShow = function(){
+      $scope.showClasses=true;
     };
 
     $scope.removeGroup = function (index, group) {
@@ -161,13 +159,13 @@ angular.module('WordRiverApp')
         ).success(function () {
             $scope.helperRemoveID(group._id);
           });
-        $scope.localGroupArray.splice($scope.findGroupInList(group.groupName), 1);
+        $scope.classArray.splice($scope.findGroupInList(group.groupName), 1);
       }
     };
 
     $scope.helperRemoveID = function (id) {
       $scope.needToRemoveID = true;
-      $scope.getGroups();
+      $scope.getClasses();
       $scope.getStudents();
       $scope.IDtoRemove = id;
     };
@@ -234,8 +232,8 @@ angular.module('WordRiverApp')
 
     $scope.findGroupInList = function(groupName){
       var index = -1;
-      for(var i = 0; i < $scope.localGroupArray.length; i++){
-        if($scope.localGroupArray[i].groupName == groupName){
+      for(var i = 0; i < $scope.classArray.length; i++){
+        if($scope.classArray[i].groupName == groupName){
           index = i;
         }
       }
@@ -250,8 +248,8 @@ angular.module('WordRiverApp')
 
       if($scope.studentList[studentIndex].groupList.indexOf(group._id) == -1){
         $scope.studentList[studentIndex].groupList.push(group);
-        if(group._id == $scope.selectedGroup._id){
-          $scope.studentsInGroup.push($scope.studentList[studentIndex]);
+        if(group._id == $scope.selectedClass._id){
+          $scope.studentsInClass.push($scope.studentList[studentIndex]);
         }
         $scope.addGroupsContextPacksToStudent(student);
         $http.put("/api/students/" + student + "/assignToGroup",
@@ -265,9 +263,9 @@ angular.module('WordRiverApp')
 
     $scope.addGroupsContextPacksToStudent = function(student){
       var fullStudent = $scope.studentList[$scope.findStudentInList(student)];
-      for(var i = 0; i < $scope.selectedGroups.length; i++) {
-        var groupIndex = $scope.findGroupInList($scope.selectedGroups[i].groupName);
-        $scope.addContextPacksToStudent($scope.localGroupArray[groupIndex].contextPacks, fullStudent)
+      for(var i = 0; i < $scope.selectedClasses.length; i++) {
+        var groupIndex = $scope.findGroupInList($scope.selectedClasses[i].groupName);
+        $scope.addContextPacksToStudent($scope.classArray[groupIndex].contextPacks, fullStudent)
       }
     };
 
@@ -312,11 +310,11 @@ angular.module('WordRiverApp')
       //iterate over all of the students and all of the groups
       //call assignStudentToGroup on each pair
       for(var i = 0; i < $scope.selectedStudents.length; i++){
-        for(var j = 0; j < $scope.selectedGroups.length; j++){
-          $scope.assignStudentToGroup($scope.selectedStudents[i], $scope.selectedGroups[j]);
+        for(var j = 0; j < $scope.selectedClasses.length; j++){
+          $scope.assignStudentToGroup($scope.selectedStudents[i], $scope.selectedClasses[j]);
         }
       }
-      $scope.selectedGroups = [];
+      $scope.selectedClasses = [];
       $scope.selectedStudents = [];
     };
 
@@ -324,14 +322,14 @@ angular.module('WordRiverApp')
     $scope.allCheckedGroups = function(category){
       //console.log(category);
       var counter;
-      for (var i = 0; i < $scope.selectedGroups.length; i++) {
-        if ($scope.selectedGroups[i] == category) {
-          $scope.selectedGroups.splice(i, 1);
+      for (var i = 0; i < $scope.selectedClasses.length; i++) {
+        if ($scope.selectedClasses[i] == category) {
+          $scope.selectedClasses.splice(i, 1);
           counter = 1;
         }
       }
       if (counter != 1){
-        $scope.selectedGroups.push(category);
+        $scope.selectedClasses.push(category);
       }
     };
 
@@ -349,27 +347,28 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.displayStudentGroups = function(student){
-      $scope.showGroups = false;
+    $scope.displayStudentClasses = function(student){
+      $scope.showClasses = false;
       $scope.selectedStudent = student;
-      $scope.studentGroups = [];
-
-      for (var i = 0; i < $scope.localGroupArray.length; i++){
-        if ($scope.inArray($scope.selectedStudent.groupList, $scope.localGroupArray[i]._id)) {
-          $scope.studentGroups.push($scope.localGroupArray[i]);
-
+      $scope.studentClasses = [];
+      for (var i = 0; i < $scope.classArray.length; i++){
+        for(var x = 0; x < $scope.studentList[i].classList.length; x++) {
+          if ($scope.selectedStudent.classList[x].className == $scope.classArray[i].className) {
+            $scope.studentClasses.push($scope.classArray[i]);
+          }
         }
       }
     };
 
-    $scope.displayGroupInfo = function(group){
-      //$scope.showGroups = true;
-      $scope.selectedGroupName = group.groupName;
-      $scope.studentsInGroup = [];
-      $scope.selectedGroup = group;
+    $scope.displayClassInfo = function(myclass){
+      $scope.selectedClassName = myclass.className;
+      $scope.studentsInClass = [];
+      $scope.selectedClass = myclass;
       for(var i = 0; i < $scope.studentList.length; i++){
-        if($scope.inArray($scope.studentList[i].groupList, group._id)){
-          $scope.studentsInGroup.push($scope.studentList[i]);
+        for(var x = 0; x < $scope.studentList[i].classList.length; x++) {
+          if ($scope.studentList[i].classList[x].className == myclass.className) {
+            $scope.studentsInClass.push($scope.studentList[i].classList[x]);
+          }
         }
       }
     };
@@ -382,13 +381,6 @@ angular.module('WordRiverApp')
         }
       }
       return false;
-    };
-
-
-    $scope.getStudentGroups = function(student){
-      $scope.selectedGroupName = "Groups for "+student.firstName+" "+student.lastName+":";
-      $scope.studentsInGroup = student.allGroupsIn;
-
     };
 
     $scope.orderBy = function (property) {
@@ -416,19 +408,16 @@ angular.module('WordRiverApp')
     $scope.removeGroupFromStudent = function (group){
       var index = $scope.findGroupInList(group.groupName);
       //console.log(index);
-      $scope.selectedGroup = $scope.localGroupArray[index];
+      $scope.selectedClass = $scope.classArray[index];
 
       $scope.removeStudentFromGroup($scope.selectedStudent);
       //console.log("Yo");
-      for (var i = 0; i < $scope.studentGroups.length; i++){
-        //console.log($scope.studentGroups[i]);
-
-        if ($scope.studentGroups[i] == group._id){
-
-          $scope.studentGroups.splice(i, 1);
+      for (var i = 0; i < $scope.studentClasses.length; i++){
+        if ($scope.studentClasses[i] == group._id){
+          $scope.studentClasses.splice(i, 1);
         }
       }
-      $scope.displayStudentGroups($scope.selectedStudent);
+      $scope.displayStudentClasses($scope.selectedStudent);
     };
 
 
@@ -437,13 +426,13 @@ angular.module('WordRiverApp')
       for (var i = 0; i < $scope.studentList.length; i++) {
         if (student == $scope.studentList[i]) {
           for (var j = 0; j < $scope.studentList[i].groupList.length; j++) {
-            //console.log($scope.selectedGroupName + " "+ $scope.studentList[i].groupList[j] )
-            if ($scope.studentList[i].groupList[j] == $scope.selectedGroup._id) {
+            //console.log($scope.selectedClassName + " "+ $scope.studentList[i].groupList[j] )
+            if ($scope.studentList[i].groupList[j] == $scope.selectedClass._id) {
               $scope.studentList[i].groupList.splice(j, 1);
 
               //Start here once the seed is changed
               $http.put('api/students/' + $scope.studentList[i]._id + '/deleteFromGroup',
-                {groupID: $scope.selectedGroup._id}
+                {groupID: $scope.selectedClass._id}
               ).success(function () {
                   $scope.syncUser();
                 });
@@ -453,25 +442,25 @@ angular.module('WordRiverApp')
           break;
         }
       }
-      for (var h = 0; h < $scope.studentsInGroup.length; h++) {
-        if (student == $scope.studentsInGroup[h]) {
-          $scope.studentsInGroup.splice(h, 1);
+      for (var h = 0; h < $scope.studentsInClass.length; h++) {
+        if (student == $scope.studentsInClass[h]) {
+          $scope.studentsInClass.splice(h, 1);
         }
       }
-      $scope.displayGroupInfo($scope.selectedGroup);
+      $scope.displayClassInfo($scope.selectedClass);
     };
 
     //////////////////////////////////////////////////////////
     //Trying to write and edit group name function. Having troubles with changing just the name.
     $scope.editGroupName = function (group) { // This is a good function
       var index = $scope.findGroupInList(group.groupName);
-      var text = prompt("Provide a new name for " + $scope.localGroupArray[index].groupName + ".", "");
+      var text = prompt("Provide a new name for " + $scope.classArray[index].groupName + ".", "");
       if (text != null) {
-        var choice = confirm("Are you sure you want to change the name of " + $scope.localGroupArray[index].groupName + " to " + text + "?");
+        var choice = confirm("Are you sure you want to change the name of " + $scope.classArray[index].groupName + " to " + text + "?");
         if (choice == true) {
 
           //$scope.studentList[index].groupList.groupName = text;
-          $scope.localGroupArray[index].groupName = text;
+          $scope.classArray[index].groupName = text;
 
           $http.put('/api/users/' + $scope.currentUser._id + '/group',
             {index: index, groupName: text}
@@ -482,6 +471,6 @@ angular.module('WordRiverApp')
         }
       }
     };
-    $scope.getGroups();
+    $scope.getClasses();
   });
 

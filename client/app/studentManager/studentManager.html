@@ -14,10 +14,10 @@
       Click the pencil to edit the group's name or click the trash can to delete the group.
     </p>
 
-    <h1>Your {{localGroupArray.length}} Groups:</h1>
+    <h1>Your {{classArray.length}} Classes:</h1>
     <!--Add a new group to add students to-->
-    <form ng-submit="addGroup()">
-      <input ng-model="groupField" type="text" size="15" placeholder="Add a Group">
+    <form ng-submit="addClass()">
+      <input ng-model="classField" type="text" size="15" placeholder="Add a Class">
       <input type="submit" value="Submit" class="btn-primary">
     </form>
     <br>
@@ -26,10 +26,10 @@
     <!--List of current groups with edit and remove options-->
     <ul class="list-group scroll">
       <p>
-      <li class="list-group-item" type="checkbox" ng-repeat="group in localGroupArray | orderBy: toGroupSort:groupOrder"><label>
-        <input type="checkbox" value="value" ng-click="allCheckedGroups(group)"><a href="" ng-click="displayGroupInfo(group); groupShow()">{{group.groupName}}</a></label>
-        <span class="glyphicon glyphicon-trash floatRight close" title="Delete Group" ng-click="removeGroup($index, group)"></span>
-        <span class="glyphicon glyphicon-pencil floatLeft close" title="Edit Group Name" ng-click="editGroupName(group)"></span>
+      <li class="list-group-item" type="checkbox" ng-repeat="class in classArray | orderBy: toGroupSort:groupOrder"><label>
+        <input type="checkbox" value="value" ng-click="allCheckedGroups(class)"><a href="" ng-click="displayClassInfo(class); classShow()">{{class.className}}</a></label>
+        <span class="glyphicon glyphicon-trash floatRight close" title="Delete Group" ng-click="removeGroup($index, class)"></span>
+        <span class="glyphicon glyphicon-pencil floatLeft close" title="Edit Group Name" ng-click="editGroupName(class)"></span>
       </li>
     </ul>
   </div>
@@ -45,23 +45,23 @@
     <br>
     <!--Button to assign checked students to checked groups-->
     <input class="btn btn-primary center-block assignButton" type="submit" value="Add Selected Students to Selected Groups" class="btn btn-primary" ng-click="addStudentsToGroups()">
-    <!--Shows the students that are in a selected group-->
-    <div ng-show="showGroups">
-      <h1>Students in {{selectedGroupName}}</h1>
+    <!--Shows the students that are in a selected class-->
+    <div ng-show="showClasses">
+      <h1>Students in {{selectedClassName}}</h1>
         <ul>
-          <li class="list-group-item" ng-repeat="student in studentsInGroup | orderBy: toSort:order">
+          <li class="list-group-item" ng-repeat="student in studentsInClass | orderBy: toSort:order">
             <label>{{student.lastName}}, {{student.firstName}}</label>
             <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Remove Student From Group" ng-click="removeStudentFromGroup(student)"></span>
           </li>
         </ul>
     </div>
     <!--Shows the groups that the selected student is in-->
-    <div ng-hide="showGroups">
-      <h1>{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s Groups</h1>
-      <p ng-show="studentGroups.length == 0">This student isn't assigned to any groups.</p>
-      <ul class="list-group-item" ng-repeat="groups in studentGroups">
-        <li><label>{{groups.groupName}}</label>
-          <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Delete Group From Student" ng-click="removeGroupFromStudent(groups)"></span>
+    <div ng-hide="showClasses">
+      <h1>{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s Classes</h1>
+      <p ng-show="studentClasses.length == 0">This student isn't assigned to any classes.</p>
+      <ul class="list-group-item" ng-repeat="classes in studentClasses">
+        <li><label>{{classes.className}}</label>
+          <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Delete Class From Student" ng-click="removeGroupFromStudent(classes)"></span>
         </li>
       </ul>
     </div>
@@ -91,7 +91,7 @@
 
       <li class="list-group-item" type="checkbox" ng-repeat="student in students | filter: searchText | orderBy: toSort:order">
         <input type="checkbox" value="value" ng-click="allCheckedStudents(student._id)">
-        <label><a ng-click="displayStudentGroups(student)">{{student.lastName}}, {{student.firstName}}</a></label>
+        <label><a ng-click="displayStudentClasses(student)">{{student.lastName}}, {{student.firstName}}</a></label>
         <span class="glyphicon glyphicon-trash floatRight close" title="Delete Student" ng-click="removeStudent(students.indexOf(student), student)"></span>
     </li>
     </ul>
