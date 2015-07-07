@@ -237,42 +237,77 @@ angular.module('WordRiverApp')
       return index;
     };
 
-    //Takes in a student's ID and a groups name
-    $scope.assignStudentToClass = function(student, myclass){
-      var studentIndex = $scope.findStudentInList(student);
-      if($scope.studentList[studentIndex].classList.indexOf(myclass._id) == -1){
-        $scope.studentList[studentIndex].classList.push(myclass);
-        if(myclass._id == $scope.selectedClass._id){
-          $scope.studentsInClass.push($scope.studentList[studentIndex]);
-        }
-        //$scope.addClassWordPacksToStudent(student);
-        $http.put("/api/students/" + student + "/assignToClass",
-          {
-            classID: myclass._id,
-            groupList: myclass.groupList
-          }
-        ).success(function () {
-            console.log("Added ID and list to student!");
-            $scope.getStudents();
-          });
-      }
-    };
-
     $scope.addStudentsToClasses = function(){
-      //iterate over all of the students and all of the groups
+      //iterates over all of the selected students and classes
       //call assignStudentToClass on each pair
       for(var i = 0; i < $scope.selectedStudents.length; i++){
         for(var j = 0; j < $scope.selectedClasses.length; j++){
           $scope.assignStudentToClass($scope.selectedStudents[i], $scope.selectedClasses[j]);
         }
       }
+      $scope.uncheckClassesAndStudents();
+      /*$scope.selectedClasses = [];
+      $scope.selectedStudents = [];*/
+    };
+
+    //Takes in a student's ID and a groups name
+    $scope.assignStudentToClass = function(student, myclass){
+      var studentIndex = $scope.findStudentInList(student);
+      console.log($scope.studentList[studentIndex].classList.length);
+      if($scope.studentList[studentIndex].classList.length > 0) {
+        for (var i = 0; i < $scope.studentList[studentIndex].classList.length; i++) {
+          if ($scope.studentList[studentIndex].classList[i]._id != myclass._id) {
+            $scope.studentList[studentIndex].classList.push(myclass);
+            if (myclass._id == $scope.selectedClass._id) {
+              $scope.studentsInClass.push($scope.studentList[studentIndex]);
+            }
+            $http.put("/api/students/" + student + "/assignToClass",
+              {
+                classID: myclass._id,
+                groupList: myclass.groupList
+              }
+            ).success(function () {
+                console.log("Added class to existing classes");
+              });
+          } else {
+            alert($scope.studentList[studentIndex].firstName +" is already in "+ myclass.className);
+          }
+        }
+      } else {
+          $scope.studentList[studentIndex].classList.push(myclass);
+          if (myclass._id == $scope.selectedClass._id) {
+            $scope.studentsInClass.push($scope.studentList[studentIndex]);
+          }
+          $http.put("/api/students/" + student + "/assignToClass",
+            {
+              classID: myclass._id,
+              groupList: myclass.groupList
+            }
+          ).success(function () {
+              console.log("Added new class");
+            });
+        }
+    };
+
+    $scope.uncheckClasses = function(){
+      $scope.selectedClasses = [];
+      $scope.getClasses();
+    };
+
+    $scope.uncheckClassesAndStudents = function(){
       $scope.selectedClasses = [];
       $scope.selectedStudents = [];
+      $scope.getClasses();
+      $scope.getStudents();
+    };
+
+    $scope.uncheckStudents = function(){
+      $scope.selectedStudents = [];
+      $scope.getStudents();
     };
 
     //Takes in a group name
     $scope.allCheckedClasses = function(myclass){
-      //console.log(category);
       var counter;
       for (var i = 0; i < $scope.selectedClasses.length; i++) {
         if ($scope.selectedClasses[i] == myclass) {

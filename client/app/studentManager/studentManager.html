@@ -23,6 +23,7 @@
     <br>
     <!--Sorting A-Z or Z-A option-->
     <button class="btn-primary" title="Sort A-Z" ng-click="toGroupSort = 'groupName'; groupOrder = !groupOrder">A-Z</button>
+    <button class="btn-primary" ng-click="uncheckClasses()">Uncheck All Classes</button>
     <!--List of current groups with edit and remove options-->
     <ul class="list-group scroll">
       <p>
@@ -45,6 +46,13 @@
     <br>
     <!--Button to assign checked students to checked groups-->
     <input class="btn btn-primary center-block assignButton" type="submit" value="Add Selected Students to Selected Groups" class="btn btn-primary" ng-click="addStudentsToClasses()">
+    <br>
+    <input class="btn btn-primary center-block assignButton" type="submit" value="Uncheck All Classes and Students" class="btn btn-primary" ng-click="uncheckClassesAndStudents()">
+
+<!--
+    <button class="btn-primary" ng-click="uncheckClassesAndStudents()">Uncheck All Classes and Students</button>
+-->
+
     <!--Shows the students that are in a selected class-->
     <div ng-show="showClasses">
       <h1>Students in {{selectedClassName}}</h1>
@@ -86,6 +94,7 @@
     <!--Sorting A-Z or Z-A option, additional search box-->
     <button class="btn-primary" title="Sort A-Z" ng-click="toSort = 'lastName'; order = !order">A-Z</button>
     <input type="text" placeholder="Search Students" ng-model="searchText">
+    <button class="btn-primary" ng-click="uncheckStudents()">Uncheck All Students</button>
     <!--List of students-->
     <ul class="list-group scroll">
       <p>
