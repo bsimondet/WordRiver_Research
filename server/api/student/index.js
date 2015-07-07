@@ -12,9 +12,7 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.updateTags);
 router.delete('/:id', controller.destroy);
-router.put('/:id/assignToGroup', controller.assignToGroup);
-router.put('/:id/addPack', controller.addPack);
-router.put('/:id/addWord', controller.addPack);
+router.put('/:id/assignToClass', controller.assignToClass);
 router.put('/:id/removeClass', controller.removeClass);
 
 module.exports = router;

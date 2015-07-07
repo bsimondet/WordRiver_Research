@@ -21,9 +21,8 @@ var StudentSchema = new Schema({
      "groupList": []
     }]
   */
-  "classList": [{
-    "className": String,
-    "groupList": []
+  classList: [{
+    groupList: []
   }], //Classes with nested groups that a student is in, represented by an array of group ids
   contextTags: [] //Array of category ids, where each id is the category a user has access to
 });

@@ -93,28 +93,15 @@ exports.updateTags = function(req, res) {
 };
 
 //Not finished--Working Here!
-exports.assignToGroup = function(req, res) {
+exports.assignToClass = function(req, res) {
   var userId = req.params.id;
-  var group = req.body.groupID;
+  var classID = req.body.classID;
+  var groupList = req.body.groupList;
   Student.findById(userId, function (err, user) {
-
-    user.groupList.push(group);
-
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      res.send(200);
+    user.classList.push({
+      "_id": classID,
+      "groupList": groupList
     });
-  });
-};
-
-exports.addPack = function(req, res) {
-  var userId = req.params.id;
-  var packId = req.body.packId;
-  console.log(packId);
-  Student.findById(userId, function (err, user) {
-
-    user.contextTags.push(packId);
-
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);
@@ -152,22 +139,6 @@ exports.removeClass = function (req, res) {
     });
   });
 };
-
-/*exports.deleteFromClass = function(req, res) {
-  var userId = req.params.id;
-  var classID = req.body.classID;
-  Student.findById(userId, function (err, user) {
-    for(var i = 0 ; i < user.classList.length; i++){
-      if(user.classList[i] == classID){
-        user.classList.splice(i, 1);
-      }
-    }
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      res.send(200);
-    });
-  });
-};*/
 
 // Deletes a thing from the DB.
 exports.destroy = function(req, res) {

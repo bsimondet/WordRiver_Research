@@ -238,77 +238,32 @@ angular.module('WordRiverApp')
     };
 
     //Takes in a student's ID and a groups name
-    $scope.assignStudentToGroup = function(student, group){
-      //console.log(student + " " + group);
+    $scope.assignStudentToClass = function(student, myclass){
       var studentIndex = $scope.findStudentInList(student);
-      //console.log(studentIndex);
-
-      if($scope.studentList[studentIndex].groupList.indexOf(group._id) == -1){
-        $scope.studentList[studentIndex].groupList.push(group);
-        if(group._id == $scope.selectedClass._id){
+      if($scope.studentList[studentIndex].classList.indexOf(myclass._id) == -1){
+        $scope.studentList[studentIndex].classList.push(myclass);
+        if(myclass._id == $scope.selectedClass._id){
           $scope.studentsInClass.push($scope.studentList[studentIndex]);
         }
-        $scope.addGroupsContextPacksToStudent(student);
-        $http.put("/api/students/" + student + "/assignToGroup",
-          {groupID: group._id}
+        //$scope.addClassWordPacksToStudent(student);
+        $http.put("/api/students/" + student + "/assignToClass",
+          {
+            classID: myclass._id,
+            groupList: myclass.groupList
+          }
         ).success(function () {
+            console.log("Added ID and list to student!");
             $scope.getStudents();
           });
       }
-
     };
 
-    $scope.addGroupsContextPacksToStudent = function(student){
-      var fullStudent = $scope.studentList[$scope.findStudentInList(student)];
-      for(var i = 0; i < $scope.selectedClasses.length; i++) {
-        var groupIndex = $scope.findClassInList($scope.selectedClasses[i].groupName);
-        $scope.addContextPacksToStudent($scope.classArray[groupIndex].contextPacks, fullStudent)
-      }
-    };
-
-    $scope.addContextPacksToStudent = function(contextArray, student){
-      for(var i = 0; i < contextArray.length; i++){
-
-        //user side
-        if(student.contextTags.indexOf(contextArray[i]) == -1) {
-          student.contextTags.push(contextArray[i]);
-        }
-
-        //student side
-        //console.log(student);
-        var studentIndex = $scope.findStudentAccount(student._id);
-        var notAdded = true;
-        for(var j = 0; j < $scope.students[studentIndex].contextTags.length; j++){
-          if(($scope.students[studentIndex].contextTags[j].creatorID == $scope.currentUser._id) && ($scope.students[studentIndex].contextTags[j].tagName == contextArray[i])){
-            notAdded = false;
-          }
-        }
-        if(notAdded){
-          $scope.students[studentIndex].contextTags.push({tagName: contextArray[i], creatorID: $scope.currentUser._id});
-          //$scope.addTilesToStudent($scope.students[studentIndex], contextArray[i]);
-          $http.put("/api/students/"+student._id+"/addPack", {packId: contextArray[i]});
-          $scope.addWordsToStudent(contextArray[i], student);
-        }
-      }
-    };
-
-    $scope.addWordsToStudent = function(pack, student){
-      for(var i = 0; i < $scope.tiles.length; i++){
-        if($scope.inArray($scope.tiles[i].contextTags, pack)){
-          if(!$scope.inArray(student.tileBucket, pack)) {
-            student.tileBucket.push(pack);
-            $http.put("api/students/" + student._id + "/addWord", {word: $scope.tiles[i]._id});
-          }
-        }
-      }
-    };
-
-    $scope.addStudentsToGroups = function(){
+    $scope.addStudentsToClasses = function(){
       //iterate over all of the students and all of the groups
-      //call assignStudentToGroup on each pair
+      //call assignStudentToClass on each pair
       for(var i = 0; i < $scope.selectedStudents.length; i++){
         for(var j = 0; j < $scope.selectedClasses.length; j++){
-          $scope.assignStudentToGroup($scope.selectedStudents[i], $scope.selectedClasses[j]);
+          $scope.assignStudentToClass($scope.selectedStudents[i], $scope.selectedClasses[j]);
         }
       }
       $scope.selectedClasses = [];
