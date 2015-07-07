@@ -174,7 +174,6 @@ angular.module('WordRiverApp')
       for(var index = 0; index < $scope.students.length; index++) {
         for(var index2 = 0; index2 < $scope.students[index].classList.length; index2++) {
           if ($scope.students[index].classList[index2]._id == toRemoveID) {
-            console.log("Match!");
             $http.put('/api/students/' + $scope.students[index]._id + '/removeClass',
               {
                 _id:$scope.students[index]._id,
@@ -317,17 +316,17 @@ angular.module('WordRiverApp')
     };
 
     //Takes in a group name
-    $scope.allCheckedGroups = function(category){
+    $scope.allCheckedClasses = function(myclass){
       //console.log(category);
       var counter;
       for (var i = 0; i < $scope.selectedClasses.length; i++) {
-        if ($scope.selectedClasses[i] == category) {
+        if ($scope.selectedClasses[i] == myclass) {
           $scope.selectedClasses.splice(i, 1);
           counter = 1;
         }
       }
       if (counter != 1){
-        $scope.selectedClasses.push(category);
+        $scope.selectedClasses.push(myclass);
       }
     };
 
@@ -403,15 +402,12 @@ angular.module('WordRiverApp')
     };
     //////////////////////////////////////////////////////////////////////////
 
-    $scope.removeGroupFromStudent = function (group){
-      var index = $scope.findClassInList(group.groupName);
-      //console.log(index);
+    $scope.removeClassFromStudent = function (myClass){
+      var index = $scope.findClassInList(myClass.className);
       $scope.selectedClass = $scope.classArray[index];
-
-      $scope.removeStudentFromGroup($scope.selectedStudent);
-      //console.log("Yo");
+      $scope.removeStudentFromClass($scope.selectedStudent);
       for (var i = 0; i < $scope.studentClasses.length; i++){
-        if ($scope.studentClasses[i] == group._id){
+        if ($scope.studentClasses[i] == myClass._id){
           $scope.studentClasses.splice(i, 1);
         }
       }
@@ -420,24 +416,24 @@ angular.module('WordRiverApp')
 
 
     //making remove for students from groups.
-    $scope.removeStudentFromGroup = function (student) {
+    $scope.removeStudentFromClass = function (student) {
       for (var i = 0; i < $scope.studentList.length; i++) {
         if (student == $scope.studentList[i]) {
-          for (var j = 0; j < $scope.studentList[i].groupList.length; j++) {
-            //console.log($scope.selectedClassName + " "+ $scope.studentList[i].groupList[j] )
-            if ($scope.studentList[i].groupList[j] == $scope.selectedClass._id) {
-              $scope.studentList[i].groupList.splice(j, 1);
+          for (var j = 0; j < $scope.studentList[i].classList.length; j++) {
+            if ($scope.studentList[i].classList[j]._id == $scope.selectedClass._id) {
+              $scope.studentList[i].classList.splice(j, 1);
 
               //Start here once the seed is changed
-              $http.put('api/students/' + $scope.studentList[i]._id + '/deleteFromGroup',
-                {groupID: $scope.selectedClass._id}
+              $http.put('/api/students/' + student._id + '/removeClass',
+                {
+                  _id: $scope.studentList[i]._id,
+                  classID: $scope.selectedClass._id
+                }
               ).success(function () {
-                  $scope.syncUser();
+                  console.log("Removed class from student!");
                 });
-              break;
             }
           }
-          break;
         }
       }
       for (var h = 0; h < $scope.studentsInClass.length; h++) {

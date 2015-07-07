@@ -153,14 +153,13 @@ exports.removeClass = function (req, res) {
   });
 };
 
-exports.deleteFromGroup = function(req, res) {
+/*exports.deleteFromClass = function(req, res) {
   var userId = req.params.id;
-  var group = req.body.groupID;
+  var classID = req.body.classID;
   Student.findById(userId, function (err, user) {
-    for(var i = 0 ; i < user.groupList.length; i++){
-      console.log(user.groupList[i] +" "+ group);
-      if(user.groupList[i] == group){
-        user.groupList.splice(i, 1);
+    for(var i = 0 ; i < user.classList.length; i++){
+      if(user.classList[i] == classID){
+        user.classList.splice(i, 1);
       }
     }
     user.save(function(err) {
@@ -168,7 +167,7 @@ exports.deleteFromGroup = function(req, res) {
       res.send(200);
     });
   });
-};
+};*/
 
 // Deletes a thing from the DB.
 exports.destroy = function(req, res) {
