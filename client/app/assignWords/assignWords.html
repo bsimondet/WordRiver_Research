@@ -9,15 +9,15 @@
 <div class="container">
 
     <!--This section is for the left column-->
-    <div class="col-xs-3 accordion-toggle" ng-show="groupView">
+    <div class="col-xs-3 accordion-toggle" ng-show="classView">
       <!--Help text-->
       <p ng-show="help">
-        Click on any group to view group information, or "Show Students" to choose a student.
+        Click on any class to view class information, or "Show Students" to choose a student.
       </p>
-      <!--Button to toggle between groups and students-->
-      <button class="btn btn-primary" title="Show Students" ng-click="groupView=!groupView;fullName()">Show Students</button>
+      <!--Button to toggle between classes and students-->
+      <button class="btn btn-primary" title="Show Students" ng-click="classView=!classView;fullName()">Show Students</button>
 
-      <h1>Groups:</h1>
+      <h1>Classes:</h1>
       <!--Sorting options for groups-->
       <button class="btn-primary" ng-show="AZ1" ng-click="order1 = !order1; AZ1=!AZ1">A-Z</button>
       <button class="btn-primary" ng-show="!AZ1" ng-click="order1 = !order1 ;AZ1=!AZ1">Z-A</button>
@@ -26,27 +26,29 @@
       <!--Listing all current groups-->
       <ul class="list-group scroll">
         <p>
-        <li class="list-group-item" ng-repeat="group in userGroups | orderBy:'groupName':order1">
+        <li class="list-group-item" ng-repeat="class in userClasses | orderBy:'className':order1">
           <!--accordion groups do not like to work with an ng-repeat within an ng-repeat also, click the eyeball twice the first time you are on the page and then it will work fine-->
-        <label><input type="checkbox" value="value" ng-click="checkGroups(group)">
-          <a ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
+        <label><input type="checkbox" value="value" ng-click="checkClasses(class)">
+          <a ng-click="displayClassInfo(class)">{{class.className}}</a>
         </label>
-        <span class="glyphicon glyphicon-eye-close floatRight close" title="Show students in group" ng-click="isCollapsed = !isCollapsed; studentsInGroupAssignment(group); openingOnlyOneGroup(group)"></span>
-          <ul collapse = "group.isCollapsed">
-            <li  ng-repeat="students in groupedStudents">
-              <a ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a>
+        <span class="glyphicon glyphicon-eye-close floatRight close" title="Show students in group" ng-click="isCollapsed = !isCollapsed; studentsInClassAssignment(class); openingOnlyOneClass(class)"></span>
+          <ul collapse = "class.isCollapsed">
+            <li  ng-repeat="students in studentsInClass">
+              <label>{{students.lastName}}, {{students.firstName}}</label>
+<!-- TODO: Commented out since student display is breaking haaaarddd-->
+              <!--<a ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a>-->
             </li>
           </ul>
         </li>
       </ul>
     </div>
 
-    <div class="col-xs-3" ng-hide="groupView">
+    <div class="col-xs-3" ng-hide="classView">
       <p ng-show="help">
-        Click on any student to view student information, or "Show Groups" to choose a group.
+        Click on any student to view student information, or "Show Classes" to choose a class.
       </p>
       <!--Button to toggle between students and groups-->
-      <button class="btn btn-primary" title="Show Groups" ng-click="groupView=!groupView">Show Groups</button>
+      <button class="btn btn-primary" title="Show Classes" ng-click="classView=!classView">Show Classes</button>
 
       <h1>Students:</h1>
       <!--Sorting options for students-->
@@ -70,12 +72,12 @@
     <div class="col-xs-6" ng-hide="showMiddle">
       <!--Help text-->
       <p ng-show= "help">
-        Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        Click on any class, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
       </p>
       <button class="btn btn-primary center-block" title={{helpText}} ng-click="toggleHelp()">{{helpText}}</button>
       <!--Break between buttons-->
       <br>
-      <!--Button to assign checked word/context pack to checked group/student-->
+      <!--Button to assign checked word/context pack to checked class/student-->
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <!--TODO: Better wording or something here.-->
       <h3 class="center">Click on anything to begin.</h3>
@@ -84,13 +86,13 @@
     <div class="col-xs-6" ng-show="showCategory">
       <!--Help text-->
       <p ng-show= "help">
-        Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        Click on any class, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
       </p>
       <!--Button for help text-->
       <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
       <!--Break between buttons-->
       <br>
-      <!--Button to assign checked word/context pack to checked group/student-->
+      <!--Button to assign checked word/context pack to checked class/student-->
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br>
       <br>
@@ -99,17 +101,17 @@
         <!--Listing words in selected context pack-->
         <h4>The words in the context pack "{{categorySelected.name}}" are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="word in matchTiles | orderBy:'name'">
+          <li class="list-group-item" ng-repeat="word in matchWords | orderBy:'name'">
             <a ng-click="displayTileInfo(word)">{{word.name}}</a>
             <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignTileFromCategory(word, categorySelected, 'category')"></span>
           </li>
         </ul>
         <!--Listing groups that are assigned the selected context pack-->
-        <h4>The groups that have this context pack are:</h4>
+        <h4>The classes that have this context pack are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="group in matchGroup | orderBy:'groupName'">
-            <a ng-click = "displayGroupInfo(group)">{{group.groupName}}</a>
-            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignGroupFromCategory(group, categorySelected, 'category')"></span>
+          <li class="list-group-item" ng-repeat="class in matchGroup | orderBy:'className'">
+            <a ng-click = "displayClassInfo(class)">{{class.className}}</a>
+            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignGroupFromCategory(class, categorySelected, 'category')"></span>
           </li>
         </ul>
         <!--Listing students that are assigned the selected context pack-->
@@ -126,13 +128,13 @@
     <div class="col-xs-6" ng-show="wordView">
       <!--Help text-->
       <p ng-show= "help">
-        Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        Click on any class, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
       </p>
       <!--Button for help text-->
       <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
       <!--Break between buttons-->
       <br>
-      <!--Button to assign checked word/context pack to checked group/student-->
+      <!--Button to assign checked word/context pack to checked class/student-->
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br>
       <br>
@@ -141,17 +143,17 @@
         <!--Listing context pack assigned to selected word-->
         <h4>The word "{{tileSelected.name}}" is in the context packs:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="category in matchCategories | orderBy:'name'">
+          <li class="list-group-item" ng-repeat="category in matchWordPacks | orderBy:'name'">
             <a ng-click="displayCatInfo(category)">{{category.name}}</a>
             <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignTileFromCategory(tileSelected, category, 'tile')"></span>
           </li>
         </ul>
         <!--Listing groups assigned to selected word-->
-        <h4>The groups that have this word are:</h4>
+        <h4>The classes that have this word are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="group in matchGroup | orderBy:'groupName'">
-            <a ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
-            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignWordFromGroup(group, tileSelected, 'tile')"></span>
+          <li class="list-group-item" ng-repeat="class in matchGroup | orderBy:'className'">
+            <a ng-click="displayClassInfo(class)">{{class.className}}</a>
+            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignWordFromGroup(class, tileSelected, 'tile')"></span>
           </li>
         </ul>
         <!--Listing students that have the selected word assigned to them-->
@@ -165,41 +167,41 @@
       </div>
     </div>
 
-    <div class="col-xs-6" ng-show="showGroup">
+    <div class="col-xs-6" ng-show="showClass">
       <!--Help text-->
       <p ng-show= "help">
-        Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        Click on any class, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
       </p>
       <!--Button for help text-->
       <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
       <!--Break between buttons-->
       <br>
-      <!--Button to assign checked word/context pack to checked group/student-->
+      <!--Button to assign checked word/context pack to checked class/student-->
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br>
       <br>
-      <!--Listing things after group is selected-->
+      <!--Listing things after class is selected-->
       <div class="middleScroll">
-        <!--Listing context packs assigned to the selected group-->
-        <h4>The context packs that this group has are:</h4>
+        <!--Listing context packs assigned to the selected class-->
+        <h4>The context packs that this class has are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="pack in matchCategories | orderBy:'name'">
-          <a href="" ng-click="displayCatInfo(pack)">{{pack.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignGroupFromCategory(groupSelected, pack, 'group')"></span></li>
+          <li class="list-group-item" ng-repeat="pack in matchWordPacks | orderBy:'name'">
+          <a href="" ng-click="displayCatInfo(pack)">{{pack.name}}</a><span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignGroupFromCategory(classSelected, pack, 'group')"></span></li>
         </ul>
-        <!--Listing words assigned to the selected group-->
-        <h4>The words that this group has are:</h4>
+        <!--Listing words assigned to the selected class-->
+        <h4>The words that this class has are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy:'name'">
+          <li class="list-group-item" ng-repeat="tile in matchWords | orderBy:'name'">
             <a ng-click="displayTileInfo(tile)">{{tile.name}}</a>
-            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignWordFromGroup(groupSelected, tile, 'group')"></span>
+            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignWordFromGroup(classSelected, tile, 'group')"></span>
           </li>
         </ul>
-        <!--Listing students assigned to the selected group-->
-        <h4>The group "{{groupSelected.groupName}}" has the students: </h4>
+        <!--Listing students assigned to the selected class-->
+        <h4>The class "{{classSelected.className}}" has the students: </h4>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="student in matchStudents | orderBy:'firstName'">
             <a ng-click="displayStudentInfo(student)">{{student.firstName}} {{student.lastName}}</a>
-            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignStudentFromGroup(student, groupSelected, 'group')"></span>
+            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignStudentFromGroup(student, classSelected, 'group')"></span>
           </li>
         </ul>
       </div>
@@ -208,30 +210,30 @@
     <div class="col-xs-6" ng-show="studentView">
       <!--Help text-->
       <p ng-show= "help">
-        Click on any group, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
+        Click on any class, student, category, or word to find out more information. You can also select any number of groups or students and categories or words, and simply click "Assign Words" to assign them.
       </p>
       <!--Button for help text-->
       <button class="btn btn-primary center-block" title="Get Help" ng-click="toggleHelp()">Get Help</button>
       <!--Break between buttons-->
       <br>
-      <!--Button to assign checked word/context pack to checked group/student-->
+      <!--Button to assign checked word/context pack to checked class/student-->
       <button  class="btn btn-primary center-block assignButton" title="Assign Words" ng-click="assignWords()">Assign Words</button>
       <br>
       <br>
       <!--Listing things for when a student is selected-->
       <div class="middleScroll">
-        <!--Listing groups that a selected student is assigned to-->
-        <h4>The groups {{studentSelected.firstName}} {{studentSelected.lastName}} is in are:</h4>
+        <!--Listing classes that a selected student is assigned to-->
+        <h4>The classes {{studentSelected.firstName}} {{studentSelected.lastName}} is in are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="group in matchGroups | orderBy:'groupName'">
-            <a ng-click="displayGroupInfo(group)">{{group.groupName}}</a>
-            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignStudentFromGroup(studentSelected, group,'student')"></span>
+          <li class="list-group-item" ng-repeat="class in matchGroups | orderBy:'className'">
+            <a ng-click="displayClassInfo(class)">{{class.className}}</a>
+            <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignStudentFromGroup(studentSelected, class,'student')"></span>
           </li>
         </ul>
         <!--Listing context packs that are assigned to the selected student-->
         <h4>The context packs that this student has are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="pack in matchCategories | orderBy:'name'">
+          <li class="list-group-item" ng-repeat="pack in matchWordPacks | orderBy:'name'">
             <a ng-click="displayCatInfo(pack)">{{pack.name}}</a>
             <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignStudentFromCategory(studentSelected, pack,  'student')"></span>
           </li>
@@ -239,7 +241,7 @@
         <!--Listing words that are assigned to the selected student-->
         <h4>The words that this student has are:</h4>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="tile in matchTiles | orderBy:'name'">
+          <li class="list-group-item" ng-repeat="tile in matchWords | orderBy:'name'">
             <a ng-click="displayTileInfo(tile)">{{tile.name}}</a>
             <span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" title="Unassign" ng-click="unassignWordFromStudent(studentSelected, tile,  'student')"></span>
           </li>
@@ -257,7 +259,7 @@
       </p>
       <!--Button to toggle between context packs and words-->
       <button class="btn btn-primary" title="Show Words" ng-click="categoryView=!categoryView">Show Words</button>
-      <h1>Context Packs:</h1>
+      <h1>Word Packs:</h1>
       <!--Sorting options-->
       <button class="btn-primary" ng-show="!AZ2" ng-click=" order2 = !order2; AZ2=!AZ2">Z-A</button>
       <button class="btn-primary" ng-show="AZ2" ng-click=" order2 = !order2 ;AZ2=!AZ2">A-Z</button>
@@ -265,11 +267,11 @@
       <!--Listing all current context packs in system-->
       <ul class="list-group scroll">
         <p>
-        <li class="list-group-item" ng-repeat="category in userCategories | orderBy:'name':order2 | filter:{name:searchCategories}">
-          <label><input type="checkbox" value="value" ng-click="checkCategories(category)">
-            <a ng-click="displayCatInfo(category)">{{category.name}}</a>
+        <li class="list-group-item" ng-repeat="wordPack in userWordPacks | orderBy:'name':order2 | filter:{name:searchCategories}">
+          <label><input type="checkbox" value="value" ng-click="checkCategories(wordPack)">
+            <a ng-click="displayCatInfo(wordPack)">{{wordPack.name}}</a>
           </label>
-          <span class="glyphicon glyphicon-eye-close floatRight close" title= "Show words in category" ng-click="isCollapsed = !isCollapsed; populateDisplayTile(category); openingOnlyOneCategory(category)"></span>
+          <span class="glyphicon glyphicon-eye-close floatRight close" title= "Show words in word pack" ng-click="isCollapsed = !isCollapsed; populateDisplayTile(wordPack); openingOnlyOneCategory(wordPack)"></span>
             <ul collapse="category.isCollapsed">
               <li ng-repeat="word in displayTiles">
                 <a ng-click="displayTileInfo(word)">{{word.name}}</a>
@@ -293,7 +295,7 @@
       <!--Listing all current words in system-->
       <ul class="list-group scroll">
         <p>
-        <li class="list-group-item" ng-repeat="tile in userTiles | orderBy:'name':order3 | filter:{name:searchWords}">
+        <li class="list-group-item" ng-repeat="tile in allTiles | orderBy:'name':order3 | filter:{name:searchWords}">
           <label><input type="checkbox" value="value" ng-click="checkWords(tile)">
             <a ng-click="displayTileInfo(tile)">{{tile.name}}</a>
           </label>
