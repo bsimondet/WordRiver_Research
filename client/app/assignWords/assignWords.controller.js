@@ -16,7 +16,7 @@ angular.module('WordRiverApp')
     $scope.studentsInClass = [];
     $scope.value = false;
     $scope.help = false;
-    $scope.displayTiles = [];
+    $scope.displayWords = [];
 
     $scope.selectedCategories = [];
     $scope.selectedClasses = [];
@@ -97,7 +97,7 @@ angular.module('WordRiverApp')
     $scope.showCategory = false;
 
     $scope.switchMiddle = function(section){
-      if(section == "category"){
+      if(section == "wordPack"){
         $scope.showCategory = true;
         $scope.wordView = false;
         $scope.studentView = false;
@@ -215,30 +215,32 @@ angular.module('WordRiverApp')
     //This is the section for switching information in the middle
 
     //cat is short for category
-    $scope.displayCatInfo = function (category) {
-      $scope.switchMiddle("category");
-      $scope.categorySelected = category;
-      $scope.middleElement = category;
+    $scope.displayWordPackInfo = function (wordPack) {
+      $scope.switchMiddle("wordPack");
+      $scope.wordPackSelected = wordPack;
+      $scope.middleElement = wordPack;
       $scope.matchStudent = [];
-      $scope.matchGroup = [];
+      $scope.matchClass = [];
       $scope.matchWords = [];
       for (var j = 0; j < $scope.allWords.length; j++) {
         for (var z = 0; z < $scope.allWords[j].contextTags.length; z++) {
-          if ($scope.allWords[j].contextTags[z] == category._id) {
+          if ($scope.allWords[j].contextTags[z] == wordPack._id) {
             $scope.matchWords.push($scope.allWords[j]);
           }
         }
       }
-      for (var i=0; i<$scope.userClasses.length; i++){
-        for (var m=0; m<$scope.userClasses[i].contextPacks.length; m++){
-          if($scope.userClasses[i].contextPacks[m] == category._id){
-            $scope.matchGroup.push($scope.userClasses[i]);
+      for (var i = 0; i < $scope.userClasses.length; i++){
+        for (var m = 0; m < $scope.userClasses[i].groupList.length; m++){
+          for(var q = 0; q < $scope.userClasses[i].groupList[m].contextPacks.length; q++){
+            if($scope.userClasses[i].groupList[m].contextPacks[q] == wordPack._id) {
+              $scope.matchClass.push($scope.userClasses[i]);
+            }
           }
         }
       }
       for(var k=0; k<$scope.userStudents.length; k++){
         for(var l=0; l<$scope.userStudents[k].contextTags.length; l++){
-          if($scope.userStudents[k].contextTags[l] == category._id){
+          if($scope.userStudents[k].contextTags[l] == wordPack._id){
             $scope.matchStudent.push($scope.userStudents[k]);
           }
         }
@@ -251,7 +253,7 @@ angular.module('WordRiverApp')
       $scope.middleElement = myClass;
       $scope.matchWordPackIDs = [];
       $scope.matchWordPacks = [];
-      $scope.matchStudents = [];
+      $scope.matchStudent = [];
       $scope.matchWords = [];
       $scope.matchWordIDs = [];
       for(var i = 0; i<$scope.userClasses.length; i++){
@@ -273,7 +275,7 @@ angular.module('WordRiverApp')
       for (var k = 0; k < $scope.userStudents.length; k++){
         for (var l = 0; l < $scope.userStudents[k].classList.length; l++){
           if ($scope.userStudents[k].classList[l]._id == myClass._id){
-            $scope.matchStudents.push($scope.userStudents[k]);
+            $scope.matchStudent.push($scope.userStudents[k]);
           }
         }
       }
@@ -298,25 +300,26 @@ angular.module('WordRiverApp')
     $scope.displayStudentInfo = function (student){
       $scope.studentSelected = student;
       $scope.switchMiddle("student");
-      $scope.matchClasses = [];
+      $scope.matchClass = [];
       $scope.middleElement = student;
       $scope.studentWordPacks = [];
       $scope.matchWords = [];
       $scope.matchWordIDs = [];
-      $scope.matchClasses = [];
+      $scope.matchClassesIDs = [];
       $scope.matchWordPackIDs = [];
       $scope.matchWordPacks = [];
-      //Go through students to find the selected one and get category and tile ids
+      //Go through students to find the selected one and get category and word ids
       for (var j = 0; j < $scope.userStudents.length; j++) {
         if ($scope.userStudents[j]._id == student._id) {
           $scope.matchWordPackIDs = $scope.userStudents[j].contextTags;
           $scope.matchWordIDs = $scope.userStudents[j].tileBucket;
           for(var index = 0; index < $scope.userStudents[j].classList.length; index++){
-            $scope.matchClasses.push($scope.userStudents[j].classList[index]);
+            $scope.matchClassesIDs.push($scope.userStudents[j].classList[index]);
           }
         }
       }
-      //Go through user words to find matches with the ids stored in the student
+      $scope.matchClassesIDs = $scope.checkForDuplicates($scope.matchClassesIDs);
+      //Go through all words to find matches with the word ids stored in the student
       for (var k = 0; k < $scope.matchWordIDs.length; k++){
         for (var l = 0; l < $scope.allWords.length; l++){
           if ($scope.allWords[l]._id == $scope.matchWordIDs[k]){
@@ -324,14 +327,16 @@ angular.module('WordRiverApp')
           }
         }
       }
+      $scope.matchWords = $scope.checkForDuplicates($scope.matchWords);
       //Go through user classes and find matches with class ids stored in student
-      for (var b = 0; b < $scope.matchClasses.length; b++){
+      for (var b = 0; b < $scope.matchClassesIDs.length; b++){
         for (var v = 0; v < $scope.userClasses.length; v++){
-          if ($scope.userClasses[v]._id == $scope.matchClasses[b]._id){
-            $scope.matchClasses.push($scope.userClasses[v]);
+          if ($scope.userClasses[v]._id == $scope.matchClassesIDs[b]._id){
+            $scope.matchClass.push($scope.userClasses[v]);
           }
         }
       }
+      $scope.matchClass = $scope.checkForDuplicates($scope.matchClass);
       //Go through user categories and find matches with category ids stored in student
       for (var q = 0; q < $scope.matchWordPackIDs.length; q++){
         for (var r = 0; r < $scope.currentUser.contextPacks.length; r++){
@@ -340,15 +345,16 @@ angular.module('WordRiverApp')
           }
         }
       }
+      $scope.matchWordPacks = $scope.checkForDuplicates($scope.matchWordPacks);
     };
 
-    $scope.displayTileInfo = function (word) {
-      $scope.tileSelected = word;
+    $scope.displayWordInfo = function (word) {
+      $scope.wordSelected = word;
       $scope.switchMiddle("word");
       $scope.middleElement = word;
       $scope.matchWordPackIDs = [];
       $scope.matchWordPacks = [];
-      $scope.matchGroup = [];
+      $scope.matchClass = [];
       $scope.matchStudent = [];
       //Finds the word in the allWords array and gets the contextTag ids
       for (var i = 0; i < $scope.allWords.length; i++) {
@@ -358,7 +364,7 @@ angular.module('WordRiverApp')
           }
         }
       }
-      //Magically turns category ids into actual categories
+      $scope.matchWordPackIDs = $scope.checkForDuplicates($scope.matchWordPackIDs);
       for (var q = 0; q < $scope.matchWordPackIDs.length; q++) {
         for (var r = 0; r < $scope.userWordPacks.length; r++) {
           if ($scope.userWordPacks[r]._id == $scope.matchWordPackIDs[q]) {
@@ -366,14 +372,18 @@ angular.module('WordRiverApp')
           }
         }
       }
-      //Finds the groups that have the word stored as a free tile
+      $scope.matchWordPacks = $scope.checkForDuplicates($scope.matchWordPacks);
+      //Finds the classes that have the word stored as a free tile
       for (var l = 0; l < $scope.userClasses.length; l++) {
-        for (var m = 0; m < $scope.userClasses[l].freeTiles.length; m++) {
-          if ($scope.userClasses[l].freeTiles[m] == word._id) {
-            $scope.matchGroup.push($scope.userClasses[l]);
+        for (var m = 0; m < $scope.userClasses[l].groupList.length; m++) {
+          for (var n = 0; n < $scope.userClasses[l].groupList[m].freeTiles.length; n++) {
+            if ($scope.userClasses[l].groupList[m].freeTiles[n] == word._id) {
+              $scope.matchClass.push($scope.userClasses[l]);
+            }
           }
         }
       }
+      $scope.matchClass = $scope.checkForDuplicates($scope.matchClass);
       //Finds the students that have the word stored in their tile buckets
       for (var o = 0; o < $scope.userStudents.length; o++) {
         for (var p = 0; p < $scope.userStudents[o].tileBucket.length; p++) {
@@ -382,6 +392,7 @@ angular.module('WordRiverApp')
           }
         }
       }
+      $scope.matchStudent = $scope.checkForDuplicates($scope.matchStudent);
     };
 
 ////////////////////////////////////////////////////////////////////////////
@@ -401,9 +412,9 @@ angular.module('WordRiverApp')
                     $scope.getAll();
                   });
                 if (view == 'category') {
-                  $scope.displayCatInfo(category);
+                  $scope.displayWordPackInfo(category);
                 } else {
-                  $scope.displayTileInfo(word);
+                  $scope.displayWordInfo(word);
                 }
               }
             }
@@ -428,7 +439,7 @@ angular.module('WordRiverApp')
             $scope.getAll();
           });
         if (view == 'category') {
-          $scope.displayCatInfo(category);
+          $scope.displayWordPackInfo(category);
         } else {
           $scope.displayClassInfo(group);
         }
@@ -446,8 +457,8 @@ angular.module('WordRiverApp')
                   {contextTags: $scope.userStudents[i].contextTags}).success(function () {
                     $scope.getAll();
                   });
-                if (view == "category") {
-                  $scope.displayCatInfo(category);
+                if (view == "wordPack") {
+                  $scope.displayWordPackInfo(category);
                 } else {
                   $scope.displayStudentInfo(student);
                 }
@@ -472,7 +483,7 @@ angular.module('WordRiverApp')
                 if (type == 'group') {
                   $scope.displayClassInfo(group);
                 } else {
-                  $scope.displayTileInfo(word);
+                  $scope.displayWordInfo(word);
                 }
               }
             }
@@ -493,7 +504,7 @@ angular.module('WordRiverApp')
                     $scope.getAll();
                   });
                 if (type == 'tile') {
-                  $scope.displayTileInfo(word);
+                  $scope.displayWordInfo(word);
                 } else {
                   $scope.displayStudentInfo(student);
                 }
@@ -662,7 +673,7 @@ $scope.getNewInfo = function() {
   if($scope.showClass){
     $scope.displayClassInfo($scope.classSelected);
   }else if($scope.showCategory){
-    $scope.displayCatInfo($scope.categorySelected);
+    $scope.displayWordPackInfo($scope.wordPackSelected);
   }
 };
 
@@ -681,23 +692,21 @@ $scope.getNewInfo = function() {
 
     $scope.openingOnlyOneClass = function(myClass){
       for(var i = 0; i < $scope.userClasses.length; i++){
-        console.log($scope.userClasses[i]);
         if($scope.userClasses[i]._id == myClass._id){
           $scope.userClasses[i].isCollapsed = !$scope.userClasses[i].isCollapsed;
         } else {
           //$scope.userClasses[i].isCollapsed = true;
-          console.log("else statement");
         }
       }
 
     };
 
     $scope.populateDisplayTile = function(category){
-      $scope.displayTiles = [];
+      $scope.displayWords = [];
       for (var j = 0; j < $scope.allWords.length; j++) {
         for (var z = 0; z < $scope.allWords[j].contextTags.length; z++) {
           if ($scope.allWords[j].contextTags[z] == category._id) {
-            $scope.displayTiles.push($scope.allWords[j]);
+            $scope.displayWords.push($scope.allWords[j]);
           }
         }
       }
