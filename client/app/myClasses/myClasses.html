@@ -12,8 +12,13 @@
   <!--List of current groups with edit and remove options-->
   <ul class="list-group scroll">
     <p>
-    <li class="list-group-item" type="checkbox" ng-repeat="class in classArray">
+    <li class="list-group-item" ng-repeat="class in classArray">
       <label><a href="" ng-click="">{{class.className}}</a></label>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="group in class.groupList">
+        <label>{{group.groupName}}</label>
+      </li>
+    </ul>
     </li>
   </ul>
 </div>
