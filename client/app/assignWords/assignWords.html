@@ -35,7 +35,7 @@
           <ul collapse = "class.isCollapsed">
             <li  ng-repeat="students in studentsInClass">
               <label>{{students.lastName}}, {{students.firstName}}</label>
-<!-- TODO: Commented out since student display is breaking haaaarddd-->
+              <!-- TODO: Commented out since student display is breaking-->
               <!--<a ng-click="displayStudentInfo(students)">{{students.lastName}}, {{students.firstName}}</a>-->
             </li>
           </ul>
@@ -295,7 +295,7 @@
       <!--Listing all current words in system-->
       <ul class="list-group scroll">
         <p>
-        <li class="list-group-item" ng-repeat="tile in allTiles | orderBy:'name':order3 | filter:{name:searchWords}">
+        <li class="list-group-item" ng-repeat="tile in allWords | orderBy:'name':order3 | filter:{name:searchWords}">
           <label><input type="checkbox" value="value" ng-click="checkWords(tile)">
             <a ng-click="displayTileInfo(tile)">{{tile.name}}</a>
           </label>

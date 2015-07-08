@@ -11,7 +11,7 @@ angular.module('WordRiverApp')
     $scope.studentArray = [];
     $scope.allStudents = [];
     $scope.matchWords = [];
-    $scope.allTiles = [];
+    $scope.allWords = [];
     $scope.studentWordPacks = [];
     $scope.studentsInClass = [];
     $scope.value = false;
@@ -31,9 +31,9 @@ angular.module('WordRiverApp')
     //This is the section for getting all the things
 
     $scope.getWords = function(){
-      $scope.allTiles = [];
+      $scope.allWords = [];
       $http.get('/api/tile').success(function(tiles) {
-        $scope.allTiles = tiles;
+        $scope.allWords = tiles;
       });
     };
 
@@ -61,13 +61,18 @@ angular.module('WordRiverApp')
       });
     };
 
+    $scope.getWords();
+    $scope.getClasses();
+    $scope.getStudents();
+    $scope.getWordPacks();
+
+
     $scope.getAll = function () {
       $scope.getWords();
       $scope.getClasses();
       $scope.getStudents();
       $scope.getWordPacks();
     };
-    $scope.getAll();
 
     $scope.inArray= function(array, item){
       for(var i = 0; i < array.length; i++){
@@ -145,7 +150,7 @@ angular.module('WordRiverApp')
     //This is the section for checking boxes
 
     $scope.checkCategories = function (category) {
-      var counter;
+      var counter = 0;
       for (var i = 0; i < $scope.selectedCategories.length; i++) {
         if ($scope.selectedCategories[i] == category) {
           $scope.selectedCategories.splice(i, 1);
@@ -158,7 +163,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.checkClasses = function (myClass) {
-      var counter;
+      var counter = 0;
       for (var i = 0; i < $scope.selectedClasses.length; i++) {
         if ($scope.selectedClasses[i] == myClass) {
           $scope.selectedClasses.splice(i, 1);
@@ -171,7 +176,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.checkStudents = function (student) {
-      var counter;
+      var counter = 0;
       for (var i = 0; i < $scope.selectedStudents.length; i++) {
         if ($scope.selectedStudents[i] == student) {
           $scope.selectedStudents.splice(i, 1);
@@ -217,10 +222,10 @@ angular.module('WordRiverApp')
       $scope.matchStudent = [];
       $scope.matchGroup = [];
       $scope.matchWords = [];
-      for (var j = 0; j < $scope.allTiles.length; j++) {
-        for (var z = 0; z < $scope.allTiles[j].contextTags.length; z++) {
-          if ($scope.allTiles[j].contextTags[z] == category._id) {
-            $scope.matchWords.push($scope.allTiles[j]);
+      for (var j = 0; j < $scope.allWords.length; j++) {
+        for (var z = 0; z < $scope.allWords[j].contextTags.length; z++) {
+          if ($scope.allWords[j].contextTags[z] == category._id) {
+            $scope.matchWords.push($scope.allWords[j]);
           }
         }
       }
@@ -282,9 +287,9 @@ angular.module('WordRiverApp')
         }
       }
       for (var h = 0; h < $scope.matchWordIDs.length; h++){
-        for (var o = 0; o < $scope.allTiles.length; o++){
-          if ($scope.matchWordIDs[h] == $scope.allTiles[o]._id){
-            $scope.matchWords.push($scope.allTiles[o]);
+        for (var o = 0; o < $scope.allWords.length; o++){
+          if ($scope.matchWordIDs[h] == $scope.allWords[o]._id){
+            $scope.matchWords.push($scope.allWords[o]);
           }
         }
       }
@@ -311,26 +316,22 @@ angular.module('WordRiverApp')
           }
         }
       }
-      //Go through user tiles to find matches with the ids stored in the student
+      //Go through user words to find matches with the ids stored in the student
       for (var k = 0; k < $scope.matchWordIDs.length; k++){
-        for (var l = 0; l < $scope.allTiles.length; l++){
-          if ($scope.allTiles[l]._id == $scope.matchWordIDs[k]){
-            $scope.matchWords.push($scope.allTiles[l]);
+        for (var l = 0; l < $scope.allWords.length; l++){
+          if ($scope.allWords[l]._id == $scope.matchWordIDs[k]){
+            $scope.matchWords.push($scope.allWords[l]);
           }
         }
       }
       //Go through user classes and find matches with class ids stored in student
       for (var b = 0; b < $scope.matchClasses.length; b++){
         for (var v = 0; v < $scope.userClasses.length; v++){
-          console.log("User Class ID"+ $scope.userClasses[v]._id);
-          console.log("Grabbed ID"+ $scope.matchClasses[b]._id);
-          console.log("Index 1 "+ b);
           if ($scope.userClasses[v]._id == $scope.matchClasses[b]._id){
             $scope.matchClasses.push($scope.userClasses[v]);
           }
         }
       }
-      console.log("Do we get here?");
       //Go through user categories and find matches with category ids stored in student
       for (var q = 0; q < $scope.matchWordPackIDs.length; q++){
         for (var r = 0; r < $scope.currentUser.contextPacks.length; r++){
@@ -349,11 +350,11 @@ angular.module('WordRiverApp')
       $scope.matchWordPacks = [];
       $scope.matchGroup = [];
       $scope.matchStudent = [];
-      //Finds the word in the allTiles array and gets the contextTag ids
-      for (var i = 0; i < $scope.allTiles.length; i++) {
-        if ($scope.allTiles[i]._id == word._id) {
-          for (var j = 0; j < $scope.allTiles[i].contextTags.length; j++) {
-            $scope.matchWordPackIDs.push($scope.allTiles[i].contextTags[j]);
+      //Finds the word in the allWords array and gets the contextTag ids
+      for (var i = 0; i < $scope.allWords.length; i++) {
+        if ($scope.allWords[i]._id == word._id) {
+          for (var j = 0; j < $scope.allWords[i].contextTags.length; j++) {
+            $scope.matchWordPackIDs.push($scope.allWords[i].contextTags[j]);
           }
         }
       }
@@ -389,14 +390,14 @@ angular.module('WordRiverApp')
     $scope.unassignTileFromCategory = function (word, category, view){
       if($scope.confirmUnassign(word.name, category.name)==true) {
         //Tile API remove from context tags [{tagName:id}]
-        for (var i = 0; i < $scope.allTiles.length; i++) {
-          if ($scope.allTiles[i]._id == word._id) {
-            for (var j = 0; j < $scope.allTiles[i].contextTags.length; j++) {
-              if (category._id == $scope.allTiles[i].contextTags[j]) {
-                $scope.allTiles[i].contextTags.splice(j, 1);
+        for (var i = 0; i < $scope.allWords.length; i++) {
+          if ($scope.allWords[i]._id == word._id) {
+            for (var j = 0; j < $scope.allWords[i].contextTags.length; j++) {
+              if (category._id == $scope.allWords[i].contextTags[j]) {
+                $scope.allWords[i].contextTags.splice(j, 1);
                 $scope.i = i;
                 $http.patch('/api/tile/' + word._id,
-                  {contextTags: $scope.allTiles[i].contextTags}).success(function () {
+                  {contextTags: $scope.allWords[i].contextTags}).success(function () {
                     $scope.getAll();
                   });
                 if (view == 'category') {
@@ -693,10 +694,10 @@ $scope.getNewInfo = function() {
 
     $scope.populateDisplayTile = function(category){
       $scope.displayTiles = [];
-      for (var j = 0; j < $scope.allTiles.length; j++) {
-        for (var z = 0; z < $scope.allTiles[j].contextTags.length; z++) {
-          if ($scope.allTiles[j].contextTags[z] == category._id) {
-            $scope.displayTiles.push($scope.allTiles[j]);
+      for (var j = 0; j < $scope.allWords.length; j++) {
+        for (var z = 0; z < $scope.allWords[j].contextTags.length; z++) {
+          if ($scope.allWords[j].contextTags[z] == category._id) {
+            $scope.displayTiles.push($scope.allWords[j]);
           }
         }
       }
