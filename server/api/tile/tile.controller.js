@@ -98,7 +98,7 @@ exports.updateTile = function(req, res, next) {
 
   tile.findById(tileId, function (err, tile) {
   console.log(tile);
-    tile.contextTags.push(newCategory);
+    tile.wordPacks.push(newCategory);
     console.log(tile);
     tile.save(function(err) {
       if (err) return validationError(res, err);
@@ -114,11 +114,11 @@ exports.removeFromCategory = function(req, res, next) {
   var tileId = req.body.tileId;
   tile.findById(tileId, function (err, tile) {
     //console.log(tile);
-    for(var i = 0; i < tile.contextTags.length; i++){
+    for(var i = 0; i < tile.wordPacks.length; i++){
       //console.log("for loop");
-      if(tile.contextTags[i] == category){
+      if(tile.wordPacks[i] == category){
         //console.log("splice me");
-        tile.contextTags.splice(i,1);
+        tile.wordPacks.splice(i,1);
       }
     }
 

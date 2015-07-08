@@ -145,9 +145,9 @@ exports.removeCategoryID = function(req, res) {
   var categoryID = req.body.categoryID;
 
   User.findById(userId, function (err, user) {
-    for(var i = 0 ; i < user.contextPacks.length; i++){
-      if(user.contextPacks[i] == categoryID){
-        user.contextPacks.splice(i, 1);
+    for(var i = 0 ; i < user.wordPacks.length; i++){
+      if(user.wordPacks[i] == categoryID){
+        user.wordPacks.splice(i, 1);
       }
     }
     user.save(function(err) {
@@ -306,10 +306,10 @@ exports.deleteTile = function(req, res, next) {
       console.log(word == user.tileBucket[i].wordName);
       if(word == user.tileBucket[i].wordName){
         console.log(word);
-        for(var j = 0; j < user.tileBucket[i].contextTags.length; j++){
-          if(user.tileBucket[i].contextTags[j] == packId){
+        for(var j = 0; j < user.tileBucket[i].wordPacks.length; j++){
+          if(user.tileBucket[i].wordPacks[j] == packId){
             console.log(j);
-            user.tileBucket[i].contextTags.splice(j, 1);
+            user.tileBucket[i].wordPacks.splice(j, 1);
           }
         }
       }
@@ -373,7 +373,7 @@ exports.addContextID = function(req, res, next) {
   var contextID = req.body.contextID;
 
   User.findById(userId, function (err, user) {
-    user.contextPacks.push(contextID);
+    user.wordPacks.push(contextID);
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);

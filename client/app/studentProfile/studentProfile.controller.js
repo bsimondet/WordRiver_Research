@@ -82,8 +82,8 @@ angular.module('WordRiverApp')
     //TODO: Make it so all categories and words display related to groups
 /*    $scope.getCategoriesFromGroups = function(groups){
       for (var i = 0; i < groups.length; i++) {
-        for (var x = 0; x < groups[i].contextPacks.length; x++) {
-          $scope.tempCategoryArray.push(groups[i].contextPacks[x]);
+        for (var x = 0; x < groups[i].wordPacks.length; x++) {
+          $scope.tempCategoryArray.push(groups[i].wordPacks[x]);
         }
       }
     };*/
@@ -91,7 +91,7 @@ angular.module('WordRiverApp')
     $scope.getCategories = function(student) {
       $scope.categoryArray = [];
       $http.get('/api/categories').success(function (allCategories) {
-        $scope.getElementsByID(student.contextTags, allCategories, $scope.categoryArray);
+        $scope.getElementsByID(student.wordPacks, allCategories, $scope.categoryArray);
       });
     };
 

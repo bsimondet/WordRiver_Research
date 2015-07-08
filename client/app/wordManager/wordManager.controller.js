@@ -132,11 +132,11 @@ angular.module('WordRiverApp')
         for(var y = 0; y < $scope.selectedTiles.length; y++){
           if ($scope.userTiles[r]._id == $scope.selectedTiles[y]._id) {
             for (var v = 0; v < $scope.selectedCategories.length; v++) {
-              $scope.userTiles[r].contextTags.push($scope.selectedCategories[v]._id);
+              $scope.userTiles[r].wordPacks.push($scope.selectedCategories[v]._id);
             }
-            $scope.userTiles[r].contextTags = $scope.checkForDuplicates($scope.userTiles[r].contextTags);
+            $scope.userTiles[r].wordPacks = $scope.checkForDuplicates($scope.userTiles[r].wordPacks);
             $http.patch('api/tile/' + $scope.userTiles[r]._id,
-              {contextTags: $scope.userTiles[r].contextTags}).success(function () {
+              {wordPacks: $scope.userTiles[r].wordPacks}).success(function () {
               });
           }
         }
@@ -217,7 +217,7 @@ angular.module('WordRiverApp')
       if ($scope.addField.length > 0 && $scope.addType.length > 0) {
         $http.post('/api/tile', {
           name: $scope.addField,
-          contextTags: $scope.selectedCategories,
+          wordPacks: $scope.selectedCategories,
           wordType: $scope.addType}
         ).success(function(object){
           $scope.makeGlobalWordID(object._id);
@@ -259,8 +259,8 @@ angular.module('WordRiverApp')
       $scope.matchTiles = [];
       $scope.currentCategory = category;
         for (var j = 0; j < $scope.userTiles.length; j++) {
-          for (var z = 0; z < $scope.userTiles[j].contextTags.length; z++) {
-            if ($scope.userTiles[j].contextTags[z] == category._id) {
+          for (var z = 0; z < $scope.userTiles[j].wordPacks.length; z++) {
+            if ($scope.userTiles[j].wordPacks[z] == category._id) {
               $scope.matchTiles.push($scope.userTiles[j]);
             }
           }
@@ -273,8 +273,8 @@ angular.module('WordRiverApp')
 
     $scope.getCategoryFromTagName = function(tile, index) {
       for(var i = 0; i < $scope.categoryArray.length; i++){
-        //console.log(tile.contextTags[index] + " "+ $scope.categoryArray[i]._id);
-        if(tile.contextTags[index] == $scope.categoryArray[i]._id){
+        //console.log(tile.wordPacks[index] + " "+ $scope.categoryArray[i]._id);
+        if(tile.wordPacks[index] == $scope.categoryArray[i]._id){
           $scope.contextTagsTemp.push($scope.categoryArray[i]);
           //console.log($scope.categoryArray[i]);
         }
@@ -284,7 +284,7 @@ angular.module('WordRiverApp')
       $scope.displayWordInfo = function (word) {
         $scope.contextTagsTemp = [];
         $scope.currentTile = word;
-        for (var j = 0; j < word.contextTags.length; j++) {
+        for (var j = 0; j < word.wordPacks.length; j++) {
           $scope.getCategoryFromTagName(word, j);
         }
       };
@@ -293,9 +293,9 @@ angular.module('WordRiverApp')
     $scope.removeCategory = function(category) {
       $scope.tempIndex = $scope.findIndexOfCat(category);
       $scope.catToRemove = $scope.categoryArray[$scope.tempIndex];
-      for(var i = 0; i<$scope.currentUser.contextPacks.length; i++){
-        if($scope.currentUser.contextPacks[i] == $scope.catToRemove._id){
-          $scope.currentUser.contextPacks.splice(i,1);
+      for(var i = 0; i<$scope.currentUser.wordPacks.length; i++){
+        if($scope.currentUser.wordPacks[i] == $scope.catToRemove._id){
+          $scope.currentUser.wordPacks.splice(i,1);
         }
       }
       $http.delete('/api/categories/'+ $scope.catToRemove._id
@@ -375,7 +375,7 @@ angular.module('WordRiverApp')
         //Only editing the word text
         $http.post('/api/tile', {
           name: $scope.editField,
-          contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
+          wordPacks: $scope.userTiles[$scope.editWordIndex].wordPacks,
           wordType: $scope.userTiles[$scope.editWordIndex].wordType
         });
         $scope.removeWord($scope.wordToEdit);
@@ -386,7 +386,7 @@ angular.module('WordRiverApp')
         //Only editing the word type
         $http.post('/api/tile', {
           name: $scope.userTiles[$scope.editWordIndex].name,
-          contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
+          wordPacks: $scope.userTiles[$scope.editWordIndex].wordPacks,
           wordType: $scope.editType
         });
         $scope.removeWord($scope.wordToEdit);
@@ -397,7 +397,7 @@ angular.module('WordRiverApp')
         //Editing both the word type and the word text
         $http.post('/api/tile', {
           name: $scope.editField,
-          contextTags: $scope.userTiles[$scope.editWordIndex].contextTags,
+          wordPacks: $scope.userTiles[$scope.editWordIndex].wordPacks,
           wordType: $scope.editType
         });
         $scope.removeWord($scope.wordToEdit);

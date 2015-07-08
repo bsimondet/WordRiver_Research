@@ -135,7 +135,7 @@ angular.module('WordRiverApp')
 
     $scope.addClass = function () {
       if ($scope.classField.length >= 1) {
-        var newGroup = {groupName: $scope.classField, contextPacks: []};
+        var newGroup = {groupName: $scope.classField, wordPacks: []};
         $scope.classArray.push(newGroup);
         $http.put('/api/users/' + $scope.currentUser._id + '/addClass',
           {className: $scope.classField}

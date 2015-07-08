@@ -24,7 +24,7 @@ var StudentSchema = new Schema({
   classList: [{
     groupList: []
   }], //Classes with nested groups that a student is in, represented by an array of group ids
-  contextTags: [] //Array of category ids, where each id is the category a user has access to
+  wordPacks: [] //Array of category ids, where each id is the category a user has access to
 });
 
 module.exports = mongoose.model('Student', StudentSchema);
