@@ -12,7 +12,7 @@ var StudentSchema = new Schema({
 //}]],
   teachers: [], //Array of user account IDs associated with this student
 //##########^^^This array should never be empty, since a student does not need to exist if it isn't associated with a teacher account.####################
-  tileBucket: [], //List of tile IDs the student has access to
+  words: [], //List of tile IDs the student has access to
 
   /*
    "classList": [{

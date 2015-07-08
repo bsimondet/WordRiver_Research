@@ -282,8 +282,8 @@ angular.module('WordRiverApp')
       for (var m = 0; m < $scope.userClasses.length; m++) {
         if ($scope.userClasses[m]._id == myClass._id) {
           for (var p = 0; p < $scope.userClasses[m].groupList.length; p++) {
-            for(var a = 0; a < $scope.userClasses[m].groupList[p].freeTiles.length; a++) {
-              $scope.matchWordIDs.push($scope.userClasses[m].groupList[p].freeTiles[a]);
+            for(var a = 0; a < $scope.userClasses[m].groupList[p].words.length; a++) {
+              $scope.matchWordIDs.push($scope.userClasses[m].groupList[p].words[a]);
             }
           }
         }
@@ -312,7 +312,7 @@ angular.module('WordRiverApp')
       for (var j = 0; j < $scope.userStudents.length; j++) {
         if ($scope.userStudents[j]._id == student._id) {
           $scope.matchWordPackIDs = $scope.userStudents[j].wordPacks;
-          $scope.matchWordIDs = $scope.userStudents[j].tileBucket;
+          $scope.matchWordIDs = $scope.userStudents[j].words;
           for(var index = 0; index < $scope.userStudents[j].classList.length; index++){
             $scope.matchClassesIDs.push($scope.userStudents[j].classList[index]);
           }
@@ -376,8 +376,8 @@ angular.module('WordRiverApp')
       //Finds the classes that have the word stored as a free tile
       for (var l = 0; l < $scope.userClasses.length; l++) {
         for (var m = 0; m < $scope.userClasses[l].groupList.length; m++) {
-          for (var n = 0; n < $scope.userClasses[l].groupList[m].freeTiles.length; n++) {
-            if ($scope.userClasses[l].groupList[m].freeTiles[n] == word._id) {
+          for (var n = 0; n < $scope.userClasses[l].groupList[m].words.length; n++) {
+            if ($scope.userClasses[l].groupList[m].words[n] == word._id) {
               $scope.matchClass.push($scope.userClasses[l]);
             }
           }
@@ -386,8 +386,8 @@ angular.module('WordRiverApp')
       $scope.matchClass = $scope.checkForDuplicates($scope.matchClass);
       //Finds the students that have the word stored in their tile buckets
       for (var o = 0; o < $scope.userStudents.length; o++) {
-        for (var p = 0; p < $scope.userStudents[o].tileBucket.length; p++) {
-          if (word._id == $scope.userStudents[o].tileBucket[p]) {
+        for (var p = 0; p < $scope.userStudents[o].words.length; p++) {
+          if (word._id == $scope.userStudents[o].words[p]) {
             $scope.matchStudent.push($scope.userStudents[o]);
           }
         }
@@ -473,9 +473,9 @@ angular.module('WordRiverApp')
       if($scope.confirmUnassign(group.groupName, word.name)==true) {
         for (var i = 0; i < $scope.userClasses.length; i++) {
           if ($scope.userClasses[i] == group) {
-            for (var j = 0; j < $scope.userClasses[i].freeTiles[j].length; j++) {
-              if ($scope.userClasses[i].freeTiles[j] == word._id) {
-                $scope.userClasses[i].freeTiles.splice(j, 1);
+            for (var j = 0; j < $scope.userClasses[i].words[j].length; j++) {
+              if ($scope.userClasses[i].words[j] == word._id) {
+                $scope.userClasses[i].words.splice(j, 1);
                 $http.patch('/api/users/' + $scope.currentUser._id + '/group',
                   {groupList: $scope.userClasses}).success(function () {
                     $scope.getAll();
@@ -496,11 +496,11 @@ angular.module('WordRiverApp')
       if ($scope.confirmUnassign(student.firstName, word.name)==true) {
         for (var i = 0; i < $scope.userStudents.length; i++) {
           if ($scope.userStudents[i]._id == student._id) {
-            for (var j = 0; j < $scope.userStudents[i].tileBucket.length; j++) {
-              if ($scope.userStudents[i].tileBucket[j] == word._id) {
-                $scope.userStudents[i].tileBucket.splice(j, 1);
+            for (var j = 0; j < $scope.userStudents[i].words.length; j++) {
+              if ($scope.userStudents[i].words[j] == word._id) {
+                $scope.userStudents[i].words.splice(j, 1);
                 $http.patch('api/students/' + student._id,
-                  {tileBucket: $scope.userStudents[i].tileBucket}).success(function () {
+                  {words: $scope.userStudents[i].words}).success(function () {
                     $scope.getAll();
                   });
                 if (type == 'tile') {
@@ -598,9 +598,9 @@ angular.module('WordRiverApp')
             for (var e = 0; e < $scope.selectedClasses.length; e++) {
               if ($scope.userClasses[d]._id == $scope.selectedClasses[e]._id) {
                 for (var f = 0; f < $scope.selectedWords.length; f++) {
-                  $scope.userClasses[d].freeTiles.push($scope.selectedWords[f]._id);
+                  $scope.userClasses[d].words.push($scope.selectedWords[f]._id);
                 }
-                $scope.userClasses[d].freeTiles = $scope.checkForDuplicates($scope.userClasses[d].freeTiles);
+                $scope.userClasses[d].words = $scope.checkForDuplicates($scope.userClasses[d].words);
               }
             }
           }
@@ -647,11 +647,11 @@ angular.module('WordRiverApp')
           for (var y = 0; y < $scope.selectedStudents.length; y++) {
             if ($scope.userStudents[r]._id == $scope.selectedStudents[y]._id) {
               for (var v = 0; v < $scope.selectedWords.length; v++) {
-                $scope.userStudents[r].tileBucket.push($scope.selectedWords[v]._id);
+                $scope.userStudents[r].words.push($scope.selectedWords[v]._id);
               }
-              $scope.userStudents[r].tileBucket = $scope.checkForDuplicates($scope.userStudents[r].tileBucket);
+              $scope.userStudents[r].words = $scope.checkForDuplicates($scope.userStudents[r].words);
               $http.patch('api/students/' + $scope.userStudents[r]._id,
-                {tileBucket: $scope.userStudents[r].tileBucket}).success(function () {
+                {words: $scope.userStudents[r].words}).success(function () {
                   $scope.getAll();
                 });
             }

@@ -128,9 +128,9 @@ exports.removeWordID = function(req, res) {
   var wordID = req.body.wordID;
 
   User.findById(userId, function (err, user) {
-    for(var i = 0 ; i < user.tileBucket.length; i++){
-      if(user.tileBucket[i] == wordID){
-        user.tileBucket.splice(i, 1);
+    for(var i = 0 ; i < user.words.length; i++){
+      if(user.words[i] == wordID){
+        user.words.splice(i, 1);
       }
     }
     user.save(function(err) {
@@ -302,14 +302,14 @@ exports.deleteTile = function(req, res, next) {
   var word = req.body.word;
   var packId = req.body.packId;
   User.findById(userId, function (err, user) {
-    for(var i = 0; i < user.tileBucket.length; i++){
-      console.log(word == user.tileBucket[i].wordName);
-      if(word == user.tileBucket[i].wordName){
+    for(var i = 0; i < user.words.length; i++){
+      console.log(word == user.words[i].wordName);
+      if(word == user.words[i].wordName){
         console.log(word);
-        for(var j = 0; j < user.tileBucket[i].wordPacks.length; j++){
-          if(user.tileBucket[i].wordPacks[j] == packId){
+        for(var j = 0; j < user.words[i].wordPacks.length; j++){
+          if(user.words[i].wordPacks[j] == packId){
             console.log(j);
-            user.tileBucket[i].wordPacks.splice(j, 1);
+            user.words[i].wordPacks.splice(j, 1);
           }
         }
       }
@@ -387,7 +387,7 @@ exports.addWordID = function(req, res, next) {
   var wordID = req.body.wordID;
 
   User.findById(userId, function (err, user) {
-    user.tileBucket.push(wordID);
+    user.words.push(wordID);
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);
@@ -403,14 +403,14 @@ exports.updateTile = function(req, res, next) {
 
   User.findById(userId, function (err, user) {
     var found = false;
-    for(var i = 0; i < user.tileBucket.length; i++){
-      if(user.tileBucket[i].wordName == word){
+    for(var i = 0; i < user.words.length; i++){
+      if(user.words[i].wordName == word){
         found = true;
-        user.tileBucket[i].tileTags.push(packId);
+        user.words[i].tileTags.push(packId);
       }
     }
     if(!found){
-      user.tileBucket.push({wordName: word, tileTags: [packId]});
+      user.words.push({wordName: word, tileTags: [packId]});
     }
     user.save(function(err) {
       if (err) return validationError(res, err);

@@ -97,7 +97,7 @@ angular.module('WordRiverApp')
     $scope.getWords = function(student) {
       $scope.wordArray = [];
       $http.get('/api/tile').success(function (allWords) {
-        $scope.getElementsByID(student.tileBucket, allWords, $scope.wordArray);
+        $scope.getElementsByID(student.words, allWords, $scope.wordArray);
       });
     };
 

@@ -115,7 +115,7 @@ exports.addWord = function(req, res) {
   console.log(packId);
   Student.findById(userId, function (err, user) {
 
-    user.tileBucket.push(word);
+    user.words.push(word);
 
     user.save(function(err) {
       if (err) return validationError(res, err);

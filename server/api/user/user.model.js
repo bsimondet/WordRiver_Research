@@ -31,11 +31,11 @@ var UserSchema = new Schema({
     groupList: [{
       groupName: String,
       wordPacks: [],
-      freeTiles: []
+      words: []
     }]
   }],
 
-  tileBucket: [], //List of tile IDs the user has access to
+  words: [], //List of tile IDs the user has access to
   studentList: [] //Array of student ids
 });
 
