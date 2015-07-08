@@ -266,10 +266,10 @@
       <ul class="list-group scroll">
         <p>
         <li class="list-group-item" ng-repeat="wordPack in userWordPacks | orderBy:'name':order2 | filter:{name:searchCategories}">
-          <label><input type="checkbox" value="value" ng-click="checkCategories(wordPack)">
+          <label><input type="checkbox" value="value" ng-click="checkWordPacks(wordPack)">
             <a ng-click="displayWordPackInfo(wordPack)">{{wordPack.name}}</a>
           </label>
-          <span class="glyphicon glyphicon-eye-close floatRight close" title= "Show words in word pack" ng-click="isCollapsed = !isCollapsed; populateDisplayTile(wordPack); openingOnlyOneCategory(wordPack)"></span>
+          <span class="glyphicon glyphicon-eye-close floatRight close" title= "Show words in word pack" ng-click="isCollapsed = !isCollapsed; populateDisplayWords(wordPack); openingOnlyOneWordPack(wordPack)"></span>
             <ul collapse="category.isCollapsed">
               <li ng-repeat="word in displayWords">
                 <a ng-click="displayWordInfo(word)">{{word.name}}</a>

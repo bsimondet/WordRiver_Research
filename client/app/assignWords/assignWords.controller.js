@@ -18,7 +18,7 @@ angular.module('WordRiverApp')
     $scope.help = false;
     $scope.displayWords = [];
 
-    $scope.selectedCategories = [];
+    $scope.selectedWordPacks = [];
     $scope.selectedClasses = [];
     $scope.selectedStudents = [];
     $scope.selectedWords = [];
@@ -87,7 +87,7 @@ angular.module('WordRiverApp')
     //This is the section for switching views
 
     $scope.classView = true;
-    $scope.categoryView = true;
+    $scope.wordPackView = true;
 
 
     $scope.showMiddle = false;
@@ -149,16 +149,16 @@ angular.module('WordRiverApp')
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for checking boxes
 
-    $scope.checkCategories = function (category) {
+    $scope.checkWordPacks = function (wordPack) {
       var counter = 0;
-      for (var i = 0; i < $scope.selectedCategories.length; i++) {
-        if ($scope.selectedCategories[i] == category) {
-          $scope.selectedCategories.splice(i, 1);
+      for (var i = 0; i < $scope.selectedWordPacks.length; i++) {
+        if ($scope.selectedWordPacks[i] == wordPack) {
+          $scope.selectedWordPacks.splice(i, 1);
           counter = 1;
         }
       }
       if (counter != 1) {
-        $scope.selectedCategories.push(category);
+        $scope.selectedWordPacks.push(wordPack);
       }
     };
 
@@ -557,35 +557,35 @@ angular.module('WordRiverApp')
       return array;
     };
 
-    $scope.assignWords = function (view) {
+    $scope.assignWords = function () {
       $scope.success = false;
-      if ($scope.classView && $scope.categoryView) {
-        //Function to add selected categories to selected groups.
+      //If you're viewing classes and word packs
+      if ($scope.classView && $scope.wordPackView) {
+        //Check how many items are selected.
         if ($scope.selectedClasses.length == 0) {
-          alert("You must select at least 1 group.");
+          alert("You must select at least 1 class.");
         }
-        else if ($scope.selectedCategories.length == 0) {
-          alert("You must select at least 1 category.");
-        }
-        else {
+        else if ($scope.selectedWordPacks.length == 0) {
+          alert("You must select at least 1 word pack.");
+        } else {
           for (var a = 0; a < $scope.userClasses.length; a++) {
             for (var b = 0; b < $scope.selectedClasses.length; b++) {
               if ($scope.userClasses[a]._id == $scope.selectedClasses[b]._id) {
-                for (var c = 0; c < $scope.selectedCategories.length; c++) {
-                  $scope.userClasses[a].contextPacks.push($scope.selectedCategories[c]._id);
+                for (var c = 0; c < $scope.selectedWordPacks.length; c++) {
+                  $scope.userClasses[a].contextPacks.push($scope.selectedWordPacks[c]._id);
                 }
                 $scope.userClasses[a].contextPacks = $scope.checkForDuplicates($scope.userClasses[a].contextPacks);
               }
             }
           }
-          $http.patch('api/users/' + $scope.currentUser._id + '/group',
+          $http.patch('api/users/' + $scope.currentUser._id + '/class',
             {groupList: $scope.userClasses}).success(function () {
               $scope.getAll();
             });
           $scope.success = true;
         }
-
-      } else if ($scope.classView && !$scope.categoryView) {
+      //If you're viewing classes and words
+      } else if ($scope.classView && !$scope.wordPackView) {
         //Function to add selected words to selected groups.
         if ($scope.selectedClasses.length == 0) {
           alert("You must select at least 1 group.");
@@ -610,19 +610,20 @@ angular.module('WordRiverApp')
             });
           $scope.success = true;
         }
-      } else if (!$scope.classView && $scope.categoryView) {
+      //If you're viewing students and word packs
+      } else if (!$scope.classView && $scope.wordPackView) {
         //Function to add selected categories to selected students.
         if ($scope.selectedStudents.length == 0) {
           alert("You must select at least 1 student.");
         }
-        if ($scope.selectedCategories.length == 0) {
+        if ($scope.selectedWordPacks.length == 0) {
           alert("You must select at least 1 category.");
         }
         for (var g = 0; g < $scope.userStudents.length; g++) {
           for (var w = 0; w < $scope.selectedStudents.length; w++) {
             if ($scope.userStudents[g]._id == $scope.selectedStudents[w]._id) {
-              for (var n = 0; n < $scope.selectedCategories.length; n++) {
-                $scope.userStudents[g].contextTags.push($scope.selectedCategories[n]._id);
+              for (var n = 0; n < $scope.selectedWordPacks.length; n++) {
+                $scope.userStudents[g].contextTags.push($scope.selectedWordPacks[n]._id);
               }
               $scope.userStudents[g].contextTags = $scope.checkForDuplicates($scope.userStudents[g].contextTags);
               $http.patch('api/students/' + $scope.userStudents[g]._id,
@@ -633,7 +634,8 @@ angular.module('WordRiverApp')
           }
         }
         $scope.success = true;
-      } else if (!$scope.classView && !$scope.categoryView){
+      //If you're viewing students and words
+      } else if (!$scope.classView && !$scope.wordPackView){
         //Function to add selected words to selected students.
         if($scope.selectedStudents.length == 0){
           alert("You must select at least 1 student.");
@@ -660,7 +662,7 @@ angular.module('WordRiverApp')
       }
       if ($scope.success) {
         $scope.getNewInfo();
-        $scope.selectedCategories = [];
+        $scope.selectedWordPacks = [];
         $scope.selectedWords = [];
         $scope.selectedClasses = [];
         $scope.selectedStudents = [];
@@ -701,29 +703,23 @@ $scope.getNewInfo = function() {
 
     };
 
-    $scope.populateDisplayTile = function(category){
+    $scope.populateDisplayWords = function(wordPack){
       $scope.displayWords = [];
       for (var j = 0; j < $scope.allWords.length; j++) {
         for (var z = 0; z < $scope.allWords[j].contextTags.length; z++) {
-          if ($scope.allWords[j].contextTags[z] == category._id) {
+          if ($scope.allWords[j].contextTags[z] == wordPack._id) {
             $scope.displayWords.push($scope.allWords[j]);
           }
         }
       }
     };
 
-    $scope.openingOnlyOneCategory = function(category){
+    $scope.openingOnlyOneWordPack = function(wordPack){
       for(var i = 0; i < $scope.userWordPacks.length; i++){
-
-        console.log($scope.userWordPacks[i]);
-
-        if($scope.userWordPacks[i]._id == category._id){
+        if($scope.userWordPacks[i]._id == wordPack._id){
           $scope.userWordPacks[i].isCollapsed = !$scope.userWordPacks[i].isCollapsed;
-          console.log("if statement");
-        }
-        else{
-          $scope.userWordPacks[i].isCollapsed = true;
-          console.log("else statement");
+        } else {
+          //$scope.userWordPacks[i].isCollapsed = true;
         }
       }
 
