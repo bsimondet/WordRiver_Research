@@ -1,14 +1,42 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero background" id="banner" ng-style="backgroundImage">
+<!--
+<header class="hero-unit" id="banner">
+  <div class="">
+    <h1>Student Manager</h1>
+  </div>
+</header>
+-->
+
+<!--<header class="hero background" id="banner" ng-style="backgroundImage">-->
+<header class="hero-unit" id="banner">
   <div class="container">
-    <img class="resize" src="assets/images/WordRiverLogo.png" alt="we have a logo!"><br>
-    <h2 class = "h2" ng-hide="changePasswordShow">Assisting students in creative learning</h2>
+    <!--<img class="resize" src="assets/images/WordRiverLogo.png" alt="we have a logo!"><br>-->
+    <h1 ng-hide="changePasswordShow">Word River</h1>
     <h2 class = "changePasswordText" ng-show="changePasswordShow">Change Password</h2>
+  </div>
+</header>
+<!--To center login, need to add column to the left-->
+<div class= "col-sm-4"></div>
+<header class="col-sm-4">
+  <!--Welcome area-->
+  <div ng-show="signedInShow">
+      <span>
+        <h2>Hello {{ getCurrentUser().name }}</h2>
+      </span>
+      <h3>Would you like to view:</h3>
+      ********** WARNING: These are not implemented quite yet. **********
+    <br>
+      Note: They currently lead to studentProfile
+      <h4><a href="/studentProfile">Your Classes</a></h4>
+      <h4><a href="/studentProfile">Your Students</a></h4>
+      <h4><a href="/studentProfile">Your Context Packs</a></h4>
+      <h4><a href="/studentProfile">Your Word Packs</a></h4>
+      <h4><a href="/studentProfile">Your Words</a></h4>
+  </div>
+
+  <!--Login screen-->
     <div class="loginBox">
-
-      <!--Login screen-->
-
       <div ng-show = "logInShow">
         <form class="form" name="logIn" ng-submit="login(logIn)" novalidate>
           <a class="btn btn-default btn-lg btn-register buttonSizeUpperLogIn" ng-click="logInShow = true; signUpShow = false;">
@@ -48,21 +76,15 @@
       </div>
 
 
-
-
-      <!--sign up screen-->
-
-
+  <!--sign up screen-->
   <div ng-show="signUpShow">
     <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
-
       <a class="btn btn-default btn-lg btn-register buttonSizeUpperSignUp" ng-click="logInShow = true; signUpShow = false;">
         Login
       </a>
       <a class="btn btn-default btn-lg btn-register buttonSizeUpperSignUp" ng-click="logInShow = false; signUpShow = true;">
         Sign Up
       </a>
-
       <div class="clear" ng-class="{ 'has-success': signUp.name.$valid && submitted,
                                         'has-error': signUp.name.$invalid && submitted }">
         <span class="clear help-block" ng-show="signUp.name.$error.required && submitted">
@@ -71,9 +93,7 @@
         <input type="text" name="name" class="clear input" ng-model="user.name"
                required/>
         <label class="label">: Name</label>
-
       </div>
-
       <div class="clear" ng-class="{ 'has-success': signUp.email.$valid && submitted,
                                         'has-error': signUp.email.$invalid && submitted }">
         <span class="clear help-block" ng-show="signUp.email.$error.email && submitted">
@@ -90,7 +110,6 @@
                mongoose-error/>
         <label class="label">: Email</label>
       </div>
-
       <div class="clear" ng-class="{ 'has-success': signUp.password.$valid && submitted,
                                         'has-error': signUp.password.$invalid && submitted }">
         <span class="clear help-block"
@@ -106,7 +125,6 @@
                mongoose-error/>
         <label class="label">: Password</label>
       </div>
-
       <div class="clear">
         <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
           Submit
@@ -115,17 +133,7 @@
         </form>
       </div>
 
-
-      <div ng-show = "signedInShow">
-        <div class = "welcomeText">
-          <span>
-            Hello {{ getCurrentUser().name }}
-          </span>
-        </div>
-      </div>
-
       <!--Change password show-->
-
       <div ng-show="changePasswordShow">
         <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
           <div class="clear">
@@ -163,10 +171,6 @@
           </div>
         </form>
       </div>
-
-
-
-
     </div>
   </div>
 </header>

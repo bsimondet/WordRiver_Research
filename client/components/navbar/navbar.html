@@ -19,24 +19,19 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-left">
+        <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/homePage')}"><a href="/homePage">Home Page</a></li>
         <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/wordManager')}"><a href="/wordManager">Word Manager</a></li>
         <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/assignWords')}"><a href="/assignWords">Assign Content</a></li>
         <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/studentManager')}"><a href="/studentManager">Student Manager</a></li>
         <li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/studentProfile')}"><a href="/studentProfile">Student Profile</a></li>
-        <!--<li class="font-size" ng-show="isLoggedIn()" ng-class="{active: isActive('/homePage')}"><a href="/homePage">Json File</a></li>-->
       </ul>
 
 
       <ul class="nav navbar-nav navbar-right font-size">
-        <!--Commented out some button functionality for IDC demonstration since not applicable-->
 
-        <!--<li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>-->
-        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello Casey Jones</p> </li>
-
-
-        <!--<li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a  ng-click="changePassword()" href="/"><span class="glyphicon glyphicon-cog"></span></a></li>-->
-        <!--<li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>-->
-        <li ng-show="isLoggedIn()"><a href="/" ng-click="goHome()">Logout</a></li>
+        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a  ng-click="changePassword()" href="/"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
       </ul>
     </div>
   </div>

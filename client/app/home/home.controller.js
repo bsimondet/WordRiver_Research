@@ -5,8 +5,7 @@ angular.module('WordRiverApp')
     $scope.user = {email: "rosemariemaxwell@plexia.com", password: "joethe"};
     $scope.errors = {};
     $scope.logInShow = true;
-    //$scope.logInShow = false;
-    $scope.loggedIn = Auth.isLoggedIn()
+    $scope.loggedIn = Auth.isLoggedIn();
     $scope.signUpShow = false;
     $scope.signedInShow = false;
     $scope.buttonsShow = true;
@@ -89,13 +88,11 @@ angular.module('WordRiverApp')
         $scope.signUpShow = false;
       }else{
         $scope.logInShow = true;
-        //$scope.logInShow = false;
         $scope.signUpShow = false;
         $scope.signedInShow = false;
-        //$scope.signedInShow = true;
         $scope.buttonsShow = true;
       }
-    }
+    };
 
     $scope.checkedLoggedIn();
 
