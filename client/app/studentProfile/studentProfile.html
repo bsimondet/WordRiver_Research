@@ -31,14 +31,14 @@
       <!--Listing groups selected student is assigned to-->
       <h3 class="page-header"> Groups: </h3>
       <ul>
-        <li ng-repeat="group in studentGroups">
-          <label>{{group.groupName}}</label>
+        <li ng-repeat="class in studentClasses">
+          <label>{{class.className}}</label>
         </li>
       </ul>
       <!--Listing wordPacks  selected student is assigned to-->
       <h3 class="page-header">Word Packs:</h3>
       <ul>
-        <li ng-repeat="wordPacks in categoryArray">
+        <li ng-repeat="wordPacks in wordPackArray">
           <label>{{wordPacks.name}}</label>
         </li>
       </ul>

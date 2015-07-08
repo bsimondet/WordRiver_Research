@@ -4,10 +4,10 @@ angular.module('WordRiverApp')
   .controller('StudentProfileCtrl', function ($rootScope, $scope, $http, socket, Auth) {
     $scope.currentUser = Auth.getCurrentUser();
     $scope.students = []; //List of actual student objects
-    $scope.studentGroups = [];
+    $scope.studentClasses = [];
     $scope.selectedStudents = [];
     //$scope.teacherGroups = [];
-    $scope.categoryArray = [];
+    $scope.wordPackArray = [];
     $scope.wordArray = [];
     $scope.hide = true;
     $scope.tempCategoryArray = [];
@@ -71,11 +71,11 @@ angular.module('WordRiverApp')
 
     //Get groups that are in the current teacher's array of groups && are assigned to the current student
     $scope.getGroups = function(student) {
-      $scope.studentGroups = [];
+      $scope.studentClasses = [];
       $scope.tempCategoryArray = [];
       $http.get('/api/users/me').success(function (user) {
-        $scope.getElementsByID(student.groupList, user.groupList, $scope.studentGroups);
-        //$scope.getCategoriesFromGroups($scope.studentGroups);
+        $scope.getElementsByID(student.groupList, user.groupList, $scope.studentClasses);
+        //$scope.getCategoriesFromGroups($scope.studentClasses);
       });
     };
 
@@ -89,9 +89,9 @@ angular.module('WordRiverApp')
     };*/
 
     $scope.getCategories = function(student) {
-      $scope.categoryArray = [];
+      $scope.wordPackArray = [];
       $http.get('/api/categories').success(function (allCategories) {
-        $scope.getElementsByID(student.wordPacks, allCategories, $scope.categoryArray);
+        $scope.getElementsByID(student.wordPacks, allCategories, $scope.wordPackArray);
       });
     };
 
