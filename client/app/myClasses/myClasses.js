@@ -3,9 +3,9 @@
 angular.module('WordRiverApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('homePage', {
-        url: '/homePage',
-        templateUrl: 'app/homePage/homePage.html',
+      .state('myClasses', {
+        url: '/myClasses',
+        templateUrl: 'app/myClasses/myClasses.html',
         controller: 'JsonFileCtrl'
       });
   });

@@ -137,14 +137,14 @@ exports.removeFromCategory = function(req, res, next) {
 //
 //  tile.findById(tileId, function (err, user) {
 //    var found = false;
-//    for(var i = 0; i < user.tileBucket.length; i++){
-//      if(user.tileBucket[i].wordName == word){
+//    for(var i = 0; i < user.words.length; i++){
+//      if(user.words[i].wordName == word){
 //        found = true;
-//        user.tileBucket[i].tileTags.push(tileId);
+//        user.words[i].tileTags.push(tileId);
 //      }
 //    }
 //    if(!found){
-//      user.tileBucket.push({wordName: word, tileTags: [tileId]});
+//      user.words.push({wordName: word, tileTags: [tileId]});
 //    }
 //    user.save(function(err) {
 //      if (err) return validationError(res, err);

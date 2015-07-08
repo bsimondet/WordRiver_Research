@@ -1,0 +1,19 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="">
+    <h1>My Classes</h1>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Your {{classArray.length}} Classes:</h1>
+  <br>
+  <!--List of current groups with edit and remove options-->
+  <ul class="list-group scroll">
+    <p>
+    <li class="list-group-item" type="checkbox" ng-repeat="class in classArray">
+      <label><a href="" ng-click="">{{class.className}}</a></label>
+    </li>
+  </ul>
+</div>
