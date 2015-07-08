@@ -10,21 +10,14 @@ var StudentSchema = new Schema({
 //    tileID: String, //Tile ID
 //    contextPack: String //Context pack tag associated with the tile used in the JSON object
 //}]],
-  teachers: [], //Array of user account IDs associated with this student
-//##########^^^This array should never be empty, since a student does not need to exist if it isn't associated with a teacher account.####################
-  words: [], //List of tile IDs the student has access to
-
-  /*
-   "classList": [{
-     "_id": String,
-     "className": String,
-     "groupList": []
-    }]
-  */
-  classList: [{
-    groupList: []
-  }], //Classes with nested groups that a student is in, represented by an array of group ids
-  wordPacks: [] //Array of category ids, where each id is the category a user has access to
+  teachers: [],		//  teacher IDs of (this) student
+  words: [],                      //  IDs of words assigned to this student
+  wordPacks: [],	            //  IDs of word packs assigned to this student
+  contextPacks: [],	//  IDs of context packs assigned to this student
+  classList: [{                  //  classes (this) student is assigned to
+    _id: String,
+    groupList: []           //  IDs of the groups (this) student is assigned in this class item
+  }]
 });
 
 module.exports = mongoose.model('Student', StudentSchema);

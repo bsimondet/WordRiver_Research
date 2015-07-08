@@ -17,26 +17,26 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  wordPacks: [], //List of tags that can be applied to tiles
 
-/*  groupList: [{     //A list of groups to apply to students. A student with this group has access to the free tiles and context packs defined within the group JSON object within the user
-    groupName: String,
-    wordPacks: [], //Context packs the students within a group has access to
-    freeTiles: []     //Free tiles that may not be associated with a specific context pack that students have access to within the group
-  }], */
-
-  //TODO: implement class around groups
-  classList: [{
-    className: String,
-    groupList: [{
-      groupName: String,
-      wordPacks: [],
-      words: []
-    }]
+  studentList: [],		 //  IDs of the students (this) teacher has created
+  words: [],                      //  IDs of the words (this) teacher has created
+  wordPacks: [],		 //  IDs of the word packs (this) teacher has created
+  contextPacks: [{            //  context packs (this) teacher has created
+    packName: String,
+    words: [],            //  word IDs (this) teacher has assigned to context packs
+    wordPacks: []     //  word pack IDs (this) teacher has assigned to context packs
   }],
-
-  words: [], //List of tile IDs the user has access to
-  studentList: [] //Array of student ids
+  classList: [{                   //  classes (this) teacher has created
+    className: String,
+    words: [],            //  word IDs (this) teacher has assigned to this class
+    wordPacks: [],    //  word pack IDs (this) teacher has assigned to this class
+    groupList: [{        //  groups (this) teacher has created in this class
+      groupName: String,
+      words: [],  //  word IDs (this) teacher has assigned to this group in this class
+      wordPacks: [],  //  word pack IDs (this) teacher has assigned to this group in this class
+      contextPacks: []  //  context pack IDs  teacher has assigned to this group in this class
+    }]
+  }]
 });
 
 /**
