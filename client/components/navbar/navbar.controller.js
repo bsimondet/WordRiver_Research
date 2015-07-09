@@ -7,7 +7,7 @@ angular.module('WordRiverApp')
       'link': '/'
     }];
 
-    $scope.isCollapsed = true;
+    $scope.isGroupsCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;

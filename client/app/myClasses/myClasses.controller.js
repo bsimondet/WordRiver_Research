@@ -5,10 +5,15 @@ angular.module('WordRiverApp')
     $scope.currentUser = Auth.getCurrentUser();
     $scope.classArray = [];
     $scope.groupsArray = [];
-    $scope.isCollapsed = true;
+    $scope.isGroupsCollapsed = true;
+    $scope.isStudentsCollapsed = true;
     $scope.hideEdit = true;
     $scope.classToEdit = null;
     $scope.editField = "";
+    $scope.viewGroupInfo = false;
+    $scope.currentGroup = null;
+    $scope.userStudents = [];
+    $scope.studentsInClass = [];
 
     $scope.getClasses = function(){
       $http.get("/api/users/me").success(function(user){
@@ -18,6 +23,18 @@ angular.module('WordRiverApp')
     };
 
     $scope.getClasses();
+
+    $scope.getStudents = function(){
+      $scope.userStudents = [];
+      $http.get("/api/students").success(function(allStudents) {
+        for(var i = 0; i < allStudents.length; i++) {
+          if ($scope.inArray(allStudents[i].teachers, $scope.currentUser._id)) {
+            $scope.userStudents.push(allStudents[i]);
+          }
+        }
+      });
+    };
+    $scope.getStudents();
 
     $scope.findIndexOfClass = function (myclass) {
       for (var i = 0; i < $scope.classArray.length; i++) {
@@ -71,5 +88,27 @@ angular.module('WordRiverApp')
           $scope.getClasses();
           console.log("removed class");
         });
+    };
+
+    $scope.viewStudents = function(classID){
+      //$scope.isStudentsCollapsed = !$scope.isStudentsCollapsed;
+      $scope.studentsInClass = [];
+      for(var index = 0; index < $scope.userStudents.length; index++){
+        for(var index2 = 0; index2 < $scope.userStudents[index].classList.length; index2++){
+          if($scope.userStudents[index].classList[index2]._id == classID){
+            $scope.studentsInClass.push($scope.userStudents[index]);
+            console.log($scope.userStudents[index].firstName);
+          }
+        }
+      }
+    };
+
+    $scope.inArray= function(array, item){
+      for(var i = 0; i < array.length; i++){
+        if(array[i] == item){
+          return true;
+        }
+      }
+      return false;
     };
   });

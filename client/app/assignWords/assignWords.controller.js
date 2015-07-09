@@ -695,9 +695,9 @@ $scope.getNewInfo = function() {
     $scope.openingOnlyOneClass = function(myClass){
       for(var i = 0; i < $scope.userClasses.length; i++){
         if($scope.userClasses[i]._id == myClass._id){
-          $scope.userClasses[i].isCollapsed = !$scope.userClasses[i].isCollapsed;
+          $scope.userClasses[i].isGroupsCollapsed = !$scope.userClasses[i].isGroupsCollapsed;
         } else {
-          //$scope.userClasses[i].isCollapsed = true;
+          //$scope.userClasses[i].isGroupsCollapsed = true;
         }
       }
 
@@ -717,9 +717,9 @@ $scope.getNewInfo = function() {
     $scope.openingOnlyOneWordPack = function(wordPack){
       for(var i = 0; i < $scope.userWordPacks.length; i++){
         if($scope.userWordPacks[i]._id == wordPack._id){
-          $scope.userWordPacks[i].isCollapsed = !$scope.userWordPacks[i].isCollapsed;
+          $scope.userWordPacks[i].isGroupsCollapsed = !$scope.userWordPacks[i].isGroupsCollapsed;
         } else {
-          //$scope.userWordPacks[i].isCollapsed = true;
+          //$scope.userWordPacks[i].isGroupsCollapsed = true;
         }
       }
 
