@@ -16,7 +16,6 @@ router.patch('/', controller.update);
 router.delete('/:id', controller.destroy);
 router.put('/:id/removeFromCategory', controller.removeFromCategory);
 router.put('/:id/updateWord', controller.updateWord);
-router.put('/:id/updateWordNameAndType', controller.updateWordNameAndType);
 
 
 module.exports = router;
