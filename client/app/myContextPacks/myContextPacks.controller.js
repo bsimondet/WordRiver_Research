@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('WordRiverApp')
-  .controller('MyStudentsCtrl', function ($scope) {
+  .controller('MyContextPacksCtrl', function ($scope) {
     $scope.message = 'Hello';
   });

@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: MyStudentsCtrl', function () {
+describe('Controller: MyWordPacksCtrl', function () {
 
   // load the controller's module
   beforeEach(module('WordRiverApp'));
 
-  var MyStudentsCtrl, scope;
+  var MyWordPacksCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MyStudentsCtrl = $controller('MyStudentsCtrl', {
+    MyWordPacksCtrl = $controller('MyWordPacksCtrl', {
       $scope: scope
     });
   }));

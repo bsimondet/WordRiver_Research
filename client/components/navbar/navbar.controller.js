@@ -21,7 +21,6 @@ angular.module('WordRiverApp')
       window.location = "/";
     };
 
-
     //this function activates a variable that sends the user to the home page rather than a seperate settings page
     $scope.changePassword = function(){
       window.location = "/?changePassword=true";
