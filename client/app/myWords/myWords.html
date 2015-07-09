@@ -7,22 +7,47 @@
 </header>
 
 <div class="container">
-  <h1>All {{allWords.length}} Words:</h1>
-  <br>
-  <!--List of current groups with edit and remove options-->
-  <ul class="list-group scroll">
-    <p>
-    <li class="list-group-item" ng-repeat="word in allWords">
-      <label><a href="" ng-click="">{{word.name}}</a></label>
-    </li>
-  </ul>
-  <h1>Your {{userWords.length}} Words:</h1>
-  <br>
-  <!--List of current groups with edit and remove options-->
-  <ul class="list-group scroll">
-    <p>
-    <li class="list-group-item" ng-repeat="word in userWords">
-      <label><a href="" ng-click="">{{word.name}}</a></label>
-    </li>
-  </ul>
+
+  <!--Displaying words user has added-->
+  <div class="col-sm-6">
+    <h2>The {{userWords.length}} Words You've Added:</h2>
+
+    <!--Search option for words-->
+    <div class="col-xs-5">
+      <input type="text" ng-Model="searchUserWords" placeholder="Search My Words">
+    </div>
+
+    <!--Editing options for selected word-->
+    <div class="col-xs-3" ng-hide="showValue">
+      <input ng-model="editField" type="text" size="15" placeholder={{allWords[editWordIndex].name}}>
+    </div>
+
+    <div class="col-xs-4" ng-hide="showValue">
+      <!--Currently: {{allWords[editWordIndex].wordType}}-->
+      <select ng-model="editType">
+        <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
+      </select>
+      <input type="submit" value="Edit" class="btn-primary" ng-click="updateWord()">
+    </div>
+
+    <ul class="list-group scroll">
+      <p>
+      <li class="list-group-item" ng-repeat="word in userWords | filter:{name:searchUserWords}">
+        <label><a href="" ng-click="">{{word.name}}, {{word.wordType}}</a></label>
+        <span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord(word)"></span>
+        <span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord(word)"></span>
+      </li>
+    </ul>
+  </div>
+  <!--Displaying all words in server-->
+  <div class="col-sm-6">
+    <h2>All Dictionary {{allWords.length}} Words:</h2>
+    <input type="text" ng-Model="searchAllWords" placeholder="Search All Words">
+    <ul class="list-group scroll">
+      <p>
+      <li class="list-group-item" ng-repeat="word in allWords | filter:{name:searchAllWords}">
+        <label><a href="" ng-click="">{{word.name}}, {{word.wordType}}</a></label>
+      </li>
+    </ul>
+  </div>
 </div>

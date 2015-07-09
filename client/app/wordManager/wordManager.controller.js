@@ -14,9 +14,9 @@ angular.module('WordRiverApp')
     $scope.categoryArray = []; //an array of all categories a user currently has
     $scope.selectedCategories = []; //categories that have been checked
     $scope.selectedTiles = []; //tiles that have been checked
-    $scope.allTiles = []; //a list of all tiles from the database
+    $scope.allWords = []; //a list of all tiles from the database
     $scope.allCatTiles = []; //an array of all the tiles within a category
-    $scope.userTiles = []; //tiles that belong to the specific user
+    $scope.allWords = []; //tiles that belong to the specific user
     $scope.matchTiles = []; //a way to find tiles that match other tiles to update the database
     $scope.toSort = "name"; //used for sorting
     $scope.order = false; //used for sorting
@@ -53,10 +53,10 @@ angular.module('WordRiverApp')
     };
 
     $scope.manageWords = function(myTiles){
-      $scope.userTiles = [];
-      $scope.allTiles = myTiles;
+      $scope.allWords = [];
+      $scope.allWords = myTiles;
       for(var i= 0; i < myTiles.length; i++){
-          $scope.userTiles.push(myTiles[i]);
+          $scope.allWords.push(myTiles[i]);
       }
       if( $scope.needToAddWordID ){
         $scope.addWordIDToUser($scope.WordIDtoAdd);
@@ -128,15 +128,15 @@ angular.module('WordRiverApp')
     };
 
     $scope.addTileToCategory = function() {
-      for(var r = 0; r < $scope.userTiles.length; r++){
+      for(var r = 0; r < $scope.allWords.length; r++){
         for(var y = 0; y < $scope.selectedTiles.length; y++){
-          if ($scope.userTiles[r]._id == $scope.selectedTiles[y]._id) {
+          if ($scope.allWords[r]._id == $scope.selectedTiles[y]._id) {
             for (var v = 0; v < $scope.selectedCategories.length; v++) {
-              $scope.userTiles[r].wordPacks.push($scope.selectedCategories[v]._id);
+              $scope.allWords[r].wordPacks.push($scope.selectedCategories[v]._id);
             }
-            $scope.userTiles[r].wordPacks = $scope.checkForDuplicates($scope.userTiles[r].wordPacks);
-            $http.patch('api/tile/' + $scope.userTiles[r]._id,
-              {wordPacks: $scope.userTiles[r].wordPacks}).success(function () {
+            $scope.allWords[r].wordPacks = $scope.checkForDuplicates($scope.allWords[r].wordPacks);
+            $http.patch('api/tile/' + $scope.allWords[r]._id,
+              {wordPacks: $scope.allWords[r].wordPacks}).success(function () {
               });
           }
         }
@@ -157,8 +157,8 @@ angular.module('WordRiverApp')
     };
 
     $scope.findTileByIndex = function(tile){
-      for(var i = 0; i < $scope.userTiles.length; i++){
-        if($scope.userTiles[i]._id == tile){
+      for(var i = 0; i < $scope.allWords.length; i++){
+        if($scope.allWords[i]._id == tile){
           return i;
         }
       }
@@ -233,8 +233,8 @@ angular.module('WordRiverApp')
     };
 
     $scope.addWordIDToUser = function (toAddID) {
-      for(var z = 0; z < $scope.userTiles.length; z++) {
-        if ($scope.userTiles[z]._id == toAddID) {
+      for(var z = 0; z < $scope.allWords.length; z++) {
+        if ($scope.allWords[z]._id == toAddID) {
           $http.put('/api/users/' + $scope.currentUser._id + '/addWordID',
             {wordID: toAddID}
           ).success(function () {
@@ -258,10 +258,10 @@ angular.module('WordRiverApp')
     $scope.displayCatInfo = function (category) {
       $scope.matchTiles = [];
       $scope.currentCategory = category;
-        for (var j = 0; j < $scope.userTiles.length; j++) {
-          for (var z = 0; z < $scope.userTiles[j].wordPacks.length; z++) {
-            if ($scope.userTiles[j].wordPacks[z] == category._id) {
-              $scope.matchTiles.push($scope.userTiles[j]);
+        for (var j = 0; j < $scope.allWords.length; j++) {
+          for (var z = 0; z < $scope.allWords[j].wordPacks.length; z++) {
+            if ($scope.allWords[j].wordPacks[z] == category._id) {
+              $scope.matchTiles.push($scope.allWords[j]);
             }
           }
         }
@@ -340,7 +340,7 @@ angular.module('WordRiverApp')
 
     //deletes a word
     $scope.removeWord = function(tile) {
-      $scope.wordToRemove = $scope.userTiles[$scope.findIndexOfTile(tile)];
+      $scope.wordToRemove = $scope.allWords[$scope.findIndexOfWord(tile)];
       $http.delete('/api/tile/'+ $scope.wordToRemove._id
       ).success(function(){
         $http.put('/api/users/' + $scope.currentUser._id + '/removeWordID',
@@ -348,35 +348,36 @@ angular.module('WordRiverApp')
         );
       });
       $scope.getWords();
-      $scope.userTiles.splice($scope.findIndexOfTile(tile),1);
-      for(var i = 0; i < $scope.allTiles.length; i++){
-        if($scope.wordToRemove.id == $scope.allTiles[i].id) {
-            $scope.allTiles.splice(i,1);
+      $scope.allWords.splice($scope.findIndexOfWord(tile),1);
+      for(var i = 0; i < $scope.allWords.length; i++){
+        if($scope.wordToRemove.id == $scope.allWords[i].id) {
+            $scope.allWords.splice(i,1);
           }
       }
     };
 
-    $scope.findIndexOfTile = function(tile){
-      for(var i = 0; i < $scope.userTiles.length; i++){
-        if(tile._id == $scope.userTiles[i]._id){
+    $scope.findIndexOfWord = function(tile){
+      for(var i = 0; i < $scope.allWords.length; i++){
+        if(tile._id == $scope.allWords[i]._id){
           return i;
         }
       }
-    }
-    //TODO: THIS FUNCTION IS TERRIBLE - we made it this way due to time and labor constraints. PLEASE FIX.
-    $scope.editWord = function(tile){
-      $scope.editWordIndex = $scope.findIndexOfTile(tile);
-      $scope.showValue = false;
-      $scope.wordToEdit = $scope.userTiles[$scope.findIndexOfTile(tile)];
     };
 
-    $scope.updateTile = function() {
+    //TODO: THIS FUNCTION IS TERRIBLE - we made it this way due to time and labor constraints. PLEASE FIX.
+    $scope.editWord = function(tile){
+      $scope.editWordIndex = $scope.findIndexOfWord(tile);
+      $scope.showValue = false;
+      $scope.wordToEdit = $scope.allWords[$scope.findIndexOfWord(tile)];
+    };
+
+    $scope.updateWord = function() {
       if($scope.editField.length >= 1 && $scope.editType.length < 1){
         //Only editing the word text
         $http.post('/api/tile', {
           name: $scope.editField,
-          wordPacks: $scope.userTiles[$scope.editWordIndex].wordPacks,
-          wordType: $scope.userTiles[$scope.editWordIndex].wordType
+          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
+          wordType: $scope.allWords[$scope.editWordIndex].wordType
         });
         $scope.removeWord($scope.wordToEdit);
 
@@ -385,8 +386,8 @@ angular.module('WordRiverApp')
       else if($scope.editField.length == 0 && $scope.editType.length >= 1){
         //Only editing the word type
         $http.post('/api/tile', {
-          name: $scope.userTiles[$scope.editWordIndex].name,
-          wordPacks: $scope.userTiles[$scope.editWordIndex].wordPacks,
+          name: $scope.allWords[$scope.editWordIndex].name,
+          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
           wordType: $scope.editType
         });
         $scope.removeWord($scope.wordToEdit);
@@ -397,7 +398,7 @@ angular.module('WordRiverApp')
         //Editing both the word type and the word text
         $http.post('/api/tile', {
           name: $scope.editField,
-          wordPacks: $scope.userTiles[$scope.editWordIndex].wordPacks,
+          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
           wordType: $scope.editType
         });
         $scope.removeWord($scope.wordToEdit);
@@ -407,7 +408,7 @@ angular.module('WordRiverApp')
       }
 
       $scope.showValue = true;
-    }
+    };
 
     $scope.findIndexOfCat = function(category){
       for(var i = 0; i < $scope.categoryArray.length; i++){
@@ -415,12 +416,12 @@ angular.module('WordRiverApp')
           return i;
         }
       }
-    }
+    };
 
     $scope.editCategory = function(category){
       $scope.editCatIndex = $scope.findIndexOfCat(category);
       $scope.showValue1 = false;
-      $scope.categoryToEdit = $scope.userTiles[$scope.findIndexOfTile(category)];
+      $scope.categoryToEdit = $scope.allWords[$scope.findIndexOfWord(category)];
     };
 
     $scope.updateCategory = function(){

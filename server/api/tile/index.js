@@ -12,9 +12,11 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.patch('/', controller.update);
-//router.patch('/:id/unassign', controller.updateTile);
+//router.patch('/:id/unassign', controller.updateWord);
 router.delete('/:id', controller.destroy);
 router.put('/:id/removeFromCategory', controller.removeFromCategory);
-router.put('/:id/updateTile', controller.updateTile);
+router.put('/:id/updateWord', controller.updateWord);
+router.put('/:id/updateWordNameAndType', controller.updateWordNameAndType);
+
 
 module.exports = router;

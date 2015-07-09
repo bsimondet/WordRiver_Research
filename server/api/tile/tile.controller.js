@@ -10,18 +10,18 @@
 'use strict';
 
 var _ = require('lodash');
-var tile = require('./tile.model');
+var Tile = require('./tile.model');
 
 // Get list of things
 exports.index = function(req, res) {
-  tile.find(function (err, students) {
+  Tile.find(function (err, students) {
     if(err) { return handleError(res, err); }
     return res.json(200, students);
   });
 };
 
 exports.getUserTiles = function(req,res) {
-  tile.find({creatorID: req.params.creatorID}, function(err, tiles) {
+  Tile.find({creatorID: req.params.creatorID}, function(err, tiles) {
     if(err) { return handleError(res, err); }
     return res.json(200, tiles);
   });
@@ -30,7 +30,7 @@ exports.getUserTiles = function(req,res) {
 
 // Get a single student
 exports.show = function(req, res) {
-  tile.findById(req.params.id, function (err, student) {
+  Tile.findById(req.params.id, function (err, student) {
     if(err) { return handleError(res, err); }
     if(!student) { return res.send(404); }
     return res.json(student);
@@ -40,7 +40,7 @@ exports.show = function(req, res) {
 
 // Creates a new student in the DB.
 exports.create = function(req, res) {
-  tile.create(req.body, function(err, student) {
+  Tile.create(req.body, function(err, student) {
     if(err) { return handleError(res, err); }
     return res.json(201, student);
   });
@@ -52,7 +52,7 @@ exports.update = function(req, res) {
   if(req.body._id){ delete req.body._id }
 
   // Uses _id provided in request (url) to find pack in database
-  tile.findById(req.params.id, function(err, users) {
+  Tile.findById(req.params.id, function(err, users) {
     // Handle Errors
     if(err){ return handleError(res, err) }
     if(!users){ return res.send(404) }
@@ -79,7 +79,7 @@ exports.update = function(req, res) {
 
 // Deletes a tile from the DB.
 exports.destroy = function(req, res) {
-  tile.findById(req.params.id, function (err, student) {
+  Tile.findById(req.params.id, function (err, student) {
     if(err) { return handleError(res, err); }
     if(!student) { return res.send(404); }
     student.remove(function(err) {
@@ -89,14 +89,13 @@ exports.destroy = function(req, res) {
   });
 };
 
-//exports.updateTile =
-exports.updateTile = function(req, res, next) {
+//exports.updateWord =
+exports.updateWord = function(req, res, next) {
 
   var newCategory = req.body.newCategory;
-  //var tile = req.body.tile;
   var tileId = req.body.tileId;
 
-  tile.findById(tileId, function (err, tile) {
+  Tile.findById(tileId, function (err, tile) {
   console.log(tile);
     tile.wordPacks.push(newCategory);
     console.log(tile);
@@ -112,7 +111,7 @@ exports.removeFromCategory = function(req, res, next) {
   console.log("function called");
   var category = req.body.category;
   var tileId = req.body.tileId;
-  tile.findById(tileId, function (err, tile) {
+  Tile.findById(tileId, function (err, tile) {
     //console.log(tile);
     for(var i = 0; i < tile.wordPacks.length; i++){
       //console.log("for loop");
@@ -129,7 +128,7 @@ exports.removeFromCategory = function(req, res, next) {
   });
 };
 
-//exports.updateTile = function(req, res, next) {
+//exports.updateWord = function(req, res, next) {
 //  //var userId = req.user._id;
 //
 //  var word = req.body.word;

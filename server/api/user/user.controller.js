@@ -395,7 +395,7 @@ exports.addWordID = function(req, res, next) {
   });
 };
 
-exports.updateTile = function(req, res, next) {
+exports.updateWord = function(req, res, next) {
   var userId = req.user._id;
 
   var word = req.body.word;

@@ -1,13 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<!--
-<header class="hero-unit" id="banner">
-  <div class="">
-    <h1>Student Manager</h1>
-  </div>
-</header>
--->
-
 <!--<header class="hero background" id="banner" ng-style="backgroundImage">-->
 <header class="hero-unit" id="banner">
   <div class="container">
@@ -24,9 +16,6 @@
   <div ng-show="signedInShow">
       <span><h2>Hello {{ getCurrentUser().name }}</h2></span>
       <h3>Would you like to view:</h3>
-      ********** WARNING: These are not implemented quite yet. **********
-    <br>
-      Note: They currently lead to studentProfile
       <h4><a href="/myClasses">Your Classes</a></h4>
       <h4><a href="/myStudents">Your Students</a></h4>
       <h4><a href="/myContextPacks">Your Context Packs</a></h4>
