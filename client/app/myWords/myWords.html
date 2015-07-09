@@ -15,6 +15,7 @@
     <!--Search option for words-->
     <div class="col-xs-5">
       <input type="text" ng-Model="searchUserWords" placeholder="Search My Words">
+      <input type="text" ng-Model="searchUserWordTypes" placeholder="Search Word Types">
     </div>
 
     <!--Editing options for selected word-->
@@ -32,21 +33,22 @@
 
     <ul class="list-group scroll">
       <p>
-      <li class="list-group-item" ng-repeat="word in userWords | filter:{name:searchUserWords}">
-        <label><a href="" ng-click="">{{word.name}}, {{word.wordType}}</a></label>
-        <span class="glyphicon glyphicon-trash floatRight close" ng-click="removeWord(word)"></span>
-        <span class="glyphicon glyphicon-pencil floatRight close" ng-click="editWord(word)"></span>
+      <li class="list-group-item" ng-repeat="word in userWords | filter:{name:searchUserWords} | filter:{wordType:searchUserWordTypes}">
+      <label>{{word.name}}, {{word.wordType}}</label>
+      <a class="glyphicon glyphicon-pencil" ng-click="editWord(word)"></a>
+      <a class="glyphicon glyphicon-trash close" ng-click="removeWord(word)"></a>
       </li>
     </ul>
   </div>
   <!--Displaying all words in server-->
   <div class="col-sm-6">
     <h2>All Dictionary {{allWords.length}} Words:</h2>
-    <input type="text" ng-Model="searchAllWords" placeholder="Search All Words">
+    <input type="text" ng-Model="searchAllWords" placeholder="Search All Words"><br>
+    <input type="text" ng-Model="searchAllWordTypes" placeholder="Search Word Types">
     <ul class="list-group scroll">
       <p>
-      <li class="list-group-item" ng-repeat="word in allWords | filter:{name:searchAllWords}">
-        <label><a href="" ng-click="">{{word.name}}, {{word.wordType}}</a></label>
+      <li class="list-group-item" ng-repeat="word in allWords | filter:{name:searchAllWords} | filter:{wordType:searchAllWordTypes}">
+        <label>{{word.name}}, {{word.wordType}}</label>
       </li>
     </ul>
   </div>

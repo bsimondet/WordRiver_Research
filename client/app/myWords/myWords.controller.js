@@ -25,6 +25,7 @@ angular.module('WordRiverApp')
     $scope.selection = {addType: ""};
 
     $scope.getAllWords = function () {
+      $scope.allWords = []; //a list of all words from the database
       $http.get('/api/tile').success(function (allWords) {
         $scope.allWords = allWords;
         $scope.getUserWords();
@@ -36,6 +37,7 @@ angular.module('WordRiverApp')
 
     $scope.getUserWords = function () {
       $scope.userWordIDs = [];
+      $scope.userWords = []; //words that teacher has added
       $http.get("/api/users/me").success(function (user) {
         $scope.userWordIDs = user.words;
         for (var index = 0; index < $scope.allWords.length; index++) {
@@ -92,9 +94,11 @@ angular.module('WordRiverApp')
         $scope.editField = "";
         $scope.editType = "";
       }
+      $scope.getAllWords();
       $scope.showValue = true;
     };
 
+    //Function no longer used! Used a simple patch instead of making a new server function
     $scope.updateTile = function () {
       //If a word is entered, but the type is not
       if ($scope.editField.length >= 1 && $scope.editType.length < 1) {
@@ -144,18 +148,6 @@ angular.module('WordRiverApp')
             });
         });
       $scope.getAllWords();
-      /*      $scope.allWords.splice($scope.findIndexOfWord(word),1);
-       for(var i = 0; i < $scope.allWords.length; i++){
-       if($scope.wordToRemove.id == $scope.allWords[i].id) {
-       $scope.allWords.splice(i,1);
-       }
-       }*/
-      $scope.userWords.splice($scope.findIndexOfWord(word), 1);
-      for (var j = 0; j < $scope.userWords.length; j++) {
-        if ($scope.wordToRemove.id == $scope.userWords[j].id) {
-          $scope.userWords.splice(j, 1);
-        }
-      }
     };
 
   });
