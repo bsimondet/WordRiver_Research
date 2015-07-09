@@ -6,19 +6,27 @@
   </div>
 </header>
 
-<div class="container">
-  <h1>Your {{classArray.length}} Classes:</h1>
-  <br>
-  <!--List of current groups with edit and remove options-->
-  <ul class="list-group scroll">
-    <p>
-    <li class="list-group-item" ng-repeat="class in classArray">
-      <label><a href="" ng-click="">{{class.className}}</a></label>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="group in class.groupList">
-        <label>{{group.groupName}}</label>
-      </li>
-    </ul>
-    </li>
-  </ul>
+<div  ng-controller="JsonFileCtrl" class="container">
+  <div class="col-sm-12">
+  <h2>Your {{classArray.length}} Classes:</h2>
+    <div class="col-xs-4">
+      <!--List of current groups with edit and remove options-->
+      <div ng-repeat="class in classArray">
+        <label><a href="" ng-click="">{{class.className}}</a></label>
+        <a class="glyphicon glyphicon-pencil" ng-click="editClassName(class)"></a>
+        <a class="glyphicon glyphicon-trash" ng-click="removeClass(class)"></a>
+        <br>
+        <button class="btn-primary" ng-click="isCollapsed = !isCollapsed">View Groups</button>
+        <div collapse="isCollapsed" ng-repeat="group in class.groupList">
+            <label><a href="" ng-click="">{{group.groupName}}</a></label>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4" ng-hide="hideEdit">
+    <!--<div class="col-xs-4">-->
+      <br>
+      <input ng-model="editField" type="text" size="15" placeholder={{classArray[editClassIndex].className}}>
+      <input type="submit" value="Edit Class Name" class="btn-primary" ng-click="updateClass()">
+    </div>
+  </div>
 </div>

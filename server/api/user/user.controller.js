@@ -186,21 +186,21 @@ exports.updateCategories = function(req, res) {
   });
 };
 
-exports.updateGroupsName = function(req, res) {
+exports.updateClassName = function(req, res) {
+  var userId = req.user._id;
   var className = req.body.className;
-  var index = req.body.index;
-  User.findById(req.params.id, function (err, users) {
-    // Handle Errors
-    if (err) {
-      return handleError(res, err)
+  var classID = req.body.classID;
+  console.log("in update class");
+
+  User.findById(userId, function (err, users) {
+    for(var index = 0; index < users.classList.length; index++){
+      console.log("In for");
+      if(users.classList[index]._id == classID){
+        console.log("Match");
+        users.classList[index].className = className;
+      }
     }
-    if (!users) {
-      return res.send(404)
-    }
-    console.log(users.classList[index]);
-    // Merging request body and pack from DB. Special callback for arrays!
-    users.classList[index].className = className;
-    console.log(users.classList[index]);
+
     // Saves to database
     users.save(function (err) {
       if (err) {
@@ -242,10 +242,10 @@ exports.updateClasses = function(req, res) {
 
 exports.deleteClass = function(req, res) {
   var userId = req.params.id;
-  var myClass = req.body.myClass;
+  var myClassID = req.body.myClassID;
   User.findById(userId, function (err, user) {
     for(var i = 0 ; i < user.classList.length; i++){
-        if(user.classList[i]._id == myClass){
+        if(user.classList[i]._id == myClassID){
         user.classList.splice(i, 1);
       }
     }
@@ -355,7 +355,6 @@ exports.addClass = function(req, res, next) {
 
 exports.addStudent = function(req, res, next) {
   var userId = req.user._id;
-
   var studentID = req.body.studentID;
 
   User.findById(userId, function (err, user) {

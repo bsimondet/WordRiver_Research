@@ -98,53 +98,14 @@ angular.module('WordRiverApp')
       $scope.showValue = true;
     };
 
-    //Function no longer used! Used a simple patch instead of making a new server function
-    $scope.updateTile = function () {
-      //If a word is entered, but the type is not
-      if ($scope.editField.length >= 1 && $scope.editType.length < 1) {
-        $http.post('/api/tile', {
-          name: $scope.editField,
-          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
-          wordType: $scope.allWords[$scope.editWordIndex].wordType
-        });
-        $scope.removeWord($scope.wordToEdit);
-
-        $scope.editField = "";
-        //If a word is not entered, but the type has been
-      } else if ($scope.editField.length == 0 && $scope.editType.length >= 1) {
-        $http.post('/api/tile', {
-          name: $scope.allWords[$scope.editWordIndex].name,
-          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
-          wordType: $scope.editType
-        });
-        $scope.removeWord($scope.wordToEdit);
-
-        $scope.editType = "";
-        //If a word is entered, and the type is also entered
-      } else if ($scope.editField.length >= 1 && $scope.editType.length >= 1) {
-        $http.post('/api/tile', {
-          name: $scope.editField,
-          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
-          wordType: $scope.editType
-        });
-        $scope.removeWord($scope.wordToEdit);
-
-        $scope.editField = "";
-        $scope.editType = "";
-      }
-      $scope.showValue = true;
-    };
-
     //Deletes a word from the server and from a user's array of words they've created
     $scope.removeWord = function (word) {
       $scope.wordToRemove = $scope.allWords[$scope.findIndexOfWord(word)];
       $http.delete('/api/tile/' + $scope.wordToRemove._id
       ).success(function () {
-          console.log("Removed word!");
           $http.put('/api/users/' + $scope.currentUser._id + '/removeWordID',
             {wordID: $scope.wordToRemove._id}
           ).success(function () {
-              console.log("Updated user's words");
             });
         });
       $scope.getAllWords();

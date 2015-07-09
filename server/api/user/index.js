@@ -18,7 +18,7 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.patch('/:id/category', auth.isAuthenticated(), controller.updateCategories);
 router.patch('/:id/class', auth.isAuthenticated(), controller.updateClasses);
-router.put('/:id/class', auth.isAuthenticated(), controller.updateGroupsName);
+router.put('/:id/updateClassName', auth.isAuthenticated(), controller.updateClassName);
 router.put('/:id/updatePack', auth.isAuthenticated(), controller.updatePack);
 router.put('/:id/updateWord', auth.isAuthenticated(), controller.updateWord);
 router.put('/:id/deleteTile', auth.isAuthenticated(), controller.deleteTile);

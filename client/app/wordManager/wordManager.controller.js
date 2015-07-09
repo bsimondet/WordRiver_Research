@@ -340,7 +340,7 @@ angular.module('WordRiverApp')
 
     //deletes a word
     $scope.removeWord = function(tile) {
-      $scope.wordToRemove = $scope.allWords[$scope.findIndexOfWord(tile)];
+      $scope.wordToRemove = $scope.allWords[$scope.findIndexOfClass(tile)];
       $http.delete('/api/tile/'+ $scope.wordToRemove._id
       ).success(function(){
         $http.put('/api/users/' + $scope.currentUser._id + '/removeWordID',
@@ -348,7 +348,7 @@ angular.module('WordRiverApp')
         );
       });
       $scope.getWords();
-      $scope.allWords.splice($scope.findIndexOfWord(tile),1);
+      $scope.allWords.splice($scope.findIndexOfClass(tile),1);
       for(var i = 0; i < $scope.allWords.length; i++){
         if($scope.wordToRemove.id == $scope.allWords[i].id) {
             $scope.allWords.splice(i,1);
@@ -356,7 +356,7 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.findIndexOfWord = function(tile){
+    $scope.findIndexOfClass = function(tile){
       for(var i = 0; i < $scope.allWords.length; i++){
         if(tile._id == $scope.allWords[i]._id){
           return i;
@@ -366,9 +366,9 @@ angular.module('WordRiverApp')
 
     //TODO: THIS FUNCTION IS TERRIBLE - we made it this way due to time and labor constraints. PLEASE FIX.
     $scope.editWord = function(tile){
-      $scope.editWordIndex = $scope.findIndexOfWord(tile);
+      $scope.editWordIndex = $scope.findIndexOfClass(tile);
       $scope.showValue = false;
-      $scope.wordToEdit = $scope.allWords[$scope.findIndexOfWord(tile)];
+      $scope.wordToEdit = $scope.allWords[$scope.findIndexOfClass(tile)];
     };
 
     $scope.updateWord = function() {
@@ -421,7 +421,7 @@ angular.module('WordRiverApp')
     $scope.editCategory = function(category){
       $scope.editCatIndex = $scope.findIndexOfCat(category);
       $scope.showValue1 = false;
-      $scope.categoryToEdit = $scope.allWords[$scope.findIndexOfWord(category)];
+      $scope.categoryToEdit = $scope.allWords[$scope.findIndexOfClass(category)];
     };
 
     $scope.updateCategory = function(){
