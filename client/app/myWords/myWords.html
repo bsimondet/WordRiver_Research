@@ -1,4 +1,28 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="col-md-12">
-This is the myWords view.
+
+<header class="hero-unit" id="banner">
+  <div class="">
+    <h1>My Words</h1>
+  </div>
+</header>
+
+<div class="container">
+  <h1>All {{allWords.length}} Words:</h1>
+  <br>
+  <!--List of current groups with edit and remove options-->
+  <ul class="list-group scroll">
+    <p>
+    <li class="list-group-item" ng-repeat="word in allWords">
+      <label><a href="" ng-click="">{{word.name}}</a></label>
+    </li>
+  </ul>
+  <h1>Your {{userWords.length}} Words:</h1>
+  <br>
+  <!--List of current groups with edit and remove options-->
+  <ul class="list-group scroll">
+    <p>
+    <li class="list-group-item" ng-repeat="word in userWords">
+      <label><a href="" ng-click="">{{word.name}}</a></label>
+    </li>
+  </ul>
 </div>

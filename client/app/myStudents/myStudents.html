@@ -1,5 +1,19 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="col-md-12">
-This is the myStudents view.
+<header class="hero-unit" id="banner">
+  <div class="">
+    <h1>My Students</h1>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Your {{myStudents.length}} Students:</h1>
+  <br>
+  <!--List of current groups with edit and remove options-->
+  <ul class="list-group scroll">
+    <p>
+    <li class="list-group-item" ng-repeat="student in myStudents">
+      <label><a href="" ng-click="">{{student.firstName}} {{student.lastName}}</a></label>
+    </li>
+  </ul>
 </div>

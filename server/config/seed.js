@@ -118,7 +118,7 @@ User.find({}).remove(function () {
         "552d5b08bd3cd8f963e1167c",
         "552d5b08a734bbb099a68155",
         "552d5b087608732157874619",
-        "552d5b088f784a3f8ef312ef",
+     /*   "552d5b088f784a3f8ef312ef",
         "552d5b08a08d5bda499e42cf",
         "552d5b08ac6a61a811b9c664",
         "552d5b08597bf5df8d343bfb",
@@ -241,7 +241,7 @@ User.find({}).remove(function () {
         "55857bd21eb0b1273145eb07",
         "55857bf01eb0b1273145eb09",
         "55857c0d1eb0b1273145eb0a",
-        "55857c131eb0b1273145eb0b",
+        "55857c131eb0b1273145eb0b",*/
         "55857c181eb0b1273145eb0c",
         "552d5b08e1a3de8740774fad",
         "552c24181e58616ee17366ad",
