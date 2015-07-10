@@ -40,16 +40,20 @@ User.find({}).remove(function () {
       ],
       "contextPacks": [{            //  context packs (this) teacher has created
         "_id": "553167d183c993666d03ce80",
-        "packName": "Pacman",
-        "words": [],            //  loose word IDs (this) teacher has assigned to context packs
-        "wordPacks": []     //  word pack IDs (this) teacher has assigned to context packs
+        "packName": "Superheroes",
+        "words": [
+          "5511ae8cec56277a4af216a5"
+        ],            //  loose word IDs (this) teacher has assigned to context packs
+        "wordPacks": [
+          "553167d1c67764f3773612dc"
+        ]     //  word pack IDs (this) teacher has assigned to context packs
       }],
       /*Names of groups with assigned wordPacks by id*/
       "classList": [
         {
         "className": "Reading 3rd Grade",
         "_id": "553167d183c993d16d03ce80",
-        "contextPacks": [],
+        "contextPacks": ["553167d183c993666d03ce80"],
         "wordPacks": [],
         "words": [],
         "groupList": [
@@ -70,7 +74,7 @@ User.find({}).remove(function () {
           {
             "groupName": "Group C",
             "_id": "5535520dd7b5c70193c4993c",
-            "contextPacks": [],
+            "contextPacks": ["553167d183c993666d03ce80"],
             "wordPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86"],
             "words": ["5511ae8cf6f121e4c3108cd6", "552c24183b10b8ec888e042b", "552d5b08e1a3de8740774fad"]
           }
@@ -1797,7 +1801,7 @@ Category.find({}).remove(function () {
     },
     {
       "_id": "553167d1c67764f3773612dc",
-      "name": "Superheroes",
+      "name": "Superwords",
       "isWordType": false,
       "creatorID": "5511a83da168f8b5f3144f02"
     },

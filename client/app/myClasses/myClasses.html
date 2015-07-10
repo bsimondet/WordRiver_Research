@@ -7,7 +7,7 @@
 </header>
 
 <div  ng-controller="JsonFileCtrl" class="container">
-  <div class="col-sm-12" ng-hide="viewGroupInfo">
+  <div class="col-sm-12" ng-show="viewGroupInfo">
   <h2>Your {{classArray.length}} Classes:</h2>
     <div class="col-xs-4">
       <!--List of current groups with edit and remove options-->
@@ -15,14 +15,9 @@
         <label><a href="" ng-click="">{{class.className}}</a></label>
         <a class="glyphicon glyphicon-pencil" ng-click="editClassName(class)"></a>
         <a class="glyphicon glyphicon-trash" ng-click="removeClass(class)"></a>
-        <br>
-        <button class="btn-primary" ng-click="isGroupsCollapsed = !isGroupsCollapsed">View Groups</button>
+        <button class="btn-primary" ng-click="isGroupsCollapsed = !isGroupsCollapsed">Toggle Groups</button>
         <div collapse="isGroupsCollapsed" ng-repeat="group in class.groupList">
-            <label><a href="" ng-click="">{{group.groupName}}</a></label>
-        </div>
-        <button class="btn-primary" ng-click="viewStudents(class._id); isStudentsCollapsed=!isStudentsCollapsed">View Students</button>
-        <div collapse="isStudentsCollapsed" ng-repeat="student in studentsInClass">
-          <label><a href="" ng-click="">{{student.firstName}} {{student.lastName}}</a></label>
+            <label><a href="" ng-click="viewGroups(group)">{{group.groupName}}</a></label>
         </div>
       </div>
     </div>
@@ -33,7 +28,31 @@
     </div>
   </div>
 
-  <div class="col-sm-12" ng-show="viewGroupInfo">
-      Just checking
+  <div class="col-sm-12" ng-hide="viewGroupInfo">
+    <button class="btn btn-primary" ng-click="viewGroupInfo = true;">Back to Classes</button>
+    <h2>{{currentGroup.groupName}}:
+    <a class="glyphicon glyphicon-pencil" ng-click="editGroupName(currentGroup)"></a>
+    <a class="glyphicon glyphicon-trash" ng-click="removeGroup(currentGroup)"></a>
+    </h2>
+    <h3>Context Packs:</h3>
+    <button class="btn-primary" ng-click="isContextPacksCollapsed = !isContextPacksCollapsed">View Context Packs</button>
+    <div collapse="isContextPacksCollapsed"  ng-repeat="contextPack in contextPacksInGroup">
+      <label><a href="" ng-click="">{{contextPack.packName}}</a></label>
+    </div>
+    <h3>Word Packs:</h3>
+    <button class="btn-primary" ng-click="isWordPacksCollapsed = !isWordPacksCollapsed">View Word Packs</button>
+    <div collapse="isWordPacksCollapsed"  ng-repeat="wordPack in wordPacksInGroup">
+      <label><a href="" ng-click="">{{wordPack.name}}</a></label>
+    </div>
+    <h3>Words:</h3>
+    <button class="btn-primary" ng-click="isWordsCollapsed = !isWordsCollapsed">View Words</button>
+    <div collapse="isWordsCollapsed"  ng-repeat="word in wordsInGroup">
+      <label><a href="" ng-click="">{{word.name}}</a></label>
+    </div>
+    <h3>Students:</h3>
+    <button class="btn-primary" ng-click="isStudentsCollapsed = !isStudentsCollapsed">View Students</button>
+    <div collapse="isStudentsCollapsed"  ng-repeat="student in studentsInGroup">
+    <label><a href="" ng-click="">{{student.firstName}} {{student.lastName}}</a></label>
+    </div>
   </div>
 </div>
