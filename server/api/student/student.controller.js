@@ -140,6 +140,24 @@ exports.removeClass = function (req, res) {
   });
 };
 
+exports.removeGroup = function (req, res) {
+  var userId = req.body._id;
+  var groupID = req.body.groupID;
+  Student.findById(userId, function (err, user) {
+    for (var i = 0; i < user.classList.length; i++) {
+      for (var j = 0; j < user.classList[i].groupList.length; j++) {
+        if (user.classList[i].groupList[j] == groupID) {
+          user.classList[i].groupList.splice(j, 1);
+        }
+      }
+    }
+    user.save(function (err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 // Deletes a thing from the DB.
 exports.destroy = function(req, res) {
   Student.findById(req.params.id, function (err, student) {

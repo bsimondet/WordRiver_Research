@@ -14,10 +14,17 @@ angular.module('WordRiverApp')
     $scope.isWordPacksCollapsed = true;
     $scope.isContextPacksCollapsed = true;
     $scope.hideEdit = true;
-    $scope.viewGroupInfo = true;
+    $scope.hideGroupEdit = true;
+    $scope.viewStudents = true;
+    $scope.viewWords = true;
+    $scope.viewWordPacks = true;
+    $scope.viewContextPacks = true;
+    $scope.viewClassInfo = true;
     $scope.classToEdit = null;
     $scope.editField = "";
+    $scope.groupEditField = "";
     $scope.currentGroup = null;
+    $scope.currentGroupClass = null;
     $scope.userStudents = [];
     $scope.studentsInClass = [];
     $scope.studentsInGroup = [];
@@ -38,14 +45,6 @@ angular.module('WordRiverApp')
       return false;
     };
 
-    $scope.findIndexOfClass = function (myclass) {
-      for (var i = 0; i < $scope.classArray.length; i++) {
-        if (myclass._id == $scope.classArray[i]._id) {
-          return i;
-        }
-      }
-    };
-
     $scope.checkForDuplicates = function(array){
       for (var i = 0; i < array.length; i++) {
         for (var j = i + 1; j < array.length; j++) {
@@ -63,7 +62,9 @@ angular.module('WordRiverApp')
         $scope.contextPacksArray = [];
         $scope.classArray = user.classList;
         $scope.contextPacksArray = user.contextPacks;
-      })
+      });
+      $scope.classArray = $scope.checkForDuplicates($scope.classArray);
+      $scope.contextPacksArray = $scope.checkForDuplicates($scope.contextPacksArray);
     };
 
     $scope.getClasses();
@@ -95,8 +96,27 @@ angular.module('WordRiverApp')
       $http.get('/api/tile').success(function(tiles) {
         $scope.wordsArray = tiles;
       });
+      $scope.wordsArray = $scope.checkForDuplicates($scope.wordsArray);
     };
     $scope.getWords();
+
+
+    $scope.findIndexOfClass = function (myclass) {
+      for (var i = 0; i < $scope.classArray.length; i++) {
+        if (myclass._id == $scope.classArray[i]._id) {
+          return i;
+        }
+      }
+    };
+
+    $scope.findIndexOfGroup = function (group) {
+      var editClassIndex = $scope.findIndexOfClass($scope.currentGroupClass);
+      for (var i = 0; i < $scope.classArray[editClassIndex].groupList.length; i++) {
+        if (group._id == $scope.classArray[editClassIndex].groupList[i]._id) {
+          return i;
+        }
+      }
+    };
 
     $scope.editClassName = function (myclass) {
       $scope.editClassIndex = $scope.findIndexOfClass(myclass);
@@ -107,10 +127,9 @@ angular.module('WordRiverApp')
     //Updates a word in the server when it's edited
     $scope.updateClass = function () {
       //If a word is entered, but the type is not
-      console.log($scope.editField);
       if ($scope.editField.length > 0) {
         $http.put('/api/users/' + $scope.currentUser._id + '/class', {
-          classID: $scope.classArray[$scope.editClassIndex]._id,
+          classID: $scope.classToEdit._id,
           className: $scope.editField
         }).success(function(){
           $scope.editField = "";
@@ -129,8 +148,76 @@ angular.module('WordRiverApp')
         {myClassID: $scope.classToRemove._id}
       ).success(function () {
           $scope.getClasses();
-          console.log("removed class");
+          $scope.removeClassIDFromStudents($scope.classToRemove._id);
         });
+    };
+
+    $scope.removeClassIDFromStudents = function (toRemoveID) {
+      for(var index = 0; index < $scope.userStudents.length; index++) {
+        for(var index2 = 0; index2 < $scope.userStudents[index].classList.length; index2++) {
+          if ($scope.userStudents[index].classList[index2]._id == toRemoveID) {
+            $http.put('/api/students/' + $scope.userStudents[index]._id + '/removeClass',
+              {_id:$scope.userStudents[index]._id,
+                classID: toRemoveID}
+            ).success(function () {
+              });
+          }
+        }
+      }
+    };
+
+    $scope.editGroupName = function (group) {
+      $scope.editClassIndex = $scope.findIndexOfClass($scope.currentGroupClass);
+      $scope.editGroupIndex = $scope.findIndexOfGroup(group);
+      $scope.hideGroupEdit = false;
+      $scope.groupToEdit = $scope.classArray[$scope.editClassIndex].groupList[$scope.editGroupIndex];
+    };
+
+    //Updates a word in the server when it's edited
+    $scope.updateGroup = function () {
+      if ($scope.groupEditField.length > 0) {
+        $http.put('/api/users/' + $scope.currentUser._id + '/group', {
+          groupID: $scope.groupToEdit._id,
+          groupName: $scope.groupEditField
+        }).success(function(){
+          $scope.currentGroup.groupName = $scope.groupEditField;
+          $scope.groupEditField = "";
+          $scope.getClasses();
+          $scope.hideGroupEdit = true;
+        });
+      } else {
+        alert("Please enter a new name for this group");
+      }
+    };
+
+    //Deletes a word from the server and from a user's array of words they've created
+    $scope.removeGroup = function (group) {
+      $scope.editClassIndex = $scope.findIndexOfClass($scope.currentGroupClass);
+      $scope.editGroupIndex = $scope.findIndexOfGroup(group);
+      $scope.groupToRemove = $scope.classArray[$scope.editClassIndex].groupList[$scope.editGroupIndex];
+      $http.put('/api/users/' + $scope.currentUser._id + '/deleteGroup',
+        {groupID: $scope.groupToRemove._id}
+      ).success(function () {
+          $scope.getClasses();
+          $scope.removeGroupIDFromStudents($scope.groupToRemove._id);
+          $scope.viewClassInfo = true;
+        });
+    };
+
+    $scope.removeGroupIDFromStudents = function (toRemoveID) {
+      for(var index = 0; index < $scope.userStudents.length; index++) {
+        for(var index2 = 0; index2 < $scope.userStudents[index].classList.length; index2++) {
+          for(var index3 = 0; index3 < $scope.userStudents[index].classList[index2].groupList.length; index3++) {
+            if ($scope.userStudents[index].classList[index2].groupList[index3] == toRemoveID) {
+              $http.put('/api/students/' + $scope.userStudents[index]._id + '/removeGroup',
+                {_id: $scope.userStudents[index]._id,
+                  groupID: toRemoveID}
+              ).success(function () {
+                });
+            }
+          }
+        }
+      }
     };
 
     $scope.viewStudents = function(classID){
@@ -144,13 +231,14 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.viewGroups = function(group){
-      $scope.viewGroupInfo = false;
+    $scope.viewGroups = function(group, myClass){
+      $scope.viewClassInfo = false;
       $scope.contextPacksInGroup = [];
       $scope.wordPacksInGroup = [];
       $scope.wordsInGroup = [];
       //currentGroup is used in html side as well
       $scope.currentGroup = group;
+      $scope.currentGroupClass = myClass;
       $scope.getStudentsInGroup($scope.currentGroup);
       $scope.getIDsInGroup($scope.currentGroup);
       $scope.getGroupArray($scope.contextPackIDsInGroup, $scope.contextPacksArray, $scope.contextPacksInGroup);

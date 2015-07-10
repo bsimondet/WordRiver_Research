@@ -14,5 +14,6 @@ router.patch('/:id', controller.updateTags);
 router.delete('/:id', controller.destroy);
 router.put('/:id/assignToClass', controller.assignToClass);
 router.put('/:id/removeClass', controller.removeClass);
+router.put('/:id/removeGroup', controller.removeGroup);
 
 module.exports = router;

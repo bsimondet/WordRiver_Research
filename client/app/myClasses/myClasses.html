@@ -7,52 +7,81 @@
 </header>
 
 <div  ng-controller="JsonFileCtrl" class="container">
-  <div class="col-sm-12" ng-show="viewGroupInfo">
+  <div class="col-sm-12" ng-show="viewClassInfo">
   <h2>Your {{classArray.length}} Classes:</h2>
     <div class="col-xs-4">
       <!--List of current groups with edit and remove options-->
       <div ng-repeat="class in classArray">
-        <label><a href="" ng-click="">{{class.className}}</a></label>
+        <label>{{class.className}}</label>
         <a class="glyphicon glyphicon-pencil" ng-click="editClassName(class)"></a>
         <a class="glyphicon glyphicon-trash" ng-click="removeClass(class)"></a>
         <button class="btn-primary" ng-click="isGroupsCollapsed = !isGroupsCollapsed">Toggle Groups</button>
         <div collapse="isGroupsCollapsed" ng-repeat="group in class.groupList">
-            <label><a href="" ng-click="viewGroups(group)">{{group.groupName}}</a></label>
+            <label><a href="" ng-click="viewGroups(group, class)">{{group.groupName}}</a></label>
         </div>
       </div>
     </div>
     <div class="col-xs-4" ng-hide="hideEdit">
       <br>
-      <input ng-model="editField" type="text" size="15" placeholder={{classArray[editClassIndex].className}}>
+      <input ng-model="editField" type="text" size="15" placeholder={{classToEdit.className}}>
       <input type="submit" value="Edit Class Name" class="btn-primary" ng-click="updateClass()">
     </div>
   </div>
 
-  <div class="col-sm-12" ng-hide="viewGroupInfo">
-    <button class="btn btn-primary" ng-click="viewGroupInfo = true;">Back to Classes</button>
+  <div class="col-sm-12" ng-hide="viewClassInfo">
+    <button class="btn btn-primary" ng-click="viewClassInfo = true;">Back to Classes</button>
     <h2>{{currentGroup.groupName}}:
-    <a class="glyphicon glyphicon-pencil" ng-click="editGroupName(currentGroup)"></a>
-    <a class="glyphicon glyphicon-trash" ng-click="removeGroup(currentGroup)"></a>
+      <a class="glyphicon glyphicon-pencil" ng-click="editGroupName(currentGroup)"></a>
+      <a class="glyphicon glyphicon-trash" ng-click="removeGroup(currentGroup)"></a>
     </h2>
-    <h3>Context Packs:</h3>
-    <button class="btn-primary" ng-click="isContextPacksCollapsed = !isContextPacksCollapsed">View Context Packs</button>
-    <div collapse="isContextPacksCollapsed"  ng-repeat="contextPack in contextPacksInGroup">
-      <label><a href="" ng-click="">{{contextPack.packName}}</a></label>
+    <!--Area for toggle buttons-->
+    <div class="col-xs-3">
+      <button class="btn-primary" ng-click="viewContextPacks = !viewContextPacks">View Context Packs</button>
+      <br>
+      <button class="btn-primary" ng-click="viewWordPacks = !viewWordPacks">View Word Packs</button>
+      <br>
+      <button class="btn-primary" ng-click="viewWords = !viewWords">View Words</button>
+      <br>
+      <button class="btn-primary" ng-click="viewStudents = !viewStudents">View Students</button>
     </div>
-    <h3>Word Packs:</h3>
-    <button class="btn-primary" ng-click="isWordPacksCollapsed = !isWordPacksCollapsed">View Word Packs</button>
-    <div collapse="isWordPacksCollapsed"  ng-repeat="wordPack in wordPacksInGroup">
-      <label><a href="" ng-click="">{{wordPack.name}}</a></label>
+    <!--Area to view context packs information-->
+    <div class="col-xs-3" ng-hide="viewContextPacks">
+      <h3>Context Packs:</h3>
+      <div ng-repeat="contextPack in contextPacksInGroup">
+        <label><a href="" ng-click="">{{contextPack.packName}}</a></label>
+      </div>
+      <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
     </div>
-    <h3>Words:</h3>
-    <button class="btn-primary" ng-click="isWordsCollapsed = !isWordsCollapsed">View Words</button>
-    <div collapse="isWordsCollapsed"  ng-repeat="word in wordsInGroup">
-      <label><a href="" ng-click="">{{word.name}}</a></label>
+    <!--Area to view word packs information-->
+    <div class="col-xs-3" ng-hide="viewWordPacks">
+      <h3>Word Packs:</h3>
+      <div ng-repeat="wordPack in wordPacksInGroup">
+        <label><a href="" ng-click="">{{wordPack.name}}</a></label>
+      </div>
+      <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
     </div>
-    <h3>Students:</h3>
-    <button class="btn-primary" ng-click="isStudentsCollapsed = !isStudentsCollapsed">View Students</button>
-    <div collapse="isStudentsCollapsed"  ng-repeat="student in studentsInGroup">
-    <label><a href="" ng-click="">{{student.firstName}} {{student.lastName}}</a></label>
+    <!--Area to view words information-->
+    <div class="col-xs-3" ng-hide="viewWords">
+      <h3>Words:</h3>
+      <div ng-repeat="word in wordsInGroup">
+        <label><a href="" ng-click="">{{word.name}}</a></label>
+      </div>
+      <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
+    </div>
+    <!--Area to view student information-->
+    <div class="col-xs-3" ng-hide="viewStudents">
+      <h3>Students:</h3>
+      <div ng-repeat="student in studentsInGroup">
+        <label><a href="" ng-click="">{{student.firstName}} {{student.lastName}}</a></label>
+      </div>
+      <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
+    </div>
+    <!--Area for editing a group name-->
+    <div class="col-xs-3" ng-hide="hideGroupEdit">
+      <br>
+      <input ng-model="groupEditField" type="text" size="15" placeholder={{groupToEdit.groupName}}>
+      <input type="submit" value="Edit Group Name" class="btn-primary" ng-click="updateGroup()">
+      <input type="submit" value="Cancel" class="btn-primary" ng-click="hideGroupEdit = !hideGroupEdit">
     </div>
   </div>
 </div>

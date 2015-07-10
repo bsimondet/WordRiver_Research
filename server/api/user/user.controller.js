@@ -190,18 +190,34 @@ exports.updateClassName = function(req, res) {
   var id = req.params.id;
   var className = req.body.className;
   var classID = req.body.classID;
-  //var index = req.body.index;
-  console.log("in update class");
-
   User.findById(id, function (err, users) {
     for(var index = 0; index < users.classList.length; index++){
-      console.log("In for");
       if(users.classList[index]._id == classID){
-        console.log("Match");
         users.classList[index].className = className;
       }
     }
+    // Saves to database
+    users.save(function (err) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(200, users);
+    });
+  });
+};
 
+exports.updateGroupName = function(req, res) {
+  var id = req.params.id;
+  var groupName = req.body.groupName;
+  var groupID = req.body.groupID;
+  User.findById(id, function (err, users) {
+    for(var index = 0; index < users.classList.length; index++){
+      for(var index2 = 0; index2 < users.classList[index].groupList.length; index2++){
+        if(users.classList[index].groupList[index2]._id == groupID) {
+          users.classList[index].groupList[index2].groupName = groupName;
+        }
+      }
+    }
     // Saves to database
     users.save(function (err) {
       if (err) {
@@ -248,6 +264,24 @@ exports.deleteClass = function(req, res) {
     for(var i = 0 ; i < user.classList.length; i++){
         if(user.classList[i]._id == myClassID){
         user.classList.splice(i, 1);
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+exports.deleteGroup = function(req, res) {
+  var userId = req.params.id;
+  var groupID = req.body.groupID;
+  User.findById(userId, function (err, user) {
+    for(var index = 0 ; index < user.classList.length; index++){
+      for(var index2 = 0; index2 < user.classList[index].groupList.length; index2++){
+        if(user.classList[index].groupList[index2]._id == groupID) {
+          user.classList[index].groupList.splice(index2, 1);
+        }
       }
     }
     user.save(function(err) {
