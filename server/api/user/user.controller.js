@@ -187,12 +187,13 @@ exports.updateCategories = function(req, res) {
 };
 
 exports.updateClassName = function(req, res) {
-  var userId = req.user._id;
+  var id = req.params.id;
   var className = req.body.className;
   var classID = req.body.classID;
+  //var index = req.body.index;
   console.log("in update class");
 
-  User.findById(userId, function (err, users) {
+  User.findById(id, function (err, users) {
     for(var index = 0; index < users.classList.length; index++){
       console.log("In for");
       if(users.classList[index]._id == classID){

@@ -64,19 +64,19 @@ angular.module('WordRiverApp')
     //Updates a word in the server when it's edited
     $scope.updateClass = function () {
       //If a word is entered, but the type is not
+      console.log($scope.editField);
       if ($scope.editField.length > 0) {
-        $http.put('/api/users/' + $scope.currentUser._id + '/updateClassName', {
-          classID: $scope.classToEdit._id,
-          className: $scope.classToEdit.className
+        $http.put('/api/users/' + $scope.currentUser._id + '/class', {
+          classID: $scope.classArray[$scope.editClassIndex]._id,
+          className: $scope.editField
         }).success(function(){
-          console.log("updated class name");
           $scope.editField = "";
           $scope.getClasses();
+          $scope.hideEdit = true;
         });
       } else {
         alert("Please enter a new name for this class");
       }
-     // $scope.hideEdit = true;
     };
 
     //Deletes a word from the server and from a user's array of words they've created
@@ -91,7 +91,6 @@ angular.module('WordRiverApp')
     };
 
     $scope.viewStudents = function(classID){
-      //$scope.isStudentsCollapsed = !$scope.isStudentsCollapsed;
       $scope.studentsInClass = [];
       for(var index = 0; index < $scope.userStudents.length; index++){
         for(var index2 = 0; index2 < $scope.userStudents[index].classList.length; index2++){
