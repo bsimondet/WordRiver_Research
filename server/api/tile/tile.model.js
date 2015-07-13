@@ -5,10 +5,8 @@ var mongoose = require('mongoose'),
 
 var TileSchema = new Schema({
   name: String, //Tile's word
-  //creatorID: String,
-  wordPacks: [],
-  active: Boolean, //To check whether a tile has been used any student
-  wordType: String
+  wordType: String,
+  userCreated: Boolean
 });
 
 module.exports = mongoose.model('Tile', TileSchema);

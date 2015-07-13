@@ -21,11 +21,7 @@ var UserSchema = new Schema({
   studentList: [],		 //  IDs of the students (this) teacher has created
   words: [],                      //  IDs of the words (this) teacher has created
   wordPacks: [],		 //  IDs of the word packs (this) teacher has created
-  contextPacks: [{            //  context packs (this) teacher has created
-    packName: String,
-    words: [],            //  word IDs (this) teacher has assigned to context packs
-    wordPacks: []     //  word pack IDs (this) teacher has assigned to context packs
-  }],
+  contextPacks: [],  //  IDs of the context packs (this) teacher has created
   classList: [{                   //  classes (this) teacher has created
     className: String,
     words: [],            //  word IDs (this) teacher has assigned to this class

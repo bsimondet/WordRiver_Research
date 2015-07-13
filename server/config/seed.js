@@ -9,7 +9,8 @@
 var User = require('../api/user/user.model');
 var Student = require('../api/student/student.model');
 var Tile = require('../api/tile/tile.model');
-var Category = require('../api/category/category.model');
+var WordPack = require('../api/category/category.model');
+var ContextPack = require('../api/contextPack/contextPack.model');
 
 User.find({}).remove(function () {
   User.create({
@@ -21,7 +22,12 @@ User.find({}).remove(function () {
         "type": "user"
       },
       "password": "joethe",
-      /*Names of all current wordPacks by id*/
+      /*All words user has added by id*/
+      "words": [
+        "5511ae8cec56277a4af216a5",
+        "552c24180bb0fbbee3c0994b"
+      ],
+      /*Word packs user has added by id*/
       "wordPacks": [
         "553167d183c193d16d03ce80",
         "553167d1afa1bda9bc0d055a",
@@ -38,17 +44,11 @@ User.find({}).remove(function () {
         "558584084afb8b051fa83846",
         "55858751d0ec44402530da01"
       ],
-      "contextPacks": [{            //  context packs (this) teacher has created
-        "_id": "553167d183c993666d03ce80",
-        "packName": "Superheroes",
-        "words": [
-          "5511ae8cec56277a4af216a5"
-        ],            //  loose word IDs (this) teacher has assigned to context packs
-        "wordPacks": [
-          "553167d1c67764f3773612dc"
-        ]     //  word pack IDs (this) teacher has assigned to context packs
-      }],
-      /*Names of groups with assigned wordPacks by id*/
+      /*Context packs user has added by id*/
+      "contextPacks": [
+        "553167d183c993666d03ce80"
+      ],
+      /*Names of classes with assigned groups*/
       "classList": [
         {
         "className": "Reading 3rd Grade",
@@ -104,176 +104,7 @@ User.find({}).remove(function () {
           ]
         }
       ],
-      /*All current words in system by id*/
-      "words": [
-        "552d5b08f631321946da8341",
-        "552d5b08adc822e8831e298b",
-        "552d5b08acded8a6cd6e8dcd",
-        "552d5b08791292bc5e665b61",
-        "552d5b0840b221baaad921ec",
-        "5592d77415d5e2b723c66de3",
-        "552d5b08cb39389025769c04",
-        "552d5b0815a9a1d0c6d88e3f",
-        "552d5b086f1b0ace75ad66b6",
-        "552d5b0887c944a743ba6031",
-        "552d5b088b5e733aba8d2620",
-        "552d5b08bc8421b20abb5a62",
-        "552d5b089bd03191b7ec9afc",
-        "552d5b08bd3cd8f963e1167c",
-        "552d5b08a734bbb099a68155",
-        "552d5b087608732157874619",
-     /*   "552d5b088f784a3f8ef312ef",
-        "552d5b08a08d5bda499e42cf",
-        "552d5b08ac6a61a811b9c664",
-        "552d5b08597bf5df8d343bfb",
-        "552d5b089948ede80f3adc37",
-        "552d5b08bd843d9c13526d76",
-        "552d5b082a0145f4a6ab126b",
-        "552d5b0836a47a9760ce84bc",
-        "552d5b08974d0d4e9a148336",
-        "552d5b08960c4c9f31af08f9",
-        "552d5b082ac06aace229fc18",
-        "552d5b080a41ac71696ae275",
-        "552d5b08ebef1861e6925df1",
-        "552d5b086fdeebe962ffc171",
-        "552d5b0881b0e2b117537951",
-        "552d5b082d9c84e6c572461f",
-        "552d5b08f186ab84dd36bd24",
-        "552d5b08ecffac6643646176",
-        "552d5b08461def276c7589ea",
-        "552d5b08caede2169f0ab287",
-        "552d5b08acda561db7b3c022",
-        "552d5b0873d2087138f0b0e3",
-        "552d5b080ddd0f4c449a6930",
-        "552d5b08e54bac39a0fa5303",
-        "552d5b082efcaa22520e444b",
-        "552d5b0807228254a78d0266",
-        "552d5b088f9b179c9f41b915",
-        "552d5b08e971cb2f0c9c4a3b",
-        "552d5b082fb9929fbcc7639e",
-        "552d5b08cd63a5895aac2582",
-        "552d5b08ff86b2bcff1588c2",
-        "552d5b08e723ee4287d0e8c6",
-        "552d5b087f7d2946369694ec",
-        "552d5b08efa1707df67f3c69",
-        "552d5b089f3cd6659ecec9f7",
-        "552d5b084dd671476f5b2f19",
-        "5592cc8fc7919c731a730d67",
-        "552d5b08d359fad21a131789",
-        "552d5b082c63acb89b72cf89",
-        "552d5b089c748571cac88a40",
-        "552d5b085524dd49b0aa933f",
-        "552d5b08cb8d71b90811efe3",
-        "552d5b08a9dc076e610ffc7d",
-        "552d5b08a55d156939bff935",
-        "552d5b08b40c993e7068dca1",
-        "552d5b0820c26a478b95f7bd",
-        "552d5b0836a6578211cb2886",
-        "5592cd1c47dca2be1a798bc9",
-        "5592d648545790d31af9f70a",
-        "5592d64d545790d31af9f70b",
-        "5592d6a5ffee94f722170617",
-        "5592d6d31104590823faeb32",
-        "552d5b08619b6ef36f95f8fd",
-        "552d5b08e274fc1a6591c02b",
-        "552d5b08267ab9df7ef30c11",
-        "552d5b0875ccfa12a218aa77",
-        "552d5b08e511287e53be311d",
-        "552d5b08873a6b80dde989f9",
-        "552d5b081bc5d94baaee575c",
-        "552d5b0808eff2d9ee6452b4",
-        "552d5b08142365901ff49f2e",
-        "552d5b08c8e6226ce98cdafd",
-        "552d5b08d9031837ac352ecb",
-        "552d5b081003bdec4c0446c4",
-        "552d5b083599e39053bc5ac9",
-        "552d5b087260cda8fa58b0ef",
-        "552d5b08c50289e73d8a9e99",
-        "552d5b085a5caeb37158c286",
-        "552d5b08f198fb94de7fccd9",
-        "55856fb708209fde1a2b8af5",
-        "55856f7608209fde1a2b8af4",
-        "5585701708209fde1a2b8af7",
-        "5585704a08209fde1a2b8af8",
-        "558570aa08209fde1a2b8af9",
-        "558570d208209fde1a2b8afa",
-        "558570fa08209fde1a2b8afb",
-        "5585712508209fde1a2b8afc",
-        "5585713b08209fde1a2b8afd",
-        "5585850e9600193b2058a717",
-        "558585129600193b2058a718",
-        "5585851d9600193b2058a719",
-        "558585239600193b2058a71a",
-        "558585df76957bfd22fcfd64",
-        "558585e976957bfd22fcfd65",
-        "558585f076957bfd22fcfd66",
-        "558585f576957bfd22fcfd67",
-        "558587c2147e142026ba8c65",
-        "558587c9147e142026ba8c66",
-        "558587d3147e142026ba8c67",
-        "558587da147e142026ba8c68",
-        "558587e4147e142026ba8c69",
-        "558587eb147e142026ba8c6a",
-        "558587f1147e142026ba8c6b",
-        "558587f9147e142026ba8c6c",
-        "558587fe147e142026ba8c6d",
-        "5592cb4c510c1c3c186f6232",
-        "55858803147e142026ba8c6e",
-        "5511ae8c805b0d983f66e2cd",
-        "5511ae8cec56277a4af216a5",
-        "5511ae8c1fb25384d865e514",
-        "5511ae8cf6f121e4c3108cd6",
-        "5511ae8cb5ac0ff225f5fde2",
-        "5511ae8c127053ad5bf17926",
-        "552c2418c7134c9a280c8048",
-        "552c2418684d651eee7cea6e",
-        "552c2418e365512da04e88c6",
-        "5511ae8cfb1b2d41b9f92888",
-        "5511ae8c8b6533965921e512",
-        "5511ae8ce28633ca8ad95f7f",
-        "552c24180bb0fbbee3c0994b",
-        "552c24180d441ed98f5c9b3b",
-        "552c2418f3a3808dd9765a0f",
-        "55857b941eb0b1273145eaff",
-        "55857b981eb0b1273145eb00",
-        "55857b9d1eb0b1273145eb01",
-        "55857bb01eb0b1273145eb02",
-        "55857bb81eb0b1273145eb03",
-        "55857bbe1eb0b1273145eb04",
-        "55857bc41eb0b1273145eb05",
-        "55857bc91eb0b1273145eb06",
-        "55857bd21eb0b1273145eb07",
-        "55857bf01eb0b1273145eb09",
-        "55857c0d1eb0b1273145eb0a",
-        "55857c131eb0b1273145eb0b",*/
-        "55857c181eb0b1273145eb0c",
-        "552d5b08e1a3de8740774fad",
-        "552c24181e58616ee17366ad",
-        "552d5b0824d1092b1ed1c157",
-        "552d5b0835f412b5e2610557",
-        "552d5b084c21c73298f493bd",
-        "5511ae8c081ccbd0d072d7b4",
-        "55857d171eb0b1273145eb0d",
-        "55857d531eb0b1273145eb0e",
-        "552c24185768cb166a497fdb",
-        "5592cbe9b0983c8b19453446",
-        "552c2418971878c01bab1e7c",
-        "552c24183b10b8ec888e042b",
-        "552c2418291728ecd1d4667d",
-        "552c241822d53b21154c0cc0",
-        "552c2418c036ef35fe0bac32",
-        "552d5c8011d58a4ad979d9b0",
-        "552d5c80d6a8d78c5541b508",
-        "552d5c80c0b37217fd3eded3",
-        "552d5c80af62cb1c0a09f7bf",
-        "552d5b0887232647659a6296",
-        "552d5b086d8bd05eb7a71766",
-        "552d5b08b1e363557b2d662c",
-        "552d5b08a2385a889f90f803",
-        "552d5b086a2b54d6b160c51d",
-        "552d5b0861219d0e0572b532"
-      ],
-      /*All students in system by id*/
+      /*All students user has added by id*/
       "studentList": [
         "5511ab56117e23f0412fd08f",
         "5511ab564ac02dbaf337270d",
@@ -661,1192 +492,907 @@ Tile.find({}).remove(function () {
        assigned to wordPacks,
        active state,
        word type*/
+      "userCreated": false,
       "_id": "5511ae8c805b0d983f66e2cd",
       "name": "mail",
-      "wordPacks": ["553167d1d26d6cb60967d8a5"],
-      "active": false,
       "wordType": "Noun"
     }, {
+      "userCreated": true,
       "_id": "5511ae8cec56277a4af216a5",
       "name": "Batman",
-      "wordPacks": ["553167d1c67764f3773612dc"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "5511ae8c1fb25384d865e514",
       "name": "dog",
-      "wordPacks": ["553167d1cd3291e1352efe94"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "5511ae8cf6f121e4c3108cd6",
       "name": "book",
-      "wordPacks": ["553167d1d969a916cab51920"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "5511ae8cb5ac0ff225f5fde2",
       "name": "pencil",
-      "wordPacks": ["553167d1d969a916cab51920"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "5511ae8cfb1b2d41b9f92888",
       "name": "desk",
-      "wordPacks": ["553167d1d969a916cab51920"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "5511ae8c127053ad5bf17926",
       "name": "cat",
-      "wordPacks": ["553167d1cd3291e1352efe94"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "5511ae8ce28633ca8ad95f7f",
       "name": "house",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "5511ae8c8b6533965921e512",
       "name": "ball",
-      "wordPacks": ["553167d13562bc39e23e4d3b"],
-      "active": false,
       "wordType": "Noun"
-
     },
     {
+      "userCreated": false,
       "_id": "552c2418c7134c9a280c8048",
       "name": "a",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Article"
     },
     {
+      "userCreated": false,
       "_id": "552c24180d441ed98f5c9b3b",
       "name": "bear",
-      "wordPacks": ["553167d1cd3291e1352efe94"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "552c2418684d651eee7cea6e",
       "name": "stamp",
-      "wordPacks": ["553167d1d26d6cb60967d8a5"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "552c2418f3a3808dd9765a0f",
       "name": "eat",
-      "wordPacks": ["553167d1c296f9753ce8447f", "553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
+      "userCreated": true,
       "_id": "552c24180bb0fbbee3c0994b",
       "name": "Iron Man",
-      "wordPacks": ["553167d1c67764f3773612dc"],
-      "active": false,
       "wordType": "Noun"
     },
     {
+      "userCreated": false,
       "_id": "552c2418e365512da04e88c6",
       "name": "teacher",
-      "wordPacks": ["553167d1d969a916cab51920"],
-      "active": false,
       "wordType": "Noun"
     },
     {
       "name": "good",
       "wordType": "Adjective",
-      "_id": "55857b941eb0b1273145eaff",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857b941eb0b1273145eaff"
     }, {
       "name": "bad",
       "wordType": "Adjective",
-      "_id": "55857b981eb0b1273145eb00",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857b981eb0b1273145eb00"
     }, {
       "name": "guy",
       "wordType": "Noun",
-      "_id": "55857b9d1eb0b1273145eb01",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857b9d1eb0b1273145eb01"
     }, {
       "name": "Superman",
       "wordType": "Noun",
-      "_id": "55857bb01eb0b1273145eb02",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857bb01eb0b1273145eb02"
     }, {
       "name": "city",
       "wordType": "Noun",
-      "_id": "55857bb81eb0b1273145eb03",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857bb81eb0b1273145eb03"
     }, {
       "name": "peace",
       "wordType": "Noun",
-      "_id": "55857bbe1eb0b1273145eb04",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857bbe1eb0b1273145eb04"
     }, {
       "name": "cape",
       "wordType": "Noun",
-      "_id": "55857bc41eb0b1273145eb05",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857bc41eb0b1273145eb05"
     }, {
       "name": "villain",
       "wordType": "Noun",
-      "_id": "55857bc91eb0b1273145eb06",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857bc91eb0b1273145eb06"
     }, {
       "name": "hero",
       "wordType": "Noun",
-      "_id": "55857bd21eb0b1273145eb07",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857bd21eb0b1273145eb07"
     }, {
       "name": "quick",
       "wordType": "Noun",
-      "_id": "55857bf01eb0b1273145eb09",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false,
+      "_id": "55857bf01eb0b1273145eb09"
     }, {
       "name": "save",
       "wordType": "Verb",
-      "_id": "55857c0d1eb0b1273145eb0a",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false, "_id": "55857c0d1eb0b1273145eb0a"
     }, {
       "name": "protect",
       "wordType": "Verb",
-      "_id": "55857c131eb0b1273145eb0b",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false, "_id": "55857c131eb0b1273145eb0b"
     }, {
       "name": "wears",
       "wordType": "Verb",
-      "_id": "55857c181eb0b1273145eb0c",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false, "_id": "55857c181eb0b1273145eb0c"
     }, {
-      "__v": 2,
-      "_id": "552d5b08e1a3de8740774fad",
-      "active": false,
+      "userCreated": false, "_id": "552d5b08e1a3de8740774fad",
       "name": "away",
-      "wordType": "Adverb",
-      "wordPacks": ["553167d183c193d16d03ce80", "553167d1c67764f3773612dc"]
+      "wordType": "Adverb"
     },
     {
-      "__v": 2,
-      "_id": "552c24181e58616ee17366ad",
-      "active": false,
+      "userCreated": false, "_id": "552c24181e58616ee17366ad",
       "name": "catch",
-      "wordType": "Verb",
-      "wordPacks": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc"]
+      "wordType": "Verb"
     }, {
-      "__v": 2,
-      "_id": "552d5b0824d1092b1ed1c157",
-      "active": false,
+      "userCreated": false, "_id": "552d5b0824d1092b1ed1c157",
       "name": "find",
-      "wordType": "Verb",
-      "wordPacks": ["553167d183c193d16d03ce80", "553167d1c67764f3773612dc"]
+      "wordType": "Verb"
     }, {
-      "__v": 2,
-      "_id": "552d5b0835f412b5e2610557",
-      "active": false,
+      "userCreated": false, "_id": "552d5b0835f412b5e2610557",
       "name": "good",
-      "wordType": "Adjective",
-      "wordPacks": ["553167d1afa1bda9bc0d055a", "553167d1c67764f3773612dc"]
+      "wordType": "Adjective"
     }, {
-      "__v": 2,
-      "_id": "552d5b084c21c73298f493bd",
-      "active": false,
+      "userCreated": false, "_id": "552d5b084c21c73298f493bd",
       "name": "ran",
-      "wordType": "Verb",
-      "wordPacks": ["553167d1afa1bda9bc0d055a", "553167d1c67764f3773612dc"]
+      "wordType": "Verb"
     }, {
-      "__v": 2,
-      "_id": "5511ae8c081ccbd0d072d7b4",
-      "active": false,
+      "userCreated": false, "_id": "5511ae8c081ccbd0d072d7b4",
       "name": "run",
-      "wordType": "Verb",
-      "wordPacks": ["553167d183c193d16d03ce80", "553167d1c67764f3773612dc"]
+      "wordType": "Verb"
     }, {
       "name": "quickly",
       "wordType": "Adverb",
-      "_id": "55857d171eb0b1273145eb0d",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false, "_id": "55857d171eb0b1273145eb0d"
     }, {
       "name": "evil",
       "wordType": "Adjective",
-      "_id": "55857d531eb0b1273145eb0e",
-      "__v": 0,
-      "wordPacks": ["553167d1c67764f3773612dc"]
+      "userCreated": false, "_id": "55857d531eb0b1273145eb0e"
     },
     {
-      "_id": "552c24185768cb166a497fdb",
+      "userCreated": false, "_id": "552c24185768cb166a497fdb",
       "name": "and",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Conjunction"
     }, {
       "name": "or",
       "wordType": "Conjunction",
-      "_id": "5592cbe9b0983c8b19453446",
-      "__v": 0,
-      "wordPacks": ["553167d183c193d16d03ce80"]
+      "userCreated": false, "_id": "5592cbe9b0983c8b19453446"
     },
     {
-      "_id": "552c2418971878c01bab1e7c",
+      "userCreated": false, "_id": "552c2418971878c01bab1e7c",
       "name": "giraffe",
-      "wordPacks": ["553167d1cd3291e1352efe94"],
-      "active": false,
       "wordType": "Noun"
     },
     {
-      "_id": "552c24183b10b8ec888e042b",
+      "userCreated": false, "_id": "552c24183b10b8ec888e042b",
       "name": "send",
-      "wordPacks": ["553167d1d26d6cb60967d8a5"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552c2418291728ecd1d4667d",
+      "userCreated": false, "_id": "552c2418291728ecd1d4667d",
       "name": "apple",
-      "wordPacks": ["553167d1c296f9753ce8447f", "553167d1d969a916cab51920"],
-      "active": false,
       "wordType": "Noun"
     },
     {
-      "_id": "552c241822d53b21154c0cc0",
+      "userCreated": false, "_id": "552c241822d53b21154c0cc0",
       "name": "bus",
-      "wordPacks": ["553167d1d969a916cab51920"],
-      "active": false,
       "wordType": "Noun"
     },
     {
-      "_id": "552c2418c036ef35fe0bac32",
+      "userCreated": false, "_id": "552c2418c036ef35fe0bac32",
       "name": "fast",
-      "wordPacks": ["553167d13562bc39e23e4d3b", "553167d1c67764f3773612dc"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5c8011d58a4ad979d9b0",
+      "userCreated": false, "_id": "552d5c8011d58a4ad979d9b0",
       "name": "conductor",
-      "wordPacks": ["553167d14651465f11201014"],
-      "active": false,
       "wordType": "Noun"
     },
     {
-      "_id": "552d5c80d6a8d78c5541b508",
+      "userCreated": false, "_id": "552d5c80d6a8d78c5541b508",
       "name": "steam",
-      "wordPacks": ["553167d14651465f11201014"],
-      "active": false,
       "wordType": "Noun"
     },
     {
-      "_id": "552d5c80c0b37217fd3eded3",
+      "userCreated": false, "_id": "552d5c80c0b37217fd3eded3",
       "name": "pilot",
-      "wordPacks": ["553167d123b90c175f9b3a86"],
-      "active": false,
       "wordType": "Noun"
     },
     {
-      "_id": "552d5c80af62cb1c0a09f7bf",
+      "userCreated": false, "_id": "552d5c80af62cb1c0a09f7bf",
       "name": "fly",
-      "wordPacks": ["553167d123b90c175f9b3a86", "553167d1c67764f3773612dc"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08e1a3de8740774fad",
+      "userCreated": false, "_id": "552d5b08e1a3de8740774fad",
       "name": "away",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adverb"
     },
     {
-      "_id": "552d5b0887232647659a6296",
+      "userCreated": false, "_id": "552d5b0887232647659a6296",
       "name": "big",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b086d8bd05eb7a71766",
+      "userCreated": false, "_id": "552d5b086d8bd05eb7a71766",
       "name": "blue",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b08b1e363557b2d662c",
+      "userCreated": false, "_id": "552d5b08b1e363557b2d662c",
       "name": "can",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08a2385a889f90f803",
+      "userCreated": false, "_id": "552d5b08a2385a889f90f803",
       "name": "come",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b086a2b54d6b160c51d",
+      "userCreated": false, "_id": "552d5b086a2b54d6b160c51d",
       "name": "down",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adverb"
     },
     {
-      "_id": "552d5b08f631321946da8341",
+      "userCreated": false, "_id": "552d5b08f631321946da8341",
       "name": "for",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Conjunction"
     },
     {
-      "_id": "552d5b08adc822e8831e298b",
+      "userCreated": false, "_id": "552d5b08adc822e8831e298b",
       "name": "funny",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b08acded8a6cd6e8dcd",
+      "userCreated": false, "_id": "552d5b08acded8a6cd6e8dcd",
       "name": "go",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08791292bc5e665b61",
+      "userCreated": false, "_id": "552d5b08791292bc5e665b61",
       "name": "help",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
+      "userCreated": false,
       "_id": "552d5b0840b221baaad921ec",
       "name": "here",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adverb"
     }, {
       "name": "her",
       "wordType": "Pronoun",
-      "_id": "5592d77415d5e2b723c66de3",
-      "__v": 0,
-      "wordPacks": ["553167d1afa1bda9bc0d055a"]
+      "userCreated": false,
+      "_id": "5592d77415d5e2b723c66de3"
     },
     {
+      "userCreated": false,
       "_id": "552d5b08cb39389025769c04",
       "name": "I",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Pronoun"
     },
     {
-      "_id": "552d5b0815a9a1d0c6d88e3f",
+      "userCreated": false, "_id": "552d5b0815a9a1d0c6d88e3f",
       "name": "in",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Preposition"
     },
     {
-      "_id": "552d5b086f1b0ace75ad66b6",
+      "userCreated": false, "_id": "552d5b086f1b0ace75ad66b6",
       "name": "is",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b0887c944a743ba6031",
+      "userCreated": false, "_id": "552d5b0887c944a743ba6031",
       "name": "it",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Pronoun"
     },
     {
-      "_id": "552d5b088b5e733aba8d2620",
+      "userCreated": false, "_id": "552d5b088b5e733aba8d2620",
       "name": "jump",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08bc8421b20abb5a62",
+      "userCreated": false, "_id": "552d5b08bc8421b20abb5a62",
       "name": "little",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b089bd03191b7ec9afc",
+      "userCreated": false, "_id": "552d5b089bd03191b7ec9afc",
       "name": "look",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08bd3cd8f963e1167c",
+      "userCreated": false, "_id": "552d5b08bd3cd8f963e1167c",
       "name": "make",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08a734bbb099a68155",
+      "userCreated": false, "_id": "552d5b08a734bbb099a68155",
       "name": "me",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Pronoun"
     },
     {
-      "_id": "552d5b087608732157874619",
+      "userCreated": false, "_id": "552d5b087608732157874619",
       "name": "my",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b088f784a3f8ef312ef",
+      "userCreated": false, "_id": "552d5b088f784a3f8ef312ef",
       "name": "not",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adverb"
     },
     {
-      "_id": "552d5b08a08d5bda499e42cf",
+      "userCreated": false, "_id": "552d5b08a08d5bda499e42cf",
       "name": "one",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b08ac6a61a811b9c664",
+      "userCreated": false, "_id": "552d5b08ac6a61a811b9c664",
       "name": "play",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08597bf5df8d343bfb",
+      "userCreated": false, "_id": "552d5b08597bf5df8d343bfb",
       "name": "red",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b089948ede80f3adc37",
+      "userCreated": false, "_id": "552d5b089948ede80f3adc37",
       "name": "said",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08bd843d9c13526d76",
+      "userCreated": false, "_id": "552d5b08bd843d9c13526d76",
       "name": "see",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b082a0145f4a6ab126b",
+      "userCreated": false, "_id": "552d5b082a0145f4a6ab126b",
       "name": "the",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Article"
     },
     {
-      "_id": "552d5b0836a47a9760ce84bc",
+      "userCreated": false, "_id": "552d5b0836a47a9760ce84bc",
       "name": "three",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b08974d0d4e9a148336",
+      "userCreated": false, "_id": "552d5b08974d0d4e9a148336",
       "name": "to",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Preposition"
     },
     {
-      "_id": "552d5b08960c4c9f31af08f9",
+      "userCreated": false, "_id": "552d5b08960c4c9f31af08f9",
       "name": "two",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b082ac06aace229fc18",
+      "userCreated": false, "_id": "552d5b082ac06aace229fc18",
       "name": "up",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adverb"
     },
     {
-      "_id": "552d5b080a41ac71696ae275",
+      "userCreated": false, "_id": "552d5b080a41ac71696ae275",
       "name": "we",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Pronoun"
     },
     {
-      "_id": "552d5b08ebef1861e6925df1",
+      "userCreated": false, "_id": "552d5b08ebef1861e6925df1",
       "name": "where",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adverb"
     },
     {
-      "_id": "552d5b086fdeebe962ffc171",
+      "userCreated": false, "_id": "552d5b086fdeebe962ffc171",
       "name": "yellow",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b0881b0e2b117537951",
+      "userCreated": false, "_id": "552d5b0881b0e2b117537951",
       "name": "you",
-      "wordPacks": ["553167d183c193d16d03ce80"],
-      "active": false,
       "wordType": "Pronoun"
     },
     {
-      "_id": "552d5b082d9c84e6c572461f",
+      "userCreated": false, "_id": "552d5b082d9c84e6c572461f",
       "name": "all",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b08f186ab84dd36bd24",
+      "userCreated": false, "_id": "552d5b08f186ab84dd36bd24",
       "name": "am",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08ecffac6643646176",
+      "userCreated": false, "_id": "552d5b08ecffac6643646176",
       "name": "are",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08461def276c7589ea",
+      "userCreated": false, "_id": "552d5b08461def276c7589ea",
       "name": "at",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Preposition"
     },
     {
-      "_id": "552d5b08caede2169f0ab287",
+      "userCreated": false, "_id": "552d5b08caede2169f0ab287",
       "name": "ate",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08acda561db7b3c022",
+      "userCreated": false, "_id": "552d5b08acda561db7b3c022",
       "name": "be",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b0873d2087138f0b0e3",
+      "userCreated": false, "_id": "552d5b0873d2087138f0b0e3",
       "name": "black",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b080ddd0f4c449a6930",
+      "userCreated": false, "_id": "552d5b080ddd0f4c449a6930",
       "name": "brown",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b08e54bac39a0fa5303",
+      "userCreated": false, "_id": "552d5b08e54bac39a0fa5303",
       "name": "but",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Conjunction"
     },
     {
-      "_id": "552d5b082efcaa22520e444b",
+      "userCreated": false, "_id": "552d5b082efcaa22520e444b",
       "name": "came",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b0807228254a78d0266",
+      "userCreated": false, "_id": "552d5b0807228254a78d0266",
       "name": "did",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b088f9b179c9f41b915",
+      "userCreated": false, "_id": "552d5b088f9b179c9f41b915",
       "name": "do",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08e971cb2f0c9c4a3b",
+      "userCreated": false, "_id": "552d5b08e971cb2f0c9c4a3b",
       "name": "four",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b082fb9929fbcc7639e",
+      "userCreated": false, "_id": "552d5b082fb9929fbcc7639e",
       "name": "get",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08cd63a5895aac2582",
+      "userCreated": false, "_id": "552d5b08cd63a5895aac2582",
       "name": "have",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08ff86b2bcff1588c2",
+      "userCreated": false, "_id": "552d5b08ff86b2bcff1588c2",
       "name": "he",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Pronoun"
     },
     {
-      "_id": "552d5b08e723ee4287d0e8c6",
+      "userCreated": false, "_id": "552d5b08e723ee4287d0e8c6",
       "name": "into",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Preposition"
     },
     {
-      "_id": "552d5b087f7d2946369694ec",
+      "userCreated": false, "_id": "552d5b087f7d2946369694ec",
       "name": "like",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b08efa1707df67f3c69",
+      "userCreated": false, "_id": "552d5b08efa1707df67f3c69",
       "name": "must",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     },
     {
-      "_id": "552d5b089f3cd6659ecec9f7",
+      "userCreated": false, "_id": "552d5b089f3cd6659ecec9f7",
       "name": "new",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     },
     {
-      "_id": "552d5b084dd671476f5b2f19",
+      "userCreated": false, "_id": "552d5b084dd671476f5b2f19",
       "name": "no",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adverb"
     },
     {
       "name": "nor",
       "wordType": "Conjunction",
-      "_id": "5592cc8fc7919c731a730d67",
-      "__v": 0,
-      "wordPacks": ["553167d183c193d16d03ce80"]
+      "userCreated": false,
+      "_id": "5592cc8fc7919c731a730d67"
     },
     {
-      "_id": "552d5b08d359fad21a131789",
+      "userCreated": false, "_id": "552d5b08d359fad21a131789",
       "name": "now",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adverb"
     },
     {
-      "_id": "552d5b082c63acb89b72cf89",
+      "userCreated": false, "_id": "552d5b082c63acb89b72cf89",
       "name": "on",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Preposition"
     },
     {
-      "_id": "552d5b089c748571cac88a40",
+      "userCreated": false, "_id": "552d5b089c748571cac88a40",
       "name": "our",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     }, {
-      "_id": "552d5b085524dd49b0aa933f",
+      "userCreated": false, "_id": "552d5b085524dd49b0aa933f",
       "name": "out",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adverb"
     }, {
-      "_id": "552d5b08cb8d71b90811efe3",
+      "userCreated": false, "_id": "552d5b08cb8d71b90811efe3",
       "name": "please",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     }, {
-      "_id": "552d5b08a9dc076e610ffc7d",
+      "userCreated": false, "_id": "552d5b08a9dc076e610ffc7d",
       "name": "pretty",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     }, {
-      "_id": "552d5b0861219d0e0572b532",
+      "userCreated": false, "_id": "552d5b0861219d0e0572b532",
       "name": "ride",
-      "wordPacks": ["553167d1afa1bda9bc0d055a", "553167d14651465f11201014"],
-      "active": false,
       "wordType": "Verb"
     }, {
-      "_id": "552d5b08a55d156939bff935",
+      "userCreated": false, "_id": "552d5b08a55d156939bff935",
       "name": "saw",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     }, {
-      "_id": "552d5b08b40c993e7068dca1",
+      "userCreated": false, "_id": "552d5b08b40c993e7068dca1",
       "name": "say",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     }, {
-      "_id": "552d5b0820c26a478b95f7bd",
+      "userCreated": false, "_id": "552d5b0820c26a478b95f7bd",
       "name": "she",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Pronoun"
     }, {
-      "_id": "552d5b0836a6578211cb2886",
+      "userCreated": false, "_id": "552d5b0836a6578211cb2886",
       "name": "so",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Conjunction"
     }, {
       "name": "yet",
       "wordType": "Conjunction",
-      "_id": "5592cd1c47dca2be1a798bc9",
-      "__v": 0,
-      "wordPacks": ["553167d1afa1bda9bc0d055a"]
+      "userCreated": false, "_id": "5592cd1c47dca2be1a798bc9"
+
     }, {
       "name": "oh",
       "wordType": "Interjection",
-      "_id": "5592d648545790d31af9f70a",
-      "__v": 0,
-      "wordPacks": ["5511a83da168f8b5f3144f02"]
+      "userCreated": false,
+      "_id": "5592d648545790d31af9f70a"
     }, {
       "name": "ah",
       "wordType": "Interjection",
-      "_id": "5592d64d545790d31af9f70b",
-      "__v": 0,
-      "wordPacks": ["5511a83da168f8b5f3144f02"]
+      "userCreated": false,
+      "_id": "5592d64d545790d31af9f70b"
     }, {
       "name": "hello",
       "wordType": "Interjection",
-      "_id": "5592d6a5ffee94f722170617",
-      "__v": 0,
-      "wordPacks": ["5511a83da168f8b5f3144f02"]
+      "userCreated": false,
+      "_id": "5592d6a5ffee94f722170617"
     }, {
       "name": "hey",
       "wordType": "Interjection",
-      "_id": "5592d6d31104590823faeb32",
-      "__v": 0,
-      "wordPacks": ["5511a83da168f8b5f3144f02"]
+      "userCreated": false,
+      "_id": "5592d6d31104590823faeb32"
     }, {
+      "userCreated": false,
       "_id": "552d5b08619b6ef36f95f8fd",
       "name": "soon",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adverb"
     }, {
+      "userCreated": false,
       "_id": "552d5b08e274fc1a6591c02b",
       "name": "that",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Pronoun"
     }, {
+      "userCreated": false,
       "_id": "552d5b08267ab9df7ef30c11",
       "name": "there",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adverb"
     }, {
+      "userCreated": false,
       "_id": "552d5b0875ccfa12a218aa77",
       "name": "they",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Pronoun"
     }, {
-      "_id": "552d5b08e511287e53be311d",
+      "userCreated": false, "_id": "552d5b08e511287e53be311d",
       "name": "this",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Pronoun"
     }, {
-      "_id": "552d5b08873a6b80dde989f9",
+      "userCreated": false, "_id": "552d5b08873a6b80dde989f9",
       "name": "too",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adverb"
     }, {
-      "_id": "552d5b081bc5d94baaee575c",
+      "userCreated": false, "_id": "552d5b081bc5d94baaee575c",
       "name": "under",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adverb"
     }, {
-      "_id": "552d5b0808eff2d9ee6452b4",
+      "userCreated": false, "_id": "552d5b0808eff2d9ee6452b4",
       "name": "want",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     }, {
-      "_id": "552d5b08142365901ff49f2e",
+      "userCreated": false, "_id": "552d5b08142365901ff49f2e",
       "name": "was",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     }, {
-      "_id": "552d5b08c8e6226ce98cdafd",
+      "userCreated": false, "_id": "552d5b08c8e6226ce98cdafd",
       "name": "well",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     }, {
-      "_id": "552d5b08d9031837ac352ecb",
+      "userCreated": false, "_id": "552d5b08d9031837ac352ecb",
       "name": "went",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     }, {
-      "_id": "552d5b081003bdec4c0446c4",
+      "userCreated": false, "_id": "552d5b081003bdec4c0446c4",
       "name": "what",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Pronoun"
     }, {
-      "_id": "552d5b083599e39053bc5ac9",
+      "userCreated": false, "_id": "552d5b083599e39053bc5ac9",
       "name": "white",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adjective"
     }, {
-      "_id": "552d5b087260cda8fa58b0ef",
+      "userCreated": false, "_id": "552d5b087260cda8fa58b0ef",
       "name": "who",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Pronoun"
     }, {
-      "_id": "552d5b08c50289e73d8a9e99",
+      "userCreated": false, "_id": "552d5b08c50289e73d8a9e99",
       "name": "will",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Verb"
     }, {
-      "_id": "552d5b085a5caeb37158c286",
+      "userCreated": false, "_id": "552d5b085a5caeb37158c286",
       "name": "with",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Preposition"
     }, {
-      "_id": "552d5b08f198fb94de7fccd9",
+      "userCreated": false, "_id": "552d5b08f198fb94de7fccd9",
       "name": "yes",
-      "wordPacks": ["553167d1afa1bda9bc0d055a"],
-      "active": false,
       "wordType": "Adverb"
     }, {
       "__v": 2,
-      "_id": "55856fb708209fde1a2b8af5",
+      "userCreated": false, "_id": "55856fb708209fde1a2b8af5",
       "name": "his",
-      "wordType": "Pronoun",
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "wordType": "Pronoun"
     }, {
       "__v": 2,
-      "_id": "55856f7608209fde1a2b8af4",
+      "userCreated": false, "_id": "55856f7608209fde1a2b8af4",
       "name": "of",
-      "wordType": "Article",
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "wordType": "Article"
     }, {
       "name": "had",
       "wordType": "Verb",
-      "_id": "5585701708209fde1a2b8af7",
-      "__v": 0,
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "userCreated": false, "_id": "5585701708209fde1a2b8af7"
     }, {
       "name": "him",
       "wordType": "Noun",
-      "_id": "5585704a08209fde1a2b8af8",
-      "__v": 0,
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "userCreated": false, "_id": "5585704a08209fde1a2b8af8"
     }, {
       "name": "as",
       "wordType": "Adverb",
-      "_id": "558570aa08209fde1a2b8af9",
-      "__v": 0,
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "userCreated": false, "_id": "558570aa08209fde1a2b8af9"
     }, {
       "name": "then",
       "wordType": "Adverb",
-      "_id": "558570d208209fde1a2b8afa",
-      "__v": 0,
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "userCreated": false, "_id": "558570d208209fde1a2b8afa"
     }, {
       "name": "could",
       "wordType": "Verb",
-      "_id": "558570fa08209fde1a2b8afb",
-      "__v": 0,
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "userCreated": false, "_id": "558570fa08209fde1a2b8afb"
     }, {
       "name": "when",
       "wordType": "Verb",
-      "_id": "5585712508209fde1a2b8afc",
-      "__v": 0,
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "userCreated": false, "_id": "5585712508209fde1a2b8afc"
     }, {
       "name": "were",
       "wordType": "Verb",
-      "_id": "5585713b08209fde1a2b8afd",
-      "__v": 0,
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "userCreated": false, "_id": "5585713b08209fde1a2b8afd"
     }, {
       "name": "mom",
       "wordType": "Noun",
-      "_id": "5585850e9600193b2058a717",
-      "__v": 0,
-      "wordPacks": ["558584084afb8b051fa83846"]
+      "userCreated": false, "_id": "5585850e9600193b2058a717"
     }, {
       "name": "dad",
       "wordType": "Noun",
-      "_id": "558585129600193b2058a718",
-      "__v": 0,
-      "wordPacks": ["558584084afb8b051fa83846"]
+      "userCreated": false, "_id": "558585129600193b2058a718"
     }, {
       "name": "sister",
       "wordType": "Noun",
-      "_id": "5585851d9600193b2058a719",
-      "__v": 0,
-      "wordPacks": ["558584084afb8b051fa83846"]
+      "userCreated": false, "_id": "5585851d9600193b2058a719"
     }, {
       "name": "brother",
       "wordType": "Noun",
-      "_id": "558585239600193b2058a71a",
-      "__v": 0,
-      "wordPacks": ["558584084afb8b051fa83846"]
+      "userCreated": false, "_id": "558585239600193b2058a71a"
     }, {
       "name": "Spencer",
       "wordType": "Noun",
-      "_id": "558585df76957bfd22fcfd64",
-      "__v": 0,
-      "wordPacks": ["558584084afb8b051fa83846"]
+      "userCreated": false, "_id": "558585df76957bfd22fcfd64"
     }, {
       "name": "Maura",
       "wordType": "Noun",
-      "_id": "558585e976957bfd22fcfd65",
-      "__v": 0,
-      "wordPacks": ["558584084afb8b051fa83846"]
+      "userCreated": false, "_id": "558585e976957bfd22fcfd65"
     }, {
       "name": "Lambo",
       "wordType": "Noun",
-      "_id": "558585f076957bfd22fcfd66",
-      "__v": 0,
-      "wordPacks": ["558584084afb8b051fa83846"]
+      "userCreated": false, "_id": "558585f076957bfd22fcfd66"
     }, {
       "name": "Mylee",
       "wordType": "Noun",
-      "_id": "558585f576957bfd22fcfd67",
-      "__v": 0,
-      "wordPacks": ["558584084afb8b051fa83846"]
+      "userCreated": false, "_id": "558585f576957bfd22fcfd67"
     }, {
       "name": "Willie's",
       "wordType": "Noun",
-      "_id": "558587c2147e142026ba8c65",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "558587c2147e142026ba8c65"
     }, {
       "name": "library",
       "wordType": "Noun",
-      "_id": "558587c9147e142026ba8c66",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "558587c9147e142026ba8c66"
     }, {
       "name": "Bello Cucina",
       "wordType": "Noun",
-      "_id": "558587d3147e142026ba8c67",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "558587d3147e142026ba8c67"
     }, {
       "name": "East Side Park",
       "wordType": "Noun",
-      "_id": "558587da147e142026ba8c68",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "558587da147e142026ba8c68"
     }, {
       "name": "Wells Park",
       "wordType": "Noun",
-      "_id": "558587e4147e142026ba8c69",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "558587e4147e142026ba8c69"
     }, {
       "name": "Common Cup",
       "wordType": "Noun",
-      "_id": "558587eb147e142026ba8c6a",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "558587eb147e142026ba8c6a"
     }, {
       "name": "Dairy Queen",
       "wordType": "Noun",
-      "_id": "558587f1147e142026ba8c6b",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
-    },
-    {
+      "userCreated": false, "_id": "558587f1147e142026ba8c6b"
+    }, {
       "name": "McDonald's",
       "wordType": "Noun",
-      "_id": "558587f9147e142026ba8c6c",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "558587f9147e142026ba8c6c"
     }, {
       "name": "bank",
       "wordType": "Noun",
-      "_id": "558587fe147e142026ba8c6d",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "558587fe147e142026ba8c6d"
     }, {
       "name": "an",
       "wordType": "Article",
-      "_id": "5592cb4c510c1c3c186f6232",
-      "__v": 0,
-      "wordPacks": ["55856f5e08209fde1a2b8af3"]
+      "userCreated": false, "_id": "5592cb4c510c1c3c186f6232"
     }, {
       "name": "school",
       "wordType": "Noun",
-      "_id": "55858803147e142026ba8c6e",
-      "__v": 0,
-      "wordPacks": ["55858751d0ec44402530da01"]
+      "userCreated": false, "_id": "55858803147e142026ba8c6e"
     }
   )
 });
 
-Category.find({}).remove(function () {
-  Category.create(
+WordPack.find({}).remove(function () {
+  WordPack.create(
     {
       "_id": "553167d183c193d16d03ce80",
       "name": "Dolch 1",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d1afa1bda9bc0d055a",
       "name": "Dolch 2",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "55856f5e08209fde1a2b8af3",
       "name": "Dolch 3",
-      "isWordType": false,
       "creatorID": "5511a83da168f8b5f3144f02",
-      "__v": 0
+      "__v": 0,
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d1cd3291e1352efe94",
       "name": "Animals",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d1d26d6cb60967d8a5",
       "name": "Post Office",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d1c296f9753ce8447f",
       "name": "Lunch",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d1c67764f3773612dc",
       "name": "Superwords",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d1d969a916cab51920",
       "name": "School",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d13562bc39e23e4d3b",
       "name": "Gym Class",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d14651465f11201014",
       "name": "Trains",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d123b90c175f9b3a86",
       "name": "Planes",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "_id": "553167d171ef5955ded609ef",
       "name": "Noun",
-      "isWordType": false,
-      "creatorID": "5511a83da168f8b5f3144f02"
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInWordPack": []
     },
     {
       "name": "My Family",
-      "isWordType": false,
       "creatorID": "5511a83da168f8b5f3144f02",
-      "_id": "558584084afb8b051fa83846"
+      "_id": "558584084afb8b051fa83846",
+      "wordsInWordPack": []
     },
     {
       "name": "Morris",
-      "isWordType": false,
       "creatorID": "5511a83da168f8b5f3144f02",
       "_id": "55858751d0ec44402530da01",
-      "__v": 0
+      "wordsInWordPack": []
+    }
+  )
+});
+
+ContextPack.find({}).remove(function () {
+  ContextPack.create(
+    {
+      "_id": "55877751d0ec44402530da01",
+      "name": "Superheroes",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInContextPack": [],
+      "wordPacksInContextPack": []
+    },{
+      "_id": "55877751d0ec444025000a01",
+      "name": "Minnesota",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordsInContextPack": [],
+      "wordPacksInContextPack": []
     }
   )
 });
