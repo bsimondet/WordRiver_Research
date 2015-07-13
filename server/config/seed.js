@@ -1385,8 +1385,8 @@ ContextPack.find({}).remove(function () {
       "_id": "553167d183c993666d03ce80",
       "name": "Superheroes",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInContextPack": [],
-      "wordPacksInContextPack": []
+      "wordsInContextPack": ["5511ae8cec56277a4af216a5"],
+      "wordPacksInContextPack": ["553167d1c67764f3773612dc"]
     },{
       "_id": "55877751d0ec444025000a01",
       "name": "Minnesota",

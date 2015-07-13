@@ -7,6 +7,7 @@
 </header>
 
 <div  ng-controller="MyClassesCtrl" class="container">
+  <!--View for Classes-->
   <div class="col-sm-12" ng-show="viewClassInfo">
   <h2>Your {{classArray.length}} Classes:</h2>
     <div class="col-xs-4">
@@ -28,40 +29,47 @@
     </div>
   </div>
 
-  <div class="col-sm-12" ng-hide="viewClassInfo">
-    <button class="btn btn-primary" ng-click="viewClassInfo = true;">Back to Classes</button>
+  <!--View for Selected Group In Class-->
+  <div class="col-sm-12" ng-show="viewGroupInfo">
+    <div class="col-xs-3">
+    <label>Back to: <a href="" ng-click="toggleClassGroupContext('class')">Classes</a></label>
     <h2>{{currentGroup.groupName}}:
-      <a class="glyphicon glyphicon-pencil" ng-click="editGroupName(currentGroup)"></a>
-      <a class="glyphicon glyphicon-trash" ng-click="removeGroup(currentGroup)"></a>
+      <label><a class="glyphicon glyphicon-pencil" ng-click="editGroupName(currentGroup)"></a></label>
+      <label><a class="glyphicon glyphicon-trash" ng-click="removeGroup(currentGroup)"></a></label>
     </h2>
     <!--Area for toggle buttons-->
-    <div class="col-xs-3">
-      <button class="btn-primary" ng-click="viewContextPacks = !viewContextPacks">View Context Packs</button>
-      <br>
-      <button class="btn-primary" ng-click="viewWordPacks = !viewWordPacks">View Word Packs</button>
-      <br>
-      <button class="btn-primary" ng-click="viewWords = !viewWords">View Words</button>
-      <br>
-      <button class="btn-primary" ng-click="viewStudents = !viewStudents">View Students</button>
+      <h4><a href="" ng-click="toggleGroupItems('contextPack')">View Context Packs</a></h4>
+      <h4><a href="" ng-click="toggleGroupItems('wordPacks')">View Individually Assigned Word Packs</a></h4>
+      <h4><a href="" ng-click="">View All Words This Group Can See</a></h4>
+      <h4><a href="" ng-click="toggleGroupItems('words')">View Individually Assigned Words</a></h4>
+      <h4><a href="" ng-click="toggleGroupItems('students')">View Students</a></h4>
     </div>
     <!--Area to view context packs information-->
-    <div class="col-xs-3" ng-hide="viewContextPacks">
+    <div class="col-xs-3" ng-show="viewContextPacks">
       <h3>Context Packs:</h3>
-      <div ng-repeat="contextPack in contextPacksInGroup">
-        <label><a href="" ng-click="">{{contextPack.name}}</a></label>
+      <div ng-repeat="pack in contextPacksInGroup">
+        <label><a href="" ng-click="viewContextPackInfo(pack)">{{pack.name}}</a></label>
       </div>
       <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
     </div>
     <!--Area to view word packs information-->
-    <div class="col-xs-3" ng-hide="viewWordPacks">
+    <div class="col-xs-3" ng-show="viewWordPacks">
       <h3>Word Packs:</h3>
       <div ng-repeat="wordPack in wordPacksInGroup">
-        <label><a href="" ng-click="">{{wordPack.name}}</a></label>
+        <label><a href="" ng-click="viewWordsInWordPack(wordPack, 'group')">{{wordPack.name}}</a></label>
+      </div>
+      <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
+    </div>
+    <!--Area to view word pack words-->
+    <div class="col-xs-3" ng-show="viewWordPackWords">
+      <h3>Words In {{currentWordPack.name}}:</h3>
+      <div ng-repeat="word in wordsInWordPack">
+        <label>{{word.name}}</label>
       </div>
       <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
     </div>
     <!--Area to view words information-->
-    <div class="col-xs-3" ng-hide="viewWords">
+    <div class="col-xs-3" ng-show="viewWords">
       <h3>Words:</h3>
       <div ng-repeat="word in wordsInGroup">
         <label><a href="" ng-click="">{{word.name}}</a></label>
@@ -69,7 +77,7 @@
       <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
     </div>
     <!--Area to view student information-->
-    <div class="col-xs-3" ng-hide="viewStudents">
+    <div class="col-xs-3" ng-show="viewStudents">
       <h3>Students:</h3>
       <div ng-repeat="student in studentsInGroup">
         <label><a href="" ng-click="">{{student.firstName}} {{student.lastName}}</a></label>
@@ -84,4 +92,40 @@
       <input type="submit" value="Cancel" class="btn-primary" ng-click="hideGroupEdit = !hideGroupEdit">
     </div>
   </div>
+
+  <!--View for Selected ContextPack In Group-->
+  <div class="col-sm-12" ng-show="viewContextInfo">
+    <!--Area to view context objects-->
+    <div class="col-xs-3">
+      <label>Back to: <a href="" ng-click="toggleClassGroupContext('class')">Classes</a> > <a href="" ng-click="toggleClassGroupContext('group')">{{currentGroup.groupName}}</a></label>
+      <h2>{{currentContextPack.name}}:</h2>
+      <h4><a href="" ng-click="toggleContextPackItems('wordPacks')">View Word Packs</a></h4>
+      <h4><a href="" ng-click="toggleContextPackItems('words')">View Words</a></h4>
+    </div>
+    <!--Area to view word packs in current context pack-->
+    <div class="col-xs-3" ng-show="viewWordPacksInContextPack">
+      <h3>Word Packs:</h3>
+      <div ng-repeat="wordPack in wordPacksInContextPack">
+        <label><a href="" ng-click="viewWordsInWordPack(wordPack, 'context')">{{wordPack.name}}</a></label>
+      </div>
+      <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
+    </div>
+    <!--Area to view word pack words-->
+    <div class="col-xs-3" ng-show="viewWordPackWordsInContextPack">
+      <h3>Words In {{currentWordPack.name}}:</h3>
+      <div ng-repeat="word in wordsInWordPack">
+        <label>{{word.name}}</label>
+      </div>
+      <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
+    </div>
+    <!--Area to view words in current context pack-->
+    <div class="col-xs-3" ng-show="viewWordsInContextPack">
+      <h3>Words:</h3>
+      <div ng-repeat="word in wordsInContextPack">
+        <label><a href="" ng-click="">{{word.name}}</a></label>
+      </div>
+      <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
+    </div>
+  </div>
+
 </div>
