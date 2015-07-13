@@ -189,3 +189,13 @@ img.resize{
   margin-left: 10px;
   width: 100%;
 }
+
+.center{
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.backgroundColor{
+  background-color: #CCE1E6;
+  border-radius: 15px;
+}

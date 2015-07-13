@@ -10,17 +10,17 @@
 </header>
 <!--To center login, need to add column to the left-->
 <div class= "col-sm-4"></div>
-<header class="col-sm-4">
+<header class="col-sm-4 backgroundColor">
 
   <!--Welcome area-->
-  <div ng-show="signedInShow">
+  <div ng-show="signedInShow" class="center">
       <span><h2>Hello {{ getCurrentUser().name }}</h2></span>
       <h3>Would you like to view:</h3>
-      <h4><a href="/myClasses">Your Classes</a></h4>
-      <h4><a href="/myStudents">Your Students</a></h4>
-      <h4><a href="/myContextPacks">Your Context Packs</a></h4>
-      <h4><a href="/myWordPacks">Your Word Packs</a></h4>
-      <h4><a href="/myWords">Your Words</a></h4>
+      <h4><a href="/myClasses">My Classes</a></h4>
+      <h4><a href="/myStudents">My Students</a></h4>
+      <h4><a href="/myContextPacks">My Context Packs</a></h4>
+      <h4><a href="/myWordPacks">My Word Packs</a></h4>
+      <h4><a href="/myWords">My Words</a></h4>
   </div>
 
   <!--Login screen-->
@@ -174,3 +174,4 @@
   </div>
   </div>
 </footer>
+
