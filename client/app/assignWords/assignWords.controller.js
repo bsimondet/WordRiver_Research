@@ -61,6 +61,7 @@ angular.module('WordRiverApp')
       });
     };
 
+/*
     $scope.getWords();
     $scope.getClasses();
     $scope.getStudents();
@@ -73,6 +74,7 @@ angular.module('WordRiverApp')
       $scope.getStudents();
       $scope.getWordPacks();
     };
+*/
 
     $scope.inArray= function(array, item){
       for(var i = 0; i < array.length; i++){

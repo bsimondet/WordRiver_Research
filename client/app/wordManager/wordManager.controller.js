@@ -64,7 +64,7 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.getWords();
+    //$scope.getWords();
 
     $scope.getCategories = function() {
       $http.get('/api/categories').success(function (allCategories) {
@@ -85,7 +85,7 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.getCategories();
+    //$scope.getCategories();
 
     //Named poorly just to ensure no overlaps between functions in different models
     $scope.checkCategorys = function (category) {

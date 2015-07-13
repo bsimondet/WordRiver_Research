@@ -67,7 +67,7 @@ angular.module('WordRiverApp')
         $scope.getElementsByID($scope.currentUser.studentList, student, $scope.students);
       })
     };
-    $scope.getStudents();
+    //$scope.getStudents();
 
     //Get groups that are in the current teacher's array of groups && are assigned to the current student
     $scope.getClasses = function(student) {
@@ -106,9 +106,9 @@ angular.module('WordRiverApp')
 
     $scope.displayStudentProfile = function(student){
       $scope.selectedStudent = student;
-      $scope.getClasses(student);
-      $scope.getCategories(student);
-      $scope.getWords(student);
+      //$scope.getClasses(student);
+      //$scope.getCategories(student);
+      //$scope.getWords(student);
       $scope.hide = false;
       //$scope.getTeacherGroups(student);
       //$scope.getStudentGroups(student);

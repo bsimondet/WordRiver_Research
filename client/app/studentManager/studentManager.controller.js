@@ -47,7 +47,7 @@ angular.module('WordRiverApp')
       })
     };
 
-    $scope.getClasses();
+    //$scope.getClasses();
 
     $scope.getTiles = function(){
       $http.get("/api/tile").success(function(tiles){
@@ -55,7 +55,7 @@ angular.module('WordRiverApp')
       });
     };
 
-    $scope.getTiles();
+    //$scope.getTiles();
 
     $scope.toggleHelp = function(){
       $scope.help = !$scope.help;
@@ -89,7 +89,7 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.getStudents();
+    //$scope.getStudents();
 
     $scope.checkForDuplicates = function(array){
       for (var i = 0; i < array.length; i++) {
