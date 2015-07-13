@@ -5,6 +5,7 @@ angular.module('WordRiverApp')
     $scope.currentUser = Auth.getCurrentUser();
     $scope.allWords = []; //a list of all words from the database
     $scope.userWords = []; //words that teacher has added
+    $scope.userAllWords = []; //a list of all words from the database minus words created by users
     $scope.userWordIDs = []; //words that teacher has added
     $scope.showValue = true; //hide value for the edit fields for the words
     $scope.wordToEdit = null;
@@ -28,10 +29,10 @@ angular.module('WordRiverApp')
       $scope.allWords = []; //a list of all words from the database
       $http.get('/api/tile').success(function (allWords) {
         $scope.allWords = allWords;
+        $scope.getAllUserWords();
         $scope.getUserWords();
       });
     };
-
 
     $scope.getAllWords();
 
@@ -48,6 +49,15 @@ angular.module('WordRiverApp')
           }
         }
       })
+    };
+
+    $scope.getAllUserWords = function () {
+      $scope.userAllWords = [];
+      for(var index = 0; index < $scope.allWords.length; index++){
+        if(!($scope.allWords[index].userCreated)){
+          $scope.userAllWords.push($scope.allWords[index]);
+        }
+      }
     };
 
     $scope.findIndexOfWord = function (word) {

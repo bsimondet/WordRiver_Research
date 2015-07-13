@@ -18,11 +18,11 @@
 
     <!--Editing options for selected word-->
     <div class="col-xs-3" ng-hide="showValue">
-      <input ng-model="editField" type="text" size="15" placeholder={{allWords[editWordIndex].name}}>
+      <input ng-model="editField" type="text" size="15" placeholder={{userAllWords[editWordIndex].name}}>
     </div>
 
     <div class="col-xs-4" ng-hide="showValue">
-      <!--Currently: {{allWords[editWordIndex].wordType}}-->
+      <!--Currently: {{userAllWords[editWordIndex].wordType}}-->
       <select ng-model="editType">
         <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
       </select>
@@ -40,12 +40,14 @@
   </div>
   <!--Displaying all words in server-->
   <div class="col-sm-6">
-    <h2>All Dictionary {{allWords.length}} Words:</h2>
+    <h2>All Dictionary {{userAllWords.length}} Words:</h2>
+    <h9>Note: This does not include words you've added</h9>
+    <br><br>
     <input type="text" ng-Model="searchAllWords" placeholder="Search All Words"><br>
     <input type="text" ng-Model="searchAllWordTypes" placeholder="Search Word Types">
     <ul class="list-group scroll">
       <p>
-      <li class="list-group-item" ng-repeat="word in allWords | filter:{name:searchAllWords} | filter:{wordType:searchAllWordTypes}">
+      <li class="list-group-item" ng-repeat="word in userAllWords | filter:{name:searchAllWords} | filter:{wordType:searchAllWordTypes}">
         <label>{{word.name}}, {{word.wordType}}</label>
       </li>
     </ul>
