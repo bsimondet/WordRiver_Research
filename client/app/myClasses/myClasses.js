@@ -6,6 +6,6 @@ angular.module('WordRiverApp')
       .state('myClasses', {
         url: '/myClasses',
         templateUrl: 'app/myClasses/myClasses.html',
-        controller: 'JsonFileCtrl'
+        controller: 'MyClassesCtrl'
       });
   });

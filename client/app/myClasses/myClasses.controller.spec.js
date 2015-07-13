@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: JsonFileCtrl', function () {
+describe('Controller: MyClassesCtrl', function () {
 
   // load the controller's module
   beforeEach(module('wordRiverAppApp'));
 
-  var JsonFileCtrl, scope;
+  var MyClassesCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    JsonFileCtrl = $controller('JsonFileCtrl', {
+    MyClassesCtrl = $controller('MyClassesCtrl', {
       $scope: scope
     });
   }));

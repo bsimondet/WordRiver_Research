@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('WordRiverApp')
-  .controller('JsonFileCtrl', function ($scope, $location, $http, Auth) {
+  .controller('MyClassesCtrl', function ($scope, $location, $http, Auth) {
     $scope.currentUser = Auth.getCurrentUser();
     $scope.classArray = [];
     $scope.contextPacksArray = [];
@@ -93,8 +93,8 @@ angular.module('WordRiverApp')
 
     $scope.getWords = function(){
       $scope.wordsArray = [];
-      $http.get('/api/tile').success(function(tiles) {
-        $scope.wordsArray = tiles;
+      $http.get('/api/tile').success(function(words) {
+        $scope.wordsArray = words;
       });
       $scope.wordsArray = $scope.checkForDuplicates($scope.wordsArray);
     };
