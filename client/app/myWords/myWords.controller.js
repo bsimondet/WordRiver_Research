@@ -80,7 +80,6 @@ angular.module('WordRiverApp')
       if ($scope.editField.length >= 1 && $scope.editType.length < 1) {
         $http.patch('/api/tile/' + $scope.wordToEdit._id, {
           name: $scope.editField,
-          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
           wordType: $scope.allWords[$scope.editWordIndex].wordType
         });
         $scope.editField = "";
@@ -88,7 +87,6 @@ angular.module('WordRiverApp')
       } else if ($scope.editField.length == 0 && $scope.editType.length >= 1) {
         $http.patch('/api/tile/' + $scope.wordToEdit._id, {
           name: $scope.allWords[$scope.editWordIndex].name,
-          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
           wordType: $scope.editType
         });
 
@@ -97,7 +95,6 @@ angular.module('WordRiverApp')
       } else if ($scope.editField.length >= 1 && $scope.editType.length >= 1) {
         $http.patch('/api/tile/' + $scope.wordToEdit._id, {
           name: $scope.editField,
-          wordPacks: $scope.allWords[$scope.editWordIndex].wordPacks,
           wordType: $scope.editType
         });
 
