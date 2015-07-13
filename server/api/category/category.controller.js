@@ -12,8 +12,6 @@ exports.index = function(req, res) {
 };
 
 exports.getUserCategories = function(req,res) {
-  //console.log("This is my ID: " + req.params.creatorID);
-  //return res.json(200, {message: "Hi Ben"});
   Category.find({creatorID: req.params.creatorID}, function(err, categories) {
     if(err) { return handleError(res, err); }
     return res.json(200, categories);

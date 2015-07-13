@@ -11,6 +11,13 @@ exports.index = function(req, res) {
   });
 };
 
+exports.getUserContextPacks = function(req,res) {
+  ContextPack.find({creatorID: req.params.creatorID}, function(err, contextPack) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, contextPack);
+  });
+};
+
 // Get a single contextPack
 exports.show = function(req, res) {
   ContextPack.findById(req.params.id, function (err, contextPack) {

@@ -59,14 +59,10 @@ angular.module('WordRiverApp')
     $scope.getClasses = function(){
       $http.get("/api/users/me").success(function(user){
         $scope.classArray = [];
-        $scope.contextPacksArray = [];
         $scope.classArray = user.classList;
-        $scope.contextPacksArray = user.contextPacks;
       });
       $scope.classArray = $scope.checkForDuplicates($scope.classArray);
-      $scope.contextPacksArray = $scope.checkForDuplicates($scope.contextPacksArray);
     };
-
     $scope.getClasses();
 
     $scope.getStudents = function(){
@@ -81,6 +77,15 @@ angular.module('WordRiverApp')
       $scope.userStudents = $scope.checkForDuplicates($scope.userStudents);
     };
     $scope.getStudents();
+
+    $scope.getContextPacks = function(){
+      $scope.contextPacksArray = [];
+      $http.get('/api/contextPacks/').success(function(contextPacks){
+        $scope.contextPacksArray = contextPacks;
+      });
+      $scope.contextPacksArray = $scope.checkForDuplicates($scope.contextPacksArray);
+    };
+    $scope.getContextPacks();
 
     $scope.getWordPacks = function(){
       $scope.wordPacksArray = [];

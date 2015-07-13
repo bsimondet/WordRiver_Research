@@ -53,7 +53,7 @@ User.find({}).remove(function () {
         {
         "className": "Reading 3rd Grade",
         "_id": "553167d183c993d16d03ce80",
-        "contextPacks": ["553167d183c993666d03ce80"],
+        "contextPacks": [],
         "wordPacks": [],
         "words": [],
         "groupList": [
@@ -1382,7 +1382,7 @@ WordPack.find({}).remove(function () {
 ContextPack.find({}).remove(function () {
   ContextPack.create(
     {
-      "_id": "55877751d0ec44402530da01",
+      "_id": "553167d183c993666d03ce80",
       "name": "Superheroes",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordsInContextPack": [],
