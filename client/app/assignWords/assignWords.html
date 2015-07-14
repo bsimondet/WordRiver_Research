@@ -56,7 +56,7 @@
       <!--Listing all current students-->
       <ul class="list-group scroll">
         <p>
-        <li class="list-group-item " ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:{fullName:searchStudents}">
+        <li class="list-group-item" ng-repeat="student in userStudents | orderBy:'lastName':order0 |filter:{fullName:searchStudents}">
           <label><input type="checkbox" value="value"  ng-click="checkStudents(student)">
             <a ng-click="displayStudentInfo(student)">{{student.lastName}}, {{student.firstName}}</a>
           </label>
