@@ -27,9 +27,7 @@ angular.module('WordRiverApp')
     $scope.wordPacksArray = [];
     $scope.wordPacksArrayInContext = [];
     $scope.wordPacksArrayNonContext = [];
-    $scope.wordPacksArrayInContextID = [];
     $scope.wordsArray = [];
-    $scope.groupsArray = [];
     //For collapsing
     $scope.isGroupsCollapsed = false;
     $scope.wpIsCollapsed = false;
@@ -61,6 +59,7 @@ angular.module('WordRiverApp')
     $scope.studentsInClass = [];
     //For viewing group information
     $scope.studentsInGroup = [];
+    $scope.allWordsInGroup= [];
     $scope.wordsInGroup = [];
     $scope.wordIDsInGroup = [];
     $scope.wordPacksInGroup = [];
@@ -70,6 +69,9 @@ angular.module('WordRiverApp')
     $scope.wordsInWordPack = [];
     $scope.currentWordPack = null;
     $scope.viewWordPackWords = false;
+
+    $scope.viewAllWords = false;
+    $scope.viewIndivWords = false;
 
     $scope.showWordPackSort = false;
     $scope.showWordSort = false;
@@ -95,19 +97,20 @@ angular.module('WordRiverApp')
       $scope.viewWords = false;
       $scope.viewWordPacks = false;
       $scope.viewContextPacks = false;
+      $scope.viewWordPackWords = false;
     };
 
     $scope.viewGroupItems = function(item) {
       if(item == 'wordPacks'){
         $scope.showWordPackSort = true;
         $scope.showWordSort = false;
+        $scope.wordFilter('off');
         $scope.wordPackFilter('contextPacks');
       } else if (item == 'words'){
-        $scope.wordFilter('all');
-        $scope.wordPackFilter('off');
         $scope.showWordPackSort = false;
         $scope.showWordSort = true;
-      }
+        $scope.wordFilter('all');
+        $scope.wordPackFilter('off');      }
     };
 
     //TODO: Need a word filter as well
@@ -116,26 +119,38 @@ angular.module('WordRiverApp')
         $scope.viewContextPacks = true;
         $scope.viewIndivWordPacks = false;
         $scope.viewAllWordPacks = false;
+        $scope.viewWordPackWords = false;
       } else if (item == 'individual'){
         $scope.viewContextPacks = false;
         $scope.viewIndivWordPacks = true;
         $scope.viewAllWordPacks = false;
+        $scope.viewWordPackWords = false;
       } else if (item == 'all') {
         $scope.viewContextPacks = false;
         $scope.viewIndivWordPacks = false;
         $scope.viewAllWordPacks = true;
+        $scope.viewWordPackWords = false;
       } else if (item == 'off') {
         $scope.viewContextPacks = false;
         $scope.viewIndivWordPacks = false;
         $scope.viewAllWordPacks = false;
+        $scope.viewWordPackWords = false;
       }
     };
 
     $scope.wordFilter = function(item) {
       if(item == 'individual'){
-
+        $scope.viewAllWords = false;
+        $scope.viewIndivWords = true;
+        $scope.viewWordPackWords = false;
       } else if (item == 'all') {
-
+        $scope.viewAllWords = true;
+        $scope.viewIndivWords = false;
+        $scope.viewWordPackWords = false;
+      } else if (item == 'off') {
+        $scope.viewAllWords = false;
+        $scope.viewIndivWords = false;
+        $scope.viewWordPackWords = false;
       }
     };
 
@@ -245,7 +260,6 @@ angular.module('WordRiverApp')
     $scope.manageContextPacks = function(contextArr){
       $scope.contextPacksHolder = [];
       $scope.wordPacksArrayInContext = [];
-      $scope.wordPacksArrayInContextID = [];
       for(var index = 0; index < contextArr.length; index++) {
         $scope.contextPacksHolder.push({
           "_id": contextArr[index]._id,
@@ -426,13 +440,108 @@ angular.module('WordRiverApp')
       $scope.currentGroup = group;
       $scope.toggleClassGroup('group');
       $scope.wordPacksInGroup = [];
+      $scope.allWordsInGroup = [];
       $scope.wordsInGroup = [];
       $scope.currentGroupClass = myClass;
       $scope.getStudentsInGroup($scope.currentGroup);
       $scope.getIDsInGroup($scope.currentGroup);
       $scope.getGroupArray($scope.wordPackIDsInGroup, $scope.wordPacksArray, $scope.wordPacksInGroup);
       $scope.getGroupArray($scope.wordIDsInGroup, $scope.wordsArray, $scope.wordsInGroup);
+      $scope.allWordsInGroup = $scope.getAllWordsAssignedToGroup($scope.wordPacksInGroup, $scope.wordsInGroup);
       $scope.getNonContextWordPacksForGroups($scope.wordPacksInGroup);
+      $scope.getContextPacksInGroup();
+    };
+    /*    $scope.contextPacksHolder = [{
+     "_id": null,
+     "name": null,
+     "assignedWordPacks": {
+     "name": null,
+     "words": []
+     },
+     "notAssignedWordPacks": {
+     "name": null,
+     "words": []
+     },
+     "words": []
+     }];*/
+    $scope.getContextPacksInGroup = function() {
+      $scope.contextPacksHolderGroup = [];
+      for(var index = 0; index < $scope.contextPacksHolder.length; index++){
+        for(var index2 = 0; index2 < $scope.contextPacksHolder[index].wordPacks.length; index2++){
+          for(var index3 = 0; index3 < $scope.wordPacksInGroup.length; index3++){
+            if($scope.contextPacksHolder[index].wordPacks[index2]._id == $scope.wordPacksInGroup[index3]._id){
+              if($scope.contextPacksHolderGroup.indexOf($scope.contextPacksHolder[index]) == -1){
+                $scope.contextPacksHolderGroup.push({
+                  "_id": $scope.contextPacksHolder[index]._id,
+                  "name": $scope.contextPacksHolder[index].name,
+                  "assignedWordPacks": $scope.getAssignedWordPacks($scope.contextPacksHolder[index].wordPacks, 'assigned'),
+                  "notAssignedWordPacks": $scope.getAssignedWordPacks($scope.contextPacksHolder[index].wordPacks, 'notAssigned'),
+                  "words": $scope.contextPacksHolder[index].words
+              });
+              }
+            }
+          }
+        }
+      }
+    };
+
+    $scope.getAssignedWordPacks = function (wordPacks, option){
+      var toReturn = [];
+      var arrContains = [];
+      for(var index = 0; index < $scope.wordPacksArray.length; index++){
+        for(var index2 = 0; index2 < wordPacks.length; index2++) {
+          if (wordPacks[index2]._id == $scope.wordPacksArray[index]._id) {
+            if(arrContains.indexOf($scope.wordPacksArray[index]) == -1){
+              arrContains.push($scope.wordPacksArray[index]);
+            }
+          }
+        }
+      }
+      if(option == 'assigned'){
+        toReturn = arrContains;
+      } else if(option == 'notAssigned'){
+        for(var index3 = 0; index3 < wordPacks.length; index3++) {
+          for (var index4 = 0; index4 < arrContains.length; index4++) {
+            if (arrContains.indexOf(wordPacks[index3]) == -1) {
+              if (toReturn.indexOf(wordPacks[index3]) == -1) {
+                toReturn.push(wordPacks[index3]);
+              }
+            }
+          }
+        }
+      }
+      return toReturn;
+    };
+
+    $scope.getAllWordsAssignedToGroup = function (wordPacksInGroup, wordsInGroup){
+      var toReturn = [];
+      var arrHold = [];
+      for(var index = 0; index < wordPacksInGroup.length; index++) {
+        arrHold = $scope.getWordsForGroupWordPack(wordPacksInGroup[index].wordsInWordPack);
+        arrHold = $scope.checkForDuplicates(arrHold);
+        for(var index2 = 0; index2 < arrHold.length; index2++){
+          toReturn.push(arrHold[index2]);
+        }
+        for(var index3 = 0; index3 < wordsInGroup.length; index3++){
+          if(toReturn.indexOf(wordsInGroup[index3]) == -1){
+            toReturn.push(wordsInGroup[index3]);
+          }
+        }
+      }
+      toReturn = $scope.checkForDuplicates(toReturn);
+      return toReturn;
+    };
+
+    $scope.getWordsForGroupWordPack = function(wordIDs) {
+      var toReturn = [];
+      for(var index = 0; index < $scope.wordsArray.length; index++) {
+        for (var index2 = 0; index2 < wordIDs.length; index2++) {
+          if($scope.wordsArray[index]._id == wordIDs[index2]){
+            toReturn.push($scope.wordsArray[index]);
+          }
+        }
+      }
+      return toReturn;
     };
 
     $scope.getNonContextWordPacksForGroups = function(wordPacksInGroup){
@@ -479,12 +588,8 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.viewWordsInWordPack = function(wordPack, option){
-      if(option == 'group'){
-        $scope.viewWordPackWords = true;
-      } else if (option == 'context'){
-        $scope.viewWordPackWordsInContextPack = true;
-      }
+    $scope.viewWordsInWordPack = function(wordPack){
+      $scope.viewWordPackWords = true;
       $scope.wordsInWordPack = [];
       $scope.currentWordPack = wordPack;
       for(var index = 0; index < $scope.wordsArray.length; index++){
@@ -492,6 +597,14 @@ angular.module('WordRiverApp')
           if($scope.wordsArray[index]._id == $scope.currentWordPack.wordsInWordPack[index2]){
             $scope.wordsInWordPack.push($scope.wordsArray[index]);
           }
+        }
+      }
+    };
+
+    $scope.viewWordsInContextWordPack = function(wordPack){
+      for(var index = 0; index < $scope.wordPacksArray.length; index++){
+        if($scope.wordPacksArray[index]._id == wordPack._id){
+          $scope.viewWordsInWordPack($scope.wordPacksArray[index]);
         }
       }
     };

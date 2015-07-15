@@ -72,7 +72,7 @@ User.find({}).remove(function () {
           {
             "groupName": "Group C",
             "_id": "5535520dd7b5c70193c4993c",
-            "wordPacks": ["553167d1d969a916cab51920", "553167d171ef5955ded609ef", "553167d1c67764f3773612dc", "55858751d0ec44402530da01", "553167d123b90c175f9b3a86", "553167d123b90c775f9b3a86"],
+            "wordPacks": ["553167d1d969a916cab51920", "553167d171ef5955ded609ef", "553167d1c67764f3773612dc", "55858751d0ec44402530da01", "553167d123b90c175f9b3a86"],
             "words": ["5511ae8cf6f121e4c3108cd6", "552c24183b10b8ec888e042b", "552d5b08e1a3de8740774fad"]
           }
         ]
