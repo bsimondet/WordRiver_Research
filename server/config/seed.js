@@ -1291,7 +1291,7 @@ WordPack.find({}).remove(function () {
     },
     {
       "_id": "553167d1d969a916cab51920",
-      "name": "School",
+      "name": "School Words",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordsInWordPack": []
     },
