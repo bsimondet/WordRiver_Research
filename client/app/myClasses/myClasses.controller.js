@@ -230,27 +230,39 @@ angular.module('WordRiverApp')
       }
     };
 
+    $scope.toggleWPinCP = function (option){
+      if(option == 'close'){
+        $scope.wpIsCollapsed = true;
+      } else if (option == 'open'){
+        $scope.wpIsCollapsed = false;
+      }
+    };
+
     $scope.wordPackFilter = function(item) {
       if(item == 'contextPacks'){
         $scope.viewContextPacks = true;
         $scope.viewIndivWordPacks = false;
         $scope.viewAllWordPacks = false;
         $scope.viewWordPackWords = false;
+        $scope.toggleWPinCP('open');
       } else if (item == 'individual'){
         $scope.viewContextPacks = false;
         $scope.viewIndivWordPacks = true;
         $scope.viewAllWordPacks = false;
         $scope.viewWordPackWords = false;
+        $scope.toggleWPinCP('open');
       } else if (item == 'all') {
         $scope.viewContextPacks = false;
         $scope.viewIndivWordPacks = false;
         $scope.viewAllWordPacks = true;
         $scope.viewWordPackWords = false;
+        $scope.toggleWPinCP('open');
       } else if (item == 'off') {
         $scope.viewContextPacks = false;
         $scope.viewIndivWordPacks = false;
         $scope.viewAllWordPacks = false;
         $scope.viewWordPackWords = false;
+        $scope.toggleWPinCP('open');
       }
     };
 
@@ -267,6 +279,7 @@ angular.module('WordRiverApp')
         $scope.viewAllWords = false;
         $scope.viewIndivWords = false;
         $scope.viewWordPackWords = false;
+        $scope.wpIsCollapsed = false;
       }
     };
 
@@ -406,6 +419,7 @@ angular.module('WordRiverApp')
       $scope.getGroupArray($scope.wordIDsInGroup, $scope.wordsArray, $scope.indivWordsInGroup);
       $scope.indivWordPacksInGroup = $scope.getIndivWordPacksInGroup($scope.allWordPacksInGroup);
       $scope.allWordsInGroup = $scope.getAllWordsAssignedToGroup($scope.allWordPacksInGroup, $scope.indivWordsInGroup);
+      console.log($scope.allWordsInGroup.length);
       $scope.contextPacksHolderGroup = $scope.getContextPacksInGroup();
     };
 
@@ -521,8 +535,6 @@ angular.module('WordRiverApp')
       }
       return toReturn;
     };
-
-
 
     $scope.viewWordsInWordPack = function(wordPack){
       $scope.viewWordPackWords = true;

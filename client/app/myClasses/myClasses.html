@@ -66,7 +66,7 @@
       <h3>Context Packs:</h3>
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="contextPack in contextPacksHolderGroup">
-          <label>{{contextPack.name}}<a ng-click="wpIsCollapsed=!wpIsCollapsed"> Toggle Word Packs</a></label>
+          <label>{{contextPack.name}}<a ng-click="toggleWPinCP('close')"> Toggle Word Packs</a></label>
           <ul class="list-group" collapse="wpIsCollapsed">
             <!--This will be for already added word packs-->
             <li class="list-group-item" ng-repeat="wordPack in contextPack.assignedWordPacks">
