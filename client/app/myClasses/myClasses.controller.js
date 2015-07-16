@@ -419,7 +419,17 @@ angular.module('WordRiverApp')
       $scope.getGroupArray($scope.wordIDsInGroup, $scope.wordsArray, $scope.indivWordsInGroup);
       $scope.indivWordPacksInGroup = $scope.getIndivWordPacksInGroup($scope.allWordPacksInGroup);
       $scope.allWordsInGroup = $scope.getAllWordsAssignedToGroup($scope.allWordPacksInGroup, $scope.indivWordsInGroup);
-      console.log($scope.allWordsInGroup.length);
+      for(var i = 0; i< $scope.allWordPacksInGroup.length; i ++){
+        for(var i2 = 0; i2< $scope.allWordPacksInGroup[i].words.length; i2 ++) {
+          console.log($scope.allWordPacksInGroup[i].words[i2].name+"    allWordPacksInGroup");
+        }
+      }
+      for(var i3 = 0; i3< $scope.indivWordsInGroup.length; i3 ++){
+        console.log($scope.indivWordsInGroup[i3].name+"    indivWordsInGroup");
+      }
+      for(var i4 = 0; i4< $scope.allWordsInGroup.length; i4 ++){
+        console.log($scope.allWordsInGroup[i4].name+"    allWordsInGroup");
+      }
       $scope.contextPacksHolderGroup = $scope.getContextPacksInGroup();
     };
 
