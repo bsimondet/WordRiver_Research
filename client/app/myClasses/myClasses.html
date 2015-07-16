@@ -84,7 +84,7 @@
     <!--Area to view all word packs information-->
     <div class="col-xs-3" ng-show="viewAllWordPacks">
       <h3>All Word Packs:</h3>
-      <div ng-repeat="wordPack in wordPacksInGroup">
+      <div ng-repeat="wordPack in allWordPacksInGroup">
         <label><a href="" ng-click="viewWordsInWordPack(wordPack)">{{wordPack.name}}</a></label>
       </div>
       <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
@@ -92,7 +92,7 @@
     <!--Area to view non context pack word packs information-->
     <div class="col-xs-3" ng-show="viewIndivWordPacks">
       <h3>Word Packs Not in Context Packs:</h3>
-      <div ng-repeat="wordPack in nonContextWordPacksInGroup">
+      <div ng-repeat="wordPack in indivWordPacksInGroup">
         <label><a href="" ng-click="viewWordsInWordPack(wordPack)">{{wordPack.name}}</a></label>
       </div>
       <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
@@ -119,7 +119,7 @@
     <!--Area to view indiv words in group information-->
     <div class="col-xs-3" ng-show="viewIndivWords">
       <h3>Words:</h3>
-      <div ng-repeat="word in wordsInGroup">
+      <div ng-repeat="word in indivWordsInGroup">
         <label>{{word.name}}</label>
       </div>
       <label><a class="glyphicon glyphicon-plus" ng-click=""></a></label>
