@@ -10,7 +10,7 @@ var CategorySchema = new Schema({
                        //For example, creating a "Noun" word type category through the Word manger page will give the user the option to add "Noun" as a type of word.
                        //When a word is given this tag, it will appear in the "Noun" Word type category.
   creatorID: String, //The id of the creator of the category
-  wordsInWordPack: []
+  words: []
 });
 
 module.exports = mongoose.model('Category', CategorySchema);

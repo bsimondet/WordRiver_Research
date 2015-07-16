@@ -6,8 +6,7 @@ var mongoose = require('mongoose'),
 var ContextPackSchema = new Schema({
   name: String,
   creatorID: String, //The id of the creator of the category
-  wordsInContextPack: [],
-  wordPacksInContextPack: []
+  wordPacks: []
 });
 
 module.exports = mongoose.model('ContextPack', ContextPackSchema);

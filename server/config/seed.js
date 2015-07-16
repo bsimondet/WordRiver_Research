@@ -1250,91 +1250,90 @@ WordPack.find({}).remove(function () {
       "_id": "553167d183c193d16d03ce80",
       "name": "Dolch 1",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d1afa1bda9bc0d055a",
       "name": "Dolch 2",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "55856f5e08209fde1a2b8af3",
       "name": "Dolch 3",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "__v": 0,
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d1cd3291e1352efe94",
       "name": "Animals",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d1d26d6cb60967d8a5",
       "name": "Post Office",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d1c296f9753ce8447f",
       "name": "Lunch",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d1c67764f3773612dc",
       "name": "Super Words",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": ["55857d531eb0b1273145eb0e", "552d5c80af62cb1c0a09f7bf"]
+      "words": ["55857d531eb0b1273145eb0e", "552d5c80af62cb1c0a09f7bf"]
     },
     {
       "_id": "553167d1d969a916cab51920",
       "name": "School Words",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d13562bc39e23e4d3b",
       "name": "Gym Class",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d14651465f11201014",
       "name": "Trains",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d123b90c175f9b3a86",
       "name": "MN Level 1",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "_id": "553167d123b90c775f9b3a86",
       "name": "MN Level 2",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": []
+      "words": []
     },{
       "_id": "553167d171ef5955ded609ef",
       "name": "Action Words",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInWordPack": ["5511ae8c081ccbd0d072d7b4", "552d5b084c21c73298f493bd"]
+      "words": ["5511ae8c081ccbd0d072d7b4", "552d5b084c21c73298f493bd"]
     },
     {
       "name": "My Family",
       "creatorID": "5511a83da168f8b5f3144f02",
       "_id": "558584084afb8b051fa83846",
-      "wordsInWordPack": []
+      "words": []
     },
     {
       "name": "Morris",
       "creatorID": "5511a83da168f8b5f3144f02",
       "_id": "55858751d0ec44402530da01",
-      "wordsInWordPack": []
+      "words": []
     }
   )
 });
@@ -1345,14 +1344,12 @@ ContextPack.find({}).remove(function () {
       "_id": "553167d183c993666d03ce80",
       "name": "Superheroes",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInContextPack": ["5511ae8cec56277a4af216a5"],
-      "wordPacksInContextPack": ["553167d1c67764f3773612dc", "553167d171ef5955ded609ef"]
+      "wordPacks": ["553167d1c67764f3773612dc", "553167d171ef5955ded609ef"]
     },{
       "_id": "55877751d0ec444025000a01",
       "name": "Minnesota",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordsInContextPack": [],
-      "wordPacksInContextPack": ["55858751d0ec44402530da01", "553167d123b90c175f9b3a86", "553167d123b90c775f9b3a86"]
+      "wordPacks": ["55858751d0ec44402530da01", "553167d123b90c175f9b3a86", "553167d123b90c775f9b3a86"]
     }
   )
 });
