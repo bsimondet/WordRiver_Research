@@ -467,7 +467,6 @@ angular.module('WordRiverApp')
             }
             if(toReturnIDs.indexOf($scope.contextPacksHolder[index]._id) == -1){
               var holdAssignedArr = $scope.getAssignedWordPacks($scope.contextPacksHolder[index].wordPacks);
-              console.log($scope.contextPacksHolder[index].words);
               toReturn.push({
                 "name": $scope.contextPacksHolder[index].name,
                 "_id": $scope.contextPacksHolder[index]._id,
@@ -573,11 +572,10 @@ angular.module('WordRiverApp')
     $scope.viewWordsInWordPack = function(wordPack){
       $scope.viewWordPackWords = true;
       $scope.currentWordPack = wordPack;
-      console.log(wordPack._id)
       $scope.wordsInWordPack = [];
-      for(var index = 0; index < $scope.wordPacksHolder.length; index++){
-        if($scope.wordPacksHolder[index]._id == wordPack._id){
-          $scope.wordsInWordPack = wordPack.words;
+      for(var index = 0; index < $scope.wordPacksArray.length; index++){
+        if($scope.wordPacksArray[index]._id == wordPack._id){
+          $scope.wordsInWordPack = $scope.getWordsFromWordIDs($scope.wordPacksArray[index].wordsInWordPack);
         }
       }
     };
