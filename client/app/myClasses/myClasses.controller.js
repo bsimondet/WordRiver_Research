@@ -573,6 +573,7 @@ angular.module('WordRiverApp')
     $scope.viewWordsInWordPack = function(wordPack){
       $scope.viewWordPackWords = true;
       $scope.currentWordPack = wordPack;
+      console.log(wordPack._id)
       $scope.wordsInWordPack = [];
       for(var index = 0; index < $scope.wordPacksHolder.length; index++){
         if($scope.wordPacksHolder[index]._id == wordPack._id){
