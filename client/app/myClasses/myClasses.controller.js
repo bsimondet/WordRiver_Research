@@ -154,8 +154,6 @@ angular.module('WordRiverApp')
 
     //For group views
     $scope.viewStudents = false;
-    $scope.viewWords = false;
-    $scope.viewWordPacks = false;
     $scope.viewContextPacks = false;
     $scope.viewIndivWordPacks = false;
     $scope.viewAllWordPacks = false;
@@ -204,21 +202,13 @@ angular.module('WordRiverApp')
         $scope.viewClassInfo = true;
         $scope.viewGroupInfo = false;
         $scope.viewStudents = false;
-        $scope.hideGroupItems();
+        $scope.viewGroupItems('off');
       } else if (view == 'group') {
         $scope.headerTitle = $scope.currentGroup.groupName;
         $scope.viewClassInfo = false;
         $scope.viewGroupInfo = true;
         $scope.viewStudents = true;
-        $scope.hideGroupItems();
       }
-    };
-
-    $scope.hideGroupItems = function() {
-      $scope.viewWords = false;
-      $scope.viewWordPacks = false;
-      $scope.viewContextPacks = false;
-      $scope.viewWordPackWords = false;
     };
 
     $scope.viewGroupItems = function(item) {
@@ -231,10 +221,15 @@ angular.module('WordRiverApp')
         $scope.showWordPackSort = false;
         $scope.showWordSort = true;
         $scope.wordFilter('all');
-        $scope.wordPackFilter('off');      }
+        $scope.wordPackFilter('off');
+      } else if (item == 'off') {
+        $scope.showWordPackSort = false;
+        $scope.showWordSort = false;
+        $scope.wordFilter('off');
+        $scope.wordPackFilter('off');
+      }
     };
 
-    //TODO: Need a word filter as well
     $scope.wordPackFilter = function(item) {
       if(item == 'contextPacks'){
         $scope.viewContextPacks = true;
@@ -437,7 +432,6 @@ angular.module('WordRiverApp')
           }
         }
       }
-      console.log(toReturn.length);
       return toReturn;
     };
 
@@ -533,21 +527,8 @@ angular.module('WordRiverApp')
     $scope.viewWordsInWordPack = function(wordPack){
       $scope.viewWordPackWords = true;
       $scope.wordsInWordPack = [];
+      $scope.wordsInWordPack = wordPack.words;
       $scope.currentWordPack = wordPack;
-      for(var index = 0; index < $scope.wordsArray.length; index++){
-        for(var index2 = 0; index2 < $scope.currentWordPack.wordsInWordPack.length; index2++){
-          if($scope.wordsArray[index]._id == $scope.currentWordPack.wordsInWordPack[index2]){
-            $scope.wordsInWordPack.push($scope.wordsArray[index]);
-          }
-        }
-      }
     };
 
-    $scope.viewWordsInContextWordPack = function(wordPack){
-      for(var index = 0; index < $scope.wordPacksHolder.length; index++){
-        if($scope.wordPacksHolder[index]._id == wordPack._id){
-          $scope.viewWordsInWordPack($scope.wordPacksHolder[index]);
-        }
-      }
-    };
   });

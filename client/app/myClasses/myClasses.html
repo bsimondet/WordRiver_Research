@@ -70,11 +70,13 @@
           <ul class="list-group" collapse="wpIsCollapsed">
             <!--This will be for already added word packs-->
             <li class="list-group-item" ng-repeat="wordPack in contextPack.assignedWordPacks">
-              <label><a href="" ng-click="viewWordsInContextWordPack(wordPack)">{{wordPack.name}}</a></label>
+              <label><input type="checkbox"  ng-click="" checked>
+                <a href="" ng-click="viewWordsInWordPack(wordPack)">{{wordPack.name}}</a></label>
             </li>
             <!--This will be for word packs in context pack, but not assigned.-->
             <li class="list-group-item" ng-repeat="wordPack2 in contextPack.notAssignedWordPacks">
-              <label>{{wordPack2.name}}</label>
+              <label><input type="checkbox"  ng-click="">
+                <a href="" ng-click="viewWordsInWordPack(wordPack2)">{{wordPack2.name}}</a></label>
             </li>
           </ul>
         </li>
