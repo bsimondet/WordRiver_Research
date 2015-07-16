@@ -109,6 +109,23 @@ exports.assignToClass = function(req, res) {
   });
 };
 
+exports.assignToGroup = function(req, res) {
+  var userId = req.body.studentID;
+  var classID = req.body.classID;
+  var groupID = req.body.groupID;
+  Student.findById(userId, function (err, user) {
+    for(var i = 0; i < user.classList.length; i++){
+      if(classID == user.classList[i]._id){
+        user.classList[i].groupList.push(groupID);
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.addWord = function(req, res) {
   var userId = req.params.id;
   var word = req.body.word;

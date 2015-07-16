@@ -61,21 +61,26 @@
     </nav>
 
     <!--Area to view student list in group-->
-    <div class="col-xs-3" ng-show="viewStudents">
+    <div class="col-xs-4" ng-show="viewStudents">
       <h3>Students:</h3>
       <div ng-repeat="student in studentsInGroup">
         <label>{{student.firstName}} {{student.lastName}}</label>
       </div>
-      <h5><a class="glyphicon-plus" ng-click=""> Add Student to {{currentGroup.groupName}}</a></h5>
+      <h4><a class="glyphicon-plus" ng-click="toggleStudentAddGroup('on')"> Add Student to {{currentGroup.groupName}}</a></h4>
     </div>
 
     <!--Area to add student to list in group-->
-    <div class="col-xs-3" ng-show="viewAddStudents">
-      <h3>Your Students:</h3>
-      <div ng-repeat="studentAdd in studentsNotInGroup">
-        <label>{{studentAdd.firstName}} {{studentAdd.lastName}}</label>
-      </div>
-      <h5><a class="glyphicon-plus" ng-click=""> Add Student to {{currentGroup.groupName}}</a></h5>
+    <div class="col-xs-4" ng-show="viewAddStudents">
+      <h3>Your Students Not in {{currentGroup.groupName}}:</h3>
+      <input type="text" ng-Model="searchAddStudentsFirst" placeholder="Search Students By First Name">
+      <input type="text" ng-Model="searchAddStudentsLast" placeholder="Search Students By Last Name">
+
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="studentAdd in studentsNotInGroup  | filter:{firstName:searchAddStudentsFirst}  | filter:{lastName:searchAddStudentsLast}">
+          <label>{{studentAdd.firstName}} {{studentAdd.lastName}}  <a class="glyphicon-plus" ng-click="addStudentToGroup(studentAdd, currentGroup)"></a></label>
+        </li>
+      </ul>
+      <h4><a ng-click="toggleStudentAddGroup('off')"> Done</a></h4>
     </div>
 
     <!--Area to view context packs list in group-->
@@ -84,7 +89,6 @@
       <button class="btn btn-primary" title="Toggle Word Packs" ng-click="toggleWPinCP('toggle')">{{position}} Word Packs</button>
       <br><br>
       <ul class="list-group scroll">
-
         <li class="list-group-item" ng-repeat="contextPack in contextPacksHolderGroup">
           <label>{{contextPack.name}}</label>
           <ul class="list-group" collapse="wpIsCollapsed">
@@ -135,7 +139,7 @@
       <div ng-repeat="word in allWordsInGroup">
         <label>{{word.name}}</label>
       </div>
-      <h5><a class="glyphicon-plus" ng-click=""> Add Word to {{currentGroup.groupName}}</a></h5>
+      <h5><a class="glyphicon-plus" ng-click="viewAddWord = true"> Add Word to {{currentGroup.groupName}}</a></h5>
     </div>
 
     <!--Area to view indiv words in group information-->
@@ -144,9 +148,19 @@
       <div ng-repeat="word in indivWordsInGroup">
         <label>{{word.name}}</label>
       </div>
-      <h5><a class="glyphicon-plus" ng-click=""> Add Word to {{currentGroup.groupName}}</a></h5>
+      <h5><a class="glyphicon-plus" ng-click="toggleWordAddGroup('on')"> Add Word to {{currentGroup.groupName}}</a></h5>
     </div>
 
+    <!--Area to view indiv words in group information-->
+    <div class="col-xs-4" ng-show="viewAddWord">
+      <h3>Words not in {{currentGroup.groupName}}:</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="wordAdd in allWordsNotInGroup">
+          <label>{{wordAdd.name}}  <a class="glyphicon-plus" ng-click="addWordToGroup(wordAdd, currentGroup)"></a></label>
+        </li>
+      </ul>
+      <h5><a ng-click="toggleWordAddGroup('off')"> Done</a></h5>
+    </div>
   </div>
 
 </div>
