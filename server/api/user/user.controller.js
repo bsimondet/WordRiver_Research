@@ -444,7 +444,29 @@ exports.addWordIDtoGroup = function(req, res, next) {
         }
       }
     }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
 
+exports.addWordPackIDtoGroup = function(req, res, next) {
+  var userId = req.user._id;
+  var classID = req.body.classID;
+  var groupID = req.body.groupID;
+  var wordPackID = req.body.wordPackID;
+
+  User.findById(userId, function (err, user) {
+    for(var i = 0; i < user.classList.length; i++){
+      if(user.classList[i]._id == classID){
+        for(var i2 = 0; i2 < user.classList[i].groupList.length; i2++){
+          if(user.classList[i].groupList[i2]._id == groupID && user.classList[i].groupList[i2].wordPacks.indexOf(wordPackID) == -1){
+            user.classList[i].groupList[i2].wordPacks.push(wordPackID);
+          }
+        }
+      }
+    }
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);
