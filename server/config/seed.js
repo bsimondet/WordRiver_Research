@@ -1272,13 +1272,13 @@ WordPack.find({}).remove(function () {
     },
     {
       "_id": "553167d1d26d6cb60967d8a5",
-      "name": "Post Office",
+      "name": "Tools",
       "creatorID": "5511a83da168f8b5f3144f02",
       "words": []
     },
     {
       "_id": "553167d1c296f9753ce8447f",
-      "name": "Lunch",
+      "name": "3 Little Pigs",
       "creatorID": "5511a83da168f8b5f3144f02",
       "words": []
     },
@@ -1296,13 +1296,13 @@ WordPack.find({}).remove(function () {
     },
     {
       "_id": "553167d13562bc39e23e4d3b",
-      "name": "Gym Class",
+      "name": "When A Mouse Eats a Cookie",
       "creatorID": "5511a83da168f8b5f3144f02",
       "words": []
     },
     {
       "_id": "553167d14651465f11201014",
-      "name": "Trains",
+      "name": "Little Red Riding Hood",
       "creatorID": "5511a83da168f8b5f3144f02",
       "words": []
     },
@@ -1350,6 +1350,11 @@ ContextPack.find({}).remove(function () {
       "name": "Minnesota",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordPacks": ["55858751d0ec44402530da01", "553167d123b90c175f9b3a86", "553167d123b90c775f9b3a86"]
+    },{
+      "_id": "56977751d0ec444025000a01",
+      "name": "Stories",
+      "creatorID": "5511a83da168f8b5f3144f02",
+      "wordPacks": ["553167d1c296f9753ce8447f", "553167d14651465f11201014", "553167d13562bc39e23e4d3b"]
     }
   )
 });

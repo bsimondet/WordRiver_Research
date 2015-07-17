@@ -505,14 +505,13 @@ angular.module('WordRiverApp')
       $scope.getIDsInGroup($scope.currentGroup);
       $scope.getIndivWordsInGroup($scope.wordIDsInGroup, $scope.wordsHolder, $scope.indivWordsInGroup, $scope.allWordsInGroup);
       $scope.getAllWordPacksInGroup($scope.wordPackIDsInGroup, $scope.wordPacksHolder, $scope.allWordPacksInGroup, $scope.allWordsInGroup);
+      $scope.getContextPacksInGroup($scope.contextPacksHolderGroup);
       $scope.getAllWordsNotInGroup($scope.allWordsInGroup, $scope.allWordsNotInGroup);
       $scope.getIndivWordPacksInGroup($scope.allWordPacksInGroup, $scope.indivWordPacksInGroup);
-      $scope.contextPacksHolderGroup = $scope.getContextPacksInGroup();
     };
 
     //Filters to get context packs with word packs assigned to groups
-    $scope.getContextPacksInGroup = function() {
-      var toReturn = [];
+    $scope.getContextPacksInGroup = function(toReturn) {
       var toReturnIDs = [];
       for(var index = 0; index < $scope.contextPacksHolder.length; index++){
         for(var index2 = 0; index2 < $scope.allWordPacksInGroup.length; index2++){
@@ -532,7 +531,6 @@ angular.module('WordRiverApp')
           }
         }
       }
-      return toReturn;
     };
 
     $scope.getAssignedWordPacks = function (wordPacks){
