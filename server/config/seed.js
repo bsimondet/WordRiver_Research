@@ -1268,7 +1268,7 @@ WordPack.find({}).remove(function () {
       "_id": "553167d1cd3291e1352efe94",
       "name": "Animals",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "words": []
+      "words": ["552c2418971878c01bab1e7c", "5511ae8c1fb25384d865e514", "5511ae8c127053ad5bf17926"]
     },
     {
       "_id": "553167d1d26d6cb60967d8a5",
