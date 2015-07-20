@@ -114,8 +114,8 @@
       <div ng-repeat="wordPack in allWordPacksInGroup | orderBy:'name'">
         <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
       </div>
-      <label> Add Word Pack By Searching All Word Packs</label>
-      <a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('all')"></a>
+      <label><a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('all')"></a>
+       Add Word Pack By Searching All Word Packs</label>
     </div>
     <!--Area to view non context pack word packs information-->
     <div class="col-xs-3" ng-show="viewIndivWordPacks">
@@ -123,8 +123,8 @@
       <div ng-repeat="wordPack in indivWordPacksInGroup | orderBy:'name'">
         <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
       </div>
-      <label> Add Word Pack By Searching Word Packs Not in Context Packs</label>
-      <a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('indiv')"></a>
+      <label> <a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('indiv')"></a>
+        Add Word Pack By Searching Word Packs Not in Context Packs</label>
     </div>
     <!--Area to add individual word packs to group -->
     <div class="col-xs-3" ng-show="viewAddWordPacks">

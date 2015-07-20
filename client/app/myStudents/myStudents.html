@@ -6,18 +6,88 @@
   </div>
 </header>
 
-<div class="container">
-  <h1>Your {{myStudents.length}} Students:</h1>
-  <br>
-  <!--List of current groups with edit and remove options-->
-  <ul class="list-group scroll">
+<div class="container" ng-controller="MyStudentsCtrl">
+  <div class="col-xs-4">
+    <h1>Your {{myStudents.length}} Students:</h1>
+    <br>
+    <!--List of current groups with edit and remove options-->
+    <input type="text" ng-Model="searchFirst" placeholder="Search by First Name">
+    <input type="text" ng-Model="searchLast" placeholder="Search by Last Name">
     <p>
-      <input type="text" ng-Model="searchFirst" placeholder="Search by First Name">
-      <input type="text" ng-Model="searchLast" placeholder="Search by Last Name">
+      <br>
+      <label>Can't find someone?</label>
+      <button class="btn btn-primary" ng-click="toggleAddStudent('on')"> Add A Student</button>
+    </p>
+    <ul class="list-group scroll">
+      <li class="list-group-item" ng-repeat="student in myStudents | orderBy: 'firstName' | filter:{firstName: searchFirst} | filter:{lastName: searchLast}">
+        <label><a href="" ng-click="viewStudentInformation(student)">{{student.firstName}} {{student.lastName}}</a></label>
+      </li>
+    </ul>
+  </div>
+  <!--Add a new student-->
+  <div class="col-xs-4" ng-show="viewAddStudent">
+    <h1>Add Student:</h1>
+    <br>
+    <form ng-submit="addStudent()">
+      <input ng-model="firstname" type="text" size="15" placeholder="First Name">
+      <input ng-model="lastname" type="text" size="15" placeholder="Last Name">
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+    <button class="btn btn-primary" ng-click="toggleAddStudent('off')"> Done</button>
+  </div>
+  <!--View a student-->
+  <div class="col-xs-4" ng-show="viewStudentInfo">
+    <h1>{{currentStudent.firstName}} {{currentStudent.lastName}}'s</h1>
+    <h3><a ng-click="toggleStudentInfo('classes'); getStudentClasses()">Classes</a></h3>
+    <h3>Individually Assigned: </h3>
+    <h4><a ng-click="toggleStudentInfo('context'); getStudentContextPacks()">Context Packs</a></h4>
+    <h4><a ng-click="toggleStudentInfo('wordPacks'); getStudentWordPacks()">Word Packs</a></h4>
+    <h4><a ng-click="toggleStudentInfo('words'); getStudentWords()">Words</a></h4>
+  </div>
+  <!--View a student-->
+  <div class="col-xs-4" ng-show="viewStudentInfoItem">
+    <div ng-show="viewStudentClasses">
+      <h1>Classes</h1>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="class in studentClasses | orderBy: 'className'">
+          <label>{{class.className}}</label>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="group in class.groupList | orderBy: 'groupName'">
+              <label>{{group.groupName}}</label>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div ng-show="viewStudentContext">
+      <h1>Context Packs</h1>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="contextPack in studentContextPacks | orderBy: 'name'">
+          <label>{{contextPack.name}}</label>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="wordPack in contextPack.wordPacks | orderBy: 'name'">
+              <label>{{wordPack.name}}</label>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div ng-show="viewStudentWordPacks">
+      <h1>Word Packs</h1>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="wordPack in studentWordPacks | orderBy: 'name'">
+          <label>{{wordPack.name}}</label>
+        </li>
+      </ul>
+    </div>
+    <div ng-show="viewStudentWords">
+      <h1>Words</h1>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="word in studentWords | orderBy: 'name'">
+          <label>{{word.name}}</label>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-    <li class="list-group-item" ng-repeat="student in myStudents | orderBy: 'firstName' | filter:{firstName: searchFirst} | filter:{lastName: searchLast}">
-
-      <label><a href="" ng-click="">{{student.firstName}} {{student.lastName}}</a></label>
-    </li>
-  </ul>
 </div>
