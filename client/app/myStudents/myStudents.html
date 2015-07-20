@@ -12,7 +12,11 @@
   <!--List of current groups with edit and remove options-->
   <ul class="list-group scroll">
     <p>
-    <li class="list-group-item" ng-repeat="student in myStudents">
+      <input type="text" ng-Model="searchFirst" placeholder="Search by First Name">
+      <input type="text" ng-Model="searchLast" placeholder="Search by Last Name">
+
+    <li class="list-group-item" ng-repeat="student in myStudents | orderBy: 'firstName' | filter:{firstName: searchFirst} | filter:{lastName: searchLast}">
+
       <label><a href="" ng-click="">{{student.firstName}} {{student.lastName}}</a></label>
     </li>
   </ul>
