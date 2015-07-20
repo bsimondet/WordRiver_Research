@@ -21,6 +21,7 @@
     <ul class="list-group scroll">
       <li class="list-group-item" ng-repeat="student in myStudents | orderBy: 'firstName' | filter:{firstName: searchFirst} | filter:{lastName: searchLast}">
         <label><a href="" ng-click="viewStudentInformation(student)">{{student.firstName}} {{student.lastName}}</a></label>
+        <input type="button" value="edit" style="float:right" ng-click="toggleEditStudent('on'); toggleCurrentEditStudent(student)">
       </li>
     </ul>
   </div>
@@ -34,6 +35,17 @@
       <input type="submit" value="Submit" class="btn btn-primary">
     </form>
     <button class="btn btn-primary" ng-click="toggleAddStudent('off')"> Done</button>
+  </div>
+  <!--Edit student-->
+  <div class="col-xs-4" ng-show="viewEditStudent">
+    <h1>Edit {{currentEditStudent.firstName}} {{currentEditStudent.lastName}}:</h1>
+    <br>
+    <form ng-submit="editStudent(currentEditStudent)">
+      <input ng-model="editfirstname" type="text" size="15" placeholder="First Name">
+      <input ng-model="editlastname" type="text" size="15" placeholder="Last Name">
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+    <button class="btn btn-primary" ng-click="toggleEditStudent('off')"> Done</button>
   </div>
   <!--View a student-->
   <div class="col-xs-4" ng-show="viewStudentInfo">

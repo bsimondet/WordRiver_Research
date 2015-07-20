@@ -92,6 +92,22 @@ exports.updateTags = function(req, res) {
   });
 };
 
+// Updates an existing thing in the DB.
+exports.editStudent = function(req, res) {
+  var userId = req.params.id;
+  var fn = req.body.firstName;
+  var ln = req.body.lastName;
+
+  Student.findById(userId, function (err, student) {
+    student.firstName = fn;
+    student.lastName = ln;
+    student.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 //Not finished--Working Here!
 exports.assignToClass = function(req, res) {
   var userId = req.params.id;

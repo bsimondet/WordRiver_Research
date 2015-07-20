@@ -147,6 +147,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.viewAddStudent = false;
+    $scope.viewEditStudent = false;
     $scope.viewStudentInfo = false;
     $scope.viewStudentInfoItem = false;
     $scope.viewStudentClasses = false;
@@ -154,6 +155,8 @@ angular.module('WordRiverApp')
     $scope.viewStudentWordPacks = false;
     $scope.viewStudentWords = false;
 
+    $scope.firstname = "";
+    $scope.lastname = "";
     $scope.addStudent = function() {
       $http.post('/api/students/',
         {firstName:$scope.firstname, lastName:$scope.lastname, teachers: $scope.currentUser._id}
@@ -172,22 +175,69 @@ angular.module('WordRiverApp')
           console.log("Successfully added ID to teacher!");
         });
     };
+
+    $scope.editFirstName = "";
+    $scope.editLastName = "";
+    $scope.editStudent = function(currentEditStudent){
+      var studentToEdit = null;
+      for(var i = 0; i< $scope.myStudents.length; i++){
+        if(currentEditStudent._id == $scope.myStudents[i]._id){
+          studentToEdit = $scope.myStudents[i];
+        }
+      }
+      console.log("Fisrtname "+$scope.editFirstName);
+      console.log($scope.editLastName);
+      $http.put('/api/students/' + studentToEdit + '/editStudent',
+        {firstName:$scope.editFirstName, lastName:$scope.editLastName}
+      ).success(function(student){
+          for(var i = 0; i < $scope.myStudents.length; i++){
+            if(student._id == $scope.myStudents[i]._id){
+              $scope.myStudents[i] = student;
+            }
+          }
+          $scope.editFirstName="";
+          $scope.editLastName="";
+        });
+    };
+
     $scope.toggleAddStudent = function(info){
       if(info == 'on'){
         $scope.viewAddStudent = true;
         $scope.viewStudentInfo = false;
         $scope.toggleStudentInfo('off');
+        $scope.toggleEditStudent('off');
       } else if(info == 'off'){
         $scope.viewAddStudent = false;
       }
     };
 
+    $scope.currentEditStudent = null;
+    $scope.toggleEditStudent = function(info){
+      if(info == 'on'){
+        $scope.toggleStudentInfo('off');
+        $scope.toggleAddStudent('off');
+        $scope.viewEditStudent = true;
+      } else if(info == 'off'){
+        $scope.viewEditStudent = false;
+      }
+    };
+
+    $scope.toggleCurrentEditStudent = function (student){
+      $scope.currentEditStudent = student;
+    };
+
+    $scope.toggleCurrentStudent = function (student){
+      $scope.currentStudent = student;
+    };
+
     $scope.currentStudent = null;
     $scope.viewStudentInformation = function(student){
-      $scope.viewStudentInfo = true;
-      $scope.currentStudent = student;
+      $scope.toggleCurrentStudent(student);
+      $scope.toggleEditStudent('off');
       $scope.toggleStudentInfo('off');
       $scope.toggleAddStudent('off');
+      $scope.viewStudentInfo = true;
+
     };
 
     $scope.toggleStudentInfo = function(info){
@@ -222,11 +272,11 @@ angular.module('WordRiverApp')
         $scope.viewStudentWords = true;
         $scope.viewStudentInfoItem = true;
       }else if(info == 'off'){
+        $scope.viewStudentInfoItem = false;
         $scope.viewStudentClasses = false;
         $scope.viewStudentContext = false;
         $scope.viewStudentWordPacks = false;
         $scope.viewStudentWords = false;
-        $scope.viewStudentInfoItem = false;
       }
     };
 

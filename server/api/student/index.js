@@ -10,6 +10,7 @@ router.get('/:id', controller.show);
 router.get('/:creatorID/students', controller.getUserStudents);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
+router.put('/:id/editStudent', controller.editStudent);
 router.patch('/:id', controller.updateTags);
 router.delete('/:id', controller.destroy);
 router.put('/:id/assignToClass', controller.assignToClass);
