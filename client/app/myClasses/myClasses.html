@@ -104,8 +104,8 @@
             </li>
           </ul>
         </li>
-        <label>Add Word Pack By Searching Context Packs</label>
-          <a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('context')"> </a>
+        <label><a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('context')"> </a>
+          Add Word Pack By Searching Context Packs</label>
       </ul>
     </div>
     <!--Area to view all word packs information-->
@@ -148,6 +148,12 @@
         <ul class="list-group scroll">
           <li class="list-group-item" ng-repeat="contextPackAdd in contextPacksHolderNotGroup">
             <label>{{contextPackAdd.name}}</label>
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="wordPack in contextPackAdd.wordPacks">
+                <label><a ng-click="viewWordsInWordPack(wordPack)">{{wordPack.name}}</a></label>
+                <input type="button"  value="Add" style="float:right; background: #00FF00;" ng-click="addWordPackToGroup(wordPack, currentGroup, 'context')">
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
