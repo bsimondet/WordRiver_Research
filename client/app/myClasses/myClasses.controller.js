@@ -399,6 +399,15 @@ angular.module('WordRiverApp')
       }
     };
 
+    $scope.viewEditWordPacks = false;
+
+    $scope.toggleWordPacksEditGroup = function (item){
+      if(item == 'on'){
+        $scope.viewEditWordPacks = true;
+      } else if(item == 'off'){
+        $scope.viewEditWordPacks = false;
+      }
+    };
 
     $scope.findIndexOfClass = function (myclass) {
       for (var i = 0; i < $scope.classArray.length; i++) {
@@ -548,28 +557,6 @@ angular.module('WordRiverApp')
     };
 
     //Filters to get context packs with word packs assigned to groups
-/*    $scope.getContextPacksInGroup = function(toReturn) {
-      var toReturnIDs = [];
-      for(var index = 0; index < $scope.contextPacksHolder.length; index++){
-        for(var index2 = 0; index2 < $scope.allWordPacksInGroup.length; index2++){
-          if($scope.contextPacksHolder[index].wordPacks.indexOf($scope.allWordPacksInGroup[index2]) != -1){
-            for(var i = 0; i < toReturn.length; i++) {
-              toReturnIDs.push(toReturn[i]._id);
-            }
-            if(toReturnIDs.indexOf($scope.contextPacksHolder[index]._id) == -1){
-              var holdAssignedArr = $scope.getAssignedWordPacks($scope.contextPacksHolder[index].wordPacks);
-              toReturn.push({
-                "name": $scope.contextPacksHolder[index].name,
-                "_id": $scope.contextPacksHolder[index]._id,
-                "assignedWordPacks": holdAssignedArr,
-                "notAssignedWordPacks": $scope.getNotAssignedWordPacks(holdAssignedArr, $scope.contextPacksHolder[index].wordPacks)
-              });
-            }
-          }
-        }
-      }
-    };*/
-
     $scope.getContextPacksInGroup = function(toReturn) {
       var toReturnIDs = [];
       for(var index = 0; index < $scope.contextPacksHolder.length; index++){
@@ -842,5 +829,38 @@ angular.module('WordRiverApp')
         });
     };
 
-
+    $scope.removeWordPackFromGroup = function (wordPack, group) {
+      var classID = $scope.getClassIdOfGroupID(group._id);
+      var wpHolder = wordPack;
+      $http.put('/api/users/' + $scope.currentUser._id + '/removeWordPackIDfromGroup',
+        {
+          classID: classID,
+          groupID: group._id,
+          wordPackID: wordPack._id
+        }
+      ).success(function () {
+          console.log("removed wp ID from group!");
+          if(wpHolder.inContext){
+            $scope.allWordPacksNotInGroup.push(wpHolder);
+            for (var i = 0; i < $scope.allWordPacksInGroup.length; i++) {
+              if (wpHolder == $scope.allWordPacksInGroup[i]) {
+                $scope.allWordPacksInGroup.splice(i, 1);
+              }
+            }
+          } else {
+            $scope.indivWordPacksNotInGroup.push(wpHolder);
+            $scope.allWordPacksNotInGroup.push(wpHolder);
+            for (var index = 0; index < $scope.indivWordPacksInGroup.length; index++) {
+              if (wpHolder == $scope.indivWordPacksInGroup[index]) {
+                $scope.indivWordPacksInGroup.splice(index, 1);
+              }
+            }
+            for (var index2 = 0; index2 < $scope.allWordPacksInGroup.length; index2++) {
+              if (wpHolder == $scope.allWordPacksInGroup[index2]) {
+                $scope.allWordPacksInGroup.splice(index2, 1);
+              }
+            }
+          }
+        });
+    };
   });

@@ -95,12 +95,12 @@
             <!--This is for already added word packs-->
             <li class="list-group-item" ng-repeat="wordPack in getAssignedWordPacks(contextPack.wordPacks) | orderBy:'name'">
               <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
-              <input type="button"  value="Remove" style="float:right; background: #FF0000;" ng-click="" >
+              <input type="button"  value="Remove" style="float:right; background: #FF0000;" ng-click="removeWordPackFromGroup(wordPack, currentGroup)" >
             </li>
             <!--This is for word packs in context pack, but not assigned.-->
             <li class="list-group-item" ng-repeat="wordPack2 in getNotAssignedWordPacks(getAssignedWordPacks(contextPack.wordPacks), contextPack.wordPacks) | orderBy:'name'">
               <label><a ng-click="viewWordsInWordPack(wordPack2); toggleWordPackAddGroup('off')">{{wordPack2.name}}</a></label>
-              <input type="button"  value="Add" style="float:right; background: #00FF00;" ng-click="">
+              <input type="button"  value="Add" style="float:right; background: #00FF00;" ng-click="addWordPackToGroup(wordPack2, currentGroup, 'all')">
             </li>
           </ul>
         </li>
@@ -114,8 +114,11 @@
       <div ng-repeat="wordPack in allWordPacksInGroup | orderBy:'name'">
         <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
       </div>
+      <br>
       <label><a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('all')"></a>
        Add Word Pack By Searching All Word Packs</label>
+      <label><a class="glyphicon glyphicon-pencil" ng-click="toggleWordPacksEditGroup('on')"></a>
+        Remove Assigned Word Packs</label>
     </div>
     <!--Area to view non context pack word packs information-->
     <div class="col-xs-3" ng-show="viewIndivWordPacks">
@@ -125,6 +128,17 @@
       </div>
       <label> <a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('indiv')"></a>
         Add Word Pack By Searching Word Packs Not in Context Packs</label>
+    </div>
+    <!--Area for editing assigned word packs to a group-->
+    <div class="col-xs-3" ng-show="viewEditWordPacks">
+      <h3>Word Packs in {{currentGroup.groupName}}:</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="wordPackEdit in allWordPacksInGroup | orderBy:'name'">
+          <label>{{wordPackEdit.name}}</label>
+          <input type="button" value="Remove" style="float:right;" ng-click="removeWordPackFromGroup(wordPackEdit, currentGroup)">
+        </li>
+      </ul>
+      <button class="btn btn-primary" ng-click="toggleWordPacksEditGroup('off')"> Done Editing Word Packs</button>
     </div>
     <!--Area to add individual word packs to group -->
     <div class="col-xs-3" ng-show="viewAddWordPacks">
@@ -143,7 +157,7 @@
         <ul class="list-group scroll">
           <li class="list-group-item" ng-repeat="wordPackAdd in allWordPacksNotInGroup | orderBy:'name' | filter:{name:searchAddIndivWordPacks} ">
             <label><a ng-click="viewWordsInWordPack(wordPackAdd)">{{wordPackAdd.name}}</a></label>
-            <input type="button" value="add" style="float:right;" ng-click="addWordPackToGroup(wordPackAdd, currentGroup, 'all')">
+            <input type="button" value="Add" style="float:right;" ng-click="addWordPackToGroup(wordPackAdd, currentGroup, 'all')">
           </li>
         </ul>
       </div>
@@ -153,7 +167,7 @@
         <ul class="list-group scroll">
           <li class="list-group-item" ng-repeat="wordPackAdd in indivWordPacksNotInGroup | orderBy:'name' | filter:{name:searchAddAllWordPacks}">
             <label><a ng-click="viewWordsInWordPack(wordPackAdd)">{{wordPackAdd.name}}</a></label>
-            <input type="button" value="add" style="float:right;" ng-click="addWordPackToGroup(wordPackAdd, currentGroup, 'indiv')">
+            <input type="button" value="Add" style="float:right;" ng-click="addWordPackToGroup(wordPackAdd, currentGroup, 'indiv')">
           </li>
         </ul>
       </div>

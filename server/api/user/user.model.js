@@ -26,12 +26,10 @@ var UserSchema = new Schema({
     className: String,
     words: [],            //  word IDs (this) teacher has assigned to this class
     wordPacks: [],    //  word pack IDs (this) teacher has assigned to this class
-    contextPacks: [], //  context pack IDs (this) teacher has assigned to this class
     groupList: [{        //  groups (this) teacher has created in this class
       groupName: String,
       words: [],  //  word IDs (this) teacher has assigned to this group in this class
-      wordPacks: [],  //  word pack IDs (this) teacher has assigned to this group in this class
-      contextPacks: []  //  context pack IDs  teacher has assigned to this group in this class
+      wordPacks: []  //  word pack IDs (this) teacher has assigned to this group in this class
     }]
   }]
 });
