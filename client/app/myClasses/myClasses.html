@@ -66,7 +66,8 @@
       <div ng-repeat="student in studentsInGroup | orderBy:'firstName' ">
         <label>{{student.firstName}} {{student.lastName}}</label>
       </div>
-      <label><a class="glyphicon-plus" ng-click="toggleStudentAddGroup('on')"> Add Students to {{currentGroup.groupName}}</a></label>
+      <label><a class="glyphicon glyphicon-plus" ng-click="toggleStudentAddGroup('on')"></a>  Add Students to {{currentGroup.groupName}}</label>
+      <label><a class="glyphicon glyphicon-pencil" ng-click="toggleStudentEditGroup('on')"></a>  Remove Students from  {{currentGroup.groupName}}</label>
     </div>
 
     <!--Area to add student to list in group-->
@@ -77,10 +78,24 @@
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="studentAdd in studentsNotInGroup | orderBy:'firstName' | filter:{firstName:searchAddStudentsFirst}  | filter:{lastName:searchAddStudentsLast}">
           <label>{{studentAdd.firstName}} {{studentAdd.lastName}} </label>
-          <input type="button" value="add" style="float:right;" ng-click="addStudentToGroup(studentAdd, currentGroup)">
+          <input type="button" value="Add" style="float:right;" ng-click="addStudentToGroup(studentAdd, currentGroup)">
         </li>
       </ul>
       <button class="btn btn-primary" ng-click="toggleStudentAddGroup('off')"> Done Adding Students</button>
+    </div>
+
+    <!--Area to edit students in group list-->
+    <div class="col-xs-4" ng-show="viewEditStudents">
+      <h3>Students in {{currentGroup.groupName}}:</h3>
+      <input type="text" ng-Model="searchEditStudentsFirst" placeholder="Search By First Name">
+      <input type="text" ng-Model="searchEditStudentsLast" placeholder="Search By Last Name">
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="studentEdit in studentsInGroup | orderBy:'firstName' | filter:{firstName:searchEditStudentsFirst}  | filter:{lastName:searchEditStudentsLast}">
+          <label>{{studentEdit.firstName}} {{studentEdit.lastName}} </label>
+          <input type="button" value="Remove" style="float:right;" ng-click="removeStudentFromGroup(studentEdit, currentGroup)">
+        </li>
+      </ul>
+      <button class="btn btn-primary" ng-click="toggleStudentEditGroup('off')"> Done Removing Students</button>
     </div>
 
     <!--Area to view context packs list in group-->

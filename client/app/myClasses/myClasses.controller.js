@@ -217,6 +217,7 @@ angular.module('WordRiverApp')
         $scope.viewStudents = false;
         $scope.viewGroupItems('off');
         $scope.toggleStudentAddGroup('off');
+        $scope.toggleStudentEditGroup('off');
         $scope.hideWordAddGroup('off');
         $scope.hideWordAddGroup();
       } else if (view == 'group') {
@@ -238,6 +239,7 @@ angular.module('WordRiverApp')
         $scope.wordFilter('off');
         $scope.wordPackFilter('contextPacks');
         $scope.toggleStudentAddGroup('off');
+        $scope.toggleStudentEditGroup('off');
         $scope.hideWordAddGroup('off');
         $scope.toggleWordPackAddGroup('off');
       } else if (item == 'words'){
@@ -246,6 +248,7 @@ angular.module('WordRiverApp')
         $scope.wordFilter('all');
         $scope.wordPackFilter('off');
         $scope.toggleStudentAddGroup('off');
+        $scope.toggleStudentEditGroup('off');
         $scope.hideWordAddGroup('off');
         $scope.toggleWordPackAddGroup('off');
       } else if (item == 'off') {
@@ -254,6 +257,7 @@ angular.module('WordRiverApp')
         $scope.wordFilter('off');
         $scope.wordPackFilter('off');
         $scope.toggleStudentAddGroup('off');
+        $scope.toggleStudentEditGroup('off');
         $scope.hideWordAddGroup('off');
         $scope.toggleWordPackAddGroup('off');
       }
@@ -266,12 +270,30 @@ angular.module('WordRiverApp')
         $scope.viewAddStudents = true;
         $scope.showWordPackSort = false;
         $scope.showWordSort = false;
+        $scope.toggleStudentEditGroup('off');
         $scope.wordFilter('off');
         $scope.wordPackFilter('off');
         $scope.hideWordAddGroup('off');
         $scope.toggleWordPackAddGroup('off');
       } else if (item == 'off') {
         $scope.viewAddStudents = false;
+      }
+    };
+
+    $scope.viewEditStudents = false;
+
+    $scope.toggleStudentEditGroup = function (item){
+      if(item == 'on'){
+        $scope.viewEditStudents = true;
+        $scope.showWordPackSort = false;
+        $scope.showWordSort = false;
+        $scope.toggleStudentAddGroup('off');
+        $scope.wordFilter('off');
+        $scope.wordPackFilter('off');
+        $scope.hideWordAddGroup('off');
+        $scope.toggleWordPackAddGroup('off');
+      } else if (item == 'off') {
+        $scope.viewEditStudents = false;
       }
     };
 
@@ -361,6 +383,7 @@ angular.module('WordRiverApp')
         $scope.wordFilter('off');
         $scope.wordPackFilter('off');
         $scope.toggleStudentAddGroup('off');
+        $scope.toggleStudentEditGroup('off');
         $scope.toggleWordPackAddGroup('off');
       } else if (item == 'off') {
         $scope.viewAddWord = false;
@@ -760,6 +783,26 @@ angular.module('WordRiverApp')
           for (var index2 = 0; index2 < $scope.studentsNotInGroup.length; index2++) {
             if (student == $scope.studentsNotInGroup[index2]) {
               $scope.studentsNotInGroup.splice(index2, 1);
+            }
+          }
+        });
+    };
+
+    $scope.removeStudentFromGroup = function (student, group){
+      var classID = $scope.getClassIdOfGroupID(group._id);
+      var studentHold = student;
+      console.log(student);
+      $http.put("/api/students/" + student + "/removeGroup",
+        {
+          studentID: student._id,
+          classID: classID,
+          groupID: group._id
+        }
+      ).success(function () {
+          $scope.studentsNotInGroup.push(studentHold);
+          for (var index = 0; index < $scope.studentsInGroup.length; index++) {
+            if (studentHold == $scope.studentsInGroup[index]) {
+              $scope.studentsInGroup.splice(index, 1);
             }
           }
         });

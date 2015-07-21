@@ -130,10 +130,18 @@ exports.assignToGroup = function(req, res) {
   var classID = req.body.classID;
   var groupID = req.body.groupID;
   Student.findById(userId, function (err, user) {
+    var allClassIDs = [];
     for(var i = 0; i < user.classList.length; i++){
+      allClassIDs.push(user.classList[i]._id);
       if(classID == user.classList[i]._id){
         user.classList[i].groupList.push(groupID);
       }
+    }
+    if(allClassIDs.indexOf(classID) == -1){
+      user.classList.push({
+        "_id": classID,
+        "groupList": groupID
+      });
     }
     user.save(function(err) {
       if (err) return validationError(res, err);
@@ -174,13 +182,17 @@ exports.removeClass = function (req, res) {
 };
 
 exports.removeGroup = function (req, res) {
-  var userId = req.body._id;
+  var userId = req.body.studentID;
+  var classID = req.body.classID;
   var groupID = req.body.groupID;
+
   Student.findById(userId, function (err, user) {
     for (var i = 0; i < user.classList.length; i++) {
-      for (var j = 0; j < user.classList[i].groupList.length; j++) {
-        if (user.classList[i].groupList[j] == groupID) {
-          user.classList[i].groupList.splice(j, 1);
+      if(user.classList[i]._id == classID){
+        for (var j = 0; j < user.classList[i].groupList.length; j++) {
+          if (user.classList[i].groupList[j] == groupID) {
+            user.classList[i].groupList.splice(j, 1);
+          }
         }
       }
     }
