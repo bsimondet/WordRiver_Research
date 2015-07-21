@@ -70,10 +70,10 @@
     </div>
 
     <!--Area to add student to list in group-->
-    <div class="col-xs-3" ng-show="viewAddStudents">
+    <div class="col-xs-4" ng-show="viewAddStudents">
       <h3>Your Students Not in {{currentGroup.groupName}}:</h3>
-      <input type="text" ng-Model="searchAddStudentsFirst" placeholder="Search Students By First Name">
-      <input type="text" ng-Model="searchAddStudentsLast" placeholder="Search Students By Last Name">
+      <input type="text" ng-Model="searchAddStudentsFirst" placeholder="Search By First Name">
+      <input type="text" ng-Model="searchAddStudentsLast" placeholder="Search By Last Name">
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="studentAdd in studentsNotInGroup | orderBy:'firstName' | filter:{firstName:searchAddStudentsFirst}  | filter:{lastName:searchAddStudentsLast}">
           <label>{{studentAdd.firstName}} {{studentAdd.lastName}} </label>
@@ -92,15 +92,15 @@
         <li class="list-group-item" ng-repeat="contextPack in contextPacksHolderGroup | orderBy:'name'">
           <label>{{contextPack.name}}</label>
           <ul class="list-group" collapse="wpIsCollapsed">
-            <!--This will be for already added word packs-->
-            <li class="list-group-item" ng-repeat="wordPack in contextPack.assignedWordPacks | orderBy:'name'">
-              <label><input type="checkbox"  ng-click="" checked>
-                <a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
+            <!--This is for already added word packs-->
+            <li class="list-group-item" ng-repeat="wordPack in getAssignedWordPacks(contextPack.wordPacks) | orderBy:'name'">
+              <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
+              <input type="button"  value="Remove" style="float:right; background: #FF0000;" ng-click="" >
             </li>
-            <!--This will be for word packs in context pack, but not assigned.-->
-            <li class="list-group-item" ng-repeat="wordPack2 in contextPack.notAssignedWordPacks | orderBy:'name'">
-              <label><input type="checkbox"  ng-click="">
-                <a ng-click="viewWordsInWordPack(wordPack2); toggleWordPackAddGroup('off')">{{wordPack2.name}}</a></label>
+            <!--This is for word packs in context pack, but not assigned.-->
+            <li class="list-group-item" ng-repeat="wordPack2 in getNotAssignedWordPacks(getAssignedWordPacks(contextPack.wordPacks), contextPack.wordPacks) | orderBy:'name'">
+              <label><a ng-click="viewWordsInWordPack(wordPack2); toggleWordPackAddGroup('off')">{{wordPack2.name}}</a></label>
+              <input type="button"  value="Add" style="float:right; background: #00FF00;" ng-click="">
             </li>
           </ul>
         </li>
