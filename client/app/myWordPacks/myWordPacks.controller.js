@@ -55,6 +55,7 @@ angular.module('WordRiverApp')
     $scope.getWords();
 
     $scope.wordPacksHolder = [];  //Array organized to act as desired object
+    $scope.wordPacksNonContextHolder = [];  //Array organized to act as desired object
     $scope.wordPacksArray = [];  //Array of server objects
 
     $scope.getWordPacks = function(){
@@ -131,6 +132,7 @@ angular.module('WordRiverApp')
             }
           }
         }
+        $scope.getNonContextWordPacks();
       });
     };
 
@@ -146,5 +148,51 @@ angular.module('WordRiverApp')
       }
       return toReturn;
     };
+
+    $scope.getNonContextWordPacks = function(){
+      $scope.wordPacksNonContextHolder = [];
+      for(var i = 0; i < $scope.wordPacksHolder.length; i++){
+        if($scope.wordPacksHolder[i].inContext == false && $scope.wordPacksNonContextHolder.indexOf($scope.wordPacksHolder[i]) == -1){
+          $scope.wordPacksNonContextHolder.push($scope.wordPacksHolder[i]);
+        }
+      }
+    };
+
     $scope.getContextPacks();
+
+    $scope.viewMyContextPacks = false;
+    $scope.viewAllOfMyWordPacks = false;
+    $scope.viewMyNonContextWordPacks = false;
+    $scope.viewWordPackWords = false;
+
+    $scope.toggleView = function(view){
+      if(view == 'context'){
+        $scope.viewMyContextPacks = true;
+        $scope.viewAllOfMyWordPacks = false;
+        $scope.viewMyNonContextWordPacks = false;
+        $scope.viewWordPackWords = false;
+      } else if(view == 'all'){
+        $scope.viewMyContextPacks = false;
+        $scope.viewAllOfMyWordPacks = true;
+        $scope.viewMyNonContextWordPacks = false;
+        $scope.viewWordPackWords = false;
+      } else if(view == 'indiv'){
+        $scope.viewMyContextPacks = false;
+        $scope.viewAllOfMyWordPacks = false;
+        $scope.viewMyNonContextWordPacks = true;
+        $scope.viewWordPackWords = false;
+      }
+    };
+
+    $scope.currentWordPack = null;
+    $scope.viewWordsInWordPack = function(wordPack){
+      $scope.viewWordPackWords = true;
+      $scope.currentWordPack = wordPack;
+      $scope.wordsInWordPack = [];
+      for(var index = 0; index < $scope.wordPacksArray.length; index++){
+        if($scope.wordPacksArray[index]._id == wordPack._id){
+          $scope.wordsInWordPack = $scope.getWordsFromWordIDs($scope.wordPacksArray[index].words);
+        }
+      }
+    };
   });

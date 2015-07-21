@@ -7,11 +7,52 @@
   </header>
   <div class="container">
     <nav>
-      <h5>How would you like to sort word packs? &nbsp;&nbsp;&nbsp;
-        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('contextPacks')"> Context Packs
-        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('all')"> All Word Packs
-        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('individual')"> Word Packs Not in Context Packs
-      </h5>
+      <h3>What would like to view?
+        <input type="button" name="wordPackOption" value="Context Packs" ng-click="toggleView('context')">
+        <input type="button" name="wordPackOption" value="All Word Packs" ng-click="toggleView('all')">
+        <input type="button" name="wordPackOption" value="Word Packs Not in Context Packs" ng-click="toggleView('indiv')">
+      </h3>
     </nav>
+    <!--For viewing context packs-->
+    <div class="col-xs-3" ng-show="viewMyContextPacks">
+      <h3>My Context Packs</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="contextPack in contextPacksHolder | orderBy:'name'">
+          <label>{{contextPack.name}}</label>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="wordPack in contextPack.wordPacks | orderBy:'name'">
+              <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 20 }}{{wordPack.name.length > 20 ? '...' : ''}}</a></label>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!--For viewing all word packs-->
+    <div class="col-xs-3" ng-show="viewAllOfMyWordPacks">
+      <h3>All of My Word Packs</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="wordPack in wordPacksHolder | orderBy:'name'">
+          <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 20 }}{{wordPack.name.length > 20 ? '...' : ''}}</a></label>
+        </li>
+      </ul>
+    </div>
+    <!--For viewing word packs not in context packs-->
+    <div class="col-xs-3" ng-show="viewMyNonContextWordPacks">
+      <h3>My Word Packs Not in Context Packs</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="wordPack in wordPacksNonContextHolder | orderBy:'name'">
+          <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 20 }}{{wordPack.name.length > 20 ? '...' : ''}}</a></label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-xs-3" ng-show="viewWordPackWords">
+      <h3>Words in {{currentWordPack.name}}</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="word in wordsInWordPack | orderBy:'name'">
+          <label>{{ word.name | limitTo: 20 }}{{word.name.length > 20 ? '...' : ''}}, {{word.wordType}}</label>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
