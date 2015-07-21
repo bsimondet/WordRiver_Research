@@ -1,4 +1,17 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="col-md-12">
-This is the myWordPacks view.
+<div ng-controller="MyWordPacksCtrl">
+  <header class="hero-unit" id="banner">
+    <div class="">
+      <h1>My Word Packs</h1>
+    </div>
+  </header>
+  <div class="container">
+    <nav>
+      <h5>How would you like to sort word packs? &nbsp;&nbsp;&nbsp;
+        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('contextPacks')"> Context Packs
+        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('all')"> All Word Packs
+        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('individual')"> Word Packs Not in Context Packs
+      </h5>
+    </nav>
+  </div>
 </div>

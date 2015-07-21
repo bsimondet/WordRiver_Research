@@ -100,21 +100,21 @@
 
     <!--Area to view context packs list in group-->
     <div class="col-xs-3" ng-show="viewContextPacks">
-      <h3>Context Packs:</h3>
-      <button class="btn btn-primary" title="Toggle Word Packs" ng-click="toggleWPinCP('toggle')">{{position}} Word Packs</button>
-      <br><br>
+      <h3>Context Packs:
+      <button class="btn btn-primary" title="Toggle Word Packs" ng-click="toggleWPinCP('toggle')">{{position}}</button>
+      </h3>
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="contextPack in contextPacksHolderGroup | orderBy:'name'">
           <label>{{contextPack.name}}</label>
           <ul class="list-group" collapse="wpIsCollapsed">
             <!--This is for already added word packs-->
             <li class="list-group-item" ng-repeat="wordPack in getAssignedWordPacks(contextPack.wordPacks) | orderBy:'name'">
-              <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
+              <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</a></label>
               <input type="button"  value="Remove" style="float:right; background: #FF0000;" ng-click="removeWordPackFromGroup(wordPack, currentGroup)" >
             </li>
             <!--This is for word packs in context pack, but not assigned.-->
             <li class="list-group-item" ng-repeat="wordPack2 in getNotAssignedWordPacks(getAssignedWordPacks(contextPack.wordPacks), contextPack.wordPacks) | orderBy:'name'">
-              <label><a ng-click="viewWordsInWordPack(wordPack2); toggleWordPackAddGroup('off')">{{wordPack2.name}}</a></label>
+              <label><a ng-click="viewWordsInWordPack(wordPack2); toggleWordPackAddGroup('off')">{{ wordPack2.name | limitTo: 15 }}{{wordPack2.name.length > 15 ? '...' : ''}}</a></label>
               <input type="button"  value="Add" style="float:right; background: #00FF00;" ng-click="addWordPackToGroup(wordPack2, currentGroup, 'all')">
             </li>
           </ul>
@@ -127,7 +127,7 @@
     <div class="col-xs-3" ng-show="viewAllWordPacks">
       <h3>All Word Packs:</h3>
       <div ng-repeat="wordPack in allWordPacksInGroup | orderBy:'name'">
-        <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
+        <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</a></label>
       </div>
       <br>
       <label><a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('all')"></a>
@@ -139,7 +139,7 @@
     <div class="col-xs-3" ng-show="viewIndivWordPacks">
       <h3>Word Packs Not in Context Packs:</h3>
       <div ng-repeat="wordPack in indivWordPacksInGroup | orderBy:'name'">
-        <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{wordPack.name}}</a></label>
+        <label><a ng-click="viewWordsInWordPack(wordPack); toggleWordPackAddGroup('off')">{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</a></label>
       </div>
       <label> <a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('indiv')"></a>
         Add Word Pack By Searching Word Packs Not in Context Packs</label>
@@ -149,7 +149,7 @@
       <h3>Word Packs in {{currentGroup.groupName}}:</h3>
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="wordPackEdit in allWordPacksInGroup | orderBy:'name'">
-          <label>{{wordPackEdit.name}}</label>
+          <label>{{ wordPackEdit.name | limitTo: 15 }}{{wordPackEdit.name.length > 15 ? '...' : ''}}</label>
           <input type="button" value="Remove" style="float:right;" ng-click="removeWordPackFromGroup(wordPackEdit, currentGroup)">
         </li>
       </ul>
@@ -162,10 +162,10 @@
         <input type="text" ng-Model="searchAddContextWordPacks" placeholder="Search Context Packs">
         <ul class="list-group scroll">
           <li class="list-group-item" ng-repeat="contextPackAdd in contextPacksHolderNotGroup">
-            <label>{{contextPackAdd.name}}</label>
+            <label>{{ contextPackAdd.name | limitTo: 15 }}{{contextPackAdd.name.length > 15 ? '...' : ''}}</label>
             <ul class="list-group">
               <li class="list-group-item" ng-repeat="wordPack in contextPackAdd.wordPacks">
-                <label><a ng-click="viewWordsInWordPack(wordPack)">{{wordPack.name}}</a></label>
+                <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</a></label>
                 <input type="button"  value="Add" style="float:right; background: #00FF00;" ng-click="addWordPackToGroup(wordPack, currentGroup, 'context')">
               </li>
             </ul>
@@ -177,7 +177,7 @@
         <input type="text" ng-Model="searchAddIndivWordPacks" placeholder="Search Word Packs">
         <ul class="list-group scroll">
           <li class="list-group-item" ng-repeat="wordPackAdd in allWordPacksNotInGroup | orderBy:'name' | filter:{name:searchAddIndivWordPacks} ">
-            <label><a ng-click="viewWordsInWordPack(wordPackAdd)">{{wordPackAdd.name}}</a></label>
+            <label><a ng-click="viewWordsInWordPack(wordPackAdd)">{{ wordPackAdd.name | limitTo: 15 }}{{wordPackAdd.name.length > 15 ? '...' : ''}}</a></label>
             <input type="button" value="Add" style="float:right;" ng-click="addWordPackToGroup(wordPackAdd, currentGroup, 'all')">
           </li>
         </ul>
@@ -187,7 +187,7 @@
         <input type="text" ng-Model="searchAddAllWordPacks" placeholder="Search Word Packs">
         <ul class="list-group scroll">
           <li class="list-group-item" ng-repeat="wordPackAdd in indivWordPacksNotInGroup | orderBy:'name' | filter:{name:searchAddAllWordPacks}">
-            <label><a ng-click="viewWordsInWordPack(wordPackAdd)">{{wordPackAdd.name}}</a></label>
+            <label><a ng-click="viewWordsInWordPack(wordPackAdd)">{{ wordPackAdd.name | limitTo: 15 }}{{wordPackAdd.name.length > 15 ? '...' : ''}}</a></label>
             <input type="button" value="Add" style="float:right;" ng-click="addWordPackToGroup(wordPackAdd, currentGroup, 'indiv')">
           </li>
         </ul>
@@ -199,7 +199,7 @@
     <div class="col-xs-3" ng-show="viewWordPackWords">
       <h3>Words In {{currentWordPack.name}}:</h3>
       <div ng-repeat="word in wordsInWordPack">
-        <label>{{word.name}}</label>
+        <label>{{word.name}}, {{word.wordType}}</label>
       </div>
     </div>
 
@@ -207,7 +207,7 @@
     <div class="col-xs-3" ng-show="viewAllWords">
       <h3>Words:</h3>
       <div ng-repeat="word in allWordsInGroup | orderBy:'name'">
-        <label>{{word.name}}</label>
+        <label>{{word.name}}, {{word.wordType}}</label>
       </div>
       <label><a class="glyphicon-plus" ng-click="viewAddWord = true"> Add Words to {{currentGroup.groupName}}</a></label>
     </div>
@@ -216,7 +216,7 @@
     <div class="col-xs-3" ng-show="viewIndivWords">
       <h3>Words:</h3>
       <div ng-repeat="word in indivWordsInGroup | orderBy:'name'">
-        <label>{{word.name}}</label>
+        <label>{{word.name}}, {{word.wordType}}</label>
       </div>
       <label><a class="glyphicon-plus" ng-click="viewAddWord = true"> Add Words to {{currentGroup.groupName}}</a></label>
     </div>
