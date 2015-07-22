@@ -26,7 +26,7 @@
               <input type="button" value="Edit Name" style="float:right" ng-click="editWordPackName(wordPack)">
             </li>
           </ul>
-          <label><a class="glyphicon glyphicon-plus" ng-click="addWordPack()"></a> Add Existing Word Pack </label>
+          <label><a class="glyphicon glyphicon-plus" ng-click="addWordPack(contextPack)"></a> Add Existing Word Pack </label>
           <label><a class="glyphicon glyphicon-plus" ng-click="newWordPack(contextPack)"></a> Add New Word Pack </label>
         </li>
       </ul>
@@ -52,16 +52,6 @@
         </li>
       </ul>
       <label><a class="glyphicon glyphicon-plus" ng-click="newWordPack()"></a> Create New Word Pack </label>
-    </div>
-
-    <!--For viewing words in a word pack-->
-    <div class="col-xs-3" ng-show="viewWordPackWords">
-      <h3>Words in {{currentWordPack.name}}</h3>
-      <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="word in wordsInWordPack | orderBy:'name'">
-          <label>{{ word.name | limitTo: 20 }}{{word.name.length > 20 ? '...' : ''}}, {{word.wordType}}</label>
-        </li>
-      </ul>
     </div>
 
     <!--For editing a context pack name-->
@@ -91,6 +81,28 @@
       <input ng-model="createWordPackNameField" type="text" size="15" placeholder="Name of Word Pack">
       <input type="submit" value="Add New Word Pack" class="btn-primary" ng-click="createWordPack()">
       <input type="submit" value="Cancel" class="btn-primary" ng-click="viewCreateWordPack = false">
+    </div>
+
+    <!--For adding a existing word pack to a context pack -->
+    <div class="col-xs-3" ng-show="viewAddWordPack">
+      <h3>Existing Word Packs to add to {{currentContextPack.name}}</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="wordPack in wordPacksNonContextHolder | orderBy:'name'">
+          <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</a></label>
+          <input type="button" value="Add" style="float:right" ng-click="addWordPackToContextPack(currentContextPack, wordPack)">
+        </li>
+      </ul>
+      <input type="submit" value="Cancel" class="btn-primary" ng-click="viewAddWordPack = false">
+    </div>
+
+    <!--For viewing words in a word pack-->
+    <div class="col-xs-3" ng-show="viewWordPackWords">
+      <h3>Words in {{currentWordPack.name}}</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="word in wordsInWordPack | orderBy:'name'">
+          <label>{{ word.name | limitTo: 20 }}{{word.name.length > 20 ? '...' : ''}}, {{word.wordType}}</label>
+        </li>
+      </ul>
     </div>
 
   </div>

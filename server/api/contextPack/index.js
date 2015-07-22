@@ -13,5 +13,6 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 router.put('/:id/editContextName', controller.editContextName);
+router.put('/:id/addWordPackToContextPack', controller.addWordPackToContextPack);
 
 module.exports = router;

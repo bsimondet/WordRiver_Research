@@ -67,6 +67,21 @@ var validationError = function(res, err) {
   return res.json(422, err);
 };
 
+// Updates an existing contextPack in the DB.
+exports.addWordPackToContextPack = function(req, res) {
+  var contextId = req.params.id;
+  var wordPackID = req.body.wordPackID;
+
+  ContextPack.findById(contextId, function (err, contextPack) {
+    contextPack.wordPacks.push(wordPackID);
+    contextPack.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+
 // Deletes a contextPack from the DB.
 exports.destroy = function(req, res) {
   ContextPack.findById(req.params.id, function (err, contextPack) {
