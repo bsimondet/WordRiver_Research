@@ -42,21 +42,21 @@
     <h5>Back to: <a ng-click="toggleClassGroup('class')">Classes</a></h5>
     <nav>
       <h4>What would you like to view in {{currentGroup.groupName}}? &nbsp;&nbsp;&nbsp;
-      <input type="radio" name="groupItem" ng-click="viewGroupItems('wordPacks')"> Word Packs
-      <input type="radio" name="groupItem" ng-click="viewGroupItems('words')"> Words
+      <input type="button" value="Word Packs" name="groupItem" ng-click="viewGroupItems('wordPacks')">
+      <input type="button" value="Words" name="groupItem" ng-click="viewGroupItems('words')">
       </h4>
     </nav>
     <nav ng-show="showWordPackSort">
       <h5>How would you like to sort word packs? &nbsp;&nbsp;&nbsp;
-        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('contextPacks')" checked> Context Packs
-        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('all')"> All Word Packs
-        <input type="radio" name="wordPackOption" ng-click="wordPackFilter('individual')"> Word Packs Not in Context Packs
+        <input type="button" value="Context Packs" name="wordPackOption" ng-click="wordPackFilter('contextPacks')">
+        <input type="button" value="All Word Packs" name="wordPackOption" ng-click="wordPackFilter('all')">
+        <input type="button" value="Word Packs Not in Context Packs" name="wordPackOption" ng-click="wordPackFilter('individual')">
       </h5>
     </nav>
     <nav ng-show="showWordSort">
       <h5>How would you like to sort words? &nbsp;&nbsp;&nbsp;
-        <input type="radio" name="wordOption" ng-click="wordFilter('all')" checked> All Assigned Words
-        <input type="radio" name="wordOption" ng-click="wordFilter('individual')"> Individually Assigned Words
+        <input type="button" value="All Assigned Words" name="wordOption" ng-click="wordFilter('all')">
+        <input type="button" value="Individually Assigned Words" name="wordOption" ng-click="wordFilter('individual')">
       </h5>
     </nav>
 
@@ -209,7 +209,7 @@
       <div ng-repeat="word in allWordsInGroup | orderBy:'name'">
         <label>{{word.name}}, {{word.wordType}}</label>
       </div>
-      <label><a class="glyphicon-plus" ng-click="viewAddWord = true"> Add Words to {{currentGroup.groupName}}</a></label>
+      <label><a class="glyphicon-plus" ng-click="viewAddWord = true"></a> Add Words to {{currentGroup.groupName}}</label>
     </div>
 
     <!--Area to view indiv words in group information-->
@@ -218,7 +218,8 @@
       <div ng-repeat="word in indivWordsInGroup | orderBy:'name'">
         <label>{{word.name}}, {{word.wordType}}</label>
       </div>
-      <label><a class="glyphicon-plus" ng-click="viewAddWord = true"> Add Words to {{currentGroup.groupName}}</a></label>
+      <label><a class="glyphicon glyphicon-plus" ng-click="viewAddWord = true"></a> Add Words to {{currentGroup.groupName}}</label>
+      <label><a class="glyphicon glyphicon-pencil" ng-click="toggleWordEditGroup('on')"></a> Remove Assigned Word Packs</label>
     </div>
 
     <!--Area to add words to group -->
@@ -226,15 +227,27 @@
       <h3>Words not in {{currentGroup.groupName}}:</h3>
       <input type="text" ng-Model="searchAddWords" placeholder="Search Words">
       <input type="text" ng-Model="searchAddWordsType" placeholder="Search By Word Type">
-
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="wordAdd in allWordsNotInGroup | orderBy:'name' | filter:{name:searchAddWords} | filter:{wordType:searchAddWordsType}">
           <label>{{wordAdd.name}}, {{wordAdd.wordType}}</label>
-          <input type="button" value="add" style="float:right;" ng-click="addWordToGroup(wordAdd, currentGroup)">
+          <input type="button" value="Add" style="float:right;" ng-click="addWordToGroup(wordAdd, currentGroup)">
         </li>
       </ul>
-      <button class="btn btn-primary" ng-click="hideWordAddGroup()"> Done Adding Words</button>
+      <button class="btn btn-primary" ng-click="toggleWordAddGroup('off')"> Done Adding Words</button>
     </div>
-  </div>
+    <!--Area to remove words from a group -->
+    <div class="col-xs-3" ng-show="viewEditWord">
+      <h3>Individually Assigned Words in {{currentGroup.groupName}}:</h3>
+      <input type="text" ng-Model="searchEditWords" placeholder="Search Words">
+      <input type="text" ng-Model="searchEditWordsType" placeholder="Search By Word Type">
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="wordEdit in indivWordsInGroup | orderBy:'name' | filter:{name:searchEditWords} | filter:{wordType:searchEditWordsType}">
+          <label>{{wordEdit.name}}, {{wordEdit.wordType}}</label>
+          <input type="button" value="Remove" style="float:right;" ng-click="removeWordFromGroup(wordEdit, currentGroup)">
+        </li>
+      </ul>
+      <button class="btn btn-primary" ng-click="toggleWordEditGroup('off')"> Done Adding Words</button>
+    </div>
 
+  </div>
 </div>

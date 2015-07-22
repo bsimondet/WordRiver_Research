@@ -501,6 +501,33 @@ exports.removeWordPackIDfromGroup = function(req, res, next) {
   });
 };
 
+exports.removeWordIDfromGroup = function(req, res, next) {
+  var userId = req.user._id;
+  var classID = req.body.classID;
+  var groupID = req.body.groupID;
+  var wordID = req.body.wordID;
+
+  User.findById(userId, function (err, user) {
+    for(var i = 0; i < user.classList.length; i++){
+      if(user.classList[i]._id == classID){
+        for(var i2 = 0; i2 < user.classList[i].groupList.length; i2++){
+          if(user.classList[i].groupList[i2]._id == groupID){
+            for(var i3 = 0; i3 < user.classList[i].groupList[i2].words.length; i3++){
+              if(user.classList[i].groupList[i2].words[i3] == wordID){
+                user.classList[i].groupList[i2].words.splice(i3, 1);
+              }
+            }
+          }
+        }
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.updateWord = function(req, res, next) {
   var userId = req.user._id;
 

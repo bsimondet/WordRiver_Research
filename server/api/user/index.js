@@ -33,6 +33,7 @@ router.put('/:id/removeCategoryID', auth.isAuthenticated(), controller.removeCat
 router.put('/:id/removeWordID', auth.isAuthenticated(), controller.removeWordID);
 router.put('/:id/removeStudentID', auth.isAuthenticated(), controller.removeStudentID);
 router.put('/:id/addWordIDtoGroup', auth.isAuthenticated(), controller.addWordIDtoGroup);
+router.put('/:id/removeWordIDfromGroup', auth.isAuthenticated(), controller.removeWordIDfromGroup);
 router.put('/:id/addWordPackIDtoGroup', auth.isAuthenticated(), controller.addWordPackIDtoGroup);
 router.put('/:id/removeWordPackIDfromGroup', auth.isAuthenticated(), controller.removeWordPackIDfromGroup);
 
