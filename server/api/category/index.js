@@ -14,5 +14,7 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 router.put('/:id/editWordPackName', controller.editWordPackName);
+router.put('/:id/addWordToWordPack', controller.addWordToWordPack);
+router.put('/:id/removeWordIDFromWordPack', controller.removeWordIDFromWordPack);
 
 module.exports = router;

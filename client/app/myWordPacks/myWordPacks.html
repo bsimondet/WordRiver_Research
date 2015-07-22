@@ -33,7 +33,6 @@
           <!--<label><a class=" glyphicon-plus" ng-click="addWordPack(contextPack)"></a> Existing Packs -->
           <!--<a class=" glyphicon-plus" ng-click="newWordPack(contextPack)"></a> New Pack </label>-->
           <!--<label><a class="glyphicon glyphicon-minus" ng-click="removeWordPack(contextPack)"></a> Remove Word Packs </label>-->
-
         </li>
       </ul>
     </div>
@@ -119,9 +118,22 @@
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="word in wordsInWordPack | orderBy:'name'">
           <label>{{ word.name | limitTo: 20 }}{{word.name.length > 20 ? '...' : ''}}, {{word.wordType}}</label>
+          <a class="glyphicon glyphicon-trash" style="float:right" ng-click="removeWordFromWordPack(word)">  </a>
         </li>
       </ul>
+      <label><a class="glyphicon-plus" style="float:right" ng-click="addWords()"> Add Words to {{currentWordPack.name}} </a></label>
     </div>
 
+    <!--For adding words not current in word pack-->
+    <div class="col-xs-3" ng-show="viewAddWordsToWordPacks">
+      <h3>Words not in {{currentWordPack.name}}</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="word in wordsNotInWordPack | orderBy:'name'">
+          <label>{{ word.name | limitTo: 20 }}{{word.name.length > 20 ? '...' : ''}}, {{word.wordType}}</label>
+          <input type="button" value="Add" style="float:right" ng-click="addWordsToWordPack(word)">
+        </li>
+      </ul>
+      <button class="btn btn-primary" ng-click="viewAddWordsToWordPacks = false">Done</button>
+    </div>
   </div>
 </div>

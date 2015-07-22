@@ -176,6 +176,7 @@ angular.module('WordRiverApp')
         $scope.viewAddWordPack = false;
         $scope.createWordPackForContext = false;
         $scope.viewRemoveWordPack = false;
+        $scope.viewAddWordsToWordPacks = false;
       } else if(view == 'all'){
         $scope.viewMyContextPacks = false;
         $scope.viewAllOfMyWordPacks = true;
@@ -186,6 +187,7 @@ angular.module('WordRiverApp')
         $scope.viewAddWordPack = false;
         $scope.createWordPackForContext = false;
         $scope.viewRemoveWordPack = false;
+        $scope.viewAddWordsToWordPacks = false;
       } else if(view == 'indiv'){
         $scope.viewMyContextPacks = false;
         $scope.viewAllOfMyWordPacks = false;
@@ -196,6 +198,7 @@ angular.module('WordRiverApp')
         $scope.viewAddWordPack = false;
         $scope.createWordPackForContext = false;
         $scope.viewRemoveWordPack = false;
+        $scope.viewAddWordsToWordPacks = false;
       }
     };
 
@@ -214,6 +217,7 @@ angular.module('WordRiverApp')
       $scope.viewAddWordPack = false;
       $scope.createWordPackForContext = false;
       $scope.viewRemoveWordPack = false;
+      $scope.viewAddWordsToWordPacks = false;
     };
 
     $scope.updateContextName = function () {
@@ -259,6 +263,7 @@ angular.module('WordRiverApp')
       $scope.viewAddWordPack = false;
       $scope.createWordPackForContext = false;
       $scope.viewRemoveWordPack = false;
+      $scope.viewAddWordsToWordPacks = false;
     };
 
     $scope.updateWordPackName = function () {
@@ -302,6 +307,7 @@ angular.module('WordRiverApp')
       $scope.viewCreateWordPack = true;
       $scope.viewAddWordPack = false;
       $scope.viewRemoveWordPack = false;
+      $scope.viewAddWordsToWordPacks = false;
       if(item != null){
         $scope.currentContextPack = item;
         $scope.createWordPackForContext = true;
@@ -348,6 +354,7 @@ angular.module('WordRiverApp')
       $scope.viewAddWordPack = true;
       $scope.viewCreateWordPack = false;
       $scope.viewRemoveWordPack = false;
+      $scope.viewAddWordsToWordPacks = false;
       $scope.currentContextPack = contextPack;
     };
 
@@ -376,6 +383,7 @@ angular.module('WordRiverApp')
       $scope.viewEditWordPackName = false;
       $scope.viewAddWordPack = false;
       $scope.viewCreateWordPack = false;
+      $scope.viewAddWordsToWordPacks = false;
       $scope.currentContextPack = contextPack;
     };
 
@@ -406,6 +414,8 @@ angular.module('WordRiverApp')
     };
 
     $scope.currentWordPack = null;
+    $scope.wordsNotInWordPack = [];
+
     $scope.viewWordsInWordPack = function(wordPack){
       $scope.viewEditContextName = false;
       $scope.viewEditWordPackName = false;
@@ -414,12 +424,74 @@ angular.module('WordRiverApp')
       $scope.viewAddWordPack = false;
       $scope.createWordPackForContext = false;
       $scope.viewRemoveWordPack = false;
+      $scope.viewAddWordsToWordPacks = false;
       $scope.currentWordPack = wordPack;
       $scope.wordsInWordPack = [];
+      $scope.wordsNotInWordPack = [];
+      var wordsInWordPackIDs = [];
       for(var index = 0; index < $scope.wordPacksArray.length; index++){
         if($scope.wordPacksArray[index]._id == wordPack._id){
+          wordsInWordPackIDs = $scope.wordPacksArray[index].words;
           $scope.wordsInWordPack = $scope.getWordsFromWordIDs($scope.wordPacksArray[index].words);
         }
       }
+      for(var index2 = 0; index2 < $scope.wordsArray.length; index2++){
+        if(wordsInWordPackIDs.indexOf($scope.wordsArray[index2]._id) == -1){
+          $scope.wordsNotInWordPack.push({
+            "_id":$scope.wordsArray[index2]._id,
+            "name":$scope.wordsArray[index2].name,
+            "wordType":$scope.wordsArray[index2].wordType
+          });
+        }
+      }
     };
+
+    $scope.viewAddWordsToWordPacks = false;
+
+    $scope.addWords = function(){
+      $scope.viewAddWordsToWordPacks = true;
+    };
+
+    $scope.addWordsToWordPack = function(word){
+      var newWord = word;
+      if(confirm("If adding a word to a word pack in a context pack, you may need to refresh the page to see the words.")) {
+        $http.put('/api/categories/' + $scope.currentWordPack._id + '/addWordToWordPack', {
+          wordID: word._id
+        }).success(function () {
+          $scope.wordsInWordPack.push({
+            "_id": newWord._id,
+            "name": newWord.name,
+            "wordType": newWord.wordType
+          });
+          for (var index = 0; index < $scope.wordsNotInWordPack.length; index++) {
+            if ($scope.wordsNotInWordPack[index]._id == newWord._id) {
+              $scope.wordsNotInWordPack.splice(index, 1);
+            }
+          }
+          $scope.getWordPacks();
+        })
+      }
+    };
+
+    $scope.removeWordFromWordPack = function(word){
+      var oldWord = word;
+      if(confirm("If removing a word from a word pack in a context pack, you may need to refresh the page to see the words.")){
+        $http.put('/api/categories/' + $scope.currentWordPack._id +'/removeWordIDFromWordPack', {
+            wordID: word._id
+        }).success(function(){
+          for(var index = 0; index < $scope.wordsInWordPack.length; index++){
+            if($scope.wordsInWordPack[index]._id == oldWord._id){
+              $scope.wordsInWordPack.splice(index, 1);
+            }
+          }
+          $scope.wordsNotInWordPack.push({
+            "_id":oldWord._id,
+            "name":oldWord.name,
+            "wordType":oldWord.wordType
+          });
+          $scope.getWordPacks();
+        })
+      }
+    };
+
   });

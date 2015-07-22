@@ -63,6 +63,38 @@ exports.editWordPackName = function(req, res) {
   });
 };
 
+// Updates an existing contextPack in the DB.
+exports.addWordToWordPack = function(req, res) {
+  var wordPackId = req.params.id;
+  var wordID = req.body.wordID;
+
+  Category.findById(wordPackId, function (err, wordPack) {
+    wordPack.words.push(wordID);
+    wordPack.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+// Updates an existing contextPack in the DB.
+exports.removeWordIDFromWordPack = function(req, res) {
+  var wordPackId = req.params.id;
+  var wordID = req.body.wordID;
+
+  Category.findById(wordPackId, function (err, wordPack) {
+    for(var i = 0; i < wordPack.words.length; i++){
+      if( wordPack.words[i] == wordID){
+        wordPack.words.splice(i, 1);
+      }
+    }
+    wordPack.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 var validationError = function(res, err) {
   return res.json(422, err);
 };
