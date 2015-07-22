@@ -15,7 +15,7 @@
     </nav>
     <!--For viewing context packs-->
     <div class="col-xs-3" ng-show="viewMyContextPacks">
-      <h3>My Context Packs</h3>
+      <h3>My Context Packs <a class="glyphicon glyphicon-plus" ng-click="newContextPack()"></a></h3>
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="contextPack in contextPacksHolder | orderBy:'name'">
           <label>{{contextPack.name}}</label>
@@ -65,6 +65,14 @@
       <input ng-model="editContextNameField" type="text" size="15" placeholder= {{contextToEditName}}>
       <input type="submit" value="Edit Context Pack Name" class="btn-primary" ng-click="updateContextName()">
       <input type="submit" value="Cancel" class="btn-primary" ng-click="viewEditContextName = false">
+    </div>
+
+    <!--For creating a new context pack -->
+    <div class="col-xs-3" ng-show="viewCreateContextPack">
+      <h3>New Context Pack</h3>
+      <input ng-model="createContextPackNameField" type="text" size="15" placeholder="Name of Context Pack">
+      <input type="submit" value="Add New Context Pack" class="btn-primary" ng-click="createContextPack()">
+      <input type="submit" value="Cancel" class="btn-primary" ng-click="viewCreateContextPack = false">
     </div>
 
     <!--For editing a word pack name-->

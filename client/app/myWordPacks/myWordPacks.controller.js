@@ -248,6 +248,38 @@ angular.module('WordRiverApp')
       }
     };
 
+    $scope.viewCreateContextPack = false;
+
+    $scope.newContextPack = function(){
+      $scope.viewCreateContextPack = true;
+      $scope.viewWordPackWords = false;
+      $scope.viewEditWordPackName = false;
+      $scope.viewCreateWordPack = false;
+      $scope.viewAddWordPack = false;
+      $scope.viewRemoveWordPack = false;
+      $scope.viewAddWordsToWordPacks = false;
+    };
+
+    $scope.createContextPack = function () {
+      if ($scope.createContextPackNameField.length > 0) {
+        $http.post('/api/contextPacks/', {
+          name: $scope.createContextPackNameField,
+          creatorID: $scope.currentUser._id
+        }).success(function(newContextPack){
+          $scope.contextPacksHolder.push({
+            "_id":newContextPack._id,
+            "name":newContextPack.name,
+            "wordPacks": []
+          });
+
+          $scope.createContextPackNameField = "";
+          $scope.viewCreateContextPack = false;
+        });
+      } else {
+        alert("Please enter a name for this context pack");
+      }
+    };
+
     //For editing a word pack name
     $scope.viewEditWordPackName = false;
     $scope.wordPackToEdit = null;
@@ -260,6 +292,7 @@ angular.module('WordRiverApp')
       $scope.wordPackToEditName = wordPack.name;
       $scope.wordPackToEdit = wordPack;
       $scope.viewCreateWordPack = false;
+      $scope.viewCreateContextPack = false;
       $scope.viewAddWordPack = false;
       $scope.createWordPackForContext = false;
       $scope.viewRemoveWordPack = false;
@@ -305,6 +338,7 @@ angular.module('WordRiverApp')
       $scope.viewWordPackWords = false;
       $scope.viewEditWordPackName = false;
       $scope.viewCreateWordPack = true;
+      $scope.viewCreateContextPack = false;
       $scope.viewAddWordPack = false;
       $scope.viewRemoveWordPack = false;
       $scope.viewAddWordsToWordPacks = false;
@@ -353,6 +387,7 @@ angular.module('WordRiverApp')
       $scope.viewEditWordPackName = false;
       $scope.viewAddWordPack = true;
       $scope.viewCreateWordPack = false;
+      $scope.viewCreateContextPack = false;
       $scope.viewRemoveWordPack = false;
       $scope.viewAddWordsToWordPacks = false;
       $scope.currentContextPack = contextPack;
@@ -383,6 +418,7 @@ angular.module('WordRiverApp')
       $scope.viewEditWordPackName = false;
       $scope.viewAddWordPack = false;
       $scope.viewCreateWordPack = false;
+      $scope.viewCreateContextPack = false;
       $scope.viewAddWordsToWordPacks = false;
       $scope.currentContextPack = contextPack;
     };
@@ -421,7 +457,7 @@ angular.module('WordRiverApp')
       $scope.viewEditWordPackName = false;
       $scope.viewWordPackWords = true;
       $scope.viewCreateWordPack = false;
-      $scope.viewAddWordPack = false;
+      $scope.viewCreateContextPack = false;
       $scope.createWordPackForContext = false;
       $scope.viewRemoveWordPack = false;
       $scope.viewAddWordsToWordPacks = false;
