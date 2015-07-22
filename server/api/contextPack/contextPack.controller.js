@@ -49,6 +49,24 @@ exports.update = function(req, res) {
   });
 };
 
+// Updates an existing contextPack in the DB.
+exports.editContextName = function(req, res) {
+  var contextId = req.params.id;
+  var newName = req.body.name;
+
+  ContextPack.findById(contextId, function (err, contextPack) {
+    contextPack.name = newName;
+    contextPack.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+var validationError = function(res, err) {
+  return res.json(422, err);
+};
+
 // Deletes a contextPack from the DB.
 exports.destroy = function(req, res) {
   ContextPack.findById(req.params.id, function (err, contextPack) {

@@ -171,22 +171,159 @@ angular.module('WordRiverApp')
         $scope.viewAllOfMyWordPacks = false;
         $scope.viewMyNonContextWordPacks = false;
         $scope.viewWordPackWords = false;
+        $scope.viewEditWordPackName = false;
+        $scope.viewCreateWordPack = false;
+        $scope.createWordPackForContext = false;
       } else if(view == 'all'){
         $scope.viewMyContextPacks = false;
         $scope.viewAllOfMyWordPacks = true;
         $scope.viewMyNonContextWordPacks = false;
         $scope.viewWordPackWords = false;
+        $scope.viewEditWordPackName = false;
+        $scope.viewCreateWordPack = false;
+        $scope.createWordPackForContext = false;
       } else if(view == 'indiv'){
         $scope.viewMyContextPacks = false;
         $scope.viewAllOfMyWordPacks = false;
         $scope.viewMyNonContextWordPacks = true;
         $scope.viewWordPackWords = false;
+        $scope.viewEditWordPackName = false;
+        $scope.viewCreateWordPack = false;
+        $scope.createWordPackForContext = false;
+      }
+    };
+
+    //For editing a context pack name
+    $scope.viewEditContextName = false;
+    $scope.contextToEdit = null;
+    $scope.editContextName = "";
+
+    $scope.editContextName = function (context) {
+      $scope.viewEditWordPackName = false;
+      $scope.viewWordPackWords = false;
+      $scope.viewEditContextName = true;
+      $scope.contextToEditName = context.name;
+      $scope.contextToEdit = context;
+      $scope.viewCreateWordPack = false;
+      $scope.createWordPackForContext = false;
+    };
+
+    $scope.updateContextName = function () {
+      if ($scope.editContextName.length > 0) {
+        $http.put('/api/contextPacks/' + $scope.contextToEdit._id + '/editContextName', {
+          contextID: $scope.contextToEdit._id,
+          name: $scope.editContextNameField
+        }).success(function(){
+          $scope.editContextNameField = "";
+          $scope.getContextPacks();
+          $scope.viewEditContextName = false;
+        });
+      } else {
+        alert("Please enter a new name for this context pack");
+      }
+    };
+
+    //For editing a word pack name
+    $scope.viewEditWordPackName = false;
+    $scope.wordPackToEdit = null;
+    $scope.editWordPackName = "";
+
+    $scope.editWordPackName = function (wordPack) {
+      $scope.viewEditContextName = false;
+      $scope.viewWordPackWords = false;
+      $scope.viewEditWordPackName = true;
+      $scope.wordPackToEditName = wordPack.name;
+      $scope.wordPackToEdit = wordPack;
+      $scope.viewCreateWordPack = false;
+      $scope.createWordPackForContext = false;
+    };
+
+    $scope.updateWordPackName = function () {
+      if ($scope.editWordPackName.length > 0) {
+        $http.put('/api/categories/' + $scope.wordPackToEdit._id + '/editWordPackName', {
+          wordPackID: $scope.wordPackToEdit._id,
+          name: $scope.editWordPackNameField
+        }).success(function(){
+          for(var i = 0; i < $scope.contextPacksHolder.length; i++){
+            for(var j = 0; j < $scope.contextPacksHolder[i].wordPacks.length; j++){
+              if($scope.contextPacksHolder[i].wordPacks[j]._id == $scope.wordPackToEdit._id){
+                $scope.contextPacksHolder[i].wordPacks[j].name = $scope.editWordPackNameField;
+              }
+            }
+          }
+          for(var k = 0; k < $scope.wordPacksHolder.length; k++){
+            if($scope.wordPacksHolder[k]._id == $scope.wordPackToEdit._id){
+              $scope.wordPacksHolder[k].name = $scope.editWordPackNameField;
+            }
+          }
+          for(var l = 0; l < $scope.wordPacksNonContextHolder.length; l++){
+            if($scope.wordPacksNonContextHolder[l]._id == $scope.wordPackToEdit._id){
+              $scope.wordPacksNonContextHolder[l].name = $scope.editWordPackNameField;
+            }
+          }
+          $scope.editWordPackNameField = "";
+          $scope.viewEditWordPackName = false;
+        });
+      } else {
+        alert("Please enter a new name for this word pack");
+      }
+    };
+
+    $scope.viewCreateWordPack = false;
+    $scope.createWordPackForContext = false;
+    $scope.currentContextPack = null;
+
+    $scope.newWordPack = function(item){
+      $scope.viewCreateWordPack = true;
+      if(item != null){
+        $scope.currentContextPack = item;
+        $scope.createWordPackForContext = true;
+      }
+    };
+
+    $scope.createWordPack = function () {
+      if ($scope.createWordPackNameField.length > 0) {
+        $http.post('/api/categories/', {
+          name: $scope.createWordPackNameField,
+          creatorID: $scope.currentUser._id
+        }).success(function(newWordPack){
+          $scope.wordPacksHolder.push({
+            "_id":newWordPack._id,
+            "name":newWordPack.name,
+            "inContext": false
+          });
+          $scope.wordPacksNonContextHolder.push({
+            "_id":newWordPack._id,
+            "name":newWordPack.name,
+            "inContext": false
+          });
+          if($scope.createWordPackForContext){
+            for(var i = 0; i < $scope.contextPacksHolder.length; i++){
+              if($scope.contextPacksHolder[i]._id == $scope.currentContextPack._id){
+                $scope.contextPacksHolder[i].wordPacks.push({
+                  "_id":newWordPack._id,
+                  "name":newWordPack.name,
+                  "inContext": false
+                });
+              }
+            }
+            $scope.createWordPackForContext = false;
+          }
+          $scope.createWordPackNameField = "";
+          $scope.viewCreateWordPack = false;
+        });
+      } else {
+        alert("Please enter a name for this word pack");
       }
     };
 
     $scope.currentWordPack = null;
     $scope.viewWordsInWordPack = function(wordPack){
+      $scope.viewEditContextName = false;
+      $scope.viewEditWordPackName = false;
       $scope.viewWordPackWords = true;
+      $scope.viewCreateWordPack = false;
+      $scope.createWordPackForContext = false;
       $scope.currentWordPack = wordPack;
       $scope.wordsInWordPack = [];
       for(var index = 0; index < $scope.wordPacksArray.length; index++){

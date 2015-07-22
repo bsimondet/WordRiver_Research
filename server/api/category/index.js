@@ -13,5 +13,6 @@ router.post('/', controller.update);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
+router.put('/:id/editWordPackName', controller.editWordPackName);
 
 module.exports = router;

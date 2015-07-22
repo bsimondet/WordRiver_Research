@@ -49,6 +49,24 @@ exports.update = function(req, res) {
   });
 };
 
+// Updates an existing contextPack in the DB.
+exports.editWordPackName = function(req, res) {
+  var wordPackId = req.params.id;
+  var newName = req.body.name;
+
+  Category.findById(wordPackId, function (err, wordPack) {
+    wordPack.name = newName;
+    wordPack.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+var validationError = function(res, err) {
+  return res.json(422, err);
+};
+
 // Deletes a category from the DB.
 exports.destroy = function(req, res) {
   Category.findById(req.params.id, function (err, category) {
