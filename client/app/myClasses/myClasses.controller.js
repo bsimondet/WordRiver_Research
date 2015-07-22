@@ -226,9 +226,6 @@ angular.module('WordRiverApp')
         $scope.viewGroupInfo = false;
         $scope.viewStudents = false;
         $scope.viewGroupItems('off');
-        $scope.toggleStudentAddGroup('off');
-        $scope.toggleStudentEditGroup('off');
-        $scope.toggleWordAddGroup('off');
       } else if (view == 'group') {
         $scope.headerTitle = $scope.currentGroup.groupName;
         $scope.viewClassInfo = false;
@@ -241,70 +238,58 @@ angular.module('WordRiverApp')
     $scope.showWordSort = false;
     $scope.viewWordPackWords = false;
 
+
+    $scope.viewAddWord = false;
+    $scope.viewEditWord = false;
+
     $scope.viewGroupItems = function(item) {
       if(item == 'wordPacks'){
         $scope.showWordPackSort = true;
         $scope.showWordSort = false;
         $scope.wordFilter('off');
         $scope.wordPackFilter('contextPacks');
-        $scope.toggleStudentAddGroup('off');
-        $scope.toggleStudentEditGroup('off');
-        $scope.toggleWordAddGroup('off');
-        $scope.toggleWordPackAddGroup('off');
-        $scope.toggleWordPacksEditGroup('off');
+        $scope.viewEditWordPacks = false;
+        $scope.toggleStudentInfo('off');
+        $scope.viewAddWord = false;
+        $scope.viewEditWord = false;
       } else if (item == 'words'){
         $scope.showWordPackSort = false;
         $scope.showWordSort = true;
         $scope.wordFilter('all');
         $scope.wordPackFilter('off');
-        $scope.toggleStudentAddGroup('off');
-        $scope.toggleStudentEditGroup('off');
-        $scope.toggleWordAddGroup('off');
-        $scope.toggleWordPackAddGroup('off');
-        $scope.toggleWordPacksEditGroup('off');
+        $scope.viewEditWordPacks = false;
+        $scope.toggleStudentInfo('off');
+        $scope.viewAddWord = false;
+        $scope.viewEditWord = false;
       } else if (item == 'off') {
         $scope.showWordPackSort = false;
         $scope.showWordSort = false;
         $scope.wordFilter('off');
         $scope.wordPackFilter('off');
-        $scope.toggleStudentAddGroup('off');
-        $scope.toggleStudentEditGroup('off');
-        $scope.toggleWordAddGroup('off');
-        $scope.toggleWordPackAddGroup('off');
-        $scope.toggleWordPacksEditGroup('off');
+        $scope.viewEditWordPacks = false;
+        $scope.toggleStudentInfo('off');
+        $scope.viewAddWord = false;
+        $scope.viewEditWord = false;
       }
     };
+
 
     $scope.viewAddStudents = false;
-
-    $scope.toggleStudentAddGroup = function (item){
-      if(item == 'on'){
-        $scope.viewAddStudents = true;
-        $scope.showWordPackSort = false;
-        $scope.showWordSort = false;
-        $scope.toggleStudentEditGroup('off');
-        $scope.wordFilter('off');
-        $scope.wordPackFilter('off');
-        $scope.toggleWordAddGroup('off');
-        $scope.toggleWordPackAddGroup('off');
-      } else if (item == 'off') {
-        $scope.viewAddStudents = false;
-      }
-    };
-
     $scope.viewEditStudents = false;
 
-    $scope.toggleStudentEditGroup = function (item){
-      if(item == 'on'){
-        $scope.viewEditStudents = true;
-        $scope.showWordPackSort = false;
-        $scope.showWordSort = false;
-        $scope.toggleStudentAddGroup('off');
+    $scope.toggleStudentInfo = function (item){
+      if(item == 'add'){
+        $scope.viewAddStudents = true;
+        $scope.viewEditStudents = false;
         $scope.wordFilter('off');
         $scope.wordPackFilter('off');
-        $scope.toggleWordAddGroup('off');
-        $scope.toggleWordPackAddGroup('off');
-      } else if (item == 'off') {
+      } else if(item == 'edit'){
+        $scope.viewAddStudents = false;
+        $scope.viewEditStudents = true;
+        $scope.wordFilter('off');
+        $scope.wordPackFilter('off');
+      }else if(item =='off'){
+        $scope.viewAddStudents = false;
         $scope.viewEditStudents = false;
       }
     };
@@ -319,24 +304,27 @@ angular.module('WordRiverApp')
         $scope.viewIndivWordPacks = false;
         $scope.viewAllWordPacks = false;
         $scope.viewWordPackWords = false;
-        $scope.toggleWordPacksEditGroup('off');
+        $scope.viewEditWordPacks = false;
         $scope.toggleWordPackAddGroup('off');
+        $scope.toggleStudentInfo('off');
         $scope.toggleWPinCP('open');
       } else if (item == 'individual'){
         $scope.viewContextPacks = false;
         $scope.viewIndivWordPacks = true;
         $scope.viewAllWordPacks = false;
         $scope.viewWordPackWords = false;
-        $scope.toggleWordPacksEditGroup('off');
+        $scope.viewEditWordPacks = false;
         $scope.toggleWordPackAddGroup('off');
+        $scope.toggleStudentInfo('off');
         $scope.toggleWPinCP('open');
       } else if (item == 'all') {
         $scope.viewContextPacks = false;
         $scope.viewIndivWordPacks = false;
         $scope.viewAllWordPacks = true;
         $scope.viewWordPackWords = false;
-        $scope.toggleWordPacksEditGroup('off');
+        $scope.viewEditWordPacks = false;
         $scope.toggleWordPackAddGroup('off');
+        $scope.toggleStudentInfo('off');
         $scope.toggleWPinCP('open');
       } else if (item == 'off') {
         $scope.viewContextPacks = false;
@@ -344,6 +332,7 @@ angular.module('WordRiverApp')
         $scope.viewAllWordPacks = false;
         $scope.viewWordPackWords = false;
         $scope.toggleWPinCP('open');
+        $scope.toggleWordPackAddGroup('off');
       }
     };
 
@@ -355,15 +344,59 @@ angular.module('WordRiverApp')
         $scope.viewAllWords = false;
         $scope.viewIndivWords = true;
         $scope.viewWordPackWords = false;
+        $scope.toggleStudentInfo('off');
       } else if (item == 'all') {
         $scope.viewAllWords = true;
         $scope.viewIndivWords = false;
         $scope.viewWordPackWords = false;
+        $scope.toggleStudentInfo('off');
       } else if (item == 'off') {
         $scope.viewAllWords = false;
         $scope.viewIndivWords = false;
         $scope.viewWordPackWords = false;
         $scope.wpIsCollapsed = false;
+        $scope.viewAddWord = false;
+        $scope.viewEditWord = false;
+      }
+    };
+
+    $scope.viewAddWordPacks = false;
+    $scope.viewAddAllWordPacks = false;
+    $scope.viewAddIndivWordPacks = false;
+    $scope.viewAddContextWordPacks = false;
+    $scope.viewEditWordPacks = false;
+
+    $scope.toggleWordPackAddGroup = function (item){
+      if(item == 'all') {
+        $scope.viewAddWordPacks = true;
+        $scope.viewAddAllWordPacks = true;
+        $scope.viewAddIndivWordPacks = false;
+        $scope.viewAddContextWordPacks = false;
+        $scope.viewWordPackWords = false;
+        $scope.viewEditWordPacks = false;
+        $scope.toggleStudentInfo('off');
+      } else if (item == 'indiv'){
+        $scope.viewAddWordPacks = true;
+        $scope.viewAddAllWordPacks = false;
+        $scope.viewAddIndivWordPacks = true;
+        $scope.viewAddContextWordPacks = false;
+        $scope.viewWordPackWords = false;
+        $scope.viewEditWordPacks = false;
+        $scope.toggleStudentInfo('off');
+      } else if (item == 'context'){
+        $scope.viewAddWordPacks = true;
+        $scope.viewAddAllWordPacks = false;
+        $scope.viewAddIndivWordPacks = false;
+        $scope.viewAddContextWordPacks = true;
+        $scope.viewWordPackWords = false;
+        $scope.viewEditWordPacks = false;
+        $scope.toggleStudentInfo('off');
+      } else if (item == 'off') {
+        $scope.viewAddWordPacks = false;
+        $scope.viewAddAllWordPacks = false;
+        $scope.viewAddIndivWordPacks = false;
+        $scope.viewAddContextWordPacks = false;
+        $scope.viewEditWordPacks = false;
       }
     };
 
@@ -383,89 +416,6 @@ angular.module('WordRiverApp')
           $scope.position = "Show";
         }
         $scope.wpIsCollapsed = !$scope.wpIsCollapsed;
-
-      }
-    };
-
-
-    $scope.viewAddWord = false;
-
-    $scope.toggleWordAddGroup = function (item){
-      if(item == 'on'){
-        $scope.viewAddWord = true;
-        $scope.showWordPackSort = false;
-        $scope.showWordSort = false;
-        $scope.wordFilter('off');
-        $scope.wordPackFilter('off');
-        $scope.hideWordEditGroup('off');
-        $scope.toggleStudentAddGroup('off');
-        $scope.toggleStudentEditGroup('off');
-        $scope.toggleWordPackAddGroup('off');
-      } else if (item == 'off') {
-        $scope.viewAddWord = false;
-      }
-    };
-
-    $scope.viewEditWord = false;
-
-    $scope.toggleWordEditGroup = function (item){
-      if(item == 'on'){
-        $scope.viewEditWord = true;
-        $scope.showWordPackSort = false;
-        $scope.showWordSort = false;
-        $scope.wordFilter('off');
-        $scope.wordPackFilter('off');
-        $scope.toggleWordAddGroup('off');
-        $scope.toggleStudentAddGroup('off');
-        $scope.toggleStudentEditGroup('off');
-        $scope.toggleWordPackAddGroup('off');
-      } else if (item == 'off') {
-        $scope.viewEditWord = false;
-      }
-    };
-
-    $scope.viewAddWordPacks = false;
-    $scope.viewAddAllWordPacks = false;
-    $scope.viewAddIndivWordPacks = false;
-    $scope.viewAddContextWordPacks = false;
-
-    $scope.toggleWordPackAddGroup = function (item){
-      if(item == 'all') {
-        $scope.viewAddWordPacks = true;
-        $scope.viewAddAllWordPacks = true;
-        $scope.viewAddIndivWordPacks = false;
-        $scope.viewAddContextWordPacks = false;
-        $scope.viewWordPackWords = false;
-        $scope.toggleWordPacksEditGroup('off');
-      } else if (item == 'indiv'){
-        $scope.viewAddWordPacks = true;
-        $scope.viewAddAllWordPacks = false;
-        $scope.viewAddIndivWordPacks = true;
-        $scope.viewAddContextWordPacks = false;
-        $scope.viewWordPackWords = false;
-        $scope.toggleWordPacksEditGroup('off');
-      } else if (item == 'context'){
-        $scope.viewAddWordPacks = true;
-        $scope.viewAddAllWordPacks = false;
-        $scope.viewAddIndivWordPacks = false;
-        $scope.viewAddContextWordPacks = true;
-        $scope.viewWordPackWords = false;
-        $scope.toggleWordPacksEditGroup('off');
-      } else if (item == 'off') {
-        $scope.viewAddWordPacks = false;
-        $scope.viewAddAllWordPacks = false;
-        $scope.viewAddIndivWordPacks = false;
-        $scope.viewAddContextWordPacks = false;
-      }
-    };
-
-    $scope.viewEditWordPacks = false;
-
-    $scope.toggleWordPacksEditGroup = function (item){
-      if(item == 'on'){
-        $scope.viewEditWordPacks = true;
-      } else if(item == 'off'){
-        $scope.viewEditWordPacks = false;
       }
     };
 
@@ -767,11 +717,6 @@ angular.module('WordRiverApp')
         }
       }
     };
-
-/*
-    TODO: Add remove feature for words
-*/
-
 
     $scope.viewWordsInWordPack = function(wordPack){
       $scope.viewWordPackWords = true;

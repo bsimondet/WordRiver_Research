@@ -66,8 +66,8 @@
       <div ng-repeat="student in studentsInGroup | orderBy:'firstName' ">
         <label>{{student.firstName}} {{student.lastName}}</label>
       </div>
-      <label><a class="glyphicon glyphicon-plus" ng-click="toggleStudentAddGroup('on')"></a>  Add Students to {{currentGroup.groupName}}</label>
-      <label><a class="glyphicon glyphicon-pencil" ng-click="toggleStudentEditGroup('on')"></a>  Remove Students from  {{currentGroup.groupName}}</label>
+      <label><a class="glyphicon glyphicon-plus" ng-click="toggleStudentInfo('add')"></a>  Add Students to {{currentGroup.groupName}}</label>
+      <label><a class="glyphicon glyphicon-pencil" ng-click="toggleStudentInfo('edit')"></a>  Remove Students from  {{currentGroup.groupName}}</label>
     </div>
 
     <!--Area to add student to list in group-->
@@ -81,7 +81,7 @@
           <input type="button" value="Add" style="float:right;" ng-click="addStudentToGroup(studentAdd, currentGroup)">
         </li>
       </ul>
-      <button class="btn btn-primary" ng-click="toggleStudentAddGroup('off')"> Done Adding Students</button>
+      <button class="btn btn-primary" ng-click="toggleStudentInfo('off')"> Done Adding Students</button>
     </div>
 
     <!--Area to edit students in group list-->
@@ -95,7 +95,7 @@
           <input type="button" value="Remove" style="float:right;" ng-click="removeStudentFromGroup(studentEdit, currentGroup)">
         </li>
       </ul>
-      <button class="btn btn-primary" ng-click="toggleStudentEditGroup('off')"> Done Removing Students</button>
+      <button class="btn btn-primary" ng-click="toggleStudentInfo('off')"> Done Removing Students</button>
     </div>
 
     <!--Area to view context packs list in group-->
@@ -132,7 +132,7 @@
       <br>
       <label><a class="glyphicon glyphicon-plus" ng-click="toggleWordPackAddGroup('all')"></a>
        Add Word Pack By Searching All Word Packs</label>
-      <label><a class="glyphicon glyphicon-pencil" ng-click="toggleWordPacksEditGroup('on')"></a>
+      <label><a class="glyphicon glyphicon-pencil" ng-click="viewEditWordPacks = true"></a>
         Remove Assigned Word Packs</label>
     </div>
     <!--Area to view non context pack word packs information-->
@@ -153,7 +153,7 @@
           <input type="button" value="Remove" style="float:right;" ng-click="removeWordPackFromGroup(wordPackEdit, currentGroup)">
         </li>
       </ul>
-      <button class="btn btn-primary" ng-click="toggleWordPacksEditGroup('off')"> Done Editing Word Packs</button>
+      <button class="btn btn-primary" ng-click="viewEditWordPacks = false"> Done Editing Word Packs</button>
     </div>
     <!--Area to add individual word packs to group -->
     <div class="col-xs-3" ng-show="viewAddWordPacks">
@@ -219,7 +219,7 @@
         <label>{{word.name}}, {{word.wordType}}</label>
       </div>
       <label><a class="glyphicon glyphicon-plus" ng-click="viewAddWord = true"></a> Add Words to {{currentGroup.groupName}}</label>
-      <label><a class="glyphicon glyphicon-pencil" ng-click="toggleWordEditGroup('on')"></a> Remove Assigned Word Packs</label>
+      <label><a class="glyphicon glyphicon-pencil" ng-click="viewEditWord = true"></a> Remove Assigned Word Packs</label>
     </div>
 
     <!--Area to add words to group -->
@@ -233,7 +233,7 @@
           <input type="button" value="Add" style="float:right;" ng-click="addWordToGroup(wordAdd, currentGroup)">
         </li>
       </ul>
-      <button class="btn btn-primary" ng-click="toggleWordAddGroup('off')"> Done Adding Words</button>
+      <button class="btn btn-primary" ng-click="viewAddWord = false"> Done Adding Words</button>
     </div>
     <!--Area to remove words from a group -->
     <div class="col-xs-3" ng-show="viewEditWord">
@@ -246,7 +246,7 @@
           <input type="button" value="Remove" style="float:right;" ng-click="removeWordFromGroup(wordEdit, currentGroup)">
         </li>
       </ul>
-      <button class="btn btn-primary" ng-click="toggleWordEditGroup('off')"> Done Adding Words</button>
+      <button class="btn btn-primary" ng-click="viewEditWord = false"> Done Adding Words</button>
     </div>
 
   </div>
