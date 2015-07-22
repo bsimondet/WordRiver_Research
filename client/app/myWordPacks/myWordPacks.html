@@ -20,14 +20,20 @@
         <li class="list-group-item" ng-repeat="contextPack in contextPacksHolder | orderBy:'name'">
           <label>{{contextPack.name}}</label>
           <a class="glyphicon glyphicon-pencil" ng-click="editContextName(contextPack)"></a>
+          <a class="glyphicon glyphicon-trash" style="float:right" ng-click="removeContextPack(contextPack)">  </a>
           <ul class="list-group">
             <li class="list-group-item" ng-repeat="wordPack in contextPack.wordPacks | orderBy:'name'">
               <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 10 }}{{wordPack.name.length > 10 ? '...' : ''}}</a></label>
-              <input type="button" value="Edit Name" style="float:right" ng-click="editWordPackName(wordPack)">
+              <a class="glyphicon glyphicon-trash" style="float:right" ng-click="removeWordPack(contextPack)">  </a>
+              <a class="glyphicon glyphicon-pencil" style="float:right" ng-click="editWordPackName(wordPack)">  </a>
             </li>
           </ul>
-          <label><a class="glyphicon glyphicon-plus" ng-click="addWordPack(contextPack)"></a> Add Existing Word Pack </label>
-          <label><a class="glyphicon glyphicon-plus" ng-click="newWordPack(contextPack)"></a> Add New Word Pack </label>
+          <input type="button" value="Add Word Packs" ng-click="addWordPack(contextPack)">
+          <input type="button" value="Add New Pack" ng-click="newWordPack(contextPack)">
+          <!--<label><a class=" glyphicon-plus" ng-click="addWordPack(contextPack)"></a> Existing Packs -->
+          <!--<a class=" glyphicon-plus" ng-click="newWordPack(contextPack)"></a> New Pack </label>-->
+          <!--<label><a class="glyphicon glyphicon-minus" ng-click="removeWordPack(contextPack)"></a> Remove Word Packs </label>-->
+
         </li>
       </ul>
     </div>
@@ -93,6 +99,18 @@
         </li>
       </ul>
       <input type="submit" value="Cancel" class="btn-primary" ng-click="viewAddWordPack = false">
+    </div>
+
+    <!--For removing a word pack from a context pack -->
+    <div class="col-xs-3" ng-show="viewRemoveWordPack">
+      <h3> Word Packs in {{currentContextPack.name}}</h3>
+      <ul class="list-group scroll">
+        <li class="list-group-item" ng-repeat="wordPack in currentContextPack.wordPacks | orderBy:'name'">
+          <label>{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</label>
+          <input type="button" value="Remove" style="float:right" ng-click="removeWordPackFromContextPack(currentContextPack, wordPack)">
+        </li>
+      </ul>
+      <input type="submit" value="Cancel" class="btn-primary" ng-click="viewRemoveWordPack = false">
     </div>
 
     <!--For viewing words in a word pack-->

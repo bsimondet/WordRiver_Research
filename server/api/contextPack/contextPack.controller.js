@@ -81,6 +81,23 @@ exports.addWordPackToContextPack = function(req, res) {
   });
 };
 
+// Updates an existing contextPack in the DB.
+exports.removeWordPackFromContextPack = function(req, res) {
+  var contextId = req.params.id;
+  var wordPackID = req.body.wordPackID;
+
+  ContextPack.findById(contextId, function (err, contextPack) {
+    for(var i = 0; i < contextPack.wordPacks.length; i++){
+      if(contextPack.wordPacks[i] == wordPackID){
+        contextPack.wordPacks.splice(i, 1);
+      }
+    }
+    contextPack.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
 
 // Deletes a contextPack from the DB.
 exports.destroy = function(req, res) {
