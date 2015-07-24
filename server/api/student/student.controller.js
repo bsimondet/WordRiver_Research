@@ -94,7 +94,7 @@ exports.updateTags = function(req, res) {
 
 // Updates an existing thing in the DB.
 exports.editStudent = function(req, res) {
-  var userId = req.params.id;
+  var userId = req.body.studentID;
   var fn = req.body.firstName;
   var ln = req.body.lastName;
 

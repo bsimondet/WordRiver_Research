@@ -158,26 +158,49 @@ angular.module('WordRiverApp')
     $scope.firstname = "";
     $scope.lastname = "";
     $scope.addStudent = function() {
-      $http.post('/api/students/',
-        {firstName:$scope.firstname, lastName:$scope.lastname, teachers: $scope.currentUser._id}
-      ).success(function(student){
-          $scope.myStudents.push(student);
-          $scope.addStudentIDToTeacher(student._id);
-          $scope.firstname="";
-          $scope.lastname="";
-        });
+      var studentCheck = [];
+      for(var i = 0; i < $scope.myStudents.length; i++){
+        var firstCheck = $scope.myStudents[i].firstName.toLowerCase();
+        var lastCheck = $scope.myStudents[i].lastName.toLowerCase();
+        studentCheck.push(firstCheck+lastCheck);
+        var firstHold = $scope.firstname.toLowerCase();
+        var lastHold = $scope.lastname.toLowerCase();
+        if(firstCheck == firstHold && lastCheck == lastHold){
+          if(confirm($scope.firstname+" "+$scope.lastname+" is already one of your students. Did you want to add a new student with the same name?")){
+            $scope.lastnamehelp = $scope.lastname+" (Copy)";
+            $http.post('/api/students/',
+              {firstName:$scope.firstname, lastName:$scope.lastnamehelp, teachers: $scope.currentUser._id}
+            ).success(function(student){
+                studentCheck.push(firstHold+lastHold);
+                $scope.myStudents.push(student);
+                $scope.addStudentIDToTeacher(student._id);
+                $scope.firstname="";
+                $scope.lastname="";
+              });
+          }
+        }
+      }
+      if(studentCheck.indexOf(firstHold+lastHold) == -1){
+        $http.post('/api/students/',
+          {firstName:$scope.firstname, lastName:$scope.lastname, teachers: $scope.currentUser._id}
+        ).success(function(student){
+            $scope.myStudents.push(student);
+            $scope.addStudentIDToTeacher(student._id);
+            $scope.firstname="";
+            $scope.lastname="";
+          });
+      }
     };
 
     $scope.addStudentIDToTeacher = function(toAddID){
       $http.put('api/users/' + $scope.currentUser._id + '/addStudent',
         {studentID: toAddID}
       ).success(function () {
-          console.log("Successfully added ID to teacher!");
         });
     };
 
-    $scope.editFirstName = "";
-    $scope.editLastName = "";
+    $scope.editfirstname = "";
+    $scope.editlastname = "";
     $scope.editStudent = function(currentEditStudent){
       var studentToEdit = null;
       for(var i = 0; i< $scope.myStudents.length; i++){
@@ -185,18 +208,26 @@ angular.module('WordRiverApp')
           studentToEdit = $scope.myStudents[i];
         }
       }
-      console.log("Fisrtname "+$scope.editFirstName);
-      console.log($scope.editLastName);
-      $http.put('/api/students/' + studentToEdit + '/editStudent',
-        {firstName:$scope.editFirstName, lastName:$scope.editLastName}
-      ).success(function(student){
+      if($scope.editfirstname == "" && $scope.editlastname == ""){
+        return alert("Please enter a replacement first or last name for "+studentToEdit.firstName+" "+studentToEdit.lastName);
+      } else if($scope.editfirstname == ""){
+        $scope.editfirstname = studentToEdit.firstName;
+      } else if($scope.editlastname == ""){
+        $scope.editlastname = studentToEdit.lastName;
+      }
+      $http.put('/api/students/' + studentToEdit + '/editStudent', {
+          firstName:$scope.editfirstname,
+          lastName:$scope.editlastname,
+          studentID:studentToEdit._id
+        }).success(function(){
           for(var i = 0; i < $scope.myStudents.length; i++){
-            if(student._id == $scope.myStudents[i]._id){
-              $scope.myStudents[i] = student;
+            if(currentEditStudent._id == $scope.myStudents[i]._id){
+              $scope.myStudents[i].firstName = $scope.editfirstname;
+              $scope.myStudents[i].lastName = $scope.editlastname;
             }
           }
-          $scope.editFirstName="";
-          $scope.editLastName="";
+          $scope.editfirstname="";
+          $scope.editlastname="";
         });
     };
 

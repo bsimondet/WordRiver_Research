@@ -34,7 +34,7 @@
       <input ng-model="lastname" type="text" size="15" placeholder="Last Name">
       <input type="submit" value="Submit" class="btn btn-primary">
     </form>
-    <button class="btn btn-primary" ng-click="toggleAddStudent('off')"> Done</button>
+    <button class="btn btn-primary" ng-click="toggleAddStudent('off'); firstname = ''; lastname = ''"> Done</button>
   </div>
   <!--Edit student-->
   <div class="col-xs-4" ng-show="viewEditStudent">
