@@ -201,6 +201,7 @@ angular.module('WordRiverApp')
 
     $scope.editfirstname = "";
     $scope.editlastname = "";
+    //TODO: Could have a check for other students named the same as the edited name, like when adding students
     $scope.editStudent = function(currentEditStudent){
       var studentToEdit = null;
       for(var i = 0; i< $scope.myStudents.length; i++){
