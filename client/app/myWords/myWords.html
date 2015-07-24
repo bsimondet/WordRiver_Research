@@ -11,22 +11,33 @@
   <div class="col-sm-6">
     <h2>The {{userWords.length}} Words You've Added:</h2>
     <!--Search option for words-->
-    <div class="col-xs-5">
+    <div class="col-xs-6">
       <input type="text" ng-Model="searchUserWords" placeholder="Search My Words">
       <input type="text" ng-Model="searchUserWordTypes" placeholder="Search Word Types">
+      <br> Can't find the word you're looking for? <br>
+      <button class="btn btn-success" ng-click="viewAddWords = true"><a class="glyphicon glyphicon-plus"></a> Add Words</button>
+    </div>
+
+    <!--Adding options for new word-->
+    <div class="col-xs-6" ng-show="viewAddWords">
+      <input ng-model="addField" type="text" size="15" placeholder="New Word">
+      <select ng-model="addType">
+        <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
+      </select>
+      <button class="btn btn-success" ng-click="addNewWord()"><a class="glyphicon glyphicon-plus"></a> Add Word</button>
+      <input type="submit" value="Cancel" class="btn btn-primary" ng-click="viewAddWords = false; addField = ''">
     </div>
 
     <!--Editing options for selected word-->
-    <div class="col-xs-3" ng-hide="showValue">
+    <div class="col-xs-6" ng-show="viewEditWords">
       <input ng-model="editField" type="text" size="15" placeholder={{userAllWords[editWordIndex].name}}>
-    </div>
 
-    <div class="col-xs-4" ng-hide="showValue">
       <!--Currently: {{userAllWords[editWordIndex].wordType}}-->
       <select ng-model="editType">
         <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
       </select>
-      <input type="submit" value="Edit" class="btn-primary" ng-click="updateWord()">
+      <input type="submit" value="Edit" class="btn btn-primary" ng-click="updateWord()">
+      <input type="submit" value="Cancel" class="btn btn-primary" ng-click="viewEditWords = false; editField = ''">
     </div>
 
     <ul class="list-group scroll">
@@ -34,7 +45,7 @@
       <li class="list-group-item" ng-repeat="word in userWords | filter:{name:searchUserWords} | filter:{wordType:searchUserWordTypes}">
       <label>{{word.name}}, {{word.wordType}}</label>
       <a class="glyphicon glyphicon-pencil" ng-click="editWord(word)"></a>
-      <a class="glyphicon glyphicon-trash close" ng-click="removeWord(word)"></a>
+      <a class="glyphicon glyphicon-trash close" ng-click="deleteWord(word)"></a>
       </li>
     </ul>
   </div>
@@ -45,6 +56,7 @@
     <br><br>
     <input type="text" ng-Model="searchAllWords" placeholder="Search All Words"><br>
     <input type="text" ng-Model="searchAllWordTypes" placeholder="Search Word Types">
+
     <ul class="list-group scroll">
       <p>
       <li class="list-group-item" ng-repeat="word in userAllWords | filter:{name:searchAllWords} | filter:{wordType:searchAllWordTypes}">

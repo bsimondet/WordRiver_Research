@@ -40,7 +40,7 @@
       <input type="text" ng-Model="searchAllWordPacks" placeholder="Search Word Packs">
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="wordPack in wordPacksHolder | orderBy:'name' | filter:{name:searchAllWordPacks}">
-          <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</a></label>
+          <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 20 }}{{wordPack.name.length > 20 ? '...' : ''}}</a></label>
           <a class="glyphicon glyphicon-pencil" style="float:right" ng-click="editWordPackName(wordPack)">  </a>
         </li>
       </ul>
@@ -52,7 +52,7 @@
       <input type="text" ng-Model="searchWordPacksNotContext" placeholder="Search Word Packs">
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="wordPack in wordPacksNonContextHolder | orderBy:'name' | filter:{name: searchWordPacksNotContext}">
-          <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</a></label>
+          <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 20 }}{{wordPack.name.length > 20 ? '...' : ''}}</a></label>
           <a class="glyphicon glyphicon-trash" style="float:right" ng-click="removeWordPack(wordPack)">  </a>
           <a class="glyphicon glyphicon-pencil" style="float:right" ng-click="editWordPackName(wordPack)">  </a>
         </li>

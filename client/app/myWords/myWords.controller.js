@@ -7,7 +7,7 @@ angular.module('WordRiverApp')
     $scope.userWords = []; //words that teacher has added
     $scope.userAllWords = []; //a list of all words from the database minus words created by users
     $scope.userWordIDs = []; //words that teacher has added
-    $scope.showValue = true; //hide value for the edit fields for the words
+    $scope.viewEditWords = false; //hide value for the edit fields for the words
     $scope.wordToEdit = null;
     $scope.editField = ""; //what's typed into the edit field for a word name
     $scope.editType = ""; //what's typed into the edit field for a word type
@@ -70,7 +70,7 @@ angular.module('WordRiverApp')
 
     $scope.editWord = function (word) {
       $scope.editWordIndex = $scope.findIndexOfWord(word);
-      $scope.showValue = false;
+      $scope.viewEditWords = true;
       $scope.wordToEdit = $scope.allWords[$scope.findIndexOfWord(word)];
     };
 
@@ -102,20 +102,38 @@ angular.module('WordRiverApp')
         $scope.editType = "";
       }
       $scope.getAllWords();
-      $scope.showValue = true;
+      $scope.viewEditWords = false;
     };
 
     //Deletes a word from the server and from a user's array of words they've created
-    $scope.removeWord = function (word) {
-      $scope.wordToRemove = $scope.allWords[$scope.findIndexOfWord(word)];
-      $http.delete('/api/tile/' + $scope.wordToRemove._id
+    $scope.deleteWord = function (word) {
+      var wordHolder = word;
+      $http.delete('/api/tile/' + word._id
       ).success(function () {
-          $http.put('/api/users/' + $scope.currentUser._id + '/removeWordID',
-            {wordID: $scope.wordToRemove._id}
-          ).success(function () {
+          $http.put('/api/users/' + $scope.currentUser._id + '/removeWordID', {
+              wordID: wordHolder._id
+          }).success(function () {
             });
         });
       $scope.getAllWords();
     };
+
+    $scope.viewAddWords = false;
+    $scope.addNewWord = function(){
+      if ($scope.addField.length > 0 && $scope.addType.length > 0) {
+        $http.post('/api/tile', {
+            name: $scope.addField,
+            wordType: $scope.addType
+          }).success(function(object){
+          $scope.userWords.push(object);
+          $http.put('/api/users/' + $scope.currentUser._id + '/addWordID', {
+              wordID: object._id
+          }).success(function () {
+            });
+          });
+        $scope.addField = "";
+      }
+    };
+
 
   });
