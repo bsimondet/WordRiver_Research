@@ -29,6 +29,7 @@
               <a class="glyphicon glyphicon-pencil" style="float:right" ng-click="editWordPackName(wordPack)">  </a>
             </li>
           </ul>
+          <!--<button class="btn-primary" ng-click="addWordPackOptions('context')">Add Word Pack</button>-->
           <button class="btn-primary" ng-click="addWordPack(contextPack)">Add Word Pack</button>
           <button class="btn-success" ng-click="newWordPack(contextPack)"><a class="glyphicon glyphicon-plus"></a>  New Pack</button>
         </li>
@@ -58,6 +59,17 @@
         </li>
       </ul>
       <button class="btn btn-success" ng-click="newWordPack()"><a class="glyphicon glyphicon-plus" ng-click="newWordPack()"></a> Create New Word Pack </button>
+    </div>
+
+    <div class="col-xs-3" ng-show="viewAddWordPackOptions">
+      <h3>Would you like to:</h3>
+      <button class="btn btn-primary" ng-click="">Search Public Context Packs</button>
+      <br><br>
+      <button class="btn btn-primary" ng-click="">Search Public Word Packs</button>
+      <br><br>
+      <button class="btn btn-primary" ng-click="">Search Your Word Packs</button>
+      <br><br>
+      <button class="btn btn-success" ng-click=""><a class="glyphicon glyphicon-plus"></a> Add New Word Pack</button>
     </div>
 
     <!--For editing a context pack name-->

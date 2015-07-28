@@ -42,7 +42,7 @@
 
     <ul class="list-group scroll">
       <p>
-      <li class="list-group-item" ng-repeat="word in userWords | filter:{name:searchUserWords} | filter:{wordType:searchUserWordTypes}">
+      <li class="list-group-item" ng-repeat="word in userWords | orderBy:'name' | filter:{name:searchUserWords} | filter:{wordType:searchUserWordTypes}">
       <label>{{word.name}}, {{word.wordType}}</label>
       <a class="glyphicon glyphicon-pencil" ng-click="editWord(word)"></a>
       <a class="glyphicon glyphicon-trash close" ng-click="deleteWord(word)"></a>
@@ -59,7 +59,7 @@
 
     <ul class="list-group scroll">
       <p>
-      <li class="list-group-item" ng-repeat="word in userAllWords | filter:{name:searchAllWords} | filter:{wordType:searchAllWordTypes}">
+      <li class="list-group-item" ng-repeat="word in userAllWords | orderBy:'name' | filter:{name:searchAllWords} | filter:{wordType:searchAllWordTypes}">
         <label>{{word.name}}, {{word.wordType}}</label>
       </li>
     </ul>

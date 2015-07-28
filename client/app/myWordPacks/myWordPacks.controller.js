@@ -264,7 +264,8 @@ angular.module('WordRiverApp')
           $scope.contextPacksHolder.push({
             "_id":newContextPack._id,
             "name":newContextPack.name,
-            "wordPacks": []
+            "wordPacks": [],
+            "public" : false
           });
 
           $scope.createContextPackNameField = "";
@@ -350,12 +351,14 @@ angular.module('WordRiverApp')
           $scope.wordPacksHolder.push({
             "_id":newWordPack._id,
             "name":newWordPack.name,
-            "inContext": false
+            "inContext": false,
+            "public" : false
           });
           $scope.wordPacksNonContextHolder.push({
             "_id":newWordPack._id,
             "name":newWordPack.name,
-            "inContext": false
+            "inContext": false,
+            "public" : false
           });
           if($scope.createWordPackForContext){
             for(var i = 0; i < $scope.contextPacksHolder.length; i++){
@@ -370,6 +373,21 @@ angular.module('WordRiverApp')
         });
       } else {
         alert("Please enter a name for this word pack");
+      }
+    };
+
+    $scope.viewAddWordPackOptions = false;
+
+    $scope.addWordPackOptions = function (item) {
+      $scope.viewAddWordPackOptions = true;
+      if(item == 'context'){
+
+      } else if(item == 'all'){
+
+      } else if(item == 'indiv'){
+
+      } else if(item == 'off'){
+        $scope.viewAddWordPackOptions = false;
       }
     };
 

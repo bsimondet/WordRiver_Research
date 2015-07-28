@@ -123,7 +123,8 @@ angular.module('WordRiverApp')
       if ($scope.addField.length > 0 && $scope.addType.length > 0) {
         $http.post('/api/tile', {
             name: $scope.addField,
-            wordType: $scope.addType
+            wordType: $scope.addType,
+            userCreated: true
           }).success(function(object){
           $scope.userWords.push(object);
           $http.put('/api/users/' + $scope.currentUser._id + '/addWordID', {
