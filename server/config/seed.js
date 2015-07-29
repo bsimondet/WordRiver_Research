@@ -2972,7 +2972,7 @@ ContextPack.find({}).remove(function () {
       "_id": "553167d183c993666d03ce80",
       "name": "Super Words",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordPacks": ["553167d1c67764f3773612dc", "553167d171ef5955ded609ef"]
+      "wordPacks": ["553167d1c67764f3773612dc", "553167d171ef5955ded609ef", "553167d1c677awf3722612dc", "553167d1c677awf3722612dc"]
     },{
       "_id": "55877751d0ec444025000a01",
       "name": "Minnesota",
