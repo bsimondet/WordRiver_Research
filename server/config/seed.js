@@ -32,22 +32,28 @@ User.find({}).remove(function () {
         "553167d183c193d16d03ce80",
         "553167d1afa1bda9bc0d055a",
         "55856f5e08209fde1a2b8af3",
+        "553167d1d969a916cab51920",
+        "553167d1d969a91600b51920",
+        "558584084afb8b051fa83846",
         "553167d1cd3291e1352efe94",
         "553167d1d26d6cb60967d8a5",
         "553167d1c296f9753ce8447f",
-        "553167d1c67764f3773612dc",
-        "553167d1d969a916cab51920",
         "553167d13562bc39e23e4d3b",
         "553167d14651465f11201014",
         "553167d123b90c175f9b3a86",
+        "553167d123b90c775f9b3a86",
         "553167d171ef5955ded609ef",
-        "558584084afb8b051fa83846",
-        "55858751d0ec44402530da01",
-        "553167d123b90c775f9b3a86"
+        "553167d1c67764f3773612dc",
+        "553167d1c6770af3773612dc",
+        "553167d1c6770af3722612dc",
+        "5511a83da168f8b5f3144f02"
       ],
       /*Context packs user has added by id*/
       "contextPacks": [
-        "553167d183c993666d03ce80", "55877751d0ec444025000a01"
+        "553167d183c993666d03ce80",
+        "55877751d0ec444025000a01",
+        "56977751d0ec444025000a01",
+        "56977751d0ec444025az0a01"
       ],
       /*Names of classes with assigned groups*/
       "classList": [
@@ -2881,7 +2887,7 @@ WordPack.find({}).remove(function () {
       "words": ["55b8fbd6c3b95c57783e3b98", "55b8fc26c3b95c57783e3b99", "55b8fc34c3b95c57783e3b9a", "55b8fc47c3b95c57783e3b9b", "55b8fc54c3b95c57783e3b9c", "55b8fc60c3b95c57783e3b9d", "55b8fc6ac3b95c57783e3b9e", "55b8fc75c3b95c57783e3b9f", "55b78c633e560d6039ee30a6", "55b8fc83c3b95c57783e3ba0", "55b8fc8dc3b95c57783e3ba1", "552c2418c036ef35fe0bac32", "55b78cdb680b15303aee5a6d", "55b8fca8c3b95c57783e3ba2", "55b8fce1c3b95c57783e3ba8", "55b8fceac3b95c57783e3ba9", "55b8fcf2c3b95c57783e3baa", "55b8fcfac3b95c57783e3bab", "55b8fd02c3b95c57783e3bac", "55b8fd15c3b95c57783e3bad", "55b8fd1ec3b95c57783e3bae", "55b8fd26c3b95c57783e3baf", "5592cbe9b0983c8b19453446", "55b8fd33c3b95c57783e3bb0", "55b8fd3bc3b95c57783e3bb1", "55b78d0d680b15303aee5a74", "55b8fd4ac3b95c57783e3bb2", "55b8fd51c3b95c57783e3bb3", "55b8fd59c3b95c57783e3bb4", "55b78c363e560d6039ee309f", "55b8fd67c3b95c57783e3bb5", "55b8fd70c3b95c57783e3bb6", "55b8fd75c3b95c57783e3bb7", "55b8fd87c3b95c57783e3bb8", "55b8fd92c3b95c57783e3bb9", "55b78c293e560d6039ee309e", "55b8fda1c3b95c57783e3bba", "55b8fdb1c3b95c57783e3bbb", "55b8fdcac3b95c57783e3bbd", "55b8fde8c3b95c57783e3bbe", "55b8fdf0c3b95c57783e3bbf", "55b78c443e560d6039ee30a1", "55b8fdfec3b95c57783e3bc0", "55b8fe01c3b95c57783e3bc1", "55b8fe08c3b95c57783e3bc2"]
     },
     {
-      "_id": "553167d1d969a916zzb51920",
+      "_id": "553167d1d969a91600b51920",
       "name": "Third Grade",
       "creatorID": "5511a83da168f8b5f3144f02",
       "words": ["55b78e32694a69753b65c6a2", "55b904dfaa3dc0f303c4b69c", "55b904e9aa3dc0f303c4b69d", "55b904efaa3dc0f303c4b69e", "55b904f7aa3dc0f303c4b69f", "55b904feaa3dc0f303c4b6a0", "55b90504aa3dc0f303c4b6a1", "55b9050aaa3dc0f303c4b6a2", "55b90511aa3dc0f303c4b6a3", "55b8fccbc3b95c57783e3ba5", "55b9051eaa3dc0f303c4b6a4", "55b90527aa3dc0f303c4b6a5", "55b90540aa3dc0f303c4b6a6", "55b90547aa3dc0f303c4b6a7", "55b9054daa3dc0f303c4b6a8", "55b90554aa3dc0f303c4b6a9", "55b9055eaa3dc0f303c4b6aa", "55b90573aa3dc0f303c4b6ab", "55b90586aa3dc0f303c4b6ac", "55b9058eaa3dc0f303c4b6ad", "55b90594aa3dc0f303c4b6ae", "55b9059faa3dc0f303c4b6af", "55b905a9aa3dc0f303c4b6b0", "55b905b6aa3dc0f303c4b6b1", "55b78ce7680b15303aee5a6f", "55b905b6aa3dc0f303c4b6b1", "55b905c0aa3dc0f303c4b6b2", "55b905ccaa3dc0f303c4b6b3", "55b905d3aa3dc0f303c4b6b4", "55b78cf9680b15303aee5a71", "55b905dfaa3dc0f303c4b6b5", "55b8fcc5c3b95c57783e3ba4", "55b905e8aa3dc0f303c4b6b6", "55b905eeaa3dc0f303c4b6b7", "55b905fdaa3dc0f303c4b6b8", "55b8fcbfc3b95c57783e3ba3", "55b78d2e680b15303aee5a77", "55b8fcd6c3b95c57783e3ba7", "55b90609aa3dc0f303c4b6b9", "55b90613aa3dc0f303c4b6ba", "55b9061eaa3dc0f303c4b6bb", "55b78c563e560d6039ee30a4"]
@@ -2946,13 +2952,13 @@ WordPack.find({}).remove(function () {
       "words": ["55857d531eb0b1273145eb0e", "55857b941eb0b1273145eaff"]
     },
     {
-      "_id": "553167d1c677awf3773612dc",
+      "_id": "553167d1c6770af3773612dc",
       "name": "Superheroes",
       "creatorID": "5511a83da168f8b5f3144f02",
       "words": ["55b7a5d2dfe95dd650295b89", "55b7a452c634fde44e8226a4", "55b7a434c634fde44e8226a2", "55b7a42fc634fde44e8226a1", "55b7a427c634fde44e8226a0", "55b7a424c634fde44e82269f", "55b7a3eec634fde44e82269e", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b"]
     },
     {
-      "_id": "553167d1c677awf3722612dc",
+      "_id": "553167d1c6770af3722612dc",
       "name": "Supervillains",
       "creatorID": "5511a83da168f8b5f3144f02",
       "words": ["55b7a3a6c634fde44e822698", "55b7a3afc634fde44e822699", "55b7a43cc634fde44e8226a3", "55b7a3b5c634fde44e82269a", "55b7a3bbc634fde44e82269b", "55b7a3c8c634fde44e82269c", "55b7a3d1c634fde44e82269d"]
@@ -2972,7 +2978,7 @@ ContextPack.find({}).remove(function () {
       "_id": "553167d183c993666d03ce80",
       "name": "Super Words",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordPacks": ["553167d1c67764f3773612dc", "553167d171ef5955ded609ef", "553167d1c677awf3722612dc", "553167d1c677awf3722612dc"]
+      "wordPacks": ["553167d1c67764f3773612dc", "553167d171ef5955ded609ef", "553167d1c6770af3773612dc", "553167d1c6770af3722612dc"]
     },{
       "_id": "55877751d0ec444025000a01",
       "name": "Minnesota",
@@ -2987,7 +2993,7 @@ ContextPack.find({}).remove(function () {
       "_id": "56977751d0ec444025az0a01",
       "name": "Sight Words by Grade Level",
       "creatorID": "5511a83da168f8b5f3144f02",
-      "wordPacks": ["553167d183c193d16d03ce80", "553167d1afa1bda9bc0d055a", "55856f5e08209fde1a2b8af3", "553167d1d969a916cab51920", "553167d1d969a916zzb51920", "558584084afb8b051fa83846"]
+      "wordPacks": ["553167d183c193d16d03ce80", "553167d1afa1bda9bc0d055a", "55856f5e08209fde1a2b8af3", "553167d1d969a916cab51920", "553167d1d969a91600b51920", "558584084afb8b051fa83846"]
     }
   )
 });

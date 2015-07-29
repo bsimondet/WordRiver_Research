@@ -143,6 +143,7 @@ angular.module('WordRiverApp')
           if($scope.wordPacksHolder[index]._id == wordPackIDs[index2] && toReturn.indexOf($scope.wordPacksHolder[index]) == -1){
             $scope.wordPacksHolder[index].inContext = true;
             toReturn.push($scope.wordPacksHolder[index]);
+            break;
           }
         }
       }
