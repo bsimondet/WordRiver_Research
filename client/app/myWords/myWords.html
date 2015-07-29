@@ -60,7 +60,7 @@
     <ul class="list-group scroll">
       <p>
       <li class="list-group-item" ng-repeat="word in userAllWords | orderBy:'name' | filter:{name:searchAllWords} | filter:{wordType:searchAllWordTypes}">
-        <label>{{word.name}}, {{word.wordType}}</label>
+        <label>{{word.name}}, {{word.wordType}}, {{word._id}}</label>
       </li>
     </ul>
   </div>
