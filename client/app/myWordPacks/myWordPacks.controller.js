@@ -349,22 +349,23 @@ angular.module('WordRiverApp')
           name: $scope.createWordPackNameField,
           creatorID: $scope.currentUser._id
         }).success(function(newWordPack){
+          var holder = newWordPack;
           $scope.wordPacksHolder.push({
-            "_id":newWordPack._id,
-            "name":$scope.createWordPackNameField,
+            "_id":holder._id,
+            "name":holder.name,
             "inContext": false,
             "public" : false
           });
           $scope.wordPacksNonContextHolder.push({
-            "_id":newWordPack._id,
-            "name":$scope.createWordPackNameField,
+            "_id":holder._id,
+            "name":holder.name,
             "inContext": false,
             "public" : false
           });
           if($scope.createWordPackForContext){
             for(var i = 0; i < $scope.contextPacksHolder.length; i++){
               if($scope.contextPacksHolder[i]._id == $scope.currentContextPack._id){
-                $scope.addWordPackToContextPack($scope.contextPacksHolder[i], newWordPack);
+                $scope.addWordPackToContextPack($scope.contextPacksHolder[i]._id, holder);
               }
             }
             $scope.createWordPackForContext = false;
@@ -404,12 +405,12 @@ angular.module('WordRiverApp')
       $scope.viewAddWordsToWordPacks = false;
     };
 
-    $scope.addWordPackToContextPack = function(newWordPack){
-      $http.put('/api/contextPacks/' + $scope.currentContextPack._id + '/addWordPackToContextPack', {
+    $scope.addWordPackToContextPack = function(contextID, newWordPack){
+      $http.put('/api/contextPacks/' + contextID + '/addWordPackToContextPack', {
         wordPackID: newWordPack._id
       }).success(function(){
         for(var i = 0; i < $scope.contextPacksHolder.length; i++){
-          if($scope.contextPacksHolder[i]._id == $scope.currentContextPack._id){
+          if($scope.contextPacksHolder[i]._id == contextID){
             $scope.contextPacksHolder[i].wordPacks.push({
               "_id":newWordPack._id,
               "name":newWordPack.name,
