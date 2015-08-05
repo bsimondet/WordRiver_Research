@@ -29,12 +29,12 @@ describe('Controller: WordManagerCtrl', function () {
     expect(true).toBe(true);
   });
 
-  it('this tests the function getCategories', function () {
+  it('this tests the function getWordPacks', function () {
     //scope.getCategories();
     //expect(scope.categoryArray.length).toBe(4)
   });
 
-  it('this tests the function addCategory', function () {
+  it('this tests the function addWordPack', function () {
     expect(true).toBe(true);
   });
 

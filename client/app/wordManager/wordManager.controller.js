@@ -25,7 +25,7 @@ angular.module('WordRiverApp')
     $scope.tileId = "";
     $scope.contextTagsTemp = [];
     $scope.showValue = true; //hide value for the edit fields for the words
-    $scope.showValue1 = true; //not in use, hide value for the edit field for categories
+    $scope.showValue1 = true; //not in use, hide value for the edit field for WordPacks
     $scope.wordToEdit = null;
     $scope.tempIndex = null;
     $scope.needToAddID = false;
@@ -250,9 +250,9 @@ angular.module('WordRiverApp')
       $scope.getWords();
     };
 
-    $scope.uncheckAllCategories = function(){
-      $scope.selectedCategories = [];
-      $scope.getCategories();
+    $scope.uncheckAllWordPacks = function(){
+      $scope.selectedWordPacks = [];
+      $scope.getWordPacks();
     };
 
     $scope.displayCatInfo = function (category) {

@@ -6,7 +6,7 @@ var controller = require('./wordPack.controller.js');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/:creatorID/categories', controller.getUserCategories);
+router.get('/:creatorID/wordPacks', controller.getUserWordPacks);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.post('/', controller.update);

@@ -5,7 +5,7 @@
 </header>
 
 <div class="container">
-  <div class="col-xs-3 accordion-toggle" id="categories">
+  <div class="col-xs-3 accordion-toggle" id="WordPacks">
     <h1>Your {{categoryArray.length}} Context Packs:</h1>
 
     <!--Add context pack-->
@@ -14,7 +14,7 @@
       <input type="submit" value="Add" class="btn-primary">
     </form>
     <br>
-    <p><button class="btn btn-primary" ng-click="uncheckAllCategories()">Uncheck All Packs</button></p>
+    <p><button class="btn btn-primary" ng-click="uncheckAllWordPacks()">Uncheck All Packs</button></p>
     <input type="text" ng-Model="searchPacks" placeholder="Search Words">
     <!--List of all Context Packs-->
     <ul class="list-group scroll">
@@ -38,7 +38,7 @@
   <div class="col-xs-6 center">
     <!--Button to add checked words to checked context packs-->
     <form ng-submit="addTileToCategory()">
-      <input class="btn btn-primary center-block assignButton" type="submit" value="Add selected words to selected categories" class="btn btn-primary">
+      <input class="btn btn-primary center-block assignButton" type="submit" value="Add selected words to selected word packs" class="btn btn-primary">
     </form>
     <!--Shows selected context pack's assigned words-->
     <div class="col-xs-3 wordfooter wordsIn">
@@ -48,8 +48,8 @@
       </ul>
     </div>
     <!--Shows selected word's assigned context packs-->
-    <div class="col-xs-3 wordfooter categoriesIn">
-      <h2>Categories containing <i>{{currentTile.name}}</i></h2>
+    <div class="col-xs-3 wordfooter WordPackssIn">
+      <h2>Word Packs containing <i>{{currentTile.name}}</i></h2>
       <ul class="list-group middleScroll">
           <li class="list-group-item" ng-repeat="category in contextTagsTemp | orderBy: toSort:order">{{category.name}}<span class="glyphicon glyphicon-minus-sign floatRight close unassignIconColor" ng-click="removeCategoryFromWord($index)"></span></li>
       </ul>

@@ -5,7 +5,7 @@
 angular.module('WordRiverApp')
   .controller('AssignWordsCtrl', function ($rootScope, $scope, $http, socket, Auth) {
     $scope.currentUser = Auth.getCurrentUser();
-    $scope.categoryArray = [];
+    $scope.WordPackArray = [];
     $scope.userClasses = [];
     $scope.userWordPacks = [];
     $scope.studentArray = [];
@@ -96,39 +96,39 @@ angular.module('WordRiverApp')
     $scope.wordView = false;
     $scope.studentView = false;
     $scope.showClass = false;
-    $scope.showCategory = false;
+    $scope.showWordPack = false;
 
     $scope.switchMiddle = function(section){
       if(section == "wordPack"){
-        $scope.showCategory = true;
+        $scope.showWordPack = true;
         $scope.wordView = false;
         $scope.studentView = false;
         $scope.showClass = false;
         $scope.showMiddle = true;
         $scope.help = false;
       } else if (section == "word"){
-        $scope.showCategory = false;
+        $scope.showWordPack = false;
         $scope.wordView = true;
         $scope.studentView = false;
         $scope.showClass = false;
         $scope.showMiddle = true;
         $scope.help = false;
       } else if (section == "student"){
-        $scope.showCategory = false;
+        $scope.showWordPack = false;
         $scope.wordView = false;
         $scope.studentView = true;
         $scope.showClass = false;
         $scope.showMiddle = true;
         $scope.help = false;
       } else if (section == "class"){
-        $scope.showCategory = false;
+        $scope.showWordPack = false;
         $scope.wordView = false;
         $scope.studentView = false;
         $scope.showClass = true;
         $scope.showMiddle = true;
         $scope.help = false;
       } else if (section == "middle"){
-        $scope.showCategory = false;
+        $scope.showWordPack = false;
         $scope.wordView = false;
         $scope.studentView = false;
         $scope.showClass = false;
@@ -400,21 +400,21 @@ angular.module('WordRiverApp')
 ////////////////////////////////////////////////////////////////////////////
 //This is the section for the unassign functions
 
-    $scope.unassignTileFromCategory = function (word, category, view){
-      if($scope.confirmUnassign(word.name, category.name)==true) {
+    $scope.unassignTileFromWordPAck = function (word, WordPAck, view){
+      if($scope.confirmUnassign(word.name, WordPAck.name)==true) {
         //Tile API remove from context tags [{tagName:id}]
         for (var i = 0; i < $scope.allWords.length; i++) {
           if ($scope.allWords[i]._id == word._id) {
             for (var j = 0; j < $scope.allWords[i].wordPacks.length; j++) {
-              if (category._id == $scope.allWords[i].wordPacks[j]) {
+              if (WordPAck._id == $scope.allWords[i].wordPacks[j]) {
                 $scope.allWords[i].wordPacks.splice(j, 1);
                 $scope.i = i;
                 $http.patch('/api/tile/' + word._id,
                   {wordPacks: $scope.allWords[i].wordPacks}).success(function () {
                     $scope.getAll();
                   });
-                if (view == 'category') {
-                  $scope.displayWordPackInfo(category);
+                if (view == 'WordPack') {
+                  $scope.displayWordPackInfo(WordPAck);
                 } else {
                   $scope.displayWordInfo(word);
                 }
@@ -425,12 +425,12 @@ angular.module('WordRiverApp')
       }
     };
 
-    $scope.unassignGroupFromCategory = function (group, category, view){
-      if($scope.confirmUnassign(group.groupName, category.name)==true) {
+    $scope.unassignGroupFromWordPack = function (group, WordPack, view){
+      if($scope.confirmUnassign(group.groupName, WordPack.name)==true) {
         for (var i = 0; i < $scope.userClasses.length; i++) {
           if ($scope.userClasses[i]._id == group._id) {
             for (var j = 0; j < $scope.userClasses[i].wordPacks.length; j++) {
-              if ($scope.userClasses[i].wordPacks[j] == category._id) {
+              if ($scope.userClasses[i].wordPacks[j] == WordPack._id) {
                 $scope.userClasses[i].wordPacks.splice(j, 1);
               }
             }
@@ -440,27 +440,27 @@ angular.module('WordRiverApp')
           {groupList: $scope.userClasses}).success(function () {
             $scope.getAll();
           });
-        if (view == 'category') {
-          $scope.displayWordPackInfo(category);
+        if (view == 'WordPack') {
+          $scope.displayWordPackInfo(WordPack);
         } else {
           $scope.displayClassInfo(group);
         }
       }
     };
 
-    $scope.unassignStudentFromCategory = function (student, category, view){
-      if($scope.confirmUnassign(student.firstName, category.name)==true) {
+    $scope.unassignStudentFromWordPack = function (student, WordPack, view){
+      if($scope.confirmUnassign(student.firstName, WordPack.name)==true) {
         for (var i = 0; i < $scope.userStudents.length; i++) {
           if ($scope.userStudents[i]._id == student._id) {
             for (var j = 0; j < $scope.userStudents[i].wordPacks.length; j++) {
-              if ($scope.userStudents[i].wordPacks[j] == category._id) {
+              if ($scope.userStudents[i].wordPacks[j] == WordPack._id) {
                 $scope.userStudents[i].wordPacks.splice(j, 1);
                 $http.patch('/api/students/' + student._id,
                   {wordPacks: $scope.userStudents[i].wordPacks}).success(function () {
                     $scope.getAll();
                   });
                 if (view == "wordPack") {
-                  $scope.displayWordPackInfo(category);
+                  $scope.displayWordPackInfo(WordPack);
                 } else {
                   $scope.displayStudentInfo(student);
                 }
@@ -676,7 +676,7 @@ angular.module('WordRiverApp')
 $scope.getNewInfo = function() {
   if($scope.showClass){
     $scope.displayClassInfo($scope.classSelected);
-  }else if($scope.showCategory){
+  }else if($scope.showWordPack){
     $scope.displayWordPackInfo($scope.wordPackSelected);
   }
 };
