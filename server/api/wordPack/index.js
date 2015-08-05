@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./category.controller');
+var controller = require('./wordPack.controller.js');
 
 var router = express.Router();
 

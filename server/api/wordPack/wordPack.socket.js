@@ -4,21 +4,21 @@
 
 'use strict';
 
-var Category = require('./category.model');
+var WordPack = require('./wordPack.model.js');
 
 exports.register = function(socket) {
-  Category.schema.post('save', function (doc) {
+  WordPack.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  Category.schema.post('remove', function (doc) {
+  WordPack.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
-}
+};
 
 function onSave(socket, doc, cb) {
-  socket.emit('category:save', doc);
+  socket.emit('wordPack:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('category:remove', doc);
+  socket.emit('wordPack:remove', doc);
 }

@@ -56,7 +56,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.getWordPacks = function(){
-      $http.get('/api/categories/' + $scope.currentUser._id + '/categories').success(function(wordPacks){
+      $http.get('/api/wordPacks/' + $scope.currentUser._id + '/wordPacks').success(function(wordPacks){
         $scope.userWordPacks = wordPacks;
       });
     };
@@ -216,7 +216,7 @@ angular.module('WordRiverApp')
     ////////////////////////////////////////////////////////////////////////////
     //This is the section for switching information in the middle
 
-    //cat is short for category
+    //cat is short for wordPack
     $scope.displayWordPackInfo = function (wordPack) {
       $scope.switchMiddle("wordPack");
       $scope.wordPackSelected = wordPack;
@@ -310,7 +310,7 @@ angular.module('WordRiverApp')
       $scope.matchClassesIDs = [];
       $scope.matchWordPackIDs = [];
       $scope.matchWordPacks = [];
-      //Go through students to find the selected one and get category and word ids
+      //Go through students to find the selected one and get wordPack and word ids
       for (var j = 0; j < $scope.userStudents.length; j++) {
         if ($scope.userStudents[j]._id == student._id) {
           $scope.matchWordPackIDs = $scope.userStudents[j].wordPacks;
@@ -339,7 +339,7 @@ angular.module('WordRiverApp')
         }
       }
       $scope.matchClass = $scope.checkForDuplicates($scope.matchClass);
-      //Go through user categories and find matches with category ids stored in student
+      //Go through user wordPacks and find matches with wordPack ids stored in student
       for (var q = 0; q < $scope.matchWordPackIDs.length; q++){
         for (var r = 0; r < $scope.currentUser.wordPacks.length; r++){
           if ($scope.currentUser.wordPacks[r] == $scope.matchWordPackIDs[q]){
@@ -614,12 +614,12 @@ angular.module('WordRiverApp')
         }
       //If you're viewing students and word packs
       } else if (!$scope.classView && $scope.wordPackView) {
-        //Function to add selected categories to selected students.
+        //Function to add selected wordPacks to selected students.
         if ($scope.selectedStudents.length == 0) {
           alert("You must select at least 1 student.");
         }
         if ($scope.selectedWordPacks.length == 0) {
-          alert("You must select at least 1 category.");
+          alert("You must select at least 1 wordPack.");
         }
         for (var g = 0; g < $scope.userStudents.length; g++) {
           for (var w = 0; w < $scope.selectedStudents.length; w++) {

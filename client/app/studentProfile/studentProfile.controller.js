@@ -78,8 +78,8 @@ angular.module('WordRiverApp')
       });
     };
 
-    //TODO: Make it so all categories and words display related to groups
-/*    $scope.getCategoriesFromGroups = function(groups){
+    //TODO: Make it so all Word Packs and words display related to groups
+/*    $scope.getWordPacksFromGroups = function(groups){
       for (var i = 0; i < groups.length; i++) {
         for (var x = 0; x < groups[i].wordPacks.length; x++) {
           $scope.tempCategoryArray.push(groups[i].wordPacks[x]);
@@ -87,10 +87,10 @@ angular.module('WordRiverApp')
       }
     };*/
 
-    $scope.getCategories = function(student) {
+    $scope.getWordPacks = function(student) {
       $scope.wordPackArray = [];
-      $http.get('/api/categories').success(function (allCategories) {
-        $scope.getElementsByID(student.wordPacks, allCategories, $scope.wordPackArray);
+      $http.get('/api/wordPacks').success(function (allWordPacks) {
+        $scope.getElementsByID(student.wordPacks, allWordPacks, $scope.wordPackArray);
       });
     };
 
@@ -107,7 +107,7 @@ angular.module('WordRiverApp')
     $scope.displayStudentProfile = function(student){
       $scope.selectedStudent = student;
       //$scope.getClasses(student);
-      //$scope.getCategories(student);
+      //$scope.getWordPacks(student);
       //$scope.getWords(student);
       $scope.hide = false;
       //$scope.getTeacherGroups(student);

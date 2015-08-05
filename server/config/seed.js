@@ -9,7 +9,7 @@
 var User = require('../api/user/user.model');
 var Student = require('../api/student/student.model');
 var Tile = require('../api/tile/tile.model');
-var WordPack = require('../api/category/category.model');
+var WordPack = require('./category.model');
 var ContextPack = require('../api/contextPack/contextPack.model');
 
 User.find({}).remove(function () {

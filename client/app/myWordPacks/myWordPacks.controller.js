@@ -62,7 +62,7 @@ angular.module('WordRiverApp')
       $scope.wordPacksHolder = [];
       $scope.wordPacksArray = [];
       $scope.wordPacksHolderIDs = [];
-      $http.get('/api/categories/').success(function(wordPacks){
+      $http.get('/api/wordPacks/').success(function(wordPacks){
         for(var index = 0; index < wordPacks.length; index++){
           for(var i = 0; i < $scope.wordPacksHolder.length; i++){
             $scope.wordPacksHolderIDs.push($scope.wordPacksHolder[i]._id);
@@ -297,7 +297,7 @@ angular.module('WordRiverApp')
 
     $scope.updateWordPackName = function () {
       if ($scope.editWordPackName.length > 0) {
-        $http.put('/api/categories/' + $scope.wordPackToEdit._id + '/editWordPackName', {
+        $http.put('/api/wordPacks/' + $scope.wordPackToEdit._id + '/editWordPackName', {
           wordPackID: $scope.wordPackToEdit._id,
           name: $scope.editWordPackNameField
         }).success(function(){
@@ -345,19 +345,19 @@ angular.module('WordRiverApp')
 
     $scope.createWordPack = function () {
       if ($scope.createWordPackNameField.length > 0) {
-        $http.post('/api/categories/', {
+        $http.post('/api/wordPacks/', {
           name: $scope.createWordPackNameField,
           creatorID: $scope.currentUser._id
         }).success(function(newWordPack){
           $scope.wordPacksHolder.push({
             "_id":newWordPack._id,
-            "name":newWordPack.name,
+            "name":$scope.createWordPackNameField,
             "inContext": false,
             "public" : false
           });
           $scope.wordPacksNonContextHolder.push({
             "_id":newWordPack._id,
-            "name":newWordPack.name,
+            "name":$scope.createWordPackNameField,
             "inContext": false,
             "public" : false
           });
@@ -492,7 +492,7 @@ angular.module('WordRiverApp')
     $scope.addWordsToWordPack = function(word){
       var newWord = word;
       if(confirm("If adding a word to a word pack in a context pack, you may need to refresh the page to see the words.")) {
-        $http.put('/api/categories/' + $scope.currentWordPack._id + '/addWordToWordPack', {
+        $http.put('/api/wordPacks/' + $scope.currentWordPack._id + '/addWordToWordPack', {
           wordID: word._id
         }).success(function () {
           $scope.wordsInWordPack.push({
@@ -513,7 +513,7 @@ angular.module('WordRiverApp')
     $scope.removeWordFromWordPack = function(word){
       var oldWord = word;
       if(confirm("If removing a word from a word pack in a context pack, you may need to refresh the page to see the words.")){
-        $http.put('/api/categories/' + $scope.currentWordPack._id +'/removeWordIDFromWordPack', {
+        $http.put('/api/wordPacks/' + $scope.currentWordPack._id +'/removeWordIDFromWordPack', {
             wordID: word._id
         }).success(function(){
           for(var index = 0; index < $scope.wordsInWordPack.length; index++){
@@ -534,7 +534,7 @@ angular.module('WordRiverApp')
     $scope.removeWordPack = function(wordPack){
       var wordPackHolder = wordPack;
       if(confirm("Are you sure you want to delete "+wordPack.name+"? "+'\n\n'+"*Note*"+'\n'+" This will not delete words in the word pack")){
-        $http.delete('/api/categories/' + wordPack._id).success(function(){
+        $http.delete('/api/wordPacks/' + wordPack._id).success(function(){
           for(var i = 0; i < $scope.wordPacksNonContextHolder.length; i++){
             if(wordPackHolder._id == $scope.wordPacksNonContextHolder[i]._id){
               $scope.wordPacksNonContextHolder.splice(i, 1);

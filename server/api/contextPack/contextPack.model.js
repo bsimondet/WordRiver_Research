@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var ContextPackSchema = new Schema({
   name: String,
-  creatorID: String, //The id of the creator of the category
+  creatorID: String, //The id of the creator of the wordPack
   wordPacks: [],
   public : Boolean
 });

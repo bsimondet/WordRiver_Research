@@ -5,7 +5,7 @@ angular.module('WordRiverApp')
 
     //global variables
     $scope.currentUser = Auth.getCurrentUser();
-    $scope.categoryField = ""; //what's typed in the field when making a new category
+    $scope.categoryField = ""; //what's typed in the field when making a new wordPack
     $scope.addField = ""; //what's typed in the field for a new word name
     $scope.addType = ""; //what's typed in the field for a new word type
     $scope.editField = ""; //what's typed into the edit field for a word name
@@ -15,12 +15,12 @@ angular.module('WordRiverApp')
     $scope.selectedCategories = []; //categories that have been checked
     $scope.selectedTiles = []; //tiles that have been checked
     $scope.allWords = []; //a list of all tiles from the database
-    $scope.allCatTiles = []; //an array of all the tiles within a category
+    $scope.allCatTiles = []; //an array of all the tiles within a wordPack
     $scope.allWords = []; //tiles that belong to the specific user
     $scope.matchTiles = []; //a way to find tiles that match other tiles to update the database
     $scope.toSort = "name"; //used for sorting
     $scope.order = false; //used for sorting
-    $scope.currentCategory = null; //for some functions, is the category currently in use or looked it
+    $scope.currentCategory = null; //for some functions, is the wordPack currently in use or looked it
     $scope.currentTile = null; //for some functions, holds the tile in use
     $scope.tileId = "";
     $scope.contextTagsTemp = [];
@@ -178,7 +178,7 @@ angular.module('WordRiverApp')
       socket.unsyncUpdates('pack');
     });
 
-    /*For creating a new category*/
+    /*For creating a new wordPack*/
     $scope.addCategory = function () {
       if ($scope.categoryField.length >= 1) {
         $http.post('/api/categories/', {
@@ -192,14 +192,14 @@ angular.module('WordRiverApp')
       $scope.categoryField="";
     };
 
-    /*Helper for creating a new category*/
+    /*Helper for creating a new wordPack*/
     $scope.makeGlobalID = function (id) {
       $scope.needToAddID = true;
       $scope.getCategories();
       $scope.IDtoAdd = id;
     };
 
-    /*Helper for adding a new category's id to user's contextids array*/
+    /*Helper for adding a new wordPack's id to user's contextids array*/
     $scope.addCategoryIDToUser = function (toAddID) {
       for(var index = 0; index < $scope.categoryArray.length; index++) {
         if ($scope.categoryArray[index]._id == toAddID) {
@@ -266,7 +266,7 @@ angular.module('WordRiverApp')
           }
         }
         if ($scope.matchTiles.length <= 0) {
-          alert("There are no tiles in this category");
+          alert("There are no tiles in this wordPack");
         }
 
     };
@@ -289,7 +289,7 @@ angular.module('WordRiverApp')
         }
       };
 
-    //Deletes a category
+    //Deletes a wordPack
     $scope.removeCategory = function(category) {
       $scope.tempIndex = $scope.findIndexOfCat(category);
       $scope.catToRemove = $scope.categoryArray[$scope.tempIndex];
@@ -319,7 +319,7 @@ angular.module('WordRiverApp')
       }
     };
 
-      //Removes a word from a category
+      //Removes a word from a wordPack
     $scope.removeFromCategory = function(tile, index) {
       $scope.tileId = tile._id;
       console.log("This is the id I care about "+$scope.tileId);
@@ -331,7 +331,7 @@ angular.module('WordRiverApp')
       $scope.matchTiles.splice(index, 1);
     };
 
-    //Removes a category from a word, on the server side this does the same thing as removeFromCategory
+    //Removes a wordPack from a word, on the server side this does the same thing as removeFromCategory
     $scope.removeCategoryFromWord = function(index) {
       $scope.tileId = $scope.currentTile._id;
       $http.put('/api/tile/' + $scope.tileId + "/removeFromCategory", {category: $scope.contextTagsTemp[index]._id, tileId: $scope.currentTile._id});
