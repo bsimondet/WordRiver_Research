@@ -140,7 +140,7 @@ exports.removeWordID = function(req, res) {
   });
 };
 
-exports.removeCategoryID = function(req, res) {
+exports.removeWordPackID = function(req, res) {
   var userId = req.user._id;
   var categoryID = req.body.categoryID;
 

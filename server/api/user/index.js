@@ -29,7 +29,7 @@ router.put('/:id/addClass', auth.isAuthenticated(), controller.addClass);
 router.put('/:id/addStudent', auth.isAuthenticated(), controller.addStudent);
 router.put('/:id/addContextID', auth.isAuthenticated(), controller.addContextID);
 router.put('/:id/addWordID', auth.isAuthenticated(), controller.addWordID);
-router.put('/:id/removeCategoryID', auth.isAuthenticated(), controller.removeCategoryID);
+router.put('/:id/removeWordPackID', auth.isAuthenticated(), controller.removeWordPackID);
 router.put('/:id/removeWordID', auth.isAuthenticated(), controller.removeWordID);
 router.put('/:id/removeStudentID', auth.isAuthenticated(), controller.removeStudentID);
 router.put('/:id/addWordIDtoGroup', auth.isAuthenticated(), controller.addWordIDtoGroup);

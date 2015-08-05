@@ -89,24 +89,7 @@ exports.destroy = function(req, res) {
   });
 };
 
-//exports.updateWord =
-exports.updateWord = function(req, res, next) {
-
-  var newCategory = req.body.newCategory;
-  var tileId = req.body.tileId;
-
-  Tile.findById(tileId, function (err, tile) {
-  console.log(tile);
-    tile.wordPacks.push(newCategory);
-    console.log(tile);
-    tile.save(function(err) {
-      if (err) return validationError(res, err);
-      res.send(200);
-    });
-  });
-};
-
-exports.removeFromCategory = function(req, res, next) {
+exports.removeFromWordPack = function(req, res, next) {
   //var userId = req.user._id;
   console.log("function called");
   var category = req.body.category;

@@ -12,10 +12,8 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.patch('/', controller.update);
-//router.patch('/:id/unassign', controller.updateWord);
 router.delete('/:id', controller.destroy);
-router.put('/:id/removeFromCategory', controller.removeFromCategory);
-router.put('/:id/updateWord', controller.updateWord);
+router.put('/:id/removeFromWordPack', controller.removeFromWordPack);
 
 
 module.exports = router;

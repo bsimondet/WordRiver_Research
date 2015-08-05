@@ -19,7 +19,7 @@ function onConnect(socket) {
 
   // Insert sockets below
   require('../api/contextPack/contextPack.socket').register(socket);
-  require('./category.socket').register(socket);
+  require('./api/wordPack/wordPack.socket').register(socket);
   require('../api/tile/tile.socket').register(socket);
   require('../api/student/student.socket').register(socket);
 }
