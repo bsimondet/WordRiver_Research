@@ -27,7 +27,7 @@ angular.module('WordRiverApp')
 
     $scope.getAllWords = function () {
       $scope.allWords = []; //a list of all words from the database
-      $http.get('/api/tile').success(function (allWords) {
+      $http.get('/api/words/').success(function (allWords) {
         $scope.allWords = allWords;
         $scope.getAllUserWords();
         $scope.getUserWords();
@@ -78,14 +78,14 @@ angular.module('WordRiverApp')
     $scope.updateWord = function () {
       //If a word is entered, but the type is not
       if ($scope.editField.length >= 1 && $scope.editType.length < 1) {
-        $http.patch('/api/tile/' + $scope.wordToEdit._id, {
+        $http.patch('/api/words/' + $scope.wordToEdit._id, {
           name: $scope.editField,
           wordType: $scope.allWords[$scope.editWordIndex].wordType
         });
         $scope.editField = "";
         //If a word is not entered, but the type has been
       } else if ($scope.editField.length == 0 && $scope.editType.length >= 1) {
-        $http.patch('/api/tile/' + $scope.wordToEdit._id, {
+        $http.patch('/api/words/' + $scope.wordToEdit._id, {
           name: $scope.allWords[$scope.editWordIndex].name,
           wordType: $scope.editType
         });
@@ -93,7 +93,7 @@ angular.module('WordRiverApp')
         $scope.editType = "";
         //If a word is entered, and the type is also entered
       } else if ($scope.editField.length >= 1 && $scope.editType.length >= 1) {
-        $http.patch('/api/tile/' + $scope.wordToEdit._id, {
+        $http.patch('/api/words/' + $scope.wordToEdit._id, {
           name: $scope.editField,
           wordType: $scope.editType
         });
@@ -108,7 +108,7 @@ angular.module('WordRiverApp')
     //Deletes a word from the server and from a user's array of words they've created
     $scope.deleteWord = function (word) {
       var wordHolder = word;
-      $http.delete('/api/tile/' + word._id
+      $http.delete('/api/words/' + word._id
       ).success(function () {
           $http.put('/api/users/' + $scope.currentUser._id + '/removeWordID', {
               wordID: wordHolder._id
@@ -121,7 +121,7 @@ angular.module('WordRiverApp')
     $scope.viewAddWords = false;
     $scope.addNewWord = function(){
       if ($scope.addField.length > 0 && $scope.addType.length > 0) {
-        $http.post('/api/tile', {
+        $http.post('/api/words/', {
             name: $scope.addField,
             wordType: $scope.addType,
             userCreated: true

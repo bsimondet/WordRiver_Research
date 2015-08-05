@@ -21,7 +21,7 @@ exports.index = function(req, res) {
   });
 };
 
-exports.getUserTiles = function(req, res) {
+exports.getUserWords = function(req, res) {
   return res.status(208);
   //User.find({}, '-salt -hashedPassword', function (err, users) {
   //  if(err) return res.send(500, err);

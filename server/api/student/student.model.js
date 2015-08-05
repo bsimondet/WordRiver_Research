@@ -6,9 +6,9 @@ var mongoose = require('mongoose'),
 var StudentSchema = new Schema({
   firstName: String,
   lastName: String,
-//  artifacts: [[{ //Array of arrays containing JSON objects, with each inner array representing an artifact, and each JSON object representing a tile
-//    tileID: String, //Tile ID
-//    contextPack: String //Context pack tag associated with the tile used in the JSON object
+//  artifacts: [[{ //Array of arrays containing JSON objects, with each inner array representing an artifact, and each JSON object representing a word
+//    tileID: String, //Word ID
+//    contextPack: String //Context pack tag associated with the word used in the JSON object
 //}]],
   teachers: [],		//  teacher IDs of (this) student
   words: [],                      //  IDs of words assigned to this student

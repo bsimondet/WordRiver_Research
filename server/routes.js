@@ -11,7 +11,7 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/contextPacks', require('./api/contextPack'));
   app.use('/api/wordPacks', require('./api/wordPack'));
-  app.use('/api/tile', require('./api/tile'));
+  app.use('/api/words', require('./api/word'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/students', require ('./api/student'));
 

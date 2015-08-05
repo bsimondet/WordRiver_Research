@@ -18,7 +18,7 @@ angular.module('WordRiverApp')
     $scope.wordsHolder = []; //Array organized to act as desired object
 
     $scope.getWords = function(){
-      $http.get('/api/tile').success(function(words) {
+      $http.get('/api/words/').success(function(words) {
         $scope.wordsArray = [];
         $scope.wordsHolder = [];
         $scope.wordsHolderIDs = [];

@@ -41,7 +41,7 @@ angular.module('WordRiverApp')
       $scope.wordsArray = [];
       $scope.wordsHolder = [];
       $scope.wordsHolderIDs = [];
-      $http.get('/api/tile').success(function(words) {
+      $http.get('/api/words/').success(function(words) {
         for(var index = 0; index < words.length; index++){
           for(var i = 0; i < $scope.wordsHolder.length; i++){
             $scope.wordsHolderIDs.push($scope.wordsHolder[i]._id);

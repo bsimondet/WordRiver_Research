@@ -63,7 +63,7 @@ describe('User Model', function() {
   //it("Testing getting all user's tiles", function(done){
   //  user.save(function() {
   //    request(app)
-  //      .get('/user/1234/tile')
+  //      .get('/user/1234/word')
   //      .expect(200)
   //      .end(function(err, response) {
   //        done();

@@ -8,8 +8,8 @@
 
 var User = require('../api/user/user.model');
 var Student = require('../api/student/student.model');
-var Tile = require('../api/tile/tile.model');
-var WordPack = require('./category.model');
+var Word = require('../api/word/word.model');
+var WordPack = require('../api/wordPack/wordPack.model');
 var ContextPack = require('../api/contextPack/contextPack.model');
 
 User.find({}).remove(function () {
@@ -400,8 +400,8 @@ Student.find({}).remove(function () {
 );
 
 
-Tile.find({}).remove(function () {
-  Tile.create({
+Word.find({}).remove(function () {
+  Word.create({
       /*Current words,
        id,
        name,

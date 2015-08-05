@@ -3,10 +3,10 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var TileSchema = new Schema({
-  name: String, //Tile's word
+var WordSchema = new Schema({
+  name: String, //Word's word
   wordType: String,
   userCreated: Boolean
 });
 
-module.exports = mongoose.model('Tile', TileSchema);
+module.exports = mongoose.model('Word', WordSchema);

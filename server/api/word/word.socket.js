@@ -4,22 +4,22 @@
 
 'use strict';
 
-var tile = require('./tile.model');
+var Word = require('./word.model.js');
 
 exports.register = function(socket) {
-  tile.schema.post('save', function (doc) {
+  Word.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  tile.schema.post('remove', function (doc) {
+  Word.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 };
 
 function onSave(socket, doc, cb) {
-  socket.emit('tile:save', doc);
+  socket.emit('word:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('tile:remove', doc);
+  socket.emit('word:remove', doc);
 }
 
