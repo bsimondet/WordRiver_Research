@@ -15,41 +15,22 @@ angular.module('WordRiverApp')
     };
 
     $scope.wordsArray = []; //Array of server objects
-    $scope.wordsHolder = []; //Array organized to act as desired object
 
     $scope.getWords = function(){
-      $http.get('/api/words/').success(function(words) {
+      $http.get('/api/words').success(function(words) {
         $scope.wordsArray = [];
-        $scope.wordsHolder = [];
-        $scope.wordsHolderIDs = [];
         for(var index = 0; index < words.length; index++){
-          for(var i = 0; i < $scope.wordsHolder.length; i++){
-            $scope.wordsHolderIDs.push($scope.wordsHolder[i]._id);
-          }
           if(words[index].userCreated == false){
             if($scope.wordsArray.indexOf(words[index]) == -1){
               $scope.wordsArray.push(words[index]);
-            }
-            if($scope.wordsHolderIDs.indexOf(words[index]._id) == -1){
-              $scope.wordsHolder.push({
-                "_id": words[index]._id,
-                "name": words[index].name,
-                "inContext": false
-              });
             }
           } else if($scope.currentUser.words.indexOf(words[index]._id) != -1){
             if($scope.wordsArray.indexOf(words[index]) == -1){
               $scope.wordsArray.push(words[index]);
             }
-            if($scope.wordsHolderIDs.indexOf(words[index]._id) == -1){
-              $scope.wordsHolder.push({
-                "_id": words[index]._id,
-                "name": words[index].name,
-                "inContext": false
-              });
-            }
           }
         }
+        console.log("Got words!")
       });
     };
     $scope.getWords();
@@ -62,7 +43,7 @@ angular.module('WordRiverApp')
       $scope.wordPacksHolder = [];
       $scope.wordPacksArray = [];
       $scope.wordPacksHolderIDs = [];
-      $http.get('/api/wordPacks/').success(function(wordPacks){
+      $http.get('/api/wordPacks').success(function(wordPacks){
         for(var index = 0; index < wordPacks.length; index++){
           for(var i = 0; i < $scope.wordPacksHolder.length; i++){
             $scope.wordPacksHolderIDs.push($scope.wordPacksHolder[i]._id);
@@ -81,6 +62,7 @@ angular.module('WordRiverApp')
             }
           }
         }
+        console.log("Got word packs!")
       });
     };
 
@@ -114,7 +96,7 @@ angular.module('WordRiverApp')
       $scope.contextPacksHolder = [];
       $scope.contextPacksArray = [];
       $scope.contextPacksHolderIDs = [];
-      $http.get('/api/contextPacks/').success(function(contextPacks){
+      $http.get('/api/contextPacks').success(function(contextPacks){
         for(var index = 0; index < contextPacks.length; index++){
           for(var i = 0; i < $scope.contextPacksHolder.length; i++){
             $scope.contextPacksHolderIDs.push($scope.contextPacksHolder[i]._id);
@@ -133,6 +115,7 @@ angular.module('WordRiverApp')
           }
         }
         $scope.getNonContextWordPacks();
+        console.log("Got context packs!")
       });
     };
 
