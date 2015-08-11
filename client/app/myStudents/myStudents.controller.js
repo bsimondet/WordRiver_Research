@@ -19,35 +19,19 @@ angular.module('WordRiverApp')
 
     $scope.getWords = function(){
       $scope.wordsArray = [];
-      $scope.wordsHolder = [];
-      $scope.wordsHolderIDs = [];
       $http.get('/api/words/').success(function(words) {
         for(var index = 0; index < words.length; index++){
-          for(var i = 0; i < $scope.wordsHolder.length; i++){
-            $scope.wordsHolderIDs.push($scope.wordsHolder[i]._id);
-          }
           if(words[index].userCreated == false){
             if($scope.wordsArray.indexOf(words[index]) == -1){
               $scope.wordsArray.push(words[index]);
-            }
-            if($scope.wordsHolderIDs.indexOf(words[index]._id) == -1){
-              $scope.wordsHolder.push({
-                "_id": words[index]._id,
-                "name": words[index].name
-              });
             }
           } else if($scope.currentUser.words.indexOf(words[index]._id) != -1){
             if($scope.wordsArray.indexOf(words[index]) == -1){
               $scope.wordsArray.push(words[index]);
             }
-            if($scope.wordsHolderIDs.indexOf(words[index]._id) == -1){
-              $scope.wordsHolder.push({
-                "_id": words[index]._id,
-                "name": words[index].name
-              });
-            }
           }
         }
+        console.log("Got words!")
       });
     };
 
@@ -79,15 +63,16 @@ angular.module('WordRiverApp')
             }
           }
         }
+        console.log("Got word packs!")
       });
     };
 
     $scope.getWordsFromWordIDs = function(wordIDs){
       var toReturn = [];
-      for(var index = 0; index < $scope.wordsHolder.length; index++) {
+      for(var index = 0; index < $scope.wordsArray.length; index++) {
         for(var index2 = 0; index2 < wordIDs.length; index2++) {
-          if($scope.wordsHolder[index]._id == wordIDs[index2] && toReturn.indexOf($scope.wordsHolder[index]) == -1){
-            toReturn.push($scope.wordsHolder[index]);
+          if($scope.wordsArray[index]._id == wordIDs[index2] && toReturn.indexOf($scope.wordsArray[index]) == -1){
+            toReturn.push($scope.wordsArray[index]);
           }
         }
       }
@@ -120,6 +105,7 @@ angular.module('WordRiverApp')
             }
           }
         }
+        console.log("Got context packs!")
       });
     };
 
@@ -409,10 +395,10 @@ angular.module('WordRiverApp')
 
     $scope.getStudentWords = function (){
       $scope.studentWords = [];
-      for(var i = 0; i < $scope.wordsHolder.length; i++){
+      for(var i = 0; i < $scope.wordsArray.length; i++){
         for(var j = 0; j < $scope.currentStudent.words.length; j++){
-          if($scope.currentStudent.words[j] == $scope.wordsHolder[i]._id && $scope.studentWords.indexOf($scope.wordsHolder[i]) == -1){
-            $scope.studentWords.push($scope.wordsHolder[i]);
+          if($scope.currentStudent.words[j] == $scope.wordsArray[i]._id && $scope.studentWords.indexOf($scope.wordsArray[i]) == -1){
+            $scope.studentWords.push($scope.wordsArray[i]);
           }
         }
       }

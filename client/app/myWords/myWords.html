@@ -6,7 +6,7 @@
   </div>
 </header>
 
-<div class="container">
+<div class="container" ng-controller="MyWordsCtrl">
   <!--Displaying words user has added-->
   <div class="col-sm-6">
     <h2>The {{userWords.length}} Words You've Added:</h2>
@@ -40,8 +40,10 @@
       <input type="submit" value="Cancel" class="btn btn-primary" ng-click="viewEditWords = false; editField = ''">
     </div>
 
+    <!--TODO: Something is up with the alignment here, may have been caused when adjusting banner.-->
+    <br><br><br><br><br><br>
     <ul class="list-group scroll">
-      <p>
+
       <li class="list-group-item" ng-repeat="word in userWords | orderBy:'name' | filter:{name:searchUserWords} | filter:{wordType:searchUserWordTypes}">
       <label>{{word.name}}, {{word.wordType}}</label>
       <a class="glyphicon glyphicon-pencil" ng-click="editWord(word)"></a>

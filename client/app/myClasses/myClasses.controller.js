@@ -39,37 +39,19 @@ angular.module('WordRiverApp')
 
     $scope.getWords = function(){
       $scope.wordsArray = [];
-      $scope.wordsHolder = [];
-      $scope.wordsHolderIDs = [];
       $http.get('/api/words/').success(function(words) {
         for(var index = 0; index < words.length; index++){
-          for(var i = 0; i < $scope.wordsHolder.length; i++){
-            $scope.wordsHolderIDs.push($scope.wordsHolder[i]._id);
-          }
           if(words[index].userCreated == false){
             if($scope.wordsArray.indexOf(words[index]) == -1){
               $scope.wordsArray.push(words[index]);
-            }
-            if($scope.wordsHolderIDs.indexOf(words[index]._id) == -1){
-              $scope.wordsHolder.push({
-                "_id": words[index]._id,
-                "name": words[index].name,
-                "inContext": false
-              });
             }
           } else if($scope.currentUser.words.indexOf(words[index]._id) != -1){
             if($scope.wordsArray.indexOf(words[index]) == -1){
               $scope.wordsArray.push(words[index]);
             }
-            if($scope.wordsHolderIDs.indexOf(words[index]._id) == -1){
-              $scope.wordsHolder.push({
-                "_id": words[index]._id,
-                "name": words[index].name,
-                "inContext": false
-              });
-            }
           }
         }
+        console.log("Got words!");
       });
     };
 
@@ -106,6 +88,7 @@ angular.module('WordRiverApp')
             }
           }
         }
+        console.log("Got word packs!");
       });
     };
 
@@ -158,6 +141,7 @@ angular.module('WordRiverApp')
             }
           }
         }
+        console.log("Got context packs!");
       });
     };
 

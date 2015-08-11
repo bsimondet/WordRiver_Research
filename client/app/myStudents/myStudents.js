@@ -5,7 +5,7 @@ angular.module('WordRiverApp')
     $stateProvider
       .state('myStudents', {
         url: '/myStudents',
-        templateUrl: 'app/myStudents/myStudents.html',
-        controller: 'MyStudentsCtrl'
+        templateUrl: 'app/myStudents/myStudents.html'
+        //controller: 'MyStudentsCtrl'
       });
   });
