@@ -110,7 +110,6 @@ User.find({}).remove(function () {
         "5511ab564ac02dbaf337270d",
         "5511ab5617fda1233df3f6dd",
         "552c20f8be17b267b77b5a19",
-        "552c20f8d1172952c6f268fe",
         "552c20f878838eab8bf3f0b1",
         "552c20f8b21be14535092a6a",
         "552c20f8c91389f9a90eea7e",
@@ -192,17 +191,6 @@ Student.find({}).remove(function () {
         "groupList": ["5535520dd7b5c70193c4993c", "5535520dff3a52f2757e5944", "5535520d147a722a4e7233a3"]
       }],
       "wordPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86", "553167d1d969a916cab51920", "553167d1c296f9753ce8447f", "553167d1afa1bda9bc0d055a"]
-    }, {
-      "_id": "552c20f8d1172952c6f268fe",
-      "firstName": "Molly",
-      "lastName": "Grove",
-      "teachers": ["5511a83da168f8b5f3144f02"],
-      "words": ["552d5c8011d58a4ad979d9b0", "552d5c80d6a8d78c5541b508", "552d5c80c0b37217fd3eded3", "552d5c80af62cb1c0a09f7bf", "5511ae8cec56277a4af216a5", "552c24180bb0fbbee3c0994b", "552c2418f3a3808dd9765a0f", "552c2418291728ecd1d4667d"],
-      "classList": [{
-        "_id": "553167d663c993d16d03ce80",
-        "groupList": ["5535520dd7b5c70193c4993c", "5535520db654746a2361ffb6", "5535520d147a722a4e7233a3"]
-      }],
-      "wordPacks": ["553167d14651465f11201014", "553167d123b90c175f9b3a86", "553167d1c67764f3773612dc"]
     }, {
       "_id": "552c20f878838eab8bf3f0b1",
       "firstName": "Resa",
