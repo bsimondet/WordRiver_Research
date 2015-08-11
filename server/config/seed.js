@@ -2991,7 +2991,7 @@ ContextPack.find({}).remove(function () {
       "wordPacks": ["553167d1c296f9753ce8447f", "553167d14651465f11201014", "553167d13562bc39e23e4d3b"]
     },{
       "_id": "56977751d0ec444025az0a01",
-      "name": "Sight Words by Grade Level",
+      "name": "Sight Words",
       "creatorID": "5511a83da168f8b5f3144f02",
       "wordPacks": ["553167d183c193d16d03ce80", "553167d1afa1bda9bc0d055a", "55856f5e08209fde1a2b8af3", "553167d1d969a916cab51920", "553167d1d969a91600b51920", "558584084afb8b051fa83846"]
     }
