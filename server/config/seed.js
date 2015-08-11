@@ -142,7 +142,7 @@ Student.find({}).remove(function () {
      assigned teachers,
      assigned words,
      assigned groups,
-     assigned wordPacks*/ 
+     assigned wordPacks*/
     {
       "_id": "5511ab56117e23f0412fd08f",
       "firstName": "Aaron",
