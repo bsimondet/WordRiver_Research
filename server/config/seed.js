@@ -503,7 +503,7 @@ Word.find({}).remove(function () {
     }, {
       "name": "Superman",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "_id": "55857bb01eb0b1273145eb02"
     }, {
       "name": "city",
@@ -2206,85 +2206,85 @@ Word.find({}).remove(function () {
       "_id": "55b7a3a6c634fde44e822698",
       "name": "Lex Luthor",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a3afc634fde44e822699",
       "name": "the Joker",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a3b5c634fde44e82269a",
       "name": "Magneto",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a3bbc634fde44e82269b",
       "name": "Doctor Doom",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a3c8c634fde44e82269c",
       "name": "Catwoman",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a3d1c634fde44e82269d",
       "name": "Mystique",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a3eec634fde44e82269e",
       "name": "Spider-Man",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a424c634fde44e82269f",
       "name": "Hulk",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a427c634fde44e8226a0",
       "name": "Thor",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a42fc634fde44e8226a1",
       "name": "Captain America",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a434c634fde44e8226a2",
       "name": "Wolverine",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a43cc634fde44e8226a3",
       "name": "Loki",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     }, {
       "_id": "55b7a452c634fde44e8226a4",
       "name": "Hawkeye",
       "wordType": "Noun",
-      "userCreated": false,
+      "userCreated": true,
       "__v": 0
     },{
       "_id":"55b7a5d2dfe95dd650295b89",
       "name":"Wonder Woman",
       "wordType":"Noun",
-      "userCreated":false,
+      "userCreated":true,
       "__v":0
     }, {
       "name": "again",
