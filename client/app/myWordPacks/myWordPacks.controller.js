@@ -140,6 +140,7 @@ angular.module('WordRiverApp')
           $scope.wordPacksNonContextHolder.push($scope.wordPacksHolder[i]);
         }
       }
+      console.log("Got non context word packs!")
     };
 
     $scope.getContextPacks();

@@ -116,7 +116,7 @@
       <ul class="list-group scroll">
         <li class="list-group-item" ng-repeat="wordPack in wordPacksNonContextHolder | orderBy:'name' | filter:{name:searchExistingWordPacks}">
           <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 15 }}{{wordPack.name.length > 15 ? '...' : ''}}</a></label>
-          <input type="button" value="Add" style="float:right" ng-click="addWordPackToContextPack(wordPack)">
+          <input type="button" value="Add" style="float:right" ng-click="addWordPackToContextPack(currentContextPack._id, wordPack)">
         </li>
         <br>
         <button class="btn btn-primary" ng-click="viewAddWordPack = false; searchExistingWordPacks = ''">Done</button>
