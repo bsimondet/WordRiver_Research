@@ -1,11 +1,8 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
 <div ng-controller="MyWordPacksCtrl">
-  <header class="hero-unit" id="banner">
-    <div class="">
-      <h1>My Word Packs</h1>
-    </div>
-  </header>
+  <div ng-include="'components/navbar/navbar.html'"></div>
   <div class="container">
+    <br><br>
+    <h1>My Word Packs</h1>
     <nav>
       <h3>What would like to view?
         <input type="button" name="wordPackOption" value="Context Packs" ng-click="toggleView('context')">
@@ -18,12 +15,12 @@
       <h3>My Context Packs <a class="glyphicon glyphicon-plus" ng-click="newContextPack()"></a></h3>
       <input type="text" ng-Model="searchContext" placeholder="Search Context Packs">
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="contextPack in contextPacksHolder | orderBy:'name' | filter:{name:searchContext}">
+        <li class="list-group-item" ng-repeat="contextPack in contextPacksArray | orderBy:'name' | filter:{name:searchContext}">
           <label>{{contextPack.name}}</label>
           <a class="glyphicon glyphicon-pencil" ng-click="editContextName(contextPack)"></a>
           <a class="glyphicon glyphicon-trash" style="float:right" ng-click="removeContextPack(contextPack)">  </a>
           <ul class="list-group">
-            <li class="list-group-item" ng-repeat="wordPack in contextPack.wordPacks | orderBy:'name'">
+            <li class="list-group-item" ng-repeat="wordPack in getWordPacksForContextPack(contextPack) | orderBy:'name'">
               <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 18 }}{{wordPack.name.length > 18 ? '...' : ''}}</a></label>
               <a class="glyphicon glyphicon-trash" style="float:right" ng-click="removeWordPackFromContextPack(contextPack, wordPack)">  </a>
               <a class="glyphicon glyphicon-pencil" style="float:right" ng-click="editWordPackName(wordPack)">  </a>
@@ -40,7 +37,7 @@
       <h3>All of My Word Packs</h3>
       <input type="text" ng-Model="searchAllWordPacks" placeholder="Search Word Packs">
       <ul class="list-group scroll">
-        <li class="list-group-item" ng-repeat="wordPack in wordPacksHolder | orderBy:'name' | filter:{name:searchAllWordPacks}">
+        <li class="list-group-item" ng-repeat="wordPack in wordPacksArray | orderBy:'name' | filter:{name:searchAllWordPacks}">
           <label><a ng-click="viewWordsInWordPack(wordPack)">{{ wordPack.name | limitTo: 20 }}{{wordPack.name.length > 20 ? '...' : ''}}</a></label>
           <a class="glyphicon glyphicon-pencil" style="float:right" ng-click="editWordPackName(wordPack)">  </a>
         </li>
@@ -61,6 +58,7 @@
       <button class="btn btn-success" ng-click="newWordPack()"><a class="glyphicon glyphicon-plus" ng-click="newWordPack()"></a> Create New Word Pack </button>
     </div>
 
+    <!--This would be a good spot for the buttons to add existing, new, or sharable wordpacks/contextpacks-->
     <div class="col-xs-3" ng-show="viewAddWordPackOptions">
       <h3>Would you like to:</h3>
       <button class="btn btn-primary" ng-click="">Search Public Context Packs</button>
@@ -135,7 +133,7 @@
         </li>
         <br>
         <button class="btn btn-success" ng-click="addWords()"><a class="glyphicon glyphicon-plus"></a>  Add Words to {{currentWordPack.name}} </button>
-        <button class="btn btn-primary" ng-click="viewWordPackWords = false; searchWords = ''; searchWordTypes = ''">Done</button>
+        <button class="btn btn-primary" ng-click="viewWordPackWords = false; searchWords = ''; searchWordTypes = ''; viewAddWordsToWordPacks = false">Done</button>
       </ul>
     </div>
 

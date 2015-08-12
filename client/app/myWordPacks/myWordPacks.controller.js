@@ -30,39 +30,26 @@ angular.module('WordRiverApp')
             }
           }
         }
-        console.log("Got words!")
+        //console.log("Got words!")
       });
     };
     $scope.getWords();
 
-    $scope.wordPacksHolder = [];  //Array organized to act as desired object
     $scope.wordPacksNonContextHolder = [];  //Array organized to act as desired object
     $scope.wordPacksArray = [];  //Array of server objects
 
     $scope.getWordPacks = function(){
-      $scope.wordPacksHolder = [];
       $scope.wordPacksArray = [];
-      $scope.wordPacksHolderIDs = [];
       $http.get('/api/wordPacks').success(function(wordPacks){
-        for(var index = 0; index < wordPacks.length; index++){
-          for(var i = 0; i < $scope.wordPacksHolder.length; i++){
-            $scope.wordPacksHolderIDs.push($scope.wordPacksHolder[i]._id);
-          }
-          if(wordPacks[index].creatorID == $scope.currentUser._id){
-            if($scope.wordPacksArray.indexOf(wordPacks[index]) == -1){
-              $scope.wordPacksArray.push(wordPacks[index]);
-            }
-            if($scope.wordPacksHolderIDs.indexOf(wordPacks[index]._id) == -1){
-              $scope.wordPacksHolder.push({
-                "_id": wordPacks[index]._id,
-                "name": wordPacks[index].name,
-                "words": $scope.getWordsFromWordIDs(wordPacks[index].words),
-                "inContext": false
-              });
+        var holder = wordPacks;
+        for(var index = 0; index < holder.length; index++){
+          if(holder[index].creatorID == $scope.currentUser._id){
+            if($scope.wordPacksArray.indexOf(holder[index]) == -1){
+              $scope.wordPacksArray.push(holder[index]);
             }
           }
         }
-        console.log("Got word packs!")
+        //console.log("Got word packs!")
       });
     };
 
@@ -89,43 +76,35 @@ angular.module('WordRiverApp')
     };
     $scope.getWordPacks();
 
-    $scope.contextPacksHolder = [];
     $scope.contextPacksArray = [];
-
+    $scope.wordPacksInContextIDs = [];
     $scope.getContextPacks = function(){
-      $scope.contextPacksHolder = [];
       $scope.contextPacksArray = [];
-      $scope.contextPacksHolderIDs = [];
+      $scope.wordPacksInContextIDs = [];
       $http.get('/api/contextPacks').success(function(contextPacks){
         for(var index = 0; index < contextPacks.length; index++){
-          for(var i = 0; i < $scope.contextPacksHolder.length; i++){
-            $scope.contextPacksHolderIDs.push($scope.contextPacksHolder[i]._id);
-          }
           if(contextPacks[index].creatorID == $scope.currentUser._id){
             if($scope.contextPacksArray.indexOf(contextPacks[index]) == -1){
               $scope.contextPacksArray.push(contextPacks[index]);
-            }
-            if($scope.contextPacksHolderIDs.indexOf(contextPacks[index]._id) == -1){
-              $scope.contextPacksHolder.push({
-                "_id": contextPacks[index]._id,
-                "name": contextPacks[index].name,
-                "wordPacks": $scope.getWordPacksFromWordPackIDs(contextPacks[index].wordPacks)
-              });
+              for(var i = 0; i < contextPacks[index].wordPacks.length; i++){
+                if($scope.wordPacksInContextIDs.indexOf(contextPacks[index].wordPacks[i]) == -1){
+                  $scope.wordPacksInContextIDs.push(contextPacks[index].wordPacks[i]);
+                }
+              }
             }
           }
         }
         $scope.getNonContextWordPacks();
-        console.log("Got context packs!")
+        //console.log("Got context packs!")
       });
     };
 
     $scope.getWordPacksFromWordPackIDs = function(wordPackIDs){
       var toReturn = [];
-      for(var index = 0; index < $scope.wordPacksHolder.length; index++) {
+      for(var index = 0; index < $scope.wordPacksArray.length; index++) {
         for(var index2 = 0; index2 < wordPackIDs.length; index2++) {
-          if($scope.wordPacksHolder[index]._id == wordPackIDs[index2] && toReturn.indexOf($scope.wordPacksHolder[index]) == -1){
-            $scope.wordPacksHolder[index].inContext = true;
-            toReturn.push($scope.wordPacksHolder[index]);
+          if($scope.wordPacksArray[index]._id == wordPackIDs[index2] && toReturn.indexOf($scope.wordPacksArray[index]) == -1){
+            toReturn.push($scope.wordPacksArray[index]);
             break;
           }
         }
@@ -135,12 +114,12 @@ angular.module('WordRiverApp')
 
     $scope.getNonContextWordPacks = function(){
       $scope.wordPacksNonContextHolder = [];
-      for(var i = 0; i < $scope.wordPacksHolder.length; i++){
-        if($scope.wordPacksHolder[i].inContext == false && $scope.wordPacksNonContextHolder.indexOf($scope.wordPacksHolder[i]) == -1){
-          $scope.wordPacksNonContextHolder.push($scope.wordPacksHolder[i]);
+      for(var i = 0; i < $scope.wordPacksArray.length; i++){
+        if($scope.wordPacksInContextIDs.indexOf($scope.wordPacksArray[i]._id) == -1 && $scope.wordPacksNonContextHolder.indexOf($scope.wordPacksArray[i]) == -1){
+          $scope.wordPacksNonContextHolder.push($scope.wordPacksArray[i]);
         }
       }
-      console.log("Got non context word packs!")
+      //console.log("Got non context word packs!")
     };
 
     $scope.getContextPacks();
@@ -201,6 +180,10 @@ angular.module('WordRiverApp')
       $scope.viewAddWordsToWordPacks = false;
     };
 
+    $scope.getWordPacksForContextPack = function (contextPack) {
+      return $scope.getWordPacksFromWordPackIDs(contextPack.wordPacks);
+    };
+
     $scope.updateContextName = function () {
       if ($scope.editContextName.length > 0) {
         $http.put('/api/contextPacks/' + $scope.contextToEdit._id + '/editContextName', {
@@ -220,9 +203,9 @@ angular.module('WordRiverApp')
       var contextHolder = contextPack;
       if(confirm("This will remove the Context Pack, but the Word Packs will still exist unless removed.")){
         $http.delete('/api/contextPacks/' + contextPack._id).success(function(){
-          for(var i = 0; i < $scope.contextPacksHolder.length; i++){
-            if(contextHolder._id == $scope.contextPacksHolder[i]._id){
-              $scope.contextPacksHolder.splice(i, 1);
+          for(var i = 0; i < $scope.contextPacksArray.length; i++){
+            if(contextHolder._id == $scope.contextPacksArray[i]._id){
+              $scope.contextPacksArray.splice(i, 1);
             }
           }
         })
@@ -246,12 +229,7 @@ angular.module('WordRiverApp')
           name: $scope.createContextPackNameField,
           creatorID: $scope.currentUser._id
         }).success(function(newContextPack){
-          $scope.contextPacksHolder.push({
-            "_id":newContextPack._id,
-            "name":newContextPack.name,
-            "wordPacks": [],
-            "public" : false
-          });
+          $scope.contextPacksArray.push(newContextPack);
 
           $scope.createContextPackNameField = "";
           $scope.viewCreateContextPack = false;
@@ -285,16 +263,9 @@ angular.module('WordRiverApp')
           wordPackID: $scope.wordPackToEdit._id,
           name: $scope.editWordPackNameField
         }).success(function(){
-          for(var i = 0; i < $scope.contextPacksHolder.length; i++){
-            for(var j = 0; j < $scope.contextPacksHolder[i].wordPacks.length; j++){
-              if($scope.contextPacksHolder[i].wordPacks[j]._id == $scope.wordPackToEdit._id){
-                $scope.contextPacksHolder[i].wordPacks[j].name = $scope.editWordPackNameField;
-              }
-            }
-          }
-          for(var k = 0; k < $scope.wordPacksHolder.length; k++){
-            if($scope.wordPacksHolder[k]._id == $scope.wordPackToEdit._id){
-              $scope.wordPacksHolder[k].name = $scope.editWordPackNameField;
+          for(var k = 0; k < $scope.wordPacksArray.length; k++){
+            if($scope.wordPacksArray[k]._id == $scope.wordPackToEdit._id){
+              $scope.wordPacksArray[k].name = $scope.editWordPackNameField;
             }
           }
           for(var l = 0; l < $scope.wordPacksNonContextHolder.length; l++){
@@ -334,28 +305,21 @@ angular.module('WordRiverApp')
           creatorID: $scope.currentUser._id
         }).success(function(newWordPack){
           var holder = newWordPack;
-          $scope.wordPacksHolder.push({
-            "_id":holder._id,
-            "name":holder.name,
-            "inContext": false,
-            "public" : false
-          });
-          $scope.wordPacksNonContextHolder.push({
-            "_id":holder._id,
-            "name":holder.name,
-            "inContext": false,
-            "public" : false
-          });
+          holder.inContext = false;
+          $scope.wordPacksArray.push(holder);
+          $scope.wordPacksNonContextHolder.push(holder);
           if($scope.createWordPackForContext){
-            for(var i = 0; i < $scope.contextPacksHolder.length; i++){
-              if($scope.contextPacksHolder[i]._id == $scope.currentContextPack._id){
-                $scope.addWordPackToContextPack($scope.contextPacksHolder[i]._id, holder);
+            for(var i = 0; i < $scope.contextPacksArray.length; i++){
+              if($scope.contextPacksArray[i]._id == $scope.currentContextPack._id){
+                $scope.addWordPackToContextPack($scope.contextPacksArray[i]._id, holder);
               }
             }
             $scope.createWordPackForContext = false;
           }
           $scope.createWordPackNameField = "";
           $scope.viewCreateWordPack = false;
+          $scope.currentWordPack = holder;
+          $scope.viewWordPackWords = true;
         });
       } else {
         alert("Please enter a name for this word pack");
@@ -393,20 +357,7 @@ angular.module('WordRiverApp')
       $http.put('/api/contextPacks/' + contextID + '/addWordPackToContextPack', {
         wordPackID: newWordPack._id
       }).success(function(){
-        for(var i = 0; i < $scope.contextPacksHolder.length; i++){
-          if($scope.contextPacksHolder[i]._id == contextID){
-            $scope.contextPacksHolder[i].wordPacks.push({
-              "_id":newWordPack._id,
-              "name":newWordPack.name,
-              "inContext": true
-            });
-          }
-        }
-        for(var j = 0; j < $scope.wordPacksNonContextHolder.length; j++){
-          if($scope.wordPacksNonContextHolder[j]._id == newWordPack._id){
-            $scope.wordPacksNonContextHolder.splice(j, 1);
-          }
-        }
+        $scope.getContextPacks();
       })
     };
 
@@ -414,25 +365,21 @@ angular.module('WordRiverApp')
       $http.put('/api/contextPacks/' + contextPack._id + '/removeWordPackFromContextPack', {
         wordPackID: oldWordPack._id
       }).success(function(){
-        for(var i = 0; i < $scope.contextPacksHolder.length; i++){
-          if($scope.contextPacksHolder[i]._id == contextPack._id){
-            for(var j = 0; j < $scope.contextPacksHolder[i].wordPacks.length; j++){
-              if($scope.contextPacksHolder[i].wordPacks[j]._id == oldWordPack._id){
-                $scope.contextPacksHolder[i].wordPacks.splice(j, 1);
+        for(var i = 0; i < $scope.contextPacksArray.length; i++){
+          if($scope.contextPacksArray[i]._id == contextPack._id){
+            for(var j = 0; j < $scope.contextPacksArray[i].wordPacks.length; j++){
+              if($scope.contextPacksArray[i].wordPacks[j] == oldWordPack._id){
+                $scope.contextPacksArray[i].wordPacks.splice(j, 1);
               }
             }
           }
         }
-        for(var k = 0; k < $scope.wordPacksHolder.length; k++){
-          if($scope.wordPacksHolder[k]._id == oldWordPack._id){
-            $scope.wordPacksHolder[k].inContext = false;
+        for(var k = 0; k < $scope.wordPacksArray.length; k++){
+          if($scope.wordPacksArray[k]._id == oldWordPack._id){
+            $scope.wordPacksArray[k].inContext = false;
           }
         }
-        $scope.wordPacksNonContextHolder.push({
-          "_id":oldWordPack._id,
-          "name":oldWordPack.name,
-          "words":oldWordPack.words
-        });
+        $scope.wordPacksNonContextHolder.push(oldWordPack);
       })
     };
 
@@ -525,9 +472,9 @@ angular.module('WordRiverApp')
               $scope.wordPacksNonContextHolder.splice(i, 1);
             }
           }
-          for(var j = 0; j < $scope.wordPacksHolder.length; j++){
-            if(wordPackHolder._id == $scope.wordPacksHolder[j]._id){
-              $scope.wordPacksHolder.splice(j, 1);
+          for(var j = 0; j < $scope.wordPacksArray.length; j++){
+            if(wordPackHolder._id == $scope.wordPacksArray[j]._id){
+              $scope.wordPacksArray.splice(j, 1);
             }
           }
         })
