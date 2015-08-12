@@ -124,6 +124,19 @@ angular.module('WordRiverApp')
 
     $scope.getContextPacks();
 
+    $scope.typeOptions =
+      [
+        "Adjective",
+        "Adverb",
+        "Article",
+        "Conjunction",
+        "Interjection",
+        "Noun",
+        "Preposition",
+        "Pronoun",
+        "Verb"
+      ];
+
     $scope.viewMyContextPacks = false;
     $scope.viewAllOfMyWordPacks = false;
     $scope.viewMyNonContextWordPacks = false;
@@ -224,7 +237,8 @@ angular.module('WordRiverApp')
     };
 
     $scope.createContextPack = function () {
-      if ($scope.createContextPackNameField.length > 0) {
+      var holder = $scope.createContextPackNameField;
+      if (holder.length > 0) {
         $http.post('/api/contextPacks/', {
           name: $scope.createContextPackNameField,
           creatorID: $scope.currentUser._id
@@ -423,7 +437,6 @@ angular.module('WordRiverApp')
 
     $scope.addWordsToWordPack = function(word){
       var newWord = word;
-      if(confirm("If adding a word to a word pack in a context pack, you may need to refresh the page to see the words.")) {
         $http.put('/api/wordPacks/' + $scope.currentWordPack._id + '/addWordToWordPack', {
           wordID: word._id
         }).success(function () {
@@ -439,12 +452,10 @@ angular.module('WordRiverApp')
           }
           $scope.getWordPacks();
         })
-      }
     };
 
     $scope.removeWordFromWordPack = function(word){
       var oldWord = word;
-      if(confirm("If removing a word from a word pack in a context pack, you may need to refresh the page to see the words.")){
         $http.put('/api/wordPacks/' + $scope.currentWordPack._id +'/removeWordIDFromWordPack', {
             wordID: word._id
         }).success(function(){
@@ -460,7 +471,6 @@ angular.module('WordRiverApp')
           });
           $scope.getWordPacks();
         })
-      }
     };
 
     $scope.removeWordPack = function(wordPack){

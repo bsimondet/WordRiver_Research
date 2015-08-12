@@ -13,6 +13,7 @@ angular.module('WordRiverApp')
     $scope.editType = ""; //what's typed into the edit field for a word type
     $scope.typeOptions =
       [
+        "",
         "Adjective",
         "Adverb",
         "Article",
@@ -68,9 +69,12 @@ angular.module('WordRiverApp')
       }
     };
 
+    $scope.currentWord = null;
     $scope.editWord = function (word) {
+      $scope.currentWord = word;
       $scope.editWordIndex = $scope.findIndexOfWord(word);
       $scope.viewEditWords = true;
+      $scope.viewAddWords = false;
       $scope.wordToEdit = $scope.allWords[$scope.findIndexOfWord(word)];
     };
 
@@ -133,6 +137,12 @@ angular.module('WordRiverApp')
             });
           });
         $scope.addField = "";
+      } else if ($scope.addField.length > 0 && $scope.addType.length < 0) {
+        alert("Please select the part of speech for "+$scope.addField);
+      } else if ($scope.addField.length < 0 && $scope.addType.length < 0) {
+        alert("Please enter a new word and select the part of speech");
+      } else if ($scope.addField.length < 0 && $scope.addType.length > 0) {
+        alert("Please enter a new word for your selected the part of speech");
       }
     };
 

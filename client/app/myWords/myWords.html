@@ -1,19 +1,16 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-<header class="hero-unit" id="banner">
-  <div class="">
-    <h1>My Words</h1>
-  </div>
-</header>
-
 <div class="container" ng-controller="MyWordsCtrl">
+  <div ng-include="'components/navbar/navbar.html'"></div>
+  <br><br>
+  <h1>My Words</h1>
   <!--Displaying words user has added-->
   <div class="col-sm-6">
     <h2>The {{userWords.length}} Words You've Added:</h2>
     <!--Search option for words-->
     <div class="col-xs-6">
       <input type="text" ng-Model="searchUserWords" placeholder="Search My Words">
-      <input type="text" ng-Model="searchUserWordTypes" placeholder="Search Word Types">
+      <select ng-model="searchUserWordTypes">
+        <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
+      </select>
       <br> Can't find the word you're looking for? <br>
       <button class="btn btn-success" ng-click="viewAddWords = true"><a class="glyphicon glyphicon-plus"></a> Add Words</button>
     </div>
@@ -30,7 +27,7 @@
 
     <!--Editing options for selected word-->
     <div class="col-xs-6" ng-show="viewEditWords">
-      <input ng-model="editField" type="text" size="15" placeholder={{userAllWords[editWordIndex].name}}>
+      <input ng-model="editField" type="text" size="15" placeholder={{currentWord.name}}>
 
       <!--Currently: {{userAllWords[editWordIndex].wordType}}-->
       <select ng-model="editType">
@@ -57,7 +54,9 @@
     <h9>Note: This does not include words you've added</h9>
     <br><br>
     <input type="text" ng-Model="searchAllWords" placeholder="Search All Words"><br>
-    <input type="text" ng-Model="searchAllWordTypes" placeholder="Search Word Types">
+    <select ng-model="searchAllWordTypes">
+      <option ng-repeat="option in typeOptions" ng-value="'{{option}}'">{{option}}</option>
+    </select>
 
     <ul class="list-group scroll">
       <p>
