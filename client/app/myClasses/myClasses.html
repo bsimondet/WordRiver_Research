@@ -1,14 +1,13 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
 
-<div ng-controller="MyClassesCtrl">
-  <header class="hero-unit" id="banner">
+<div ng-controller="MyClassesCtrl" class="container">
+  <div ng-include="'components/navbar/navbar.html'"></div>
     <div class="">
+      <br><br>
       <h1>{{headerTitle}}</h1>
     </div>
-  </header>
 
   <!--View for Classes-->
-  <div class="container" ng-show="viewClassInfo">
+  <div ng-show="viewClassInfo">
     <h2>Your {{classArray.length}} Classes:</h2>
     <div class="col-xs-3">
       <!--List of current groups with edit and remove options-->

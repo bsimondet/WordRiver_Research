@@ -1,8 +1,7 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-<!--<header class="hero background" id="banner" ng-style="backgroundImage">-->
 <header class="hero-unit" id="banner">
+  <div ng-include="'components/navbar/navbar.html'"></div>
   <div class="container">
+    <br><br>
     <!--<img class="resize" src="assets/images/WordRiverLogo.png" alt="we have a logo!"><br>-->
     <h1 ng-hide="changePasswordShow">Word River</h1>
     <h2 class = "changePasswordText" ng-show="changePasswordShow">Change Password</h2>
@@ -10,10 +9,10 @@
 </header>
 <!--To center login, need to add column to the left-->
 <div class= "col-sm-4"></div>
-<header class="col-sm-4 backgroundColor">
+<header class="col-sm-4">
 
   <!--Welcome area-->
-  <div ng-show="signedInShow" class="center">
+  <div ng-show="signedInShow" class="center backgroundColor">
       <span><h2>Hello {{ getCurrentUser().name }}</h2></span>
       <h3>Would you like to view:</h3>
       <h4><a href="/myClasses">My Classes</a></h4>
@@ -168,9 +167,4 @@
     It gives teachers a tool to enable differential learning and allows teachers to personalize their curricula while tracking student progress. <br>
     This project was created to help children take over the world via intense knowledge.</p>
 </div>
-<footer class="footer">
-  <div class="container">
-  </div>
-  </div>
-</footer>
 
