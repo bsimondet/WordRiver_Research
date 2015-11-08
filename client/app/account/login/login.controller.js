@@ -22,5 +22,7 @@ angular.module('WordRiverApp')
         });
       }
     };
-
+    $scope.loginOauth = function(provider){
+      this.$window.location.href = '/auth/' + provider;
+    };
   });

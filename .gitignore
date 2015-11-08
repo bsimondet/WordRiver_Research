@@ -6,4 +6,5 @@ client/bower_components
 dist
 /server/config/local.env.js
 /server/config/environment/production.js
+/server/auth/google/google.config.js
 coverage

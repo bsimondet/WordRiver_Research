@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('WordRiverApp')
-  .controller('HomeCtrl', function ($scope, $rootScope, Auth, $location) {
+  .controller('HomeCtrl', function ($scope, $rootScope, Auth, $location, $window) {
     $scope.user = {email: "rosemariemaxwell@plexia.com", password: "joethe"};
     $scope.errors = {};
     $scope.logInShow = true;
@@ -27,7 +27,6 @@ angular.module('WordRiverApp')
         $scope.signUpShow = false;
       }
     };
-
     $scope.login = function(form) {
       $scope.submitted = true;
 
@@ -37,19 +36,19 @@ angular.module('WordRiverApp')
           password: $scope.user.password
         })
           .then( function() {
-            $scope.signedInShow = true;
-            $scope.buttonsShow = false;
-            $scope.logInShow = false;
-            $scope.signUpShow = false;
             // Logged in, redirect to home
             $location.path('/');
           })
           .catch( function(err) {
             $scope.errors.other = err.message;
-            $location.path('/');
           });
       }
     };
+
+    $scope.loginOauth = function(provider) {
+      $window.location.href = '/auth/' + provider;
+    };
+
     $scope.register = function(form) {
       $scope.submitted = true;
 
