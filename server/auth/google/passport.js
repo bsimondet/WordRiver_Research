@@ -1,13 +1,15 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var config = require('../../config/environment');
 
 exports.setup = function (User, config) {
   passport.use(new GoogleStrategy({
-      clientID: clientID,
-      clientSecret: clientSecret,
-      callbackURL: 'http://localhost:9000'
+      clientID: config.google.clientID,
+      clientSecret: config.google.clientSecret,
+      callbackURL: config.google.callbackURL,
+      passReqToCallback: true
     },
-    function(accessToken, refreshToken, profile, done) {
+    function(req, accessToken, refreshToken, profile, done) {
       User.findOne({
         'google.id': profile.id
       }, function(err, user) {
@@ -17,8 +19,7 @@ exports.setup = function (User, config) {
             email: profile.emails[0].value,
             role: 'user',
             username: profile.username,
-            provider: 'google',
-            google: profile._json
+            provider: 'google'
           });
           user.save(function(err) {
             if (err) done(err);

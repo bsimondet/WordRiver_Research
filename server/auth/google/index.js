@@ -3,7 +3,6 @@
 var express = require('express');
 var passport = require('passport');
 var auth = require('../auth.service');
-var config = require('../google.config.js');
 
 var router = express.Router();
 
@@ -18,8 +17,11 @@ router
   }))
 
   .get('/callback', passport.authenticate('google', {
-    failureRedirect: '/signup',
+    failureRedirect: 'http://localhost:9000/home',
     session: false
-  }), auth.setTokenCookie);
+  }),function(req, res) {
+    auth.setTokenCookie;
+    res.redirect('http://localhost:9000/home');
+  });
 
 module.exports = router;

@@ -10,29 +10,29 @@
 <!--To center login, need to add column to the left-->
 <div class= "col-sm-4"></div>
 <header class="col-sm-4">
-
   <!--Welcome area-->
   <div ng-show="signedInShow" class="center backgroundColor">
-      <span><h2>Hello {{ getCurrentUser().name }}</h2></span>
-      <h3>Would you like to view:</h3>
-      <h4><a href="/myClasses">My Classes</a></h4>
-      <h4><a href="/myStudents">My Students</a></h4>
-      <h4><a href="/myWordPacks">My Word Packs</a></h4>
-      <h4><a href="/myWords">My Words</a></h4>
+    <span><h2>Hello {{ getCurrentUser().name }}</h2></span>
+    <h3>Would you like to view:</h3>
+    <h4><a href="/myClasses">My Classes</a></h4>
+    <h4><a href="/myStudents">My Students</a></h4>
+    <h4><a href="/myWordPacks">My Word Packs</a></h4>
+    <h4><a href="/myWords">My Words</a></h4>
   </div>
-
   <!--Login screen-->
-    <div class="loginBox">
-      <div ng-show = "logInShow">
-        <form class="form" name="logIn" ng-submit="login(logIn)" novalidate>
-          <a class="btn btn-default btn-lg btn-register buttonSizeUpperLogIn" ng-click="logInShow = true; signUpShow = false;">
-            Login
-          </a>
-          <a class="btn btn-default btn-lg btn-register buttonSizeUpperLogIn" ng-click="logInShow = false; signUpShow = true;">
-            Sign Up
-          </a>
-
-          <div class="form-group has-error">
+  <div class="loginBox">
+    <div ng-show = "logInShow">
+      <form class="form" name="logIn" ng-submit="login(logIn)" novalidate>
+        <a class="btn btn-default btn-lg btn-register buttonSizeUpperLogIn" ng-click="logInShow = true; signUpShow = false;">
+          Login
+        </a>
+        <a class="btn btn-default btn-lg btn-register buttonSizeUpperLogIn" ng-click="logInShow = false; signUpShow = true;">
+          Sign Up
+        </a>
+        <a class="btn btn-default btn-lg btn-register buttonSizeUpperGoogle" ng-click="loginOauth('google')">
+          Login with Google
+        </a>
+        <div class="form-group has-error">
             <span class="clear help-block" ng-show="logIn.email.$error.required && logIn.password.$error.required && submitted">
               Please enter your email and password.
             </span>
@@ -42,132 +42,100 @@
             <span
               class="clear help-block">{{ errors.other }}
             </span>
-          </div>
-
-          <div class="clear">
-            <input type="email" name="email" class="input" ng-model="user.email" id="loginEmail" required>
-            <label class="label" for="loginEmail" >: Email</label>
-          </div>
-
-          <div class="clear">
-            <input type="password" name="password" class="input" ng-model="user.password" required>
-            <label class="label">: Password</label>
-          </div>
-          <div class="clear">
-            <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
-              Submit
-            </button>
-          </div>
-          <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
-            <i class="fa fa-google-plus"></i> Connect with Google+
-          </a>
-        </form>
-      </div>
-
-
-  <!--sign up screen-->
-  <div ng-show="signUpShow">
-    <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
-      <a class="btn btn-default btn-lg btn-register buttonSizeUpperSignUp" ng-click="logInShow = true; signUpShow = false;">
-        Login
-      </a>
-      <a class="btn btn-default btn-lg btn-register buttonSizeUpperSignUp" ng-click="logInShow = false; signUpShow = true;">
-        Sign Up
-      </a>
-      <div class="clear" ng-class="{ 'has-success': signUp.name.$valid && submitted,
-                                        'has-error': signUp.name.$invalid && submitted }">
+        </div>
+        <div class="clear">
+          <input type="email" name="email" class="input" ng-model="user.email" id="loginEmail" required>
+          <label class="label" for="loginEmail" >: Email</label>
+        </div>
+        <div class="clear">
+          <input type="password" name="password" class="input" ng-model="user.password" required>
+          <label class="label">: Password</label>
+        </div>
+        <div class="clear button-container">
+          <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
+            Submit
+          </button>
+        </div>
+        <div class="clear">
+        </div>
+      </form>
+    </div>
+    <!--sign up screen-->
+    <div ng-show="signUpShow">
+      <form class="form" name="signUp" ng-submit="register(signUp)" novalidate>
+        <a class="btn btn-default btn-lg btn-register buttonSizeUpperSignUp" ng-click="logInShow = true; signUpShow = false;">
+          Login
+        </a>
+        <a class="btn btn-default btn-lg btn-register buttonSizeUpperSignUp" ng-click="logInShow = false; signUpShow = true;">
+          Sign Up
+        </a>
+        <div class="clear" ng-class="{ 'has-success': signUp.name.$valid && submitted,'has-error': signUp.name.$invalid && submitted }">
         <span class="clear help-block" ng-show="signUp.name.$error.required && submitted">
           A name is required
         </span>
-        <input type="text" name="name" class="clear input" ng-model="user.name"
-               required/>
-        <label class="label">: Name</label>
-      </div>
-      <div class="clear" ng-class="{ 'has-success': signUp.email.$valid && submitted,
-                                        'has-error': signUp.email.$invalid && submitted }">
+          <input type="text" name="name" class="clear input" ng-model="user.name" required/>
+          <label class="label">: Name</label>
+        </div>
+        <div class="clear" ng-class="{ 'has-success': signUp.email.$valid && submitted,'has-error': signUp.email.$invalid && submitted }">
         <span class="clear help-block" ng-show="signUp.email.$error.email && submitted">
           Doesn't look like a valid email.
         </span>
         <span class="clear help-block" ng-show="signUp.email.$error.required && submitted">
           What's your email address?
         </span>
-          <span class="clear help-block" ng-show="signUp.email.$error.mongoose">
-          {{ errors.email }}
-        </span>
-        <input type="email" name="email" class="clear input" ng-model="user.email"
-               required
-               mongoose-error/>
-        <label class="label">: Email</label>
-      </div>
-      <div class="clear" ng-class="{ 'has-success': signUp.password.$valid && submitted,
-                                        'has-error': signUp.password.$invalid && submitted }">
-        <span class="clear help-block"
-              ng-show="(signUp.password.$error.minlength || signUp.password.$error.required) && submitted">
+          <span class="clear help-block" ng-show="signUp.email.$error.mongoose">{{ errors.email }}</span>
+          <input type="email" name="email" class="clear input" ng-model="user.email" required mongoose-error/>
+          <label class="label">: Email</label>
+        </div>
+        <div class="clear" ng-class="{ 'has-success': signUp.password.$valid && submitted,'has-error': signUp.password.$invalid && submitted }">
+        <span class="clear help-block" ng-show="(signUp.password.$error.minlength || signUp.password.$error.required) && submitted">
           Password must be at least 3 characters.
         </span>
-        <span class="help-block" ng-show="signUp.password.$error.mongoose">
-          {{ errors.password }}
-        </span>
-        <input type="password" name="password" class="clear input" ng-model="user.password"
-               ng-minlength="3"
-               required
-               mongoose-error/>
-        <label class="label">: Password</label>
-      </div>
-      <div class="clear">
-        <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
-          Submit
-        </button>
-      </div>
-        </form>
-      </div>
-
-      <!--Change password show-->
-      <div ng-show="changePasswordShow">
-        <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
-          <div class="clear">
-            <div class="form-group has-error">
+          <span class="help-block" ng-show="signUp.password.$error.mongoose">{{ errors.password }}</span>
+          <input type="password" name="password" class="clear input" ng-model="user.password" ng-minlength="3" required mongoose-error/>
+          <label class="label">: Password</label>
+        </div>
+        <div class="clear">
+          <button class="btn btn-inverse btn-lg btn-login buttonSizeLower" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+    <!--Change password show-->
+    <div ng-show="changePasswordShow">
+      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+        <div class="clear">
+          <div class="form-group has-error">
             <span class="help-block" ng-show="form.password.$error.mongoose">
             <h5 class="errorText">Incorrect Password.</h5>
             </span>
-            </div>
-            <input type="password" name="password" class="input inputSize" ng-model="user.oldPassword"
-                   mongoose-error/>
-            <label class="label">: Current Password</label>
           </div>
-
-          <div class="clear">
-            <div class="form-group has-error">
-            <span class="help-block"
-                  ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+          <input type="password" name="password" class="input inputSize" ng-model="user.oldPassword"
+                 mongoose-error/>
+          <label class="label">: Current Password</label>
+        </div>
+        <div class="clear">
+          <div class="form-group has-error">
+            <span class="help-block" ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
               <h5 class="errorText">Password must be at least 3 characters.</h5>
             </span>
-            </div>
-            <input type="password" name="newPassword" class="input inputSize" ng-model="user.newPassword"
-                   ng-minlength="3"
-                   required/>
-            <label class="label">: New Password</label>
           </div>
-
-          <div class="clear">
+          <input type="password" name="newPassword" class="input inputSize" ng-model="user.newPassword"
+                 ng-minlength="3"
+                 required/>
+          <label class="label">: New Password</label>
+        </div>
+        <div class="clear">
             <span class="greenText">
               {{ message }}
             </span>
-            <button class="btn btn-lg btn-login buttonLower" type="submit">
-              Save changes
-            </button>
-
-          </div>
-        </form>
-      </div>
+          <button class="btn btn-lg btn-login buttonLower" type="submit">
+            Save changes
+          </button>
+        </div>
+      </form>
     </div>
   </div>
+  </div>
 </header>
-
-
-<div class="test">
-  <p>Word River is a system to help teachers support their students creative engagement.<br>
-    It gives teachers a tool to enable differential learning and allows teachers to personalize their curricula while tracking student progress. <br>
-    This project was created to help children take over the world via intense knowledge.</p>
-</div>
-

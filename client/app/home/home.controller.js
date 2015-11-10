@@ -2,7 +2,8 @@
 
 angular.module('WordRiverApp')
   .controller('HomeCtrl', function ($scope, $rootScope, Auth, $location, $window) {
-    $scope.user = {email: "rosemariemaxwell@plexia.com", password: "joethe"};
+    //$scope.user = {email: "rosemariemaxwell@plexia.com", password: "joethe"};
+    $scope.user = {email: "", password: ""};
     $scope.errors = {};
     $scope.logInShow = true;
     $scope.loggedIn = Auth.isLoggedIn();

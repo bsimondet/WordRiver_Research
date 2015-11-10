@@ -15,7 +15,7 @@
         <label>{{class.className}}</label>
         <a class="glyphicon glyphicon-pencil" ng-click="editClassName(class)"></a>
         <a class="glyphicon glyphicon-trash" ng-click="removeClass(class)"></a>
-        <button class="btn-primary" ng-click="isGroupsCollapsed = !isGroupsCollapsed">Toggle Groups</button>
+        <button class="btn btn-primary" ng-click="isGroupsCollapsed = !isGroupsCollapsed">Toggle Groups</button>
         <div collapse="isGroupsCollapsed" ng-repeat="group in class.groupList">
           <label><a ng-click="viewGroups(group, class)">{{group.groupName}}</a></label>
         </div>
@@ -24,7 +24,7 @@
     <div class="col-xs-3" ng-hide="hideEdit">
       <br>
       <input ng-model="editField" type="text" size="15" placeholder={{classToEdit.className}}>
-      <input type="submit" value="Edit Class Name" class="btn-primary" ng-click="updateClass()">
+      <input type="submit" value="Edit Class Name" class="btn btn-primary" ng-click="updateClass()">
     </div>
   </div>
 
@@ -41,21 +41,21 @@
     <h5>Back to: <a ng-click="toggleClassGroup('class')">Classes</a></h5>
     <nav>
       <h4>What would you like to view in {{currentGroup.groupName}}? &nbsp;&nbsp;&nbsp;
-      <input type="button" value="Word Packs" name="groupItem" ng-click="viewGroupItems('wordPacks')">
-      <input type="button" value="Words" name="groupItem" ng-click="viewGroupItems('words')">
+      <input class="btn btn-primary" type="button" value="Word Packs" name="groupItem" ng-click="viewGroupItems('wordPacks')">
+      <input class="btn btn-primary" type="button" value="Words" name="groupItem" ng-click="viewGroupItems('words')">
       </h4>
     </nav>
     <nav ng-show="showWordPackSort">
       <h5>How would you like to sort word packs? &nbsp;&nbsp;&nbsp;
-        <input type="button" value="Context Packs" name="wordPackOption" ng-click="wordPackFilter('contextPacks')">
-        <input type="button" value="All Word Packs" name="wordPackOption" ng-click="wordPackFilter('all')">
-        <input type="button" value="Word Packs Not in Context Packs" name="wordPackOption" ng-click="wordPackFilter('individual')">
+        <input class="btn btn-primary" type="button" value="Context Packs" name="wordPackOption" ng-click="wordPackFilter('contextPacks')">
+        <input class="btn btn-primary" type="button" value="All Word Packs" name="wordPackOption" ng-click="wordPackFilter('all')">
+        <input class="btn btn-primary" type="button" value="Word Packs Not in Context Packs" name="wordPackOption" ng-click="wordPackFilter('individual')">
       </h5>
     </nav>
     <nav ng-show="showWordSort">
       <h5>How would you like to sort words? &nbsp;&nbsp;&nbsp;
-        <input type="button" value="All Assigned Words" name="wordOption" ng-click="wordFilter('all')">
-        <input type="button" value="Individually Assigned Words" name="wordOption" ng-click="wordFilter('individual')">
+        <input class="btn btn-primary" type="button" value="All Assigned Words" name="wordOption" ng-click="wordFilter('all')">
+        <input class="btn btn-primary" type="button" value="Individually Assigned Words" name="wordOption" ng-click="wordFilter('individual')">
       </h5>
     </nav>
 
