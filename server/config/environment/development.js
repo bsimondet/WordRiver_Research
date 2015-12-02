@@ -9,5 +9,5 @@ module.exports = {
            // 'mongodb://localhost/wordriverapp'
   },
 
-  seedDB: true
+  seedDB: false
 };

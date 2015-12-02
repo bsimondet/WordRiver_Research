@@ -37,10 +37,20 @@ var all = {
     options: {
       db: {
         safe: true
+      },
+      server: {
+        socketOptions: {
+          keepAlive: 1
+        }
       }
     }
   },
 
+google: {
+    clientID:     process.env.GOOGLE_ID || 'id',
+    clientSecret: process.env.GOOGLE_SECRET || 'secret',
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback?'
+  }
 };
 
 // Export the config object based on the NODE_ENV

@@ -57,13 +57,14 @@ function hasRole(roleRequired) {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id) {
-  return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*5 });
+  return jwt.sign({ _id: id }, config.secrets.session, { expiresIn: 60*60 });
 }
 
 /**
  * Set token cookie directly for oAuth strategies
  */
 function setTokenCookie(req, res) {
+  console.log("setting token");
   if (!req.user) return res.json(404, { message: 'Something went wrong, please try again.'});
   var token = signToken(req.user._id, req.user.role);
   res.cookie('token', JSON.stringify(token));

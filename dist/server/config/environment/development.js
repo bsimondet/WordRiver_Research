@@ -5,8 +5,9 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/wordriverapp'
+    uri:    process.env.MONGO_URI
+           // 'mongodb://localhost/wordriverapp'
   },
 
-  seedDB: true
+  seedDB: false
 };

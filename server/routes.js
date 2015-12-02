@@ -3,17 +3,17 @@
  */
 
 'use strict';
-
+var passport = require('passport');
 var errors = require('./components/errors');
 
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/contextPacks', require('./api/contextPack'));
-  app.use('/api/wordPacks', require('./api/wordPack'));
-  app.use('/api/words', require('./api/word'));
-  app.use('/api/users', require('./api/user'));
-  app.use('/api/students', require ('./api/student'));
+  app.use('/api/contextPack', require('./api/contextPack'));
+  app.use('/api/wordPack', require('./api/wordPack'));
+  app.use('/api/word', require('./api/word'));
+  app.use('/api/user', require('./api/user'));
+  app.use('/api/student', require ('./api/student'));
 
   app.use('/auth', require('./auth'));
   app.use('/auth/google', require('./auth'));
